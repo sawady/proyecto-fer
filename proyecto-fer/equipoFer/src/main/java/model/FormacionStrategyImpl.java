@@ -30,7 +30,7 @@ public class FormacionStrategyImpl implements FormacionStrategy {
 	}
 	
 	public Titular buscarMejorEnPos(Posicion pos, List<Jugador> lista){
-		
+		return null;		
 	}
 
 }
