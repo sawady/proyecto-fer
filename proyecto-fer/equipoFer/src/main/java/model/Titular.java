@@ -2,8 +2,15 @@ package model;
 
 public class Titular {
 	
+/* VARIABLES ***************************************************/
+	
 	public Jugador jugador;
 	public Posicion pos;
+	
+	/* CONSTRUSTOR ***************************************************/
+	/* METODOS ***************************************************/
+	
+	/* GET&SET ***************************************************/
 	
 	public Jugador getJugador() {
 		return jugador;
@@ -12,6 +19,8 @@ public class Titular {
 	public Posicion getPos() {
 		return pos;
 	}
+
+/* EQUALS & HASHCODE ***************************************************/
 
 	public int hashCode() {
 		final int prime = 31;
@@ -38,7 +47,4 @@ public class Titular {
 			return false;
 		return true;
 	}
-	
-	
-
 }

@@ -4,8 +4,22 @@ import java.util.List;
 
 public class Equipo implements Nombrable{
 	
+/* VARIABLES ***************************************************/
+	
 	private List<Jugador> jugadores;
 	private Tecnico tecnico;
+	
+/* CONSTRUSTOR ***************************************************/
+	
+		//ToDo
+	
+/* METODOS ***************************************************/
+	
+	public Formacion armarFormacion(){
+		return this.getTecnico().armarFormacion(this);
+	}
+	
+/* GET&SET ***************************************************/
 	
 	public List<Jugador> getJugadores() {
 		return jugadores;
@@ -21,10 +35,6 @@ public class Equipo implements Nombrable{
 
 	public void setTecnico(Tecnico tecnico) {
 		this.tecnico = tecnico;
-	}
-
-	public Formacion armarFormacion(){
-		return this.getTecnico().armarFormacion(this);
 	}
 
 	public String getNombre() {

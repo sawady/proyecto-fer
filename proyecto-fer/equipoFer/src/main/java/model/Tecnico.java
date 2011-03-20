@@ -2,15 +2,22 @@ package model;
 
 public class Tecnico implements Nombrable {
 	
+/* VARIABLES ***************************************************/
+
 	private String nombre;
 	private FormacionStrategy form_strategy;
 	
-	public FormacionStrategy getForm_strategy() {
-		return form_strategy;
-	}
-	
+/* CONSTRUSTOR ***************************************************/
+/* METODOS ***************************************************/
+
 	public Formacion armarFormacion(Equipo eq){
 		return this.getForm_strategy().armarFormacion(eq);
+	}
+	
+/* GET&SET ***************************************************/
+	
+	public FormacionStrategy getForm_strategy() {
+		return form_strategy;
 	}
 	
 	public void setNombre(String nombre) {

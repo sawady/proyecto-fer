@@ -4,17 +4,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class FormacionStrategyImpl implements FormacionStrategy {
-	
+	/* VARIABLES ***************************************************/
+
 	private List<Posicion> posiciones = new ArrayList<Posicion>();
+
+	/* CONSTRUSTOR ***************************************************/
+	/* METODOS ***************************************************/
 	
-	public List<Posicion> getPosiciones() {
-		return posiciones;
-	}
-
-	public void setPosiciones(List<Posicion> posiciones) {
-		this.posiciones = posiciones;
-	}
-
 	public Formacion armarFormacion(Equipo eq) {
 		
 		ArrayList<Jugador> auxList = new ArrayList<Jugador>();
@@ -29,8 +25,19 @@ public class FormacionStrategyImpl implements FormacionStrategy {
 		return f;
 	}
 	
-	public Titular buscarMejorEnPos(Posicion pos, List<Jugador> lista){
+	public Jugador buscarMejorEnPos(Posicion pos, List<Jugador> lista){
 		return null;		
+	}
+	
+	/* GET&SET ***************************************************/
+
+	
+	public List<Posicion> getPosiciones() {
+		return posiciones;
+	}
+
+	public void setPosiciones(List<Posicion> posiciones) {
+		this.posiciones = posiciones;
 	}
 
 }
