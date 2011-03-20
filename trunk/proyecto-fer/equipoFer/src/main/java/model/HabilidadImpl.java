@@ -2,8 +2,15 @@ package model;
 
 public class HabilidadImpl implements Habilidad{
 	
+	/* VARIABLES ***************************************************/
+
 	private Posicion posicion;
 	private int valor;
+	
+	/* CONSTRUSTOR ***************************************************/
+	/* METODOS ***************************************************/
+	/* GET&SET ***************************************************/
+
 	
 	public Posicion getPosicion() {
 		return posicion;
@@ -13,14 +20,15 @@ public class HabilidadImpl implements Habilidad{
 		this.posicion = posicion;
 	}
 
-	public int getValor() {
-		return valor;
-	}
 
 	public void setValor(int valor) {
 		this.valor = valor;
 	}
 
+	public int getValor() {
+		return valor;
+	}
+	
 	public int getValor(Posicion pos) {
 		
 		if(pos == this.getPosicion())
