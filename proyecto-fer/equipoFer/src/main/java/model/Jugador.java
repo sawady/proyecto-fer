@@ -9,6 +9,12 @@ public class Jugador implements Nombrable{
 	private List<Habilidad> habilidades;
 	
 	/* CONSTRUSTOR ***************************************************/
+	
+	public Jugador(List<Habilidad> habilidades) {
+		super();
+		this.habilidades = habilidades;
+	}
+	
 	/* METODOS ***************************************************/
 	
 	public int getValorHabilidad(Posicion pos){
@@ -19,6 +25,8 @@ public class Jugador implements Nombrable{
 		return result;
 	}
 	
+
+
 	private int max(int v1, int v2) {
 		if(v1<=v2)
 			return v2;
