@@ -25,16 +25,24 @@ public class FormacionStrategyImpl implements FormacionStrategy {
 		Formacion f = new Formacion();
 		
 		for (Posicion pos: this.getPosiciones()){
-			//f.titulares.addAll(buscarMejorEnPos(pos, auxList)); 
-			//falta q saq el jugador
+			Jugador jugadorTemp = buscarMejorEnPos(pos,auxList);
+			auxList.remove(jugadorTemp);
+			f.getTitulares().add(new Titular(jugadorTemp, pos));
 		}
 		
+		f.getSuplentes().addAll(auxList);
 		return f;
 	}
 	
 	
 	public Jugador buscarMejorEnPos(Posicion pos, List<Jugador> lista){
-		return null;		
+		Jugador jugadorGanador = lista.get(0); 
+		for(Jugador j:lista){
+			if(jugadorGanador.getValorHabilidad(pos)< j.getValorHabilidad(pos)){
+				jugadorGanador = j;
+			}
+		}
+		return jugadorGanador;
 	}
 	
 	/* GET&SET ***************************************************/
