@@ -8,6 +8,13 @@ public class Titular {
 	public Posicion pos;
 	
 	/* CONSTRUSTOR ***************************************************/
+	public Titular(Jugador jugador, Posicion pos) {
+		super();
+		this.jugador = jugador;
+		this.pos = pos;
+	}
+	
+	
 	/* METODOS ***************************************************/
 	
 	/* GET&SET ***************************************************/
