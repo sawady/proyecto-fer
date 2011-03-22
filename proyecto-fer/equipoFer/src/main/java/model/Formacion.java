@@ -8,7 +8,7 @@ public class Formacion {
 /* VARIABLES ***************************************************/
 	
 	public List<Titular> titulares = new ArrayList<Titular>();
-	public List<Jugador> suplentes;
+	public List<Jugador> suplentes = new ArrayList<Jugador>();
 	public Equipo equipo;
 	
 /* GET&SET ***************************************************/
@@ -25,4 +25,16 @@ public class Formacion {
 		return equipo;
 	}
 
+	public void setTitulares(List<Titular> titulares) {
+		this.titulares = titulares;
+	}
+
+	public void setSuplentes(List<Jugador> suplentes) {
+		this.suplentes = suplentes;
+	}
+
+	public void setEquipo(Equipo equipo) {
+		this.equipo = equipo;
+	}
+	
 }
