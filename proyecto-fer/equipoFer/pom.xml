@@ -3,14 +3,21 @@
   <groupId>ar.edu.unq.ep.fer</groupId>
   <artifactId>equipoFer</artifactId>
   <version>0.0.1-SNAPSHOT</version>
-  <dependencies>
-  
+ 
+  <dependencies>  
   <dependency>
   	<groupId>mysql</groupId>	  
 	<artifactId>mysql-connector-java</artifactId>
 	<version> 5.1.14 </version>
+  </dependency>  
+  <dependency>
+    <groupId>org.mockito</groupId>
+    <artifactId>mockito-all</artifactId>
+    <version>1.8.1</version>
+    <scope>test</scope> 
   </dependency>
-	 </dependencies>
+  </dependencies>
+	 
    <build>
     <plugins>
       <plugin>
