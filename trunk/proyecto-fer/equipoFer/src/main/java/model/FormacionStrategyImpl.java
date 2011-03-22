@@ -31,6 +31,7 @@ public class FormacionStrategyImpl implements FormacionStrategy {
 		}
 		
 		f.getSuplentes().addAll(auxList);
+		f.setEquipo(eq);
 		return f;
 	}
 	
