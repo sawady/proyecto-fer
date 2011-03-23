@@ -57,36 +57,6 @@ public class FormacionStrategyImpl implements FormacionStrategy {
 		this.posiciones = posiciones;
 	}
 
-	/* EQUALS & HASHCODE**************************************************/
-
-	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result
-				+ ((posiciones == null) ? 0 : posiciones.hashCode());
-		return result;
-	}
-
-
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		FormacionStrategyImpl other = (FormacionStrategyImpl) obj;
-		if (posiciones == null) {
-			if (other.posiciones != null)
-				return false;
-		} else if (!posiciones.equals(other.posiciones))
-			return false;
-		return true;
-	}
-
-
 
 }
 

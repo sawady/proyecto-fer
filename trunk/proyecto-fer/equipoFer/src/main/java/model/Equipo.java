@@ -8,6 +8,7 @@ public class Equipo implements Nombrable{
 	
 	private List<Jugador> jugadores;
 	private Tecnico tecnico;
+	private String nombre;
 	
 /* CONSTRUSTOR ***************************************************/
 	
@@ -42,46 +43,11 @@ public class Equipo implements Nombrable{
 	}
 
 	public String getNombre() {
-		return null;
+		return this.nombre;
 	}
-
 	
-	/*  EQUALS&HASHCODE*********************************************************************/
-	
-	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result
-				+ ((jugadores == null) ? 0 : jugadores.hashCode());
-		result = prime * result + ((tecnico == null) ? 0 : tecnico.hashCode());
-		return result;
+	public void setNombre(String nombre) {
+		this.nombre = nombre;
 	}
-
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		Equipo other = (Equipo) obj;
-		if (jugadores == null) {
-			if (other.jugadores != null)
-				return false;
-		} else if (!jugadores.equals(other.jugadores))
-			return false;
-		if (tecnico == null) {
-			if (other.tecnico != null)
-				return false;
-		} else if (!tecnico.equals(other.tecnico))
-			return false;
-		return true;
-	}
-
-
-	
-	
 	
 }

@@ -40,40 +40,10 @@ public class HabilidadImpl implements Habilidad{
 	
 	public int getValor(Posicion pos) {
 		
-		if(pos == this.getPosicion())
+		if(pos.equals(this.getPosicion()))
 			return this.getValor();		
 		else
 			return 0;		
-	}
-
-	/* EQUALS & HASHCODE**************************************************/
-	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result
-				+ ((posicion == null) ? 0 : posicion.hashCode());
-		result = prime * result + valor;
-		return result;
-	}
-
-
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		HabilidadImpl other = (HabilidadImpl) obj;
-		if (posicion != other.posicion)
-			return false;
-		if (valor != other.valor)
-			return false;
-		return true;
-	}
-	
-	
+	}	
 
 }
