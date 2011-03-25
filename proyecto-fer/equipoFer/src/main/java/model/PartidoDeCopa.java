@@ -29,16 +29,16 @@ public class PartidoDeCopa extends Partido {
 		Equipo ganadorVuelta = this.getPartidoVuelta().getGanador(); 
 		
 		if((ganadorIda == null && ganadorVuelta == null) || // caso empataron 
-		   (ganadorIda != null &&  ganadorVuelta != null && ganadorIda != ganadorVuelta))
+		   (ganadorIda != null &&  ganadorVuelta != null && ganadorIda != ganadorVuelta))//caso en c/u gano un partido
 		{
 			if(this.getGolesPorPenalEq1() > this.getGolesPorPenalEq2())
 				return this.getEquipo1();
 			else
 				return this.getEquipo2();
 		}
-		else if(ganadorIda == null)
+		else if(ganadorIda == null) // empataron partida de ida
 			return ganadorVuelta;
-		else if(ganadorVuelta == null)
+		else if(ganadorVuelta == null) //empataron partido de vuelta
 			return ganadorIda;
 		else
 			return ganadorVuelta; // ganadorIda == ganadorVuelta

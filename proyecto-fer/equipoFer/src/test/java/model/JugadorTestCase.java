@@ -23,7 +23,7 @@ public class JugadorTestCase {
 		listaHab.add(mockHab2);
 		listaHab.add(mockHab3);
 		
-		Jugador j = new Jugador(listaHab);
+		Jugador j = new Jugador(listaHab, "pepe");
 		assertEquals(j.getValorHabilidad(Posicion.ARQUERO),10);
 		assertEquals(j.getValorHabilidad(Posicion.CENTRAL),20);
 		assertEquals(j.getValorHabilidad(Posicion.DELANTERO),30);
@@ -31,7 +31,7 @@ public class JugadorTestCase {
 	
 	public void testGetValorHabilidadCuandoLaHabilidadNoEsta(){
 		List<Habilidad> listaHabVacia = new ArrayList<Habilidad>();
-		Jugador j = new Jugador(listaHabVacia);
+		Jugador j = new Jugador(listaHabVacia, "juan");
 		assertEquals(j.getValorHabilidad(Posicion.ARQUERO),0);
 		assertEquals(j.getValorHabilidad(Posicion.CENTRAL),0);
 		assertEquals(j.getValorHabilidad(Posicion.DELANTERO),0);

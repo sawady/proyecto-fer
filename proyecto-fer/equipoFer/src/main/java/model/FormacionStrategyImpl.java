@@ -22,17 +22,14 @@ public class FormacionStrategyImpl implements FormacionStrategy {
 		
 		ArrayList<Jugador> auxList = new ArrayList<Jugador>();
 		auxList.addAll(eq.getJugadores());
-		Formacion f = new Formacion();
-		
+		ArrayList<Titular>titulares= new ArrayList<Titular>();
 		for (Posicion pos: this.getPosiciones()){
 			Jugador jugadorTemp = buscarMejorEnPos(pos,auxList);
 			auxList.remove(jugadorTemp);
-			f.getTitulares().add(new Titular(jugadorTemp, pos));
+			titulares.add(new Titular(jugadorTemp, pos));
 		}
 		
-		f.getSuplentes().addAll(auxList);
-		f.setEquipo(eq);
-		return f;
+		return new Formacion(titulares, auxList, eq);
 	}
 	
 	

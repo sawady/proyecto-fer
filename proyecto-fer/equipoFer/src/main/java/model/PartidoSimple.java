@@ -26,7 +26,7 @@ public class PartidoSimple extends Partido {
 	public Equipo getGanador() {
 		if(this.getGolesEq1() > this.getGolesEq2())
 			return this.getEquipo1();
-		else if(this.getGolesEq1() == this.getGolesEq2())
+		else if(this.getGolesEq1() < this.getGolesEq2())
 			return this.getEquipo2();
 		else // caso en que empataron
 			return null;
