@@ -11,6 +11,15 @@ public class Formacion {
 	public List<Jugador> suplentes = new ArrayList<Jugador>();
 	public Equipo equipo;
 	
+ /* CONSTRUSTOR ***************************************************/
+	
+	public Formacion(List<Titular> titulares, List<Jugador> suplentes,
+			Equipo equipo) {
+		this.titulares = titulares;
+		this.suplentes = suplentes;
+		this.equipo = equipo;
+	}
+
 /* GET&SET ***************************************************/
 	
 	public List<Titular> getTitulares() {
