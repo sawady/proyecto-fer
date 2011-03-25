@@ -28,7 +28,7 @@ public class Tecnico implements Nombrable {
 	public FormacionStrategy getForm_strategy() {
 		return form_strategy;
 	}
-	
+
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
 	}
@@ -38,7 +38,7 @@ public class Tecnico implements Nombrable {
 	}
 
 	public String getNombre() {
-		return null;
+		return this.nombre;
 	}
 	
 }
