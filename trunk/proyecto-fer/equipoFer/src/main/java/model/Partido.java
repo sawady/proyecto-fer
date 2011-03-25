@@ -2,9 +2,19 @@ package model;
 
 public abstract class Partido {
 	
-	private Equipo equipo1;
-	private Equipo equipo2;
 	
+	/* VARIABLES ***************************************************/
+
+	protected Equipo equipo1;
+	protected Equipo equipo2;
+	
+	
+	/* METODOS ***************************************************/
+
+	public abstract Equipo getGanador();
+	
+	/* GET&SET ***************************************************/
+
 	public Equipo getEquipo1() {
 		return equipo1;
 	}
@@ -18,7 +28,7 @@ public abstract class Partido {
 		this.equipo2 = equipo2;
 	}
 	
-	public abstract Equipo getGanador();
+
 	
 
 }
