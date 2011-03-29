@@ -3,4 +3,17 @@
   <groupId>ar.edu.unq.ep.fer</groupId>
   <artifactId>equipoFer-persistencia</artifactId>
   <version>0.0.1-SNAPSHOT</version>
+  
+  <dependencies>
+  
+  <dependency>
+  <groupId>ar.edu.unq.ep.fer</groupId>
+  <artifactId>equipoFer</artifactId>
+  <version>0.0.1</version>
+  </dependency>
+  
+  
+  
+  </dependencies>
+  
 </project>
