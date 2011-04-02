@@ -1,0 +1,23 @@
+create database FER;
+use problems1;
+
+create table Jugador (
+	id INT NOT NULL AUTO_INCREMENT,
+	nombre varchar(100) NOT NULL,
+	PRIMARY KEY(id)
+	
+) ENGINE=INNODB;
+
+create table Equipo (
+	id INT NOT NULL AUTO_INCREMENT,
+	nombre varchar(100) NOT NULL,
+	PRIMARY KEY(id)
+	
+) ENGINE=INNODB;
+
+create table Formacion (
+	id INT NOT NULL AUTO_INCREMENT,
+	nombre varchar(100) NOT NULL,
+	PRIMARY KEY(id)
+	
+) ENGINE=INNODB;
