@@ -6,8 +6,8 @@ public class Equipo implements Nombrable{
 	
 /* VARIABLES ***************************************************/
 	
-	private List<Jugador> jugadores;
-	private Tecnico tecnico;
+	private List<Jugador> jugadores; // no se persistirlo ToDO
+	private Tecnico tecnico; // no se persistirlo ToDO
 	private String nombre;
 	
 /* CONSTRUSTOR ***************************************************/
