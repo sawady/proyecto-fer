@@ -1,17 +1,19 @@
 package model;
 
-import java.util.List;
+import java.util.HashSet;
+import java.util.Iterator;
+import java.util.Set;
 
 public class Jugador implements Nombrable{
 	
 	/* VARIABLES ***************************************************/
 	
-	private List<Habilidad> habilidades;
+	private Set<Habilidad> habilidades;
 	private String nombre;
 	
 	/* CONSTRUSTOR ***************************************************/
 	
-	public Jugador(List<Habilidad> habilidades, String nombre) {
+	public Jugador(HashSet<Habilidad> habilidades, String nombre) {
 		super();
 		this.habilidades = habilidades;
 		this.nombre = nombre;
@@ -21,9 +23,15 @@ public class Jugador implements Nombrable{
 	
 	public int getValorHabilidad(Posicion pos){
 		int result = 0;
-		for( Habilidad x:this.getHabilidades()){
-			result = max(x.getValor(pos), result);
+		Iterator<Habilidad>it = this.getHabilidades().iterator();
+		//recorro el set
+		while(it.hasNext()){
+			result = max(it.next().getValor(pos),result);
 		}
+		//ultimo elemento
+		result = max(it.next().getValor(pos),result);
+
+		
 		return result;
 	}
 	
@@ -38,11 +46,11 @@ public class Jugador implements Nombrable{
 	/* GET&SET ***************************************************/
 
 	
-	public List<Habilidad> getHabilidades() {
+	public Set<Habilidad> getHabilidades() {
 		return habilidades;
 	}
 
-	public void setHabilidades(List<Habilidad> habilidades) {
+	public void setHabilidades(HashSet<Habilidad> habilidades) {
 		this.habilidades = habilidades;
 	}
 

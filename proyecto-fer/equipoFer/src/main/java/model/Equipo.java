@@ -1,18 +1,20 @@
 package model;
 
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 public class Equipo implements Nombrable{
 	
 /* VARIABLES ***************************************************/
 	
-	private List<Jugador> jugadores; // no se persistirlo ToDO
-	private Tecnico tecnico; // no se persistirlo ToDO
+	private Set<Jugador> jugadores; // Persistir!!
+	private Tecnico tecnico; // no se persistirlo :ToDO
 	private String nombre;
 	
 /* CONSTRUSTOR ***************************************************/
 	
-	public Equipo(List<Jugador> jugadores, Tecnico tecnico) {
+	public Equipo(Set<Jugador> jugadores, Tecnico tecnico) {
 		super();
 		this.jugadores = jugadores;
 		this.tecnico = tecnico;
@@ -26,11 +28,11 @@ public class Equipo implements Nombrable{
 	
 /* GET&SET ***************************************************/
 
-	public List<Jugador> getJugadores() {
+	public Set<Jugador> getJugadores() {
 		return jugadores;
 	}
 
-	public void setJugadores(List<Jugador> jugadores) {
+	public void setJugadores(HashSet<Jugador> jugadores) {
 		this.jugadores = jugadores;
 	}
 

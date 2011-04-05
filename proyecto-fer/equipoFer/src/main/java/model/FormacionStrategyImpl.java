@@ -1,16 +1,19 @@
 package model;
 
 import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Set;
 
 public class FormacionStrategyImpl implements FormacionStrategy {
 	/* VARIABLES ***************************************************/
 
-	private List<Posicion> posiciones = new ArrayList<Posicion>();
+	private Set<Posicion> posiciones = new HashSet<Posicion>();
 
 	/* CONSTRUCTOR ***************************************************/
 	
-	public FormacionStrategyImpl(List<Posicion> posiciones) {
+	public FormacionStrategyImpl(HashSet<Posicion> posiciones) {
 		super();
 		this.posiciones = posiciones;
 	}
@@ -21,15 +24,28 @@ public class FormacionStrategyImpl implements FormacionStrategy {
 	public Formacion armarFormacion(Equipo eq) {
 		
 		ArrayList<Jugador> auxList = new ArrayList<Jugador>();
-		auxList.addAll(eq.getJugadores());
-		ArrayList<Titular>titulares= new ArrayList<Titular>();
-		for (Posicion pos: this.getPosiciones()){
-			Jugador jugadorTemp = buscarMejorEnPos(pos,auxList);
+		auxList.addAll(eq.getJugadores()); //para realizar la busqueda
+		Set<Titular>titulares= new HashSet<Titular>(); ///para armar la formacion
+		Set<Jugador>suplentes= new HashSet<Jugador>(); //para armar la formacion
+
+
+		Iterator<Posicion>it= this.getPosiciones().iterator();
+		while (it.hasNext()){
+			Jugador jugadorTemp = buscarMejorEnPos(it.next(),auxList);
 			auxList.remove(jugadorTemp);
-			titulares.add(new Titular(jugadorTemp, pos));
+			titulares.add(new Titular(jugadorTemp, it.next()));
+			
 		}
-		
-		return new Formacion(titulares, auxList, eq);
+		//ultimo elemento
+		Jugador jugadorTemp = buscarMejorEnPos(it.next(),auxList);
+		auxList.remove(jugadorTemp);
+		titulares.add(new Titular(jugadorTemp, it.next()));
+
+		//agrego los suplentes
+		for(Jugador j:auxList){
+			suplentes.add(j);
+		}
+		return new Formacion(titulares, suplentes,eq);
 	}
 	
 	
@@ -46,11 +62,11 @@ public class FormacionStrategyImpl implements FormacionStrategy {
 	/* GET&SET ***************************************************/
 
 	
-	public List<Posicion> getPosiciones() {
+	public Set<Posicion> getPosiciones() {
 		return posiciones;
 	}
 
-	public void setPosiciones(List<Posicion> posiciones) {
+	public void setPosiciones(HashSet<Posicion> posiciones) {
 		this.posiciones = posiciones;
 	}
 
