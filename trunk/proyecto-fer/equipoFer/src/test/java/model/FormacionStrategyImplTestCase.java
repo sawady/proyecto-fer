@@ -1,10 +1,17 @@
 package model;
 
-import java.util.ArrayList;
-import java.util.List;
-import org.junit.Test;
 import static org.junit.Assert.*;
-import static org.mockito.Mockito.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
+
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+
+import org.junit.Test;
 
 public class FormacionStrategyImplTestCase {
 	
@@ -51,18 +58,18 @@ public class FormacionStrategyImplTestCase {
 		when(jug3.getValorHabilidad(Posicion.DELANTERO)).thenReturn(0);
 		when(jug4.getValorHabilidad(Posicion.DELANTERO)).thenReturn(0);
 		
-		List<Titular> titularesDeseados = new ArrayList<Titular>();
+		Set<Titular> titularesDeseados = new HashSet<Titular>();
 		titularesDeseados.add(new Titular(jug1, Posicion.ARQUERO));
 		titularesDeseados.add(new Titular(jug2, Posicion.VOLANTEDEFENSIVO));
 		titularesDeseados.add(new Titular(jug3, Posicion.VOLANTEDEFENSIVO));
 		titularesDeseados.add(new Titular(jug4, Posicion.ENGANCHE));
 		titularesDeseados.add(new Titular(jug5, Posicion.DELANTERO));
 		
-		List<Jugador> suplentesDeseados = new ArrayList<Jugador>();
+		Set<Jugador> suplentesDeseados = new HashSet<Jugador>();
 		suplentesDeseados.add(jug6);
 		suplentesDeseados.add(jug7);
 		
-		List<Jugador> listaJug = new ArrayList<Jugador>();
+		Set<Jugador> listaJug = new HashSet<Jugador>();
 		listaJug.add(jug1);
 		listaJug.add(jug2);
 		listaJug.add(jug3);
@@ -85,6 +92,7 @@ public class FormacionStrategyImplTestCase {
 		
 		Formacion resultado = formStrat.armarFormacion(mockEquipo);
 		
+		assertEquals(resultado.getTitulares().size(), 5);
 		assertTrue(resultado.getTitulares().containsAll(titularesDeseados));
 		assertTrue(resultado.getSuplentes().containsAll(suplentesDeseados));
 		assertEquals(resultado.getEquipo(), mockEquipo);

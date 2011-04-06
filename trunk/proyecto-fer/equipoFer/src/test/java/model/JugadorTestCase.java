@@ -1,10 +1,15 @@
 package model;
 
+import static org.junit.Assert.assertEquals;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
+
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
+
 import org.junit.Test;
-import static org.junit.Assert.*;
-import static org.mockito.Mockito.*;
 
 public class JugadorTestCase {
 	
@@ -18,7 +23,7 @@ public class JugadorTestCase {
 		when(mockHab2.getValor(Posicion.CENTRAL)).thenReturn(20);
 		when(mockHab3.getValor(Posicion.DELANTERO)).thenReturn(30);
 
-		List<Habilidad> listaHab = new ArrayList<Habilidad>();
+		Set<Habilidad> listaHab = new HashSet<Habilidad>();
 		listaHab.add(mockHab1);
 		listaHab.add(mockHab2);
 		listaHab.add(mockHab3);
@@ -30,7 +35,7 @@ public class JugadorTestCase {
 	}
 	
 	public void testGetValorHabilidadCuandoLaHabilidadNoEsta(){
-		List<Habilidad> listaHabVacia = new ArrayList<Habilidad>();
+		Set<Habilidad> listaHabVacia = new HashSet<Habilidad>();
 		Jugador j = new Jugador(listaHabVacia, "juan");
 		assertEquals(j.getValorHabilidad(Posicion.ARQUERO),0);
 		assertEquals(j.getValorHabilidad(Posicion.CENTRAL),0);
