@@ -13,9 +13,9 @@ public class Jugador implements Nombrable{
 	
 	/* CONSTRUSTOR ***************************************************/
 	
-	public Jugador(HashSet<Habilidad> habilidades, String nombre) {
+	public Jugador(Set<Habilidad> listaHab, String nombre) {
 		super();
-		this.habilidades = habilidades;
+		this.habilidades = listaHab;
 		this.nombre = nombre;
 	}
 	
@@ -24,14 +24,12 @@ public class Jugador implements Nombrable{
 	public int getValorHabilidad(Posicion pos){
 		int result = 0;
 		Iterator<Habilidad>it = this.getHabilidades().iterator();
+		
 		//recorro el set
 		while(it.hasNext()){
 			result = max(it.next().getValor(pos),result);
 		}
-		//ultimo elemento
-		result = max(it.next().getValor(pos),result);
 
-		
 		return result;
 	}
 	
