@@ -1,6 +1,8 @@
 package model;
 
-public interface Habilidad {
+import appModel.Persistible;
+
+public interface Habilidad extends Persistible{
 	
 	public int getValor(Posicion pos);
 

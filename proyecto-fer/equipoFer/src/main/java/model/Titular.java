@@ -6,6 +6,7 @@ public class Titular {
 	
 	public Jugador jugador;
 	public Posicion pos;
+	public Formacion formacion;
 	
 	/* CONSTRUSTOR ***************************************************/
 	public Titular(Jugador jugador, Posicion pos) {
@@ -25,6 +26,15 @@ public class Titular {
 	
 	public Posicion getPos() {
 		return pos;
+	}
+	
+	public Formacion getFormacion() {
+		return formacion;
+	}
+
+
+	public void setFormacion(Formacion formacion) {
+		this.formacion = formacion;
 	}
 
 /* EQUALS & HASHCODE ***************************************************/

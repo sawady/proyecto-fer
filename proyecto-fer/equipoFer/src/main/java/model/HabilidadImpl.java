@@ -1,17 +1,21 @@
 package model;
 
-public class HabilidadImpl implements Habilidad{
+import appModel.Entity;
+
+public class HabilidadImpl extends Entity implements Habilidad{
 	
 	/* VARIABLES ***************************************************/
 
 	private Posicion posicion;
 	private int valor;
+	private Jugador jugador;
 	
 	/* CONSTRUSTOR ***************************************************/
 	
-	public HabilidadImpl(Posicion posicion, int valor) {
+	public HabilidadImpl(Posicion posicion, int valor, Jugador jug) {
 		super();
 		this.posicion = posicion;
+		this.jugador = jug;
 		this.valor = valor;
 	}
 
@@ -19,12 +23,21 @@ public class HabilidadImpl implements Habilidad{
 	/* METODOS ***************************************************/
 	/* GET&SET ***************************************************/
 
-	
 	public Posicion getPosicion() {
 		return posicion;
 	}
 	
 	
+	public Jugador getJugador() {
+		return jugador;
+	}
+
+
+	public void setJugador(Jugador jugador) {
+		this.jugador = jugador;
+	}
+
+
 	public void setPosicion(Posicion posicion) {
 		this.posicion = posicion;
 	}
@@ -44,6 +57,6 @@ public class HabilidadImpl implements Habilidad{
 			return this.getValor();		
 		else
 			return 0;		
-	}	
+	}
 
 }
