@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="model">
+	<class name="Habilidad" table="Habilidad">
+		<id name="id">
+            <generator class="native"/>
+        </id>
+        
+        <discriminator column="tipo" type="string"/>
+        
+        <subclass name="HabilidadImpl" discriminator-value="HabilidadImpl">
+        
+        	<many-to-one name="jugador" class="Jugador"/>
+                
+        </subclass>
+        
+	</class>
+</hibernate-mapping>
