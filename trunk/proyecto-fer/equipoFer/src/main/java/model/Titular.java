@@ -1,6 +1,8 @@
 package model;
 
-public class Titular {
+import appModel.Entity;
+
+public class Titular extends Entity {
 	
 /* VARIABLES ***************************************************/
 	

@@ -4,7 +4,9 @@ import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Set;
 
-public class Jugador implements Nombrable{
+import appModel.Entity;
+
+public class Jugador extends Entity implements Nombrable{
 	
 	/* VARIABLES ***************************************************/
 	
