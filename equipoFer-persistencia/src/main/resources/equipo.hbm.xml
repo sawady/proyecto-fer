@@ -1,11 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
-<hibernate-mapping package="ar.edu.unq.edp.domain">
+<hibernate-mapping package="model">
 	<class name="Equipo" table="Equipo">
 		<id name="id">
             <generator class="native"/>
         </id>
-        <property name="nombre" />
+        <property name="nombre"/>
+        
+        <many-to-one name="tecnico" class="Tecnico"/>
+        
+		<set name="jugadores">
+            <key column="equipo"/>
+            <one-to-many class="Jugador"/>
+        </set>
+        
 	</class>
 </hibernate-mapping>
