@@ -6,7 +6,9 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 
-public class FormacionStrategyImpl implements FormacionStrategy {
+import appModel.Entity;
+
+public class FormacionStrategyImpl extends Entity implements FormacionStrategy {
 	/* VARIABLES ***************************************************/
 
 	private List<Posicion> posiciones = new ArrayList<Posicion>();
@@ -17,7 +19,6 @@ public class FormacionStrategyImpl implements FormacionStrategy {
 		super();
 		this.posiciones = listaPos;
 	}
-
 	
 	/* METODOS ***************************************************/
 	
@@ -35,14 +36,20 @@ public class FormacionStrategyImpl implements FormacionStrategy {
 			Jugador jugadorTemp = buscarMejorEnPos(pos,auxList);
 			auxList.remove(jugadorTemp);
 			titulares.add(new Titular(jugadorTemp, pos));
-		}		
+		}
 
 		//agrego los suplentes
 		for(Jugador j:auxList){
 			suplentes.add(j);
 		}
 		
-		return new Formacion(titulares, suplentes,eq);
+		Formacion form_result = new Formacion(titulares, suplentes,eq);
+		
+		for(Titular t : titulares){
+			t.setFormacion(form_result);
+		}
+		
+		return form_result;
 	}
 	
 	
@@ -68,7 +75,6 @@ public class FormacionStrategyImpl implements FormacionStrategy {
 	public void setPosiciones(List<Posicion> posiciones) {
 		this.posiciones = posiciones;
 	}
-
 
 }
 

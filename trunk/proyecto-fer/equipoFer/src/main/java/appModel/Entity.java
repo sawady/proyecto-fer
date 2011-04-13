@@ -1,22 +1,21 @@
 package appModel;
 
-public abstract class Entity  {
-		private String id;
+public abstract class Entity implements Persistible{
+		private int id;
 		
-		public Entity() {
-		
+		public Entity() {		
 		}
 
-		public Entity(String id) {
-			this();
+		public Entity(int id) {
+			this.id = id;
 		}
 		
 		
-		public String getId() {
+		public int getId() {
 			return id;
 		}
 		
-		public void setId(String id) {
+		public void setId(int id) {
 			this.id = id;
 		}
 
