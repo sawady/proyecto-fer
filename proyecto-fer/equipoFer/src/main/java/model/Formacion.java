@@ -3,7 +3,9 @@ package model;
 import java.util.HashSet;
 import java.util.Set;
 
-public class Formacion {
+import appModel.Entity;
+
+public class Formacion extends Entity {
 
 /* VARIABLES ***************************************************/
 	

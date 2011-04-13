@@ -1,6 +1,8 @@
 package model;
 
-public class Tecnico implements Nombrable {
+import appModel.Entity;
+
+public class Tecnico extends Entity implements Nombrable {
 	
 /* VARIABLES ***************************************************/
 

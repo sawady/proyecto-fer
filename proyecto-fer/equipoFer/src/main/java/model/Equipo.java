@@ -4,7 +4,9 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-public class Equipo implements Nombrable{
+import appModel.Entity;
+
+public class Equipo extends Entity implements Nombrable{
 	
 /* VARIABLES ***************************************************/
 	

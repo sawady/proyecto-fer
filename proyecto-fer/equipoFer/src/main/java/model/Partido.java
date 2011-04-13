@@ -1,6 +1,8 @@
 package model;
 
-public abstract class Partido {
+import appModel.Entity;
+
+public abstract class Partido extends Entity {
 	
 	
 	/* VARIABLES ***************************************************/
