@@ -1,7 +1,6 @@
 package model;
 
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 import appModel.Entity;
@@ -10,8 +9,8 @@ public class Equipo extends Entity implements Nombrable{
 	
 /* VARIABLES ***************************************************/
 	
-	private Set<Jugador> jugadores; // Persistir!!
-	private Tecnico tecnico; // no se persistirlo :ToDO
+	private Set<Jugador> jugadores; 
+	private Tecnico tecnico; 
 	private String nombre;
 	
 /* CONSTRUSTOR ***************************************************/
