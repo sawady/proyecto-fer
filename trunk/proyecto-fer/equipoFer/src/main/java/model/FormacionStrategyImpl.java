@@ -28,8 +28,6 @@ public class FormacionStrategyImpl extends Entity implements FormacionStrategy {
 		
 		List<Jugador> jugadoresPosibles = new ArrayList<Jugador>();
 		jugadoresPosibles.addAll(eq.getJugadores()); //para realizar la busqueda
-//		Set<Titular>titulares= new HashSet<Titular>(); ///titulares
-//		Set<Jugador>suplentes= new HashSet<Jugador>(); // suplentes
 
 		Iterator<Posicion>it = this.getPosiciones().iterator();
 				
