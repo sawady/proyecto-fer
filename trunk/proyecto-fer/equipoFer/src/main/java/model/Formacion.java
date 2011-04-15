@@ -2,7 +2,6 @@ package model;
 
 import java.util.HashSet;
 import java.util.Set;
-
 import appModel.Entity;
 
 public class Formacion extends Entity {
@@ -14,6 +13,12 @@ public class Formacion extends Entity {
 	public Equipo equipo;
 	
  /* CONSTRUSTOR ***************************************************/
+	
+	public Formacion(Equipo equipo) {
+		this.titulares = new HashSet<Titular>();
+		this.suplentes = new HashSet<Jugador>();
+		this.equipo = equipo;
+	}
 	
 	public Formacion(Set<Titular> titulares, Set<Jugador> suplentes,
 			Equipo equipo) {
@@ -46,6 +51,14 @@ public class Formacion extends Entity {
 
 	public void setEquipo(Equipo equipo) {
 		this.equipo = equipo;
+	}
+	
+	public void addTitular(Titular titular) {
+		this.getTitulares().add(titular);
+	}
+	
+	public void addSuplente(Jugador jugador) {
+		this.getSuplentes().add(jugador);
 	}
 	
 }

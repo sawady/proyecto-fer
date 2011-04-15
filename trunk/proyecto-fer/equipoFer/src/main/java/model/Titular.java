@@ -11,10 +11,11 @@ public class Titular extends Entity {
 	public Formacion formacion;
 	
 	/* CONSTRUSTOR ***************************************************/
-	public Titular(Jugador jugador, Posicion pos) {
+	public Titular(Jugador jugador, Posicion pos, Formacion form) {
 		super();
 		this.jugador = jugador;
 		this.pos = pos;
+		this.formacion = form;
 	}
 	
 	
