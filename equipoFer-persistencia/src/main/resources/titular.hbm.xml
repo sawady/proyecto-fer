@@ -7,7 +7,7 @@
             <generator class="native"/>
         </id>
         <property name="posicion" type="Posicion"/>
-        <many-to-one name="jugador" class="Jugador"/>
+        <many-to-one name="jugador" class="Jugador" />
         <many-to-one name="formacion" class="Formacion"/>
 	</class>
 </hibernate-mapping>
