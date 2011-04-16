@@ -1,108 +1,92 @@
-create database FER;
-use problems1;
-
+create SCHEMA FER;
 
 CREATE TABLE Equipo (
-	id_equipo INT NOT NULL AUTO_INCREMENT,
-	nombre varchar(100) NOT NULL,
-	CONSTRAINTS tecnico
+	id_equipo AUTO_INCREMENT NOT NULL,
+	nombre CHAR(100) NOT NULL,
 	FOREIGN KEY	(id_tecnico) 
 		REFERENCES Tecnico
 		ON DELETE CASCADE ON UPDATE CASCADE,
 	PRIMARY KEY(id_equipo)	
-) ENGINE=INNODB;
+);
 
 CREATE TABLE Jugador (
-	id_jugador INT NOT NULL AUTO_INCREMENT,
+	id_jugador  AUTO_INCREMENT NOT NULL,
 	nombre varchar(100) NOT NULL,
-	CONSTRAINTS equipo
-	FOREIGN KEY	id_equipo 
+	FOREIGN KEY	(id_equipo) 
 		REFERENCES Equipo
 		ON DELETE CASCADE ON UPDATE CASCADE,
 	PRIMARY KEY(id_jugador)
 	
-) ENGINE=INNODB;
+);
 
 
 CREATE TABLE Habilidad( 
-	id_habilidad INT NOT NULL AUTO_INCREMENT,
+	id_habilidad AUTO_INCREMENT NOT NULL,
 	tipo STRING,
-	CONSTRAINTS jugador
-	FOREING KEY id_jugador
+	FOREIGN KEY (id_jugador)
 		REFERENCES Jugador
 		ON DELETE CASCADE ON UPDATE CASCADE,
 	PRIMARY KEY(id_habilidad)
-)ENGINE=INNODB
+);
 
 
 CREATE TABLE Titular(
-	id_titular INT NOT NULL AUTO_INCREMENT,
+	id_titular AUTO_INCREMENT NOT NULL,
 	posicion INT NOT NULL,  
-	CONSTRAINTS jugador
-	FOREING KEY id_jugador
+	FOREIGN KEY (id_jugador)
 		REFERENCES Jugador
 		ON DELETE CASCADE ON UPDATE CASCADE,
-	CONSTRAINTS formacion
-	FOREING KEY id_formacion
+	FOREIGN KEY (id_formacion)
 		REFERENCES Formacion
 		ON DELETE CASCADE ON UPDATE CASCADE,
 	PRIMARY KEY(id_titular)
-
-)ENGINE=INNODB;
+);
 
 
 CREATE TABLE Formacion (
-	id_formacion INT NOT NULL AUTO_INCREMENT,
+	id_formacion AUTO_INCREMENT NOT NULL,
 	nombre STRING,
-	CONSTRAINS equipo
-	FOREING KEY id_equipo
+	FOREIGN KEY (id_equipo)
 		REFERENCES Equipo
 		ON DELETE CASCADE ON UPDATE CASCADE,
 	PRIMARY KEY(id_formacion)
-) ENGINE=INNODB;
+);
 
-CREATE TABLE SuplenteEnFormacion(
-	CONSTRAINS jugador
-	FOREING KEY id_jugador
+CREATE TABLE SuplenteEnFormacion(	
+	FOREIGN KEY (id_jugador)
 		REFERENCES Jugador
 		ON DELETE CASCADE ON UPDATE CASCADE,
-	CONSTRAINS formacion
-	FOREING KEY id_formacion
+	FOREIGN KEY (id_formacion)
 		REFERENCES Formacion
 		ON DELETE CASCADE ON UPDATE CASCADE,
-		
 	PRIMARY KEY(id_formacion, id_jugador)
-) ENGINE=INNODB;
+);
 
 
 CREATE TABLE FormacionStrategy(
-	id_formacionStrategy INT NOT NULL AUTO_INCREMENT,
+	id_formacionStrategy AUTO_INCREMENT NOT NULL,
 	tipo STRING,
 	PRIMARY KEY(id_formacionStrategy)
-) ENGINE=INNODB;	
-
-
+);	
 
 CREATE TABLE PosicionesEnFormacionStrategy(
-	id_posicionesEnFormacionStrategy INT NOT NULL AUTO_INCREMENT,
+	id_posicionesEnFormacionStrategy AUTO_INCREMENT NOT NULL,
 	indice int,
 	posicion POSICION,
 	PRIMARY KEY(id_posicionesEnFormacionStrategy)
-) ENGINE=INNODB;
+);
 
 CREATE TABLE Posicion(
-	id_posicion INT NOT NULL AUTO_INCREMENT,
+	id_posicion AUTO_INCREMENT NOT NULL,
 	posicion INT,
 	PRIMARY KEY(id_posicion)
-) ENGINE=INNODB;
+);
 	
 CREATE TABLE Tecnico(
-	id_tecnico INT NOT NULL AUTO_INCREMENT,
+	id_tecnico AUTO_INCREMENT NOT NULL,
 	nombre STRING,
-	CONSTRAINS form_strategy
-	FOREING KEY id_formacion
+	FOREIGN KEY (id_formacion)
 		REFERENCES Formacion
 		ON DELETE CASCADE ON UPDATE CASCADE,
 		PRIMARY KEY(id_tecnico)
-	
-)
+);
