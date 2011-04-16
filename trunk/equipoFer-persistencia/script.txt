@@ -1,23 +1,69 @@
 create database FER;
 use problems1;
 
-create table Jugador (
-	id INT NOT NULL AUTO_INCREMENT,
+//COMENTARIOS ROCIO
+//CREATE TABLE customers (a INT, b CHAR (20), INDEX (a))
+// FOREIGN KEY [id] (nombre_índice, ...)
+//    REFERENCES nombre_de_tabla
+//FIN COMENTARIOS
+
+CREATE TABLE
+CREATE TABLE
+CREATE TABLE suplenteEnFormacion(
+	FOREING KEY id_formacion
+		REFERENCES formacion,
+	FOREING KEY id_jugador
+		REFERENCES jugador,
+	PRIMARY KEY(id_titular, id_jugador)
+
+	)ENGINE=INNODB
+
+CREATE TABLE titularEnFormacion(
+	FOREING KEY id_formacion
+		REFERENCES formacion,
+	FOREING KEY id_titular
+		REFERENCES titular,
+	PRIMARY KEY(id_titular, id_formacion)
+)ENGINE=INNODB
+
+CREATE TABLE habilidad(
+	id_habilidad INT NOT NULL AUTO_INCREMENT,
+	valor INT,
+	posicion INT,
+	FOREING KEY id_jugador
+		REFERENCES jugador,
+	PRIMARY KEY(id_hbilidad)
+)ENGINE=INNODB
+
+CREATE TABLE titular(
+	id_titular INT NOT NULL AUTO_INCREMENT,
+	posicion INT NOT NULL,
+	FOREING KEY id_jugador
+		REFERENCES jugador,
+	PRIMARY KEY(id_titular)
+
+)ENGINE=INNODB;
+
+CREATE TABLE jugador (
+	id_jugador INT NOT NULL AUTO_INCREMENT,
 	nombre varchar(100) NOT NULL,
-	PRIMARY KEY(id)
+	FOREIGN KEY	id_equipo 
+		REFERENCES equipo,
+	PRIMARY KEY(id_jugador)
 	
 ) ENGINE=INNODB;
 
-create table Equipo (
-	id INT NOT NULL AUTO_INCREMENT,
+CREATE TABLE equipo (
+	id_equipo INT NOT NULL AUTO_INCREMENT,
 	nombre varchar(100) NOT NULL,
-	PRIMARY KEY(id)
-	
+	FOREIGN KEY	id_tecnico 
+		REFERENCES tecnico,
+	PRIMARY KEY(id_equipo)	
 ) ENGINE=INNODB;
 
-create table Formacion (
-	id INT NOT NULL AUTO_INCREMENT,
-	nombre varchar(100) NOT NULL,
-	PRIMARY KEY(id)
-	
+CREATE TABLE formacion (
+	id_formacion INT NOT NULL AUTO_INCREMENT,
+	FOREING KEY id_equipo
+		REFERENCES equipo,
+	PRIMARY KEY(id_formacion)
 ) ENGINE=INNODB;
