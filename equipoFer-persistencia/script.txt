@@ -24,7 +24,7 @@ CREATE TABLE Jugador (
 ) ENGINE=INNODB;
 
 
-CREATE TABLE Habilidad( --REVisar
+CREATE TABLE Habilidad( 
 	id_habilidad INT NOT NULL AUTO_INCREMENT,
 	tipo STRING,
 	CONSTRAINTS jugador
@@ -37,7 +37,7 @@ CREATE TABLE Habilidad( --REVisar
 
 CREATE TABLE Titular(
 	id_titular INT NOT NULL AUTO_INCREMENT,
-	posicion POSICION NOT NULL,  -- revisar
+	posicion INT NOT NULL,  
 	CONSTRAINTS jugador
 	FOREING KEY id_jugador
 		REFERENCES Jugador
@@ -58,11 +58,6 @@ CREATE TABLE Formacion (
 	FOREING KEY id_equipo
 		REFERENCES Equipo
 		ON DELETE CASCADE ON UPDATE CASCADE,
-	CONSTRAINS suplentes
-	FOREING KEY id_formacion, id_jugador
-		REFERENCES SuplenteEnFormacion
-		ON DELETE CASCADE ON UPDATE CASCADE,
-		
 	PRIMARY KEY(id_formacion)
 ) ENGINE=INNODB;
 
@@ -108,6 +103,6 @@ CREATE TABLE Tecnico(
 	FOREING KEY id_formacion
 		REFERENCES Formacion
 		ON DELETE CASCADE ON UPDATE CASCADE,
+		PRIMARY KEY(id_tecnico)
 	
-
 )
