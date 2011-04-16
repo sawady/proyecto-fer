@@ -3,14 +3,14 @@
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
 <hibernate-mapping package="model">
 	<class name="FormacionStrategy" table="FormacionStrategy">
-		<id name="id">
+		<id name="id_formstrategy">
 		    <generator class="native"/>
         </id>
         <discriminator column="tipo" type="string"/>
         
         <subclass name="FormacionStrategyImpl" discriminator-value="FormacionStrategyImpl">
         
-        <list name="posiciones" table="PosicionesEnFormacionStrategy" >
+        <list name="posiciones" table="PosicionesEnFormacionStrategy" cascade="all" inverse="true">
             <key column="id_formstrategy"></key>
             <index column="indice"/>
             <element type="Posicion" column="posicion"/>
