@@ -3,7 +3,7 @@
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
 <hibernate-mapping package="model">
 	<class name="Habilidad" table="Habilidad">
-		<id name="id">
+		<id name="id_habilidad">
             <generator class="native"/>
         </id>
         
@@ -11,7 +11,7 @@
         
         <subclass name="HabilidadImpl" discriminator-value="HabilidadImpl">
         
-        	<many-to-one name="jugador" class="Jugador"/>
+        	<many-to-one name="jugador" class="Jugador" cascade="all"/>
                 
         </subclass>
         
