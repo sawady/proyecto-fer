@@ -23,7 +23,7 @@ public class Application {
 	}
 	
 	public static synchronized Application initialize() {
-		return initialize(new InMemoryHomeFactory()); //persist with collections in memory
+		return initialize(new DefaultHomeFactory()); //persist with collections in memory
 	}
 	
 	public static synchronized Application getInstance() {
