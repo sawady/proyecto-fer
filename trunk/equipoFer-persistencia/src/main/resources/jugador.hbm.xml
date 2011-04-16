@@ -3,10 +3,10 @@
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
 <hibernate-mapping package="model">
 	<class name="Jugador" table="Jugador">
-		<id name="id">
+		<id name="id_jugador">
             <generator class="native"/>
         </id>
         <property name="nombre"/>
-        <many-to-one name="equipo" class="Equipo"/>
+        <many-to-one name="equipo" class="Equipo" cascade="all"/>
 	</class>
 </hibernate-mapping>
