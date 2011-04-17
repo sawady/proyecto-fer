@@ -12,7 +12,7 @@ import model.Tecnico;
 import model.Titular;
 
 public class EquipoFerEntities {
-	
+	//lista de entitys del proyecto
 	public List<Class<?>> getEntities(){
 		List<Class<?>> result = new ArrayList<Class<?>>();
 		
