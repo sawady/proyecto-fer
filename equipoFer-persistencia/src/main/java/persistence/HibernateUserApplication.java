@@ -7,6 +7,7 @@ import appModel.UserApplication;
 
 public class HibernateUserApplication extends UserApplication {
 
+	//secion de un usuario
 	private Session session;
 	
 	public HibernateUserApplication(Session session) {
@@ -14,6 +15,7 @@ public class HibernateUserApplication extends UserApplication {
 		this.session = session;
 	}
 	
+	//manejo de transacciones
 	private Transaction startTransaction(){
 		return this.session.beginTransaction();
 	}

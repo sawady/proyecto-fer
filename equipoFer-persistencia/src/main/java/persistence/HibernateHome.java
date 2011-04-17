@@ -6,6 +6,7 @@ import appModel.Entity;
 import appModel.Home;
 
 public class HibernateHome<T extends Entity> implements Home<T>{
+	//home que se encarga d las operaciones d la session
 
 	private Session session;
 	
