@@ -13,6 +13,7 @@ import org.hibernate.classic.Session;
  * @author leo
  *
  */
+//modo de ejemplo, no pertenece a este proyecto!!!!!
 public class InsertJugadoresBasic {
 	public static void main(String[] args) {
 		//Esta instancia es thread safe
