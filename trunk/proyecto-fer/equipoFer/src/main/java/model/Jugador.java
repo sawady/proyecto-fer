@@ -16,6 +16,9 @@ public class Jugador extends Entity implements Nombrable{
 	
 	/* CONSTRUSTOR ***************************************************/
 	
+	public Jugador() {
+	}
+	
 	public Jugador(String nombre) {
 		super();
 		this.habilidades = new HashSet<Habilidad>();

@@ -11,6 +11,8 @@ public class Tecnico extends Entity implements Nombrable {
 	
 /* CONSTRUSTOR ***************************************************/
 	
+	public Tecnico() {
+	}
 	
 	public Tecnico(String nombre, FormacionStrategy form_strategy) {
 		super();

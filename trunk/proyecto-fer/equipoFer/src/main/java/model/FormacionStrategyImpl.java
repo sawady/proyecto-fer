@@ -14,7 +14,9 @@ public class FormacionStrategyImpl extends Entity implements FormacionStrategy {
 	private List<Posicion> posiciones = new ArrayList<Posicion>();
 
 	/* CONSTRUCTOR ***************************************************/
-	
+	public FormacionStrategyImpl() {
+		
+	}
 	public FormacionStrategyImpl(List<Posicion> listaPos) {
 		super();
 		this.posiciones = listaPos;

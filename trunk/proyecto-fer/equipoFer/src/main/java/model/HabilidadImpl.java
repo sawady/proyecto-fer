@@ -12,6 +12,8 @@ public class HabilidadImpl extends Entity implements Habilidad{
 	
 	/* CONSTRUSTOR ***************************************************/
 	
+	public HabilidadImpl(){}
+	
 	public HabilidadImpl(Posicion posicion, int valor, Jugador jug) {
 		super();
 		this.posicion = posicion;

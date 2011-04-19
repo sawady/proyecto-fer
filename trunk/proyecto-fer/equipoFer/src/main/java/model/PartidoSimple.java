@@ -12,6 +12,8 @@ public class PartidoSimple extends Partido {
 	
 	/* CONSTRUSTOR ***************************************************/
 
+	public PartidoSimple(){}
+	
 	public PartidoSimple(Equipo equipo1, int golEq1, Equipo equipo2, int golEq2) {
 			this.equipo1 = equipo1;
 			this.golesEq1 = golEq1;
