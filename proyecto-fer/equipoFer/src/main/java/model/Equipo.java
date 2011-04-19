@@ -15,10 +15,11 @@ public class Equipo extends Entity implements Nombrable{
 	
 /* CONSTRUSTOR ***************************************************/
 	
-	public Equipo(Tecnico tecnico) {
+	public Equipo(String nombre, Tecnico tecnico) {
 		super();
 		this.jugadores = new HashSet<Jugador>();
 		this.tecnico = tecnico;
+		this.nombre = nombre;
 	}
 	
 	public Equipo(Set<Jugador> jugadores, Tecnico tecnico) {
@@ -59,6 +60,11 @@ public class Equipo extends Entity implements Nombrable{
 		this.nombre = nombre;
 	}
 	
+	
+	public void setJugadores(Set<Jugador> jugadores) {
+		this.jugadores = jugadores;
+	}
+
 	public Equipo addJugador(Jugador jugador) {
 		this.getJugadores().add(jugador);
 		return this;

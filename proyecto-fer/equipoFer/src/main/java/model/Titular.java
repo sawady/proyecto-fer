@@ -7,14 +7,14 @@ public class Titular extends Entity {
 /* VARIABLES ***************************************************/
 	
 	public Jugador jugador;
-	public Posicion pos;
+	public Posicion posicion;
 	public Formacion formacion;
 	
 	/* CONSTRUSTOR ***************************************************/
 	public Titular(Jugador jugador, Posicion pos, Formacion form) {
 		super();
 		this.jugador = jugador;
-		this.pos = pos;
+		this.posicion = pos;
 		this.formacion = form;
 	}
 	
@@ -27,10 +27,21 @@ public class Titular extends Entity {
 		return jugador;
 	}
 	
-	public Posicion getPos() {
-		return pos;
+	public Posicion getPosicion() {
+		return posicion;
 	}
 	
+	
+	public void setJugador(Jugador jugador) {
+		this.jugador = jugador;
+	}
+
+
+	public void setPosicion(Posicion posicion) {
+		this.posicion = posicion;
+	}
+
+
 	public Formacion getFormacion() {
 		return formacion;
 	}

@@ -46,6 +46,7 @@ public class HabilidadImpl extends Entity implements Habilidad{
 	public void setValor(int valor) {
 		this.valor = valor;
 	}
+	
 
 	public int getValor() {
 		return valor;
