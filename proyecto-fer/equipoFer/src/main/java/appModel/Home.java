@@ -12,5 +12,7 @@ public interface Home<T extends Entity>  {
 	public void eliminar(T object);
 	
 	public void actualizar(T object);
+	
+	public T getWithId(int id);
 
 }

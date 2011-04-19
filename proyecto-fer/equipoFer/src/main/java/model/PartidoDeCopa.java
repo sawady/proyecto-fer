@@ -11,6 +11,8 @@ public class PartidoDeCopa extends Partido {
 
 	/* CONSTRUSTOR ***************************************************/
 
+	public PartidoDeCopa(){}
+	
 	public PartidoDeCopa(int golesPorPenalEq1, int golesPorPenalEq2,
 			PartidoSimple partidoIda, PartidoSimple partidoVuelta, Equipo equipo1, Equipo equipo2) {
 		this.golesPorPenalEq1 = golesPorPenalEq1;

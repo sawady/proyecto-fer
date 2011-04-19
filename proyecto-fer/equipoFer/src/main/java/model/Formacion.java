@@ -14,6 +14,8 @@ public class Formacion extends Entity {
 	
  /* CONSTRUSTOR ***************************************************/
 	
+	public Formacion() {
+	}
 	public Formacion(Equipo equipo) {
 		this.titulares = new HashSet<Titular>();
 		this.suplentes = new HashSet<Jugador>();
