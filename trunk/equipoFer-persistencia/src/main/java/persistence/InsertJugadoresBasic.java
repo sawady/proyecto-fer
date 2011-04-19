@@ -1,7 +1,9 @@
 package persistence;
 
 
+import model.Equipo;
 import model.Jugador;
+import model.Tecnico;
 
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
@@ -23,8 +25,14 @@ public class InsertJugadoresBasic {
 		Session session = sessionFactory.openSession();
 		Transaction transaction = session.beginTransaction();
 		try {
-			session.save(new Jugador("Pavoni"));
-			session.save(new Jugador("Santoro"));
+			
+			Equipo eq = new Equipo("Boca", new Tecnico("Bianchi", null));
+			eq.addJugador(new Jugador("Pavoni", eq));
+			eq.addJugador(new Jugador("Rafael", eq));
+			eq.addJugador(new Jugador("Palermo", eq));
+			eq.addJugador(new Jugador("Riquelme", eq));
+			
+			session.save(eq);
 			transaction.commit();
 		}
 		catch(RuntimeException e) {
