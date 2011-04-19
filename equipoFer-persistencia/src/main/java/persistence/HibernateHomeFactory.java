@@ -16,7 +16,7 @@ public class HibernateHomeFactory extends HomeFactory {
 
 	@Override
 	public Home<?> newHomeInstance(Class<?> clazz) {
-		return new HibernateHome<Entity>(this.session);
+		return new HibernateHome<Entity>(this.session, (Class<Entity>) clazz);
 	}
 
 }

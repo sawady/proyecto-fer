@@ -9,6 +9,7 @@ import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.hibernate.cfg.Configuration;
 import org.hibernate.classic.Session;
+import org.hibernate.criterion.Restrictions;
 
 /**
  * Muestra el uso basico de HB
@@ -26,13 +27,16 @@ public class InsertJugadoresBasic {
 		Transaction transaction = session.beginTransaction();
 		try {
 			
-			Equipo eq = new Equipo("Boca", new Tecnico("Bianchi", null));
-			eq.addJugador(new Jugador("Pavoni", eq));
-			eq.addJugador(new Jugador("Rafael", eq));
-			eq.addJugador(new Jugador("Palermo", eq));
-			eq.addJugador(new Jugador("Riquelme", eq));
+//			Equipo eq = new Equipo("Boca", new Tecnico("Bianchi", null));
+//			eq.addJugador(new Jugador("Pavoni", eq));
+//			eq.addJugador(new Jugador("Rafael", eq));
+//			eq.addJugador(new Jugador("Palermo", eq));
+//			eq.addJugador(new Jugador("Riquelme", eq));
+//			
+//			session.save(eq);
 			
-			session.save(eq);
+			session.delete((session.createCriteria(Equipo.class).add(Restrictions.idEq(2)).uniqueResult()));
+			
 			transaction.commit();
 		}
 		catch(RuntimeException e) {
