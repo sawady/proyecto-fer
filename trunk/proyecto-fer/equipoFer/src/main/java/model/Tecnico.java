@@ -34,6 +34,7 @@ public class Tecnico extends Entity implements Nombrable {
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
 	}
+	
 
 	public void setForm_strategy(FormacionStrategy form_strategy) {
 		this.form_strategy = form_strategy;

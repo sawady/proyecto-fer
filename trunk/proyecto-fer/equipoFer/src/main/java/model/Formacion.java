@@ -53,6 +53,15 @@ public class Formacion extends Entity {
 		this.equipo = equipo;
 	}
 	
+	
+	public void setTitulares(Set<Titular> titulares) {
+		this.titulares = titulares;
+	}
+
+	public void setSuplentes(Set<Jugador> suplentes) {
+		this.suplentes = suplentes;
+	}
+
 	public void addTitular(Titular titular) {
 		this.getTitulares().add(titular);
 	}

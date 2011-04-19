@@ -12,6 +12,7 @@ public class Jugador extends Entity implements Nombrable{
 	
 	private Set<Habilidad> habilidades;
 	private String nombre;
+	private Equipo equipo;
 	
 	/* CONSTRUSTOR ***************************************************/
 	
@@ -20,6 +21,11 @@ public class Jugador extends Entity implements Nombrable{
 		this.habilidades = new HashSet<Habilidad>();
 		this.nombre = nombre;
 	}
+	
+	public Jugador(String nombre, Equipo eq) {
+		this(nombre);
+		this.equipo = eq;
+	}	
 	
 	public Jugador(Set<Habilidad> listaHab, String nombre) {
 		super();
@@ -68,11 +74,23 @@ public class Jugador extends Entity implements Nombrable{
 		return this.nombre;
 	}
 	
+	public Equipo getEquipo() {
+		return equipo;
+	}
+
+	public void setEquipo(Equipo equipo) {
+		this.equipo = equipo;
+	}
+
 	public Jugador addHabilidad(Habilidad habilidad) {
 		this.getHabilidades().add(habilidad);
 		return this;
 	}
 	
+	public void setHabilidades(Set<Habilidad> habilidades) {
+		this.habilidades = habilidades;
+	}
+
 	public Jugador removeHabilidad(Habilidad habilidad) {
 		this.getHabilidades().remove(habilidad);
 		return this;
