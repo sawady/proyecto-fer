@@ -8,15 +8,15 @@ import appModel.HomeFactory;
 
 public class HibernateHomeFactory extends HomeFactory {
 	
-	private Session session; 
+	private ThreadLocal tl; 
 	
-	public HibernateHomeFactory(Session session){
-		this.session = session;
+	public HibernateHomeFactory(ThreadLocal tlocal){
+		this.tl = tlocal;
 	}
 
 	@Override
 	public Home<?> newHomeInstance(Class<?> clazz) {
-		return new HibernateHome<Entity>(this.session, (Class<Entity>) clazz);
+		return new HibernateHome<Entity>(this.tl, (Class<Entity>) clazz);
 	}
 
 }
