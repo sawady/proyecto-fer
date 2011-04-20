@@ -14,7 +14,7 @@ public class EquipoTestCase {
 	public void delegacionDelArmadoDeFormacion(){
 		Tecnico mockTecnico   = mock(Tecnico.class);
 		Set<Jugador> mockJugadores = mock(HashSet.class);
-		Equipo eq = new Equipo(mockJugadores,mockTecnico);
+		Equipo eq = new Equipo("River", mockJugadores,mockTecnico);
 		eq.armarFormacion();
 		verify(mockTecnico).armarFormacion(eq);
 	}
