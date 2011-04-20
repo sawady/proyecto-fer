@@ -34,9 +34,7 @@ public class InsertJugadoresBasic {
 //			eq.addJugador(new Jugador("Riquelme", eq));
 //			
 //			session.save(eq);
-			
-			session.delete((session.createCriteria(Equipo.class).add(Restrictions.idEq(2)).uniqueResult()));
-			
+					
 			transaction.commit();
 		}
 		catch(RuntimeException e) {

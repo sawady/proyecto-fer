@@ -1,25 +1,57 @@
 package persistence;
 
+
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.Transaction;
 import org.hibernate.cfg.Configuration;
 
-public class HibernateApplication {
-	//inicia la secion del hibernate
-	private SessionFactory sessionFactory;
+import appModel.HomeFactory;
+import appModel.UserApplication;
+
+public class HibernateApplication extends UserApplication {
 	
-	public HibernateApplication(){
-		this.sessionFactory = new Configuration().configure().buildSessionFactory();
+	//inicia la secion del hibernate
+	private static HibernateApplication instance;
+	private SessionFactory sessionFactory;
+	private ThreadLocal<Session> tl;
+	
+	public static HibernateApplication getInstance(){
+		if(instance == null){
+			initialize();
+		}
+		return instance;
+	} 
+	
+	private static void initialize() {
+		ThreadLocal<Session> tlocal = new ThreadLocal<Session>();
+		instance = new HibernateApplication(new HibernateHomeFactory(tlocal));
+		instance.sessionFactory = new Configuration().configure().buildSessionFactory();
+		instance.tl = tlocal;
 	}
 	
-	//abre una secion para un usuario
-	public HibernateUserApplication getUserApplication(){
+	public HibernateApplication(HomeFactory factory) {
+		super(factory);
+	}
+	
+	public void execute(Action action){
 		Session session = this.sessionFactory.openSession();
+		this.tl.set(session);
+		Transaction transaction = session.beginTransaction();
 		
-		ThreadLocal<Session> tl = new ThreadLocal<Session>();//esta variable(tl) no tendria q estar declarada
-														///fuera de este metodo??????
+		try{
+			action.execute();
+			transaction.commit();
+		}
+		catch(RuntimeException e) {
+			transaction.rollback();
+			throw e;
+		}
+		finally {
+			session.close();
+		}
+
 		
-		return new HibernateUserApplication(session);
 	}
 
 }
