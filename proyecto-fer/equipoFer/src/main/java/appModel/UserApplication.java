@@ -5,7 +5,6 @@ import java.util.Map;
 
 public class UserApplication {
 	
-	private static UserApplication instance;
 	private Map<Class<?>, Home<?>> homes = new HashMap<Class<?>, Home<?>>();
 
 	public UserApplication(HomeFactory factory) {
