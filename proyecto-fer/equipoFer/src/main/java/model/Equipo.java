@@ -27,7 +27,7 @@ public class Equipo extends Entity implements Nombrable{
 		this.nombre = nombre;
 	}
 	
-	public Equipo(Set<Jugador> jugadores, Tecnico tecnico) {
+	public Equipo(String nombre, Set<Jugador> jugadores, Tecnico tecnico) {
 		super();
 		this.jugadores = jugadores;
 		this.tecnico = tecnico;
