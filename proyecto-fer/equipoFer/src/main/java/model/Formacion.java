@@ -71,5 +71,16 @@ public class Formacion extends Entity {
 	public void addSuplente(Jugador jugador) {
 		this.getSuplentes().add(jugador);
 	}
+	@Override
+	public void printValues() {
+		System.out.println("Formacion Equipo:");
+		this.getEquipo().printValues();
+		System.out.println("Formacion Titulares:");
+		for(Titular titular : this.getTitulares())
+			titular.printValues();
+		System.out.println("Formacion Suplentes:");
+		for(Jugador jugador : this.getSuplentes())
+			jugador.printValues();
+	}
 	
 }

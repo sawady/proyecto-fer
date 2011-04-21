@@ -52,5 +52,14 @@ public class Titular extends Entity {
 	public void setFormacion(Formacion formacion) {
 		this.formacion = formacion;
 	}
+
+	@Override
+	public void printValues() {
+		System.out.println("Titular Jugador: ");
+		this.getJugador().printValues();
+//		System.out.println("Titular Posicion: " + this.getPosicion().toString());
+//		System.out.println("Titular Formacion:");
+//		this.getFormacion().printValues();
+	}
 	
 }

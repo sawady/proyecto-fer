@@ -81,5 +81,11 @@ public class PartidoDeCopa extends Partido {
 		this.partidoVuelta = partidoVuelta;
 	}
 
+	@Override
+	public void printValues() {
+		// TODO Auto-generated method stub
+		
+	}
+
 
 }

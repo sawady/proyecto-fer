@@ -68,5 +68,11 @@ public class PartidoSimple extends Partido {
 		this.golesEq2 = golesEq2;
 	}
 
+	@Override
+	public void printValues() {
+		// TODO Auto-generated method stub
+		
+	}
+
 
 }
