@@ -10,13 +10,13 @@
         <many-to-one name="equipo" class="Equipo" cascade="all"/>
         
 		<set name="titulares" cascade="all" inverse="true">
-            <key column="formacion"/>
+            <key column="id"/>
             <one-to-many class="Titular"/>
         </set>
      
         <set name="suplentes" table="SuplenteEnFormacion" inverse="true" cascade="all">
-            <key column="id_formacion"/>
-            <many-to-many column="id_jugador" class="Jugador"/>
+            <key column="formacion"/>
+            <many-to-many column="jugador" class="Jugador"/>
         </set>
             
 	</class>

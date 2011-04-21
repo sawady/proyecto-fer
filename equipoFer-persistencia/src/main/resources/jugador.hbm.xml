@@ -8,5 +8,9 @@
         </id>
         <property name="nombre"/>
         <many-to-one name="equipo" class="Equipo" cascade="all"/>
+		<set name="habilidades" cascade="all" inverse="true">
+            <key column="id"/>
+            <one-to-many class="Habilidad"/>
+        </set>
 	</class>
 </hibernate-mapping>

@@ -11,6 +11,7 @@
         
         <subclass name="HabilidadImpl" discriminator-value="HabilidadImpl">
         
+        	 <property name="valor"/>
         	<many-to-one name="jugador" class="Jugador" cascade="all"/>
                 
         </subclass>

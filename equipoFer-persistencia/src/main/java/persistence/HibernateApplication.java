@@ -12,7 +12,7 @@ import appModel.UserApplication;
 public class HibernateApplication extends UserApplication {
 	
 	//inicia la secion del hibernate
-	private static HibernateApplication instance;
+	public static HibernateApplication instance;
 	private SessionFactory sessionFactory;
 	private ThreadLocal<Session> tl;
 	
@@ -21,13 +21,14 @@ public class HibernateApplication extends UserApplication {
 			initialize();
 		}
 		return instance;
-	} 
+	}
 	
 	private static void initialize() {
 		ThreadLocal<Session> tlocal = new ThreadLocal<Session>();
 		instance = new HibernateApplication(new HibernateHomeFactory(tlocal));
 		instance.sessionFactory = new Configuration().configure().buildSessionFactory();
 		instance.tl = tlocal;
+		
 	}
 	
 	public HibernateApplication(HomeFactory factory) {
@@ -50,8 +51,6 @@ public class HibernateApplication extends UserApplication {
 		finally {
 			session.close();
 		}
-
-		
 	}
 
 }

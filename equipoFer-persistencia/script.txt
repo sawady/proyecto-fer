@@ -27,13 +27,13 @@ USE FER;
 
 DROP TABLE IF EXISTS `FER`.`Equipo`;
 CREATE TABLE  `FER`.`Equipo` (
-  `id_equipo` int(11) NOT NULL AUTO_INCREMENT,
-  `nombre` char(60) CHARACTER SET ucs2 NOT NULL,
-  `mi_tecnico` int(11) NOT NULL,
-  PRIMARY KEY (`id_equipo`),
-  KEY `fk_tecnicoequipo` (`mi_tecnico`),
-  CONSTRAINT `fk_tecnicoequipo` FOREIGN KEY (`mi_tecnico`) REFERENCES `Tecnico` (`id_tecnico`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=FIXED;
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `nombre` char(60) CHARACTER SET ucs2 DEFAULT NULL,
+  `tecnico` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`) USING BTREE,
+  KEY `fk_tecnicoequipo` (`tecnico`),
+  CONSTRAINT `fk_tecnicoequipo` FOREIGN KEY (`tecnico`) REFERENCES `Tecnico` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 ROW_FORMAT=FIXED;
 
 --
 -- Dumping data for table `FER`.`Equipo`
@@ -41,6 +41,8 @@ CREATE TABLE  `FER`.`Equipo` (
 
 /*!40000 ALTER TABLE `Equipo` DISABLE KEYS */;
 LOCK TABLES `Equipo` WRITE;
+INSERT INTO `FER`.`Equipo` VALUES  (1,'River',1),
+ (2,'River',2);
 UNLOCK TABLES;
 /*!40000 ALTER TABLE `Equipo` ENABLE KEYS */;
 
@@ -51,13 +53,13 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `FER`.`Formacion`;
 CREATE TABLE  `FER`.`Formacion` (
-  `id_formacion` int(11) NOT NULL AUTO_INCREMENT,
-  `nombre` varchar(70) NOT NULL,
-  `el_equipo` int(11) NOT NULL,
-  PRIMARY KEY (`id_formacion`),
-  KEY `fk3` (`el_equipo`),
-  CONSTRAINT `fk3` FOREIGN KEY (`el_equipo`) REFERENCES `Equipo` (`id_equipo`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `nombre` varchar(70) DEFAULT NULL,
+  `equipo` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`) USING BTREE,
+  KEY `fk3` (`equipo`),
+  CONSTRAINT `fk3` FOREIGN KEY (`equipo`) REFERENCES `Equipo` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `FER`.`Formacion`
@@ -65,6 +67,8 @@ CREATE TABLE  `FER`.`Formacion` (
 
 /*!40000 ALTER TABLE `Formacion` DISABLE KEYS */;
 LOCK TABLES `Formacion` WRITE;
+INSERT INTO `FER`.`Formacion` VALUES  (1,NULL,1),
+ (2,NULL,2);
 UNLOCK TABLES;
 /*!40000 ALTER TABLE `Formacion` ENABLE KEYS */;
 
@@ -75,10 +79,10 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `FER`.`FormacionStrategy`;
 CREATE TABLE  `FER`.`FormacionStrategy` (
-  `id_formacionStrategy` int(11) NOT NULL AUTO_INCREMENT,
-  `tipo` char(50) CHARACTER SET ucs2 NOT NULL,
-  PRIMARY KEY (`id_formacionStrategy`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `tipo` char(50) CHARACTER SET ucs2 DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `FER`.`FormacionStrategy`
@@ -86,6 +90,8 @@ CREATE TABLE  `FER`.`FormacionStrategy` (
 
 /*!40000 ALTER TABLE `FormacionStrategy` DISABLE KEYS */;
 LOCK TABLES `FormacionStrategy` WRITE;
+INSERT INTO `FER`.`FormacionStrategy` VALUES  (1,'FormacionStrategyImpl'),
+ (2,'FormacionStrategyImpl');
 UNLOCK TABLES;
 /*!40000 ALTER TABLE `FormacionStrategy` ENABLE KEYS */;
 
@@ -96,13 +102,14 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `FER`.`Habilidad`;
 CREATE TABLE  `FER`.`Habilidad` (
-  `id_habilidad` int(11) NOT NULL AUTO_INCREMENT,
-  `tipo` varchar(60) NOT NULL,
-  `el_jugador` int(11) NOT NULL,
-  PRIMARY KEY (`id_habilidad`),
-  KEY `fk_jugadorhabilidad` (`el_jugador`),
-  CONSTRAINT `fk_jugadorhabilidad` FOREIGN KEY (`el_jugador`) REFERENCES `Jugador` (`id_jugador`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `tipo` varchar(60) DEFAULT NULL,
+  `jugador` int(11) DEFAULT NULL,
+  `valor` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `fk_jugadorhabilidad` (`jugador`),
+  CONSTRAINT `fk_jugadorhabilidad` FOREIGN KEY (`jugador`) REFERENCES `Jugador` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `FER`.`Habilidad`
@@ -110,6 +117,20 @@ CREATE TABLE  `FER`.`Habilidad` (
 
 /*!40000 ALTER TABLE `Habilidad` DISABLE KEYS */;
 LOCK TABLES `Habilidad` WRITE;
+INSERT INTO `FER`.`Habilidad` VALUES  (1,'HabilidadImpl',1,0),
+ (2,'HabilidadImpl',2,0),
+ (3,'HabilidadImpl',3,0),
+ (4,'HabilidadImpl',4,0),
+ (5,'HabilidadImpl',5,0),
+ (6,'HabilidadImpl',6,0),
+ (7,'HabilidadImpl',7,0),
+ (8,'HabilidadImpl',8,0),
+ (9,'HabilidadImpl',9,0),
+ (10,'HabilidadImpl',10,0),
+ (11,'HabilidadImpl',11,0),
+ (12,'HabilidadImpl',12,0),
+ (13,'HabilidadImpl',13,0),
+ (14,'HabilidadImpl',14,0);
 UNLOCK TABLES;
 /*!40000 ALTER TABLE `Habilidad` ENABLE KEYS */;
 
@@ -120,13 +141,13 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `FER`.`Jugador`;
 CREATE TABLE  `FER`.`Jugador` (
-  `id_jugador` int(11) NOT NULL AUTO_INCREMENT,
-  `nombre` varchar(70) NOT NULL,
-  `miEquipo` int(11) NOT NULL,
-  PRIMARY KEY (`id_jugador`),
-  KEY `fk_equipojugador` (`miEquipo`),
-  CONSTRAINT `fk_equipojugador` FOREIGN KEY (`miEquipo`) REFERENCES `Equipo` (`id_equipo`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `nombre` varchar(70) DEFAULT NULL,
+  `equipo` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `fk_equipojugador` (`equipo`),
+  CONSTRAINT `fk_equipojugador` FOREIGN KEY (`equipo`) REFERENCES `Equipo` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `FER`.`Jugador`
@@ -134,29 +155,22 @@ CREATE TABLE  `FER`.`Jugador` (
 
 /*!40000 ALTER TABLE `Jugador` DISABLE KEYS */;
 LOCK TABLES `Jugador` WRITE;
+INSERT INTO `FER`.`Jugador` VALUES  (1,'Juan',1),
+ (2,'Marcelo',1),
+ (3,'Jose',1),
+ (4,'Fabian',1),
+ (5,'Seba',1),
+ (6,'Carlos',1),
+ (7,'Martin',1),
+ (8,'Seba',2),
+ (9,'Jose',2),
+ (10,'Juan',2),
+ (11,'Marcelo',2),
+ (12,'Fabian',2),
+ (13,'Martin',2),
+ (14,'Carlos',2);
 UNLOCK TABLES;
 /*!40000 ALTER TABLE `Jugador` ENABLE KEYS */;
-
-
---
--- Definition of table `FER`.`Posicion`
---
-
-DROP TABLE IF EXISTS `FER`.`Posicion`;
-CREATE TABLE  `FER`.`Posicion` (
-  `id_posicion` int(11) NOT NULL AUTO_INCREMENT,
-  `posicion` int(11) NOT NULL,
-  PRIMARY KEY (`id_posicion`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `FER`.`Posicion`
---
-
-/*!40000 ALTER TABLE `Posicion` DISABLE KEYS */;
-LOCK TABLES `Posicion` WRITE;
-UNLOCK TABLES;
-/*!40000 ALTER TABLE `Posicion` ENABLE KEYS */;
 
 
 --
@@ -165,10 +179,10 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `FER`.`PosicionesEnFormacionStrategy`;
 CREATE TABLE  `FER`.`PosicionesEnFormacionStrategy` (
-  `id_posicionesEnFormacionStrategy_` int(11) NOT NULL AUTO_INCREMENT,
-  `indice` int(11) NOT NULL,
-  `posicion` int(11) NOT NULL,
-  PRIMARY KEY (`id_posicionesEnFormacionStrategy_`)
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `indice` int(11) DEFAULT NULL,
+  `posicion` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
@@ -187,12 +201,12 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `FER`.`SuplenteEnFormacion`;
 CREATE TABLE  `FER`.`SuplenteEnFormacion` (
-  `el_jugador` int(11) NOT NULL,
-  `la_formacion` int(11) NOT NULL,
-  PRIMARY KEY (`el_jugador`,`la_formacion`),
-  KEY `fk_2` (`la_formacion`),
-  CONSTRAINT `fk_1` FOREIGN KEY (`el_jugador`) REFERENCES `Jugador` (`id_jugador`) ON DELETE CASCADE ON UPDATE CASCADE,
-  CONSTRAINT `fk_2` FOREIGN KEY (`la_formacion`) REFERENCES `Formacion` (`id_formacion`) ON DELETE CASCADE ON UPDATE CASCADE
+  `jugador` int(11) NOT NULL DEFAULT '0',
+  `formacion` int(11) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`jugador`,`formacion`) USING BTREE,
+  KEY `fk_2` (`formacion`),
+  CONSTRAINT `fk` FOREIGN KEY (`jugador`) REFERENCES `Jugador` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `fk_2` FOREIGN KEY (`formacion`) REFERENCES `Formacion` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
@@ -211,9 +225,13 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `FER`.`Tecnico`;
 CREATE TABLE  `FER`.`Tecnico` (
-  `id_tecnico` int(11) NOT NULL AUTO_INCREMENT,
-  PRIMARY KEY (`id_tecnico`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `nombre` varchar(50) DEFAULT NULL,
+  `form_strategy` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `new_fk_constraint` (`form_strategy`),
+  CONSTRAINT `new_fk_constraint` FOREIGN KEY (`form_strategy`) REFERENCES `FormacionStrategy` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `FER`.`Tecnico`
@@ -221,6 +239,8 @@ CREATE TABLE  `FER`.`Tecnico` (
 
 /*!40000 ALTER TABLE `Tecnico` DISABLE KEYS */;
 LOCK TABLES `Tecnico` WRITE;
+INSERT INTO `FER`.`Tecnico` VALUES  (1,'Bianchi',1),
+ (2,'Bianchi',2);
 UNLOCK TABLES;
 /*!40000 ALTER TABLE `Tecnico` ENABLE KEYS */;
 
@@ -231,16 +251,16 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `FER`.`Titular`;
 CREATE TABLE  `FER`.`Titular` (
-  `id_titular` int(11) NOT NULL AUTO_INCREMENT,
-  `posicion` int(11) NOT NULL,
-  `el_jugador` int(11) NOT NULL,
-  `la_formacion` int(11) NOT NULL,
-  PRIMARY KEY (`id_titular`),
-  KEY `fk1` (`el_jugador`),
-  KEY `fk2` (`la_formacion`),
-  CONSTRAINT `fk2` FOREIGN KEY (`la_formacion`) REFERENCES `Formacion` (`id_formacion`) ON DELETE CASCADE ON UPDATE CASCADE,
-  CONSTRAINT `fk1` FOREIGN KEY (`el_jugador`) REFERENCES `Jugador` (`id_jugador`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `posicion` int(11) DEFAULT NULL,
+  `jugador` int(11) DEFAULT NULL,
+  `formacion` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `fk1` (`jugador`),
+  KEY `fk2` (`formacion`),
+  CONSTRAINT `fk1` FOREIGN KEY (`jugador`) REFERENCES `Jugador` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `fk2` FOREIGN KEY (`formacion`) REFERENCES `Formacion` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `FER`.`Titular`
@@ -248,6 +268,16 @@ CREATE TABLE  `FER`.`Titular` (
 
 /*!40000 ALTER TABLE `Titular` DISABLE KEYS */;
 LOCK TABLES `Titular` WRITE;
+INSERT INTO `FER`.`Titular` VALUES  (1,7,7,1),
+ (2,5,3,1),
+ (3,3,2,1),
+ (4,3,6,1),
+ (5,0,1,1),
+ (6,5,11,2),
+ (7,3,14,2),
+ (8,7,13,2),
+ (9,3,8,2),
+ (10,0,10,2);
 UNLOCK TABLES;
 /*!40000 ALTER TABLE `Titular` ENABLE KEYS */;
 
