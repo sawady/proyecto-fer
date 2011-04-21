@@ -19,6 +19,9 @@ public class Equipo extends Entity implements Nombrable{
 		
 	}
 		
+	public Equipo(String nombre2) {
+		this.nombre = nombre;
+	}
 	
 	public Equipo(String nombre, Tecnico tecnico) {
 		super();
@@ -29,12 +32,15 @@ public class Equipo extends Entity implements Nombrable{
 	
 	public Equipo(String nombre, Set<Jugador> jugadores, Tecnico tecnico) {
 		super();
+		this.nombre = nombre;
 		this.jugadores = jugadores;
 		this.tecnico = tecnico;
 	}
 		 	
 /* METODOS ***************************************************/
 	
+
+
 	public Formacion armarFormacion(){
 		return this.getTecnico().armarFormacion(this);
 	}
