@@ -11,7 +11,7 @@
         <subclass name="FormacionStrategyImpl" discriminator-value="FormacionStrategyImpl">
         
         <list name="posiciones" table="PosicionesEnFormacionStrategy" cascade="all" inverse="true">
-            <key column="id_formstrategy"></key>
+            <key column="id"></key>
             <index column="indice"/>
             <element type="Posicion" column="posicion"/>
         </list>

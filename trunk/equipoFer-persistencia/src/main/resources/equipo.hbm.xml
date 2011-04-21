@@ -11,7 +11,7 @@
         <many-to-one name="tecnico" class="Tecnico" cascade="all"/>
         
 		<set name="jugadores" cascade="all" inverse="true">
-            <key column="equipo"/>
+            <key column="id"/>
             <one-to-many class="Jugador"/>
         </set>
         
