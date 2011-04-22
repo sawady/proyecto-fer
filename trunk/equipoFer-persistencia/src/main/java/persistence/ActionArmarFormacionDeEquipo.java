@@ -4,17 +4,16 @@ import model.Equipo;
 import model.Formacion;
 
 public class ActionArmarFormacionDeEquipo implements Action{
-	private Equipo eq;
+	
+	private Equipo equipo;
 
 	public ActionArmarFormacionDeEquipo(Equipo eq) {
 		super();
-		this.eq = eq;
+		this.equipo = eq;
 	}
 
 	public void execute() {
-
-		Formacion f = eq.armarFormacion();
-		HibernateApplication.getInstance().getHome(Formacion.class).agregar(f);
+		HibernateApplication.getInstance().getHome(Formacion.class).agregar(this.equipo.armarFormacion());		
 	}
 
 }

@@ -1,7 +1,5 @@
 package persistence;
 
-import org.hibernate.Session;
-
 import appModel.Entity;
 import appModel.Home;
 import appModel.HomeFactory;

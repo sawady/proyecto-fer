@@ -7,9 +7,9 @@ import org.hibernate.Transaction;
 import org.hibernate.cfg.Configuration;
 
 import appModel.HomeFactory;
-import appModel.UserApplication;
+import appModel.Application;
 
-public class HibernateApplication extends UserApplication {
+public class HibernateApplication extends Application {
 	
 	//inicia la secion del hibernate
 	public static HibernateApplication instance;

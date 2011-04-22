@@ -2,6 +2,7 @@ package appModel;
 
 import java.util.List;
 
+import model.Nombrable;
 
 public interface Home<T extends Entity>  {
 	
@@ -13,15 +14,18 @@ public interface Home<T extends Entity>  {
 
 	public void eliminar(T object);
 	
-	public T buscar(T object);
-
-	
 	public void actualizar(T object);
+	
+	public void deleteAllEntities();
+	
+	// ********************************************************
+	// ** SEARCH
+	// ********************************************************	
 	
 	public T getWithId(int id);
 	
 	public List<T> getAllEntities();
 	
-	public void deleteAllEntities();
+	public T getNombrable(String nombre);
 	
 }
