@@ -2,6 +2,8 @@ package persistence;
 
 import java.util.List;
 
+import model.Nombrable;
+
 import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.criterion.Restrictions;
@@ -10,7 +12,6 @@ import appModel.Entity;
 import appModel.Home;
 
 public class HibernateHome<T extends Entity> implements Home<T>{
-	//home que se encarga d las operaciones d la session
 
 	private ThreadLocal<Session> tlocal;
 	private Class<T> clazz;
@@ -57,6 +58,7 @@ public class HibernateHome<T extends Entity> implements Home<T>{
 		return (T) this.getCriteria().add(Restrictions.idEq(id)).uniqueResult();
 	}
 
+	@SuppressWarnings("unchecked")
 	public List<T> getAllEntities() {
 		return this.getCriteria().add(Restrictions.isNotNull("id")).list();
 	}
@@ -66,15 +68,9 @@ public class HibernateHome<T extends Entity> implements Home<T>{
 			this.tlocal.get().delete(obj);
 	}
 
-	public T buscar(T object) {
-		//ToDo
-		//la forma q se me ocurre es hacer una busqueda x nombre creando un criterio, entonces tendria
-		//q hacer una home
-		//especifica para cada entity
-		//Alguna idea mejor para hacer la busqueda????????
-		this.getCriteria().createCriteria()
-		
-		
+	@SuppressWarnings("unchecked")
+	public T getNombrable(String nombre) {
+		return (T) this.getCriteria().add(Restrictions.like("nombre", nombre)).uniqueResult();
 	}
 
 }

@@ -4,7 +4,7 @@ import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 
-public class UserApplication {
+public class Application {
 	
 	private Map<Class<?>, Home<?>> homes = new HashMap<Class<?>, Home<?>>();
 	
@@ -20,7 +20,7 @@ public class UserApplication {
 		return this.getHomes().values();	
 	}
 
-	public UserApplication(HomeFactory factory) {
+	public Application(HomeFactory factory) {
 		factory.addHomes(homes);	
 	}
 
