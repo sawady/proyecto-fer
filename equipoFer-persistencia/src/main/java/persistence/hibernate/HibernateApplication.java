@@ -6,7 +6,7 @@ import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.hibernate.cfg.Configuration;
 
-import persistence.Actions.Action;
+import persistence.actions.Action;
 
 import appModel.HomeFactory;
 import appModel.Application;

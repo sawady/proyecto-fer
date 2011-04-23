@@ -1,8 +1,8 @@
-package persistence.Test;
+package persistence.test;
 
-import persistence.Actions.Action;
-import persistence.Actions.ActionBuscarEquipoYArmarFormacion;
-import persistence.Actions.ActionCrearEquipoRiver;
+import persistence.actions.Action;
+import persistence.actions.ActionBuscarEquipoYArmarFormacion;
+import persistence.actions.ActionCrearEquipoRiver;
 import persistence.hibernate.HibernateApplication;
 import appModel.Home;
 

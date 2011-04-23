@@ -1,4 +1,4 @@
-package persistence.Actions;
+package persistence.actions;
 
 import persistence.hibernate.HibernateApplication;
 import model.Equipo;

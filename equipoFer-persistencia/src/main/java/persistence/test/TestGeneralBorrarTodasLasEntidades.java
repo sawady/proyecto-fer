@@ -1,11 +1,11 @@
-package persistence.Test;
+package persistence.test;
 
-import persistence.Actions.Action;
+import persistence.actions.Action;
 import persistence.hibernate.HibernateApplication;
 import appModel.Home;
 import appModel.Persistible;
 
-public class TestGeneralImprimirTodasLasEntidades {
+public class TestGeneralBorrarTodasLasEntidades {
 
 	/**
 	 * @param args
@@ -17,12 +17,11 @@ public class TestGeneralImprimirTodasLasEntidades {
 			public void execute() {
 				for(Home<?> home : HibernateApplication.getInstance().getAllHomes()){
 					
-					for(Persistible persistible : home.getAllEntities()){
-						persistible.printValues();
-					}
+					home.deleteAllEntities();
 				}
 			}
 		});
 
 	}
+
 }
