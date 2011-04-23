@@ -5,13 +5,13 @@ import java.util.List;
 
 import persistence.hibernate.HibernateApplication;
 
-import model.Equipo;
-import model.FormacionStrategy;
-import model.FormacionStrategyImpl;
-import model.HabilidadImpl;
-import model.Jugador;
-import model.Posicion;
-import model.Tecnico;
+import model.clasesPrincipales.Equipo;
+import model.clasesPrincipales.Jugador;
+import model.clasesPrincipales.Tecnico;
+import model.formaciones.FormacionStrategy;
+import model.formaciones.FormacionStrategyImpl;
+import model.habilidad.HabilidadImpl;
+import model.util.Posicion;
 
 public class ActionCrearEquipoRiver  implements Action{
 	
