@@ -1,4 +1,6 @@
-package model;
+package model.partidos;
+
+import model.clasesPrincipales.Equipo;
 
 public class PartidoDeCopa extends Partido {
 	//KZ7ky7RZ9AN2 

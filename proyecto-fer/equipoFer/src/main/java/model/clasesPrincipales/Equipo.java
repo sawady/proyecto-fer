@@ -1,7 +1,10 @@
-package model;
+package model.clasesPrincipales;
 
 import java.util.HashSet;
 import java.util.Set;
+
+import model.formaciones.Formacion;
+import model.util.Nombrable;
 
 import appModel.Entity;
 
