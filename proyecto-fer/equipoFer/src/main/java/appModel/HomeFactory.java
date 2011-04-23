@@ -4,6 +4,8 @@ import java.util.Map;
 
 public abstract class HomeFactory {
 
+	/* METODOS ***************************************************/
+
 	public final void addHomes(Map<Class<?>, Home<?>> homes){
 		
 		for(Class<?> clazz : new EquipoFerEntities().getEntities()){

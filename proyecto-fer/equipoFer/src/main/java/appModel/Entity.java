@@ -1,8 +1,13 @@
 package appModel;
 
 public abstract class Entity implements Persistible{
+	
+/* VARIABLES ***************************************************/
+
 		private int id;
 		
+/* CONSTRUCTOR ***************************************************/
+
 		public Entity() {		
 		}
 
@@ -10,7 +15,8 @@ public abstract class Entity implements Persistible{
 			this.id = id;
 		}
 		
-		
+/* GET&SET***************************************************/
+
 		public int getId() {
 			return id;
 		}

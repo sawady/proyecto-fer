@@ -5,9 +5,20 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class Application {
-	
+
+	/* VARIABLES ***************************************************/
+
 	private Map<Class<?>, Home<?>> homes = new HashMap<Class<?>, Home<?>>();
 	
+	/* CONSTRUCTOR ***************************************************/
+
+	public Application(HomeFactory factory) {
+		factory.addHomes(homes);	
+	}
+	
+	
+	/* GET&SET***************************************************/
+
 	public Map<Class<?>, Home<?>> getHomes() {
 		return homes;
 	}
@@ -18,10 +29,6 @@ public class Application {
 	
 	public Collection<Home<?>> getAllHomes(){
 		return this.getHomes().values();	
-	}
-
-	public Application(HomeFactory factory) {
-		factory.addHomes(homes);	
 	}
 
 	@SuppressWarnings("unchecked")
