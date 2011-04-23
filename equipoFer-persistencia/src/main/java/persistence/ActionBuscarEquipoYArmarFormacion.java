@@ -1,8 +1,9 @@
 package persistence;
 
 import model.Equipo;
+import model.Formacion;
 
-public class ActionBuscarEquipo implements Action {
+public class ActionBuscarEquipoYArmarFormacion implements Action {
 	
 	private String nombreEquipo;
 	private Equipo resultado;
@@ -23,14 +24,14 @@ public class ActionBuscarEquipo implements Action {
 		this.resultado = resultado;
 	}
 
-	public ActionBuscarEquipo(String nombreEquipo) {
+	public ActionBuscarEquipoYArmarFormacion(String nombreEquipo) {
 		super();
 		this.nombreEquipo = nombreEquipo;
 	}
 
 	public void execute() {
-		this.setResultado(
-				HibernateApplication.getInstance().getHome(Equipo.class).getNombrable(this.getNombreEquipo())
-		);
+		this.resultado = HibernateApplication.getInstance().getHome(Equipo.class).getNombrable(this.getNombreEquipo());
+		
+		HibernateApplication.getInstance().getHome(Formacion.class).agregar(this.resultado.armarFormacion());
 	}
 }
