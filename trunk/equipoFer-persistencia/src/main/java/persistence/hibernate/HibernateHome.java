@@ -2,7 +2,7 @@ package persistence.hibernate;
 
 import java.util.List;
 
-import model.Nombrable;
+import model.util.Nombrable;
 
 import org.hibernate.Criteria;
 import org.hibernate.Session;

@@ -1,8 +1,8 @@
 package persistence.actions;
 
 import persistence.hibernate.HibernateApplication;
-import model.Equipo;
-import model.Formacion;
+import model.clasesPrincipales.Equipo;
+import model.formaciones.Formacion;
 
 public class ActionArmarFormacionDeEquipo implements Action{
 	
