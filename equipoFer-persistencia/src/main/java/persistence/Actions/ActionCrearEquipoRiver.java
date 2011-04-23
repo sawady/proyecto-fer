@@ -1,7 +1,9 @@
-package persistence;
+package persistence.Actions;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import persistence.hibernate.HibernateApplication;
 
 import model.Equipo;
 import model.FormacionStrategy;

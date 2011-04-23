@@ -1,4 +1,4 @@
-package persistence;
+package persistence.hibernate;
 
 import appModel.Entity;
 import appModel.Home;
