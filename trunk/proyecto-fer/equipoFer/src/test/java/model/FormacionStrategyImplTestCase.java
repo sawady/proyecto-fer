@@ -80,7 +80,11 @@ public class FormacionStrategyImplTestCase {
 		
 		FormacionStrategy formStrat = new FormacionStrategyImpl(listaPos);
 		
-		Formacion resultado = new Formacion(mockEquipo);
+		Set<Jugador> suplentesDeseados = new HashSet<Jugador>();
+		suplentesDeseados.add(jug6);
+		suplentesDeseados.add(jug7);
+		
+		Formacion resultado = formStrat.armarFormacion(mockEquipo);
 		
 		Set<Titular> titularesDeseados = new HashSet<Titular>();
 		titularesDeseados.add(new Titular(jug1, Posicion.ARQUERO, resultado));
@@ -88,12 +92,6 @@ public class FormacionStrategyImplTestCase {
 		titularesDeseados.add(new Titular(jug3, Posicion.VOLANTEDEFENSIVO, resultado));
 		titularesDeseados.add(new Titular(jug4, Posicion.ENGANCHE, resultado));
 		titularesDeseados.add(new Titular(jug5, Posicion.DELANTERO, resultado));
-		
-		Set<Jugador> suplentesDeseados = new HashSet<Jugador>();
-		suplentesDeseados.add(jug6);
-		suplentesDeseados.add(jug7);
-		
-		resultado = formStrat.armarFormacion(mockEquipo);
 		
 		assertEquals(resultado.getTitulares().size(), 5);
 		assertTrue(resultado.getTitulares().containsAll(titularesDeseados));
