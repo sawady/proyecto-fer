@@ -22,7 +22,13 @@ public class HabilidadImpl extends Entity implements Habilidad{
 	}
 
 	
-	/* METODOS ***************************************************/
+	/* PRINT***************************************************/
+	
+	@Override
+	public void printValues() {
+		//System.out.println("Habilidad Posicion:" + this.getPosicion().toString());
+		System.out.println("Habilidad Valor:" + this.getValor());
+	}
 	/* GET&SET ***************************************************/
 
 	public Posicion getPosicion() {
@@ -62,10 +68,5 @@ public class HabilidadImpl extends Entity implements Habilidad{
 			return 0;		
 	}
 
-	@Override
-	public void printValues() {
-		//System.out.println("Habilidad Posicion:" + this.getPosicion().toString());
-		System.out.println("Habilidad Valor:" + this.getValor());
-	}
 
 }

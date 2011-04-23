@@ -1,10 +1,8 @@
 package model;
 
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
-import java.util.Set;
 
 import appModel.Entity;
 
@@ -61,6 +59,15 @@ public class FormacionStrategyImpl extends Entity implements FormacionStrategy {
 		
 		return jugadorGanador;
 	}
+
+/* PRINT***************************************************/
+
+	@Override
+	public void printValues() {
+//		System.out.println("FormacionStrategy Posiciones:");
+//		for(Posicion posicion : this.getPosiciones())
+//			System.out.println(posicion.toString());
+	}
 	
 	/* GET&SET ***************************************************/
 
@@ -71,12 +78,6 @@ public class FormacionStrategyImpl extends Entity implements FormacionStrategy {
 
 	public void setPosiciones(List<Posicion> posiciones) {
 		this.posiciones = posiciones;
-	}
-	@Override
-	public void printValues() {
-//		System.out.println("FormacionStrategy Posiciones:");
-//		for(Posicion posicion : this.getPosiciones())
-//			System.out.println(posicion.toString());
 	}
 
 }

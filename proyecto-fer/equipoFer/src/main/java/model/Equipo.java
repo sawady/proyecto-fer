@@ -45,6 +45,15 @@ public class Equipo extends Entity implements Nombrable{
 		return this.getTecnico().armarFormacion(this);
 	}
 	
+/* PRINT***************************************************/
+	@Override
+	public void printValues() {
+		System.out.println("Equipo Nombre: " + this.getNombre() + "\n");
+		System.out.println("Equipo Jugadores: ");
+		for(Jugador jug : this.getJugadores())
+			jug.printValues();
+	}
+
 /* GET&SET ***************************************************/
 
 	public Set<Jugador> getJugadores() {
@@ -87,12 +96,5 @@ public class Equipo extends Entity implements Nombrable{
 	}
 
 
-	@Override
-	public void printValues() {
-		System.out.println("Equipo Nombre: " + this.getNombre() + "\n");
-		System.out.println("Equipo Jugadores: ");
-		for(Jugador jug : this.getJugadores())
-			jug.printValues();
-	}
 	
 }

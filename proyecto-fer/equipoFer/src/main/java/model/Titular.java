@@ -21,8 +21,15 @@ public class Titular extends Entity {
 	}
 	
 	
-	/* METODOS ***************************************************/
-	
+	/* PRINT ***************************************************/
+	@Override
+	public void printValues() {
+		System.out.println("Titular Jugador: ");
+		this.getJugador().printValues();
+//		System.out.println("Titular Posicion: " + this.getPosicion().toString());
+//		System.out.println("Titular Formacion:");
+//		this.getFormacion().printValues();
+	}	
 	/* GET&SET ***************************************************/
 	
 	public Jugador getJugador() {
@@ -52,14 +59,4 @@ public class Titular extends Entity {
 	public void setFormacion(Formacion formacion) {
 		this.formacion = formacion;
 	}
-
-	@Override
-	public void printValues() {
-		System.out.println("Titular Jugador: ");
-		this.getJugador().printValues();
-//		System.out.println("Titular Posicion: " + this.getPosicion().toString());
-//		System.out.println("Titular Formacion:");
-//		this.getFormacion().printValues();
-	}
-	
 }

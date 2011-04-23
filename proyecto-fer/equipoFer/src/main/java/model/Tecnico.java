@@ -26,6 +26,14 @@ public class Tecnico extends Entity implements Nombrable {
 		return this.getForm_strategy().armarFormacion(eq);
 	}
 
+/* PRINT ***************************************************/
+	@Override
+	public void printValues() {
+		System.out.println("Tecnico Nombre: " + this.getNombre());
+		System.out.println("Tecnico FormStrategy:");
+		this.getForm_strategy().printValues();
+		
+	}
 
 /* GET&SET ***************************************************/
 	
@@ -44,14 +52,6 @@ public class Tecnico extends Entity implements Nombrable {
 
 	public String getNombre() {
 		return this.nombre;
-	}
-
-	@Override
-	public void printValues() {
-		System.out.println("Tecnico Nombre: " + this.getNombre());
-		System.out.println("Tecnico FormStrategy:");
-		this.getForm_strategy().printValues();
-		
 	}
 	
 }
