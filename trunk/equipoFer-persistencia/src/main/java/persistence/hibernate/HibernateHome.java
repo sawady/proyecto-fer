@@ -1,4 +1,4 @@
-package persistence;
+package persistence.hibernate;
 
 import java.util.List;
 

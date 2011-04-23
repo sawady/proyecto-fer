@@ -1,10 +1,12 @@
-package persistence;
+package persistence.hibernate;
 
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.hibernate.cfg.Configuration;
+
+import persistence.Actions.Action;
 
 import appModel.HomeFactory;
 import appModel.Application;

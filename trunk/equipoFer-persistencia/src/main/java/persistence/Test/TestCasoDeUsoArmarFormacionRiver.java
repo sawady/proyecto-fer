@@ -1,5 +1,9 @@
-package persistence;
+package persistence.Test;
 
+import persistence.Actions.Action;
+import persistence.Actions.ActionBuscarEquipoYArmarFormacion;
+import persistence.Actions.ActionCrearEquipoRiver;
+import persistence.hibernate.HibernateApplication;
 import appModel.Home;
 
 public class TestCasoDeUsoArmarFormacionRiver {

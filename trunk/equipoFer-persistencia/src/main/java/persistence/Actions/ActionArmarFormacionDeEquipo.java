@@ -1,5 +1,6 @@
-package persistence;
+package persistence.Actions;
 
+import persistence.hibernate.HibernateApplication;
 import model.Equipo;
 import model.Formacion;
 
