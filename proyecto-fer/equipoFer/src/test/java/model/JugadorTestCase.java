@@ -9,6 +9,10 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import model.clasesPrincipales.Jugador;
+import model.habilidad.Habilidad;
+import model.util.Posicion;
+
 import org.junit.Test;
 
 public class JugadorTestCase {

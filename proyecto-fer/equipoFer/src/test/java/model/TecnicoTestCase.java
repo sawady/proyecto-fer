@@ -1,5 +1,9 @@
 package model;
 
+import model.clasesPrincipales.Equipo;
+import model.clasesPrincipales.Tecnico;
+import model.formaciones.FormacionStrategy;
+
 import org.junit.Test;
 import static org.mockito.Mockito.*;
 

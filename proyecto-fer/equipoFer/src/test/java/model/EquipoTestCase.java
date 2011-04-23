@@ -6,6 +6,10 @@ import static org.mockito.Mockito.verify;
 import java.util.HashSet;
 import java.util.Set;
 
+import model.clasesPrincipales.Equipo;
+import model.clasesPrincipales.Jugador;
+import model.clasesPrincipales.Tecnico;
+
 import org.junit.Test;
 
 public class EquipoTestCase {

@@ -11,6 +11,14 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import model.clasesPrincipales.Equipo;
+import model.clasesPrincipales.Jugador;
+import model.clasesPrincipales.Titular;
+import model.formaciones.Formacion;
+import model.formaciones.FormacionStrategy;
+import model.formaciones.FormacionStrategyImpl;
+import model.util.Posicion;
+
 import org.junit.Test;
 
 public class FormacionStrategyImplTestCase {
