@@ -1,5 +1,8 @@
-package model;
+package model.clasesPrincipales;
 
+import model.formaciones.Formacion;
+import model.formaciones.FormacionStrategy;
+import model.util.Nombrable;
 import appModel.Entity;
 
 public class Tecnico extends Entity implements Nombrable {

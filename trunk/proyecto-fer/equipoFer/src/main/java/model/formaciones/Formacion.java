@@ -1,7 +1,11 @@
-package model;
+package model.formaciones;
 
 import java.util.HashSet;
 import java.util.Set;
+
+import model.clasesPrincipales.Equipo;
+import model.clasesPrincipales.Jugador;
+import model.clasesPrincipales.Titular;
 import appModel.Entity;
 
 public class Formacion extends Entity {

@@ -1,8 +1,13 @@
-package model;
+package model.formaciones;
 
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+
+import model.clasesPrincipales.Equipo;
+import model.clasesPrincipales.Jugador;
+import model.clasesPrincipales.Titular;
+import model.util.Posicion;
 
 import appModel.Entity;
 

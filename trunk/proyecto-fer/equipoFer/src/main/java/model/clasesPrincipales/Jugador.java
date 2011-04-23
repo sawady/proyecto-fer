@@ -1,8 +1,12 @@
-package model;
+package model.clasesPrincipales;
 
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Set;
+
+import model.habilidad.Habilidad;
+import model.util.Nombrable;
+import model.util.Posicion;
 
 import appModel.Entity;
 
