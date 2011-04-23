@@ -58,6 +58,16 @@ public class Jugador extends Entity implements Nombrable{
 		else
 			return v1;
 	}
+	
+	/* PRINT***************************************************/
+
+	@Override
+	public void printValues() {
+		System.out.println("Jugador Nombre: " + this.getNombre());
+		System.out.println("Jugador Habilidades:");
+		for(Habilidad habilidad : this.getHabilidades())
+			habilidad.printValues();
+	}
 	/* GET&SET ***************************************************/
 
 	
@@ -98,13 +108,6 @@ public class Jugador extends Entity implements Nombrable{
 		this.getHabilidades().remove(habilidad);
 		return this;
 	}
-
-	@Override
-	public void printValues() {
-		System.out.println("Jugador Nombre: " + this.getNombre());
-		System.out.println("Jugador Habilidades:");
-		for(Habilidad habilidad : this.getHabilidades())
-			habilidad.printValues();
-	}
+	
 	
 }
