@@ -1,4 +1,4 @@
-package persistence.Actions;
+package persistence.actions;
 
 public interface Action {
 	
