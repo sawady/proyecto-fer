@@ -32,7 +32,7 @@ public class Application {
 	}
 
 	@SuppressWarnings("unchecked")
-	public <T extends Entity> Home<T> getHome(Class<? extends T> type) {
+	public <T extends Persistible> Home<T> getHome(Class<? extends T> type) {
 		return (Home<T>) this.homes.get(type);
 	}
 	
