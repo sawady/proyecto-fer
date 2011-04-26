@@ -23,15 +23,8 @@ public class Titular extends Entity {
 	}
 	
 	
-	/* PRINT ***************************************************/
-	@Override
-	public void printValues() {
-		System.out.println("Titular Jugador: ");
-		this.getJugador().printValues();
-//		System.out.println("Titular Posicion: " + this.getPosicion().toString());
-//		System.out.println("Titular Formacion:");
-//		this.getFormacion().printValues();
-	}	
+	/* METODOS ***************************************************/
+	
 	/* GET&SET ***************************************************/
 	
 	public Jugador getJugador() {
@@ -61,4 +54,51 @@ public class Titular extends Entity {
 	public void setFormacion(Formacion formacion) {
 		this.formacion = formacion;
 	}
+	
+
+//	@Override
+//	public int hashCode() {
+//		final int prime = 31;
+//		int result = 1;
+//		result = prime * result
+//				+ ((formacion == null) ? 0 : formacion.hashCode());
+//		result = prime * result + ((jugador == null) ? 0 : jugador.hashCode());
+//		result = prime * result
+//				+ ((posicion == null) ? 0 : posicion.hashCode());
+//		return result;
+//	}
+//
+//	@Override
+//	public boolean equals(Object obj) {
+//		if (this == obj)
+//			return true;
+//		if (obj == null)
+//			return false;
+//		if (getClass() != obj.getClass())
+//			return false;
+//		Titular other = (Titular) obj;
+//		if (formacion == null) {
+//			if (other.formacion != null)
+//				return false;
+//		} else if (!formacion.equals(other.formacion))
+//			return false;
+//		if (jugador == null) {
+//			if (other.jugador != null)
+//				return false;
+//		} else if (!jugador.equals(other.jugador))
+//			return false;
+//		if (posicion != other.posicion)
+//			return false;
+//		return true;
+//	}
+
+	@Override
+	public void printValues() {
+		System.out.println("Titular Jugador: ");
+		this.getJugador().printValues();
+//		System.out.println("Titular Posicion: " + this.getPosicion().toString());
+//		System.out.println("Titular Formacion:");
+//		this.getFormacion().printValues();
+	}
+	
 }
