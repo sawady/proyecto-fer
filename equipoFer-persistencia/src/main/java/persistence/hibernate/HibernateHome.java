@@ -2,8 +2,6 @@ package persistence.hibernate;
 
 import java.util.List;
 
-import model.util.Nombrable;
-
 import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.criterion.Restrictions;
@@ -70,7 +68,8 @@ public class HibernateHome<T extends Entity> implements Home<T>{
 
 	@SuppressWarnings("unchecked")
 	public T getNombrable(String nombre) {
-		return (T) this.getCriteria().add(Restrictions.like("nombre", nombre)).uniqueResult();
+		
+		return (T) this.getCriteria().add(Restrictions.eq("nombre", nombre)).uniqueResult();
 	}
 
 }
