@@ -2,8 +2,6 @@ package appModel;
 
 import java.util.List;
 
-import model.Nombrable;
-
 public interface Home<T extends Persistible>  {
 	
 	// ********************************************************

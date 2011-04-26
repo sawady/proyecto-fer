@@ -5,14 +5,13 @@ import java.util.Set;
 
 import model.formaciones.Formacion;
 import model.util.Nombrable;
-
 import appModel.Entity;
 
 public class Equipo extends Entity implements Nombrable{
 	
 /* VARIABLES ***************************************************/
 	
-	private Set<Jugador> jugadores; 
+	private Set<Jugador> jugadores = new HashSet<Jugador>(); 
 	private Tecnico tecnico; 
 	private String nombre;
 	
@@ -28,7 +27,6 @@ public class Equipo extends Entity implements Nombrable{
 	
 	public Equipo(String nombre, Tecnico tecnico) {
 		super();
-		this.jugadores = new HashSet<Jugador>();
 		this.tecnico = tecnico;
 		this.nombre = nombre;
 	}
@@ -48,15 +46,6 @@ public class Equipo extends Entity implements Nombrable{
 		return this.getTecnico().armarFormacion(this);
 	}
 	
-/* PRINT***************************************************/
-	@Override
-	public void printValues() {
-		System.out.println("Equipo Nombre: " + this.getNombre() + "\n");
-		System.out.println("Equipo Jugadores: ");
-		for(Jugador jug : this.getJugadores())
-			jug.printValues();
-	}
-
 /* GET&SET ***************************************************/
 
 	public Set<Jugador> getJugadores() {
@@ -99,5 +88,12 @@ public class Equipo extends Entity implements Nombrable{
 	}
 
 
+	@Override
+	public void printValues() {
+		System.out.println("Equipo Nombre: " + this.getNombre() + "\n");
+		System.out.println("Equipo Jugadores: ");
+		for(Jugador jug : this.getJugadores())
+			jug.printValues();
+	}
 	
 }

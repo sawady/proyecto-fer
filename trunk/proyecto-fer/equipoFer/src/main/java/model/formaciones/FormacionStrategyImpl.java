@@ -8,7 +8,6 @@ import model.clasesPrincipales.Equipo;
 import model.clasesPrincipales.Jugador;
 import model.clasesPrincipales.Titular;
 import model.util.Posicion;
-
 import appModel.Entity;
 
 public class FormacionStrategyImpl extends Entity implements FormacionStrategy {
@@ -36,7 +35,7 @@ public class FormacionStrategyImpl extends Entity implements FormacionStrategy {
 
 		Iterator<Posicion>it = this.getPosiciones().iterator();
 				
-		while (it.hasNext()){
+		while (it.hasNext() && !jugadoresPosibles.isEmpty()){
 			Posicion pos = it.next();
 			Jugador jugadorTemp = buscarMejorEnPos(pos,jugadoresPosibles);
 			jugadoresPosibles.remove(jugadorTemp);
@@ -54,7 +53,7 @@ public class FormacionStrategyImpl extends Entity implements FormacionStrategy {
 	
 	public Jugador buscarMejorEnPos(Posicion pos, List<Jugador> lista){
 		
-		Jugador jugadorGanador = lista.get(0); 
+		Jugador jugadorGanador = lista.get(0);
 		
 		for(Jugador j:lista){
 			if(jugadorGanador.getValorHabilidad(pos) < j.getValorHabilidad(pos)){
@@ -63,15 +62,6 @@ public class FormacionStrategyImpl extends Entity implements FormacionStrategy {
 		}
 		
 		return jugadorGanador;
-	}
-
-/* PRINT***************************************************/
-
-	@Override
-	public void printValues() {
-//		System.out.println("FormacionStrategy Posiciones:");
-//		for(Posicion posicion : this.getPosiciones())
-//			System.out.println(posicion.toString());
 	}
 	
 	/* GET&SET ***************************************************/
@@ -83,6 +73,12 @@ public class FormacionStrategyImpl extends Entity implements FormacionStrategy {
 
 	public void setPosiciones(List<Posicion> posiciones) {
 		this.posiciones = posiciones;
+	}
+	@Override
+	public void printValues() {
+//		System.out.println("FormacionStrategy Posiciones:");
+//		for(Posicion posicion : this.getPosiciones())
+//			System.out.println(posicion.toString());
 	}
 
 }
