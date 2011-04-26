@@ -2,7 +2,9 @@ package appModel;
 
 import java.util.List;
 
-public interface Home<T extends Entity>  {
+import model.Nombrable;
+
+public interface Home<T extends Persistible>  {
 	
 	// ********************************************************
 	// ** ABM
