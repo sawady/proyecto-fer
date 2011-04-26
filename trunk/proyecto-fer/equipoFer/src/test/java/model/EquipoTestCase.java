@@ -6,9 +6,9 @@ import static org.mockito.Mockito.verify;
 import java.util.HashSet;
 import java.util.Set;
 
-import model.clasesPrincipales.Equipo;
-import model.clasesPrincipales.Jugador;
-import model.clasesPrincipales.Tecnico;
+import model.Equipo;
+import model.Jugador;
+import model.Tecnico;
 
 import org.junit.Test;
 

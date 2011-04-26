@@ -1,6 +1,5 @@
-package model.habilidad;
+package model;
 
-import model.util.Posicion;
 import appModel.Persistible;
 
 public interface Habilidad extends Persistible{

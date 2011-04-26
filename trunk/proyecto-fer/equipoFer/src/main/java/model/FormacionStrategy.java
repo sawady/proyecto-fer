@@ -1,6 +1,5 @@
-package model.formaciones;
+package model;
 
-import model.clasesPrincipales.Equipo;
 import appModel.Persistible;
 
 public interface FormacionStrategy extends Persistible {

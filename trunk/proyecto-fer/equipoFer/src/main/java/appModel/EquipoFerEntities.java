@@ -3,13 +3,13 @@ package appModel;
 import java.util.ArrayList;
 import java.util.List;
 
-import model.clasesPrincipales.Equipo;
-import model.clasesPrincipales.Jugador;
-import model.clasesPrincipales.Tecnico;
-import model.clasesPrincipales.Titular;
-import model.formaciones.Formacion;
-import model.formaciones.FormacionStrategy;
-import model.habilidad.Habilidad;
+import model.Equipo;
+import model.Formacion;
+import model.FormacionStrategy;
+import model.Habilidad;
+import model.Jugador;
+import model.Tecnico;
+import model.Titular;
 
 public class EquipoFerEntities {
 	//lista de entitys del proyecto

@@ -1,6 +1,5 @@
-package model.partidos;
+package model;
 
-import model.clasesPrincipales.Equipo;
 import appModel.Entity;
 
 public abstract class Partido extends Entity {

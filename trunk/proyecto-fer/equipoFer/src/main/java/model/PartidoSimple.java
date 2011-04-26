@@ -1,7 +1,5 @@
-package model.partidos;
+package model;
 
-import model.clasesPrincipales.Equipo;
-import model.formaciones.Formacion;
 
 public class PartidoSimple extends Partido {
 	

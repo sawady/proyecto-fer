@@ -1,7 +1,5 @@
-package model.habilidad;
+package model;
 
-import model.clasesPrincipales.Jugador;
-import model.util.Posicion;
 import appModel.Entity;
 
 public class HabilidadImpl extends Entity implements Habilidad{

@@ -1,10 +1,8 @@
-package model.clasesPrincipales;
+package model;
 
 import java.util.HashSet;
 import java.util.Set;
 
-import model.formaciones.Formacion;
-import model.util.Nombrable;
 import appModel.Entity;
 
 public class Equipo extends Entity implements Nombrable{
