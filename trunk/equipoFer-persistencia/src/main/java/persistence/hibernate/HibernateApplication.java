@@ -18,18 +18,19 @@ public class HibernateApplication extends Application {
 	private SessionFactory sessionFactory;
 	private ThreadLocal<Session> tl;
 	
-	public static HibernateApplication getInstance(){
+	public static synchronized HibernateApplication getInstance(){
 		if(instance == null){
-			initialize();
+			instance = initialize();
 		}
 		return instance;
 	}
 	
-	private static void initialize() {
+	private static HibernateApplication initialize() {
 		ThreadLocal<Session> tlocal = new ThreadLocal<Session>();
-		instance = new HibernateApplication(new HibernateHomeFactory(tlocal));
+		HibernateApplication instance = new HibernateApplication(new HibernateHomeFactory(tlocal));
 		instance.sessionFactory = new Configuration().configure().buildSessionFactory();
 		instance.tl = tlocal;
+		return instance;
 		
 	}
 	

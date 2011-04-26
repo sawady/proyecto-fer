@@ -12,8 +12,14 @@ import model.Posicion;
 import model.Tecnico;
 import persistence.hibernate.HibernateApplication;
 
-public class ActionCrearEquipoRiver  implements Action{
+public class ActionCrearEquipo  implements Action{
 	
+	private String nombreEquipo;
+
+	public ActionCrearEquipo(String nombreEquipo) {
+		this.nombreEquipo = nombreEquipo;
+	}
+
 	public void execute() {
 			
 			List<Posicion> listaPos = new ArrayList<Posicion>();
@@ -25,7 +31,7 @@ public class ActionCrearEquipoRiver  implements Action{
 			
 			FormacionStrategy fs = new FormacionStrategyImpl(listaPos);
 			Tecnico tecnico   = new Tecnico("Bianchi", fs);
-			Equipo eq = new Equipo("River", tecnico);
+			Equipo eq = new Equipo(this.nombreEquipo, tecnico);
 	
 			Jugador jug1 = new Jugador("Juan", eq);
 			Jugador jug2 = new Jugador("Jose", eq);
