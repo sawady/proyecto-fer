@@ -6,13 +6,13 @@
 		<id name="id">
             <generator class="native"/>
         </id>
-        <property name="nombre"/>
+        <property name="nombre"></property>
         
         <many-to-one name="tecnico" class="Tecnico" cascade="all"/>
         
 		<set name="jugadores" cascade="all" inverse="true">
-            <key column="id"/>
-            <one-to-many class="Jugador"/>
+            <key column="equipo"></key>
+            <one-to-many class="Jugador"></one-to-many>
         </set>
         
 	</class>

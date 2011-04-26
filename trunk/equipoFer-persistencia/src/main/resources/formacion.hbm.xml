@@ -10,7 +10,7 @@
         <many-to-one name="equipo" class="Equipo" cascade="all"/>
         
 		<set name="titulares" cascade="all" inverse="true">
-            <key column="id"/>
+            <key column="formacion"/>
             <one-to-many class="Titular"/>
         </set>
      
