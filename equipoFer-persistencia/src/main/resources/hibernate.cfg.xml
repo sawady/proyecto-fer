@@ -26,14 +26,15 @@
 		<!-- Echo all executed SQL to stdout -->
 		<property name="show_sql">true</property>
 
-		<mapping resource="equipo.hbm.xml" /> <!-- nuestros mappings -->
+		
+		<mapping resource="posicion.hbm.xml" /> <!-- nuestros mappings -->
+		<mapping resource="jugador.hbm.xml" />
+		<mapping resource="tecnico.hbm.xml" />
+		<mapping resource="titular.hbm.xml" />
+		<mapping resource="equipo.hbm.xml" /> 
 		<mapping resource="formacion.hbm.xml" />
 		<mapping resource="formacionStrategy.hbm.xml" />
 		<mapping resource="habilidad.hbm.xml" />
-		<mapping resource="jugador.hbm.xml" />
-		<mapping resource="posicion.hbm.xml" />
-		<mapping resource="tecnico.hbm.xml" />
-		<mapping resource="titular.hbm.xml" />
 		
 	</session-factory>
 

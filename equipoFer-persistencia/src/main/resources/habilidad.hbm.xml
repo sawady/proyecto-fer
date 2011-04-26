@@ -13,8 +13,10 @@
         
         	<property name="valor"/>
         	<many-to-one name="jugador" class="Jugador" cascade="all"/>
-<!--    			<property name="posicion" type="Posicion"/> -->
-   			       	
+<!--    			<property name="posicion" type="Posicion"/> --><property
+        		name="posicion" type="Posicion">
+</property>
+
         </subclass>
         
 	</class>

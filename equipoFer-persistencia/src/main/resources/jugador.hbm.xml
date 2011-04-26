@@ -9,7 +9,7 @@
         <property name="nombre"/>
         <many-to-one name="equipo" class="Equipo"/>
 		<set name="habilidades" cascade="all" inverse="true">
-            <key column="id"/>
+            <key column="jugador"/>
             <one-to-many class="Habilidad"/>
         </set>
 	</class>
