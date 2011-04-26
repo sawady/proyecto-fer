@@ -1,7 +1,5 @@
-package model.clasesPrincipales;
+package model;
 
-import model.formaciones.Formacion;
-import model.util.Posicion;
 import appModel.Entity;
 
 public class Titular extends Entity {

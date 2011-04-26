@@ -1,4 +1,4 @@
-package model.util;
+package model;
 
 public enum Posicion {
 	ARQUERO, LATERAL, CENTRAL, VOLANTEDEFENSIVO,
