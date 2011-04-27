@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="model">
+	<class name="Partido" table="Partido">
+		<id name="id">
+            <generator class="native"/>
+        </id>
+        
+        <discriminator column="tipo" type="string"/>
+                
+        <many-to-one name="equipo1" class="Equipo" cascade="all"></many-to-one>
+        <many-to-one name="equipo2" class="Equipo" cascade="all"></many-to-one>
+        
+        <subclass name="PartidoSimple" discriminator-value="PartidoSimple">
+        	<property type="org.joda.time.contrib.hibernate.PersistentDateTime" name="fecha"></property>
+       		<property name="golesEq1"></property>
+       		<property name="golesEq2"></property>
+       		<many-to-one name="formacionEq1" class="Formacion" cascade="all"></many-to-one>
+       		<many-to-one name="formacionEq2" class="Formacion" cascade="all"></many-to-one>
+        </subclass>
+        
+        <subclass name="PartidoDeCopa" discriminator-value="PartidoDeCopa">
+       		<property name="golesPorPenalEq1"></property>
+       		<property name="golesPorPenalEq2"></property>
+       	    <one-to-one name="partidoIda" cascade="all"></one-to-one>
+       	    <one-to-one name="partidoVuelta" cascade="all"></one-to-one>
+        </subclass>
+        
+	</class>
+</hibernate-mapping>
