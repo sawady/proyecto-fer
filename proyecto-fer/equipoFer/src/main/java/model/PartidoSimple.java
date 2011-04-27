@@ -1,10 +1,14 @@
 package model;
 
+import org.joda.time.DateTime;
+
+
 
 public class PartidoSimple extends Partido {
 	
 	/* VARIABLES ***************************************************/
 
+	private DateTime fecha;
 	private int golesEq1;
 	private int golesEq2;
 	private Formacion formacionEq1;
@@ -15,13 +19,14 @@ public class PartidoSimple extends Partido {
 
 	public PartidoSimple(){}
 	
-	public PartidoSimple(Equipo equipo1, int golEq1, Equipo equipo2, int golEq2) {
+	public PartidoSimple(Equipo equipo1, int golEq1, Equipo equipo2, int golEq2, DateTime fecha) {
 			this.equipo1 = equipo1;
 			this.golesEq1 = golEq1;
 			this.formacionEq1 = equipo1.armarFormacion(); // es correcto tener un metodo dentro de un constructor??
 			this.equipo2 = equipo2;
 			this.golesEq2 = golEq2;
 			this.formacionEq2 = equipo2.armarFormacion();
+			this.fecha = fecha;
 	}
 
 	/* METODOS ***************************************************/
@@ -37,8 +42,17 @@ public class PartidoSimple extends Partido {
 	
 	/* GET&SET ***************************************************/
 
+	
 	public Formacion getFormacionEq1() {
 		return formacionEq1;
+	}
+
+	public DateTime getFecha() {
+		return fecha;
+	}
+
+	public void setFecha(DateTime fecha) {
+		this.fecha = fecha;
 	}
 
 	public void setFormacionEq1(Formacion formacionEq1) {
