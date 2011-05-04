@@ -9,6 +9,8 @@ import model.FormacionStrategy;
 import model.Habilidad;
 import model.Jugador;
 import model.Partido;
+import model.PartidoDeCopa;
+import model.PartidoSimple;
 import model.Tecnico;
 import model.Titular;
 
@@ -24,7 +26,8 @@ public class EquipoFerEntities {
 		result.add(Jugador.class);
 		result.add(Tecnico.class);
 		result.add(Titular.class);
-		result.add(Partido.class);
+//		result.add(PartidoSimple.class);
+		result.add(PartidoDeCopa.class);
 		
 		return result;
 	}
