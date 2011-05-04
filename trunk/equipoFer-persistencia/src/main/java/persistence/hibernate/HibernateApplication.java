@@ -1,6 +1,8 @@
 package persistence.hibernate;
 
 
+import model.PartidoSimple;
+
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
@@ -27,15 +29,16 @@ public class HibernateApplication extends Application {
 	
 	private static HibernateApplication initialize() {
 		ThreadLocal<Session> tlocal = new ThreadLocal<Session>();
-		HibernateApplication instance = new HibernateApplication(new HibernateHomeFactory(tlocal));
+		HibernateApplication instance = new HibernateApplication(new HibernateHomeFactory(tlocal), tlocal);
 		instance.sessionFactory = new Configuration().configure().buildSessionFactory();
 		instance.tl = tlocal;
 		return instance;
 		
 	}
 	
-	public HibernateApplication(HomeFactory factory) {
+	public HibernateApplication(HomeFactory factory, ThreadLocal<Session> tlocal) {
 		super(factory);
+		this.getHomes().put(PartidoSimple.class, new HibernatePartidoSimpleHome(tlocal));
 	}
 	
 	public void execute(Action action){
