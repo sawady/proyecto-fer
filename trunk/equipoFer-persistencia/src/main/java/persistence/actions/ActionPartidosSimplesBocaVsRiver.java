@@ -1,14 +1,12 @@
-package persistence.test;
+package persistence.actions;
 
 import model.Equipo;
 import model.MyDate;
 import model.PartidoSimple;
-import persistence.actions.Action;
-import persistence.actions.ActionCrearEquipo;
 import persistence.hibernate.HibernateApplication;
 import appModel.Home;
 
-public class ActionPersistirPartidosSimple implements Action {
+public class ActionPartidosSimplesBocaVsRiver implements Action {
 
 	public void execute() {
 		
@@ -25,5 +23,5 @@ public class ActionPersistirPartidosSimple implements Action {
 		application.getHome(PartidoSimple.class).agregar(bocaVsRiver1);
 		application.getHome(PartidoSimple.class).agregar(bocaVsRiver2);
 	}
-	
+
 }

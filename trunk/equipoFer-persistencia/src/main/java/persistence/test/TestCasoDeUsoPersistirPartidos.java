@@ -2,6 +2,7 @@ package persistence.test;
 
 import persistence.actions.ActionCrearEquipo;
 import persistence.actions.ActionPartidoDeCopaBocaVsRiver;
+import persistence.actions.ActionPartidosSimplesBocaVsRiver;
 import persistence.hibernate.HibernateApplication;
 
 public class TestCasoDeUsoPersistirPartidos {
@@ -12,7 +13,7 @@ public class TestCasoDeUsoPersistirPartidos {
 		application.execute(new ActionCrearEquipo("Boca"));
 		application.execute(new ActionCrearEquipo("River"));
 		
-		application.execute(new ActionPersistirPartidosSimple());
+		application.execute(new ActionPartidosSimplesBocaVsRiver());
 
 		application.execute(new ActionPartidoDeCopaBocaVsRiver());
 
