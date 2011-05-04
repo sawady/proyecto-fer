@@ -13,7 +13,7 @@
         <many-to-one name="equipo2" class="Equipo" cascade="all"></many-to-one>
         
         <subclass name="PartidoSimple" discriminator-value="PartidoSimple">
-        	<property type="org.joda.time.contrib.hibernate.PersistentDateTime" name="fecha"></property>
+        	<property name="fecha"></property>
        		<property name="golesEq1"></property>
        		<property name="golesEq2"></property>
        		<many-to-one name="formacionEq1" class="Formacion" cascade="all"></many-to-one>
@@ -23,8 +23,8 @@
         <subclass name="PartidoDeCopa" discriminator-value="PartidoDeCopa">
        		<property name="golesPorPenalEq1"></property>
        		<property name="golesPorPenalEq2"></property>
-       	    <one-to-one name="partidoIda" cascade="all"></one-to-one>
-       	    <one-to-one name="partidoVuelta" cascade="all"></one-to-one>
+       	    <many-to-one name="partidoIda" class="PartidoSimple" cascade="all"></many-to-one>
+       	    <many-to-one name="partidoVuelta" class="PartidoSimple" cascade="all"></many-to-one>
         </subclass>
         
 	</class>

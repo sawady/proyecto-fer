@@ -47,7 +47,7 @@ public class HibernateHome<T extends Entity> implements Home<T>{
 		this.tlocal.get().update(object);
 	}
 	
-	private Criteria getCriteria(){
+	protected Criteria getCriteria(){
 		return this.tlocal.get().createCriteria(this.clazz);
 	}
 

@@ -35,6 +35,7 @@
 		<mapping resource="formacion.hbm.xml" />
 		<mapping resource="formacionStrategy.hbm.xml" />
 		<mapping resource="habilidad.hbm.xml" />
+		<mapping resource="partido.hbm.xml" />
 		
 	</session-factory>
 
