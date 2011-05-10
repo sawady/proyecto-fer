@@ -25,7 +25,9 @@
 
 		<!-- Echo all executed SQL to stdout -->
 		<property name="show_sql">true</property>
-
+		
+		<!-- Isolation Level -->
+		<property name="hibernate.connection.isolation">4</property>
 		
 		<mapping resource="posicion.hbm.xml" /> <!-- nuestros mappings -->
 		<mapping resource="jugador.hbm.xml" />

@@ -2,10 +2,12 @@
 
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
 <hibernate-mapping package="model">
-	<class name="Equipo" table="Equipo">
+	<class name="Equipo" table="Equipo" optimistic-lock="version">
 		<id name="id">
             <generator class="native"/>
         </id>
+        <version name="version"/>
+        
         <property name="nombre"></property>
         
         <many-to-one name="tecnico" class="Tecnico" cascade="all"/>
