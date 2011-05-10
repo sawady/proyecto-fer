@@ -40,6 +40,10 @@ public class PartidoSimple extends Partido {
 			return null;
 	}
 	
+	public boolean empataron(){
+		return this.getGanador()==null;
+	} 
+	
 	/* GET&SET ***************************************************/
 
 	
