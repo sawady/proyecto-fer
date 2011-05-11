@@ -19,9 +19,13 @@ public class TestCasoDeUsoCrearMultiplesPartidosYEquipos {
 	private static List<String>fechasPSimpleBocaRacing= new ArrayList<String>();
 	private static List<String>fechasPSimpleRiverIndependiente= new ArrayList<String>();
 	private static List<String>fechasPSimpleRacingRiver= new ArrayList<String>();
+	//lista q contiene a las anteriores para poder elegir de manera aleatoria que rivales tendra un pCopa
 	private static List< List<String> >todasLasListas = new ArrayList< List<String> >();
-
+	// valores aleatoriod
 	private static Random r= new Random();
+	
+	
+	//metodo para tener un poco de prolijidad
 	private void inicialize(){
 		// recordar dd/MM/yyyy HH:mm formato de la fecha
 		//Creo una lista de String con lo equipos para elegirlos aleatoriamente.
@@ -37,6 +41,7 @@ public class TestCasoDeUsoCrearMultiplesPartidosYEquipos {
 		todasLasListas.add(fechasPSimpleRiverIndependiente);
 	}
 	
+	//genera los equipos rivales para un partido simple, verificando que no sea contra el mismo
 	private List<String> generarRivales(){
 		List<String>toReturn = new ArrayList<String>();
 		toReturn.add(equipos.get(r.nextInt(4)));
@@ -48,6 +53,7 @@ public class TestCasoDeUsoCrearMultiplesPartidosYEquipos {
 		return toReturn;
 	}
 	
+	//genera una fecha para un partido simple y lo guarda en la lista que le corresponde
 	private String generarFechaPartido(List<String>xs){
 		String fecha;
 		//creo una fecha
@@ -61,6 +67,7 @@ public class TestCasoDeUsoCrearMultiplesPartidosYEquipos {
 		return fecha; 
 	}
 	
+	//elige 2 partidoSimple para uno de Copa, teniendo en ambos partidos los mismos rivales, elegidos al azar
 	private List<String>losPartidosSimplesParaLaCopa(){
 		//elije dos fechas de los partidos simples creados
 		//luego verificar que no elija dos fechas iguales, 
@@ -81,7 +88,6 @@ public class TestCasoDeUsoCrearMultiplesPartidosYEquipos {
 		self.inicialize();
 		final HibernateApplication application = HibernateApplication.getInstance();
 		
-		
 		// creo los 4 equipos
 		application.execute(new ActionCrearEquipo(equipos.get(0)));
 		application.execute(new ActionCrearEquipo(equipos.get(1)));
@@ -89,7 +95,7 @@ public class TestCasoDeUsoCrearMultiplesPartidosYEquipos {
 		application.execute(new ActionCrearEquipo(equipos.get(3)));
 		
 		//Creo los partidos Simples.
-		//las fechas q se generen son distintas, 
+		//las fechas q se generen son distintas, y lo guardo en una lista segun el los rivales
 		for(int i=0; i<=50; i++){
 			List<String>x =self.generarRivales();
 			String fecha;
@@ -127,7 +133,7 @@ public class TestCasoDeUsoCrearMultiplesPartidosYEquipos {
 			}
 			}
 			/////////////////////////////////////////////////////////////////////////
-			
+			//creo el partido simple en la base
 			application.execute(new ActionCrearPartidoSimple(x.get(0),x.get(1), fecha));
 		}
 		
