@@ -2,13 +2,11 @@ package persistence.actions;
 
 import java.util.Random;
 
-import model.Equipo;
 import model.MyDate;
 import model.PartidoDeCopa;
 import model.PartidoSimple;
 import persistence.hibernate.HibernateApplication;
 import persistence.hibernate.HibernatePartidoSimpleHome;
-import appModel.Home;
 
 public class ActionCrearPartidoDeCopa implements Action {
 	
@@ -33,11 +31,15 @@ public class ActionCrearPartidoDeCopa implements Action {
 			PartidoSimple partidoIda = partidoSimpleHome.getByFecha(new MyDate(this.fecha1).getFechaYHora());
 			PartidoSimple partidoVuelta = partidoSimpleHome.getByFecha(new MyDate(this.fecha2).getFechaYHora());
 			
+			
 			// decido a traves de un criterio simple, si el partido de copa poseera goles de penal o no
-			if (( this.r.nextInt(50) % 2)==0){
+			if(partidoIda.empataron() && partidoVuelta.empataron()){				
 				this.golPenalE1 = this.r.nextInt(6);
 				this.golPenalE2 = this.r.nextInt(6);
-			}
+				if(this.golPenalE1==this.golPenalE2){
+					this.golPenalE1 +=1; 
+				}
+			}			
 			else{
 				this.golPenalE1 = 0;
 				this.golPenalE2 = 0;

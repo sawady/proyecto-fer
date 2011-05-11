@@ -11,7 +11,7 @@ import appModel.Home;
 
 public class ActionCrearPartidoSimple implements Action {
 	private String eq1, eq2;
-	private Random r = new Random(6);
+	private Random r = new Random();
 	private Date fecha;
 
 
@@ -35,7 +35,7 @@ public class ActionCrearPartidoSimple implements Action {
 		Equipo B = homeEquipo.getNombrable(this.eq2);
 		
 		//genero cantidad de goles aleatoria
-		PartidoSimple partido = new PartidoSimple(A,this.r.nextInt() , B, this.r.nextInt(), this.fecha);	
+		PartidoSimple partido = new PartidoSimple(A, this.r.nextInt(6) , B, this.r.nextInt(6), this.fecha);	
 		
 		application.getHome(PartidoSimple.class).agregar(partido);
 	}
