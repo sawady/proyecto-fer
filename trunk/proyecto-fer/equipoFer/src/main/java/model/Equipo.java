@@ -84,7 +84,7 @@ public class Equipo extends Entity implements Nombrable{
 		this.getJugadores().remove(jugador);
 		return this;
 	}
-
+	/* PRINT ***********************************************************************************/
 
 	@Override
 	public void printValues() {
