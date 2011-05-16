@@ -10,18 +10,21 @@ import persistence.hibernate.HibernatePartidoSimpleHome;
 
 public class ActionCrearPartidoDeCopa implements Action {
 	
-
+	/* VARIABLES*************************************************************************/
 	private String fecha1, fecha2;// para buscar los partidos simples x fecha
 	
 	private int golPenalE1, golPenalE2;//goles x penal de cada equipo 
 	private Random r = new Random ();
 	
+	
+	/* CONSTRUCTOR*************************************************************************/
 	public ActionCrearPartidoDeCopa(String fecha1, String fecha2) {
 		super();
 		this.fecha1 = fecha1;
 		this.fecha2 = fecha2;
 	}
 
+	/* METODOS*************************************************************************/
 	public void execute() {
 			
 			final HibernateApplication application = HibernateApplication.getInstance();	
@@ -30,7 +33,6 @@ public class ActionCrearPartidoDeCopa implements Action {
 			//busco los partidos x fecha
 			PartidoSimple partidoIda = partidoSimpleHome.getByFecha(new MyDate(this.fecha1).getFechaYHora());
 			PartidoSimple partidoVuelta = partidoSimpleHome.getByFecha(new MyDate(this.fecha2).getFechaYHora());
-			
 			
 			// decido a traves de un criterio simple, si el partido de copa poseera goles de penal o no
 			if(partidoIda.empataron() && partidoVuelta.empataron()){				
@@ -51,5 +53,4 @@ public class ActionCrearPartidoDeCopa implements Action {
 			//agrego el partido de copa a la home
 			application.getHome(PartidoDeCopa.class).agregar(partidoDeCopa);
 		}
-		
-	}
+}

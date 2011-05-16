@@ -2,7 +2,6 @@ package persistence.actions;
 
 import java.util.List;
 
-import appModel.Home;
 import model.Equipo;
 import model.PartidoSimple;
 import persistence.hibernate.HibernateApplication;
@@ -10,12 +9,51 @@ import persistence.hibernate.HibernatePartidoSimpleHome;
 
 public class ActionArmarHistorialVictorias implements Action {
 	
+	/* VARIABLES*************************************************************************/
+	
 	private Equipo eq1;
 	private Equipo eq2;
 	private int victoriasEq1;
 	private int victoriasEq2;
 	private int empates;
 
+	/* CONSTRUCTOR*************************************************************************/
+	
+	public ActionArmarHistorialVictorias(Equipo eq1, Equipo eq2) {
+		super();
+		this.eq1 = eq1;
+		this.eq2 = eq2;
+		
+		this.victoriasEq1=0;
+		this.victoriasEq2=0;
+		this.empates=0;
+	}
+
+	/* METODOS*************************************************************************/
+
+	public void execute() {
+		
+		HibernatePartidoSimpleHome home = (HibernatePartidoSimpleHome) HibernateApplication.getInstance().getHome(PartidoSimple.class);
+		
+		List<PartidoSimple> partidos = (List<PartidoSimple>) home.getByAdversarios(this.getEq1(), this.getEq2());
+		
+		
+		for (PartidoSimple partidoSimple : partidos) {
+			if (partidoSimple.empataron()){
+				setEmpates(getEmpates() + 1);
+			}
+			else if (partidoSimple.getGanador().equals(this.getEq1())){
+				setVictoriasEq1(getVictoriasEq1() + 1);
+			}
+			else {
+				setVictoriasEq2(getVictoriasEq2() + 1);
+			}
+			
+		}
+		
+	}
+	
+	/* GET&SET*************************************************************************/
 	public Equipo getEq1() {
 		return eq1;
 	}
@@ -32,36 +70,6 @@ public class ActionArmarHistorialVictorias implements Action {
 		this.eq2 = eq2;
 	}
 	
-	public ActionArmarHistorialVictorias(Equipo eq1, Equipo eq2) {
-		super();
-		this.eq1 = eq1;
-		this.eq2 = eq2;
-	}
-	
-	public void execute() {
-		
-		HibernatePartidoSimpleHome home = (HibernatePartidoSimpleHome) HibernateApplication.getInstance().getHome(PartidoSimple.class);
-		
-		List<PartidoSimple> partidos = (List<PartidoSimple>) home.getByAdversarios(this.getEq1(), this.getEq2());
-
-		this.setVictoriasEq1(0);
-		this.setVictoriasEq2(0);
-		this.setEmpates(0);
-		
-		for (PartidoSimple partidoSimple : partidos) {
-			if (partidoSimple.empataron()){
-				setEmpates(getEmpates() + 1);
-			}
-			else if (partidoSimple.getGanador().equals(this.getEq1())){
-				setVictoriasEq1(getVictoriasEq1() + 1);
-			}
-			else {
-				setVictoriasEq2(getVictoriasEq2() + 1);
-			}
-			
-		}
-		
-	}
 
 	private void setVictoriasEq1(int victoriasEq1) {
 		this.victoriasEq1 = victoriasEq1;

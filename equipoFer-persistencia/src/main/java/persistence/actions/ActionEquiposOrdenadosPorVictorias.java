@@ -13,28 +13,28 @@ import appModel.Home;
 
 public class ActionEquiposOrdenadosPorVictorias implements Action {
 	
+	/* VARIABLES*************************************************************************/
+	
 	private Map<Equipo, Integer> tabla = new HashMap<Equipo, Integer>();
-
+	
+	
+	/* METODOS*************************************************************************/
 	public void execute() {
 		
 		Home<PartidoDeCopa> home = HibernateApplication.getInstance().getHome(PartidoDeCopa.class);
 		Home<Equipo> homeEquipos = HibernateApplication.getInstance().getHome(Equipo.class);
 		
 		List<PartidoDeCopa> partidosDeCopa = home.getAllEntities();
-		
 		for(Equipo equipo : homeEquipos.getAllEntities()){
 			this.getTabla().put(equipo, 0);
 		}
-		
 		List<Equipo> resultado = new ArrayList<Equipo>(); 
-		
-		for(Entry<Equipo, Integer> asoc : this.getTabla().entrySet()){
-			
+		for(Entry<Equipo, Integer> asoc : this.getTabla().entrySet()){		
 		}
 		
 	}
 	
-
+	/* gET&SET*************************************************************************/
 	private Map<Equipo, Integer> getTabla() {
 		return tabla;
 	}

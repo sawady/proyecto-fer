@@ -10,14 +10,13 @@ import persistence.hibernate.HibernateApplication;
 import appModel.Home;
 
 public class ActionCrearPartidoSimple implements Action {
+	
+	/* VARIABLES*************************************************************************/
 	private String eq1, eq2;
 	private Random r = new Random();
 	private Date fecha;
 
-
-
-
-
+	/* CONSTRUCTOR*************************************************************************/
 	public ActionCrearPartidoSimple(String nombre1, String nombre2, String fecha) {
 		super();
 		this.eq1 = nombre1;
@@ -25,6 +24,8 @@ public class ActionCrearPartidoSimple implements Action {
 		this.fecha= new MyDate(fecha).getFechaYHora();
 	}
 
+	
+	/*METODOS *************************************************************************/
 	public void execute() {
 		
 		final HibernateApplication application = HibernateApplication.getInstance();
