@@ -6,6 +6,8 @@ import persistence.actions.ActionCrearPartidoSimple;
 import persistence.hibernate.HibernateApplication;
 
 public class TestCasoDeUsoPersistirPartidoCopayPartidoSimple {
+	
+	/*MAIN *************************************************************************/
 
 	public static void main(String[] args) {
 		final HibernateApplication application = HibernateApplication.getInstance();

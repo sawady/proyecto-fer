@@ -14,12 +14,15 @@ import persistence.hibernate.HibernateApplication;
 
 public class ActionCrearEquipo  implements Action{
 	
+	/* VARIABLES*************************************************************************/
 	private String nombreEquipo;
 
+	/* CONSTRUCTOR*************************************************************************/
 	public ActionCrearEquipo(String nombreEquipo) {
 		this.nombreEquipo = nombreEquipo;
 	}
 
+	/*METODOS *************************************************************************/
 	public void execute() {
 			
 			List<Posicion> listaPos = new ArrayList<Posicion>();

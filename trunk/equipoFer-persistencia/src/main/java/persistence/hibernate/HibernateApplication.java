@@ -15,17 +15,26 @@ import appModel.Application;
 
 public class HibernateApplication extends Application {
 	
+	/* VARIABLES*************************************************************************/
 	//inicia la secion del hibernate
 	public static HibernateApplication instance;
 	private SessionFactory sessionFactory;
 	private ThreadLocal<Session> tl;
 	
+	/*CONSTRUCTOR *************************************************************************/
 	public static synchronized HibernateApplication getInstance(){
 		if(instance == null){
 			instance = initialize();
 		}
 		return instance;
 	}
+	
+	public HibernateApplication(HomeFactory factory, ThreadLocal<Session> tlocal) {
+		super(factory);
+		this.getHomes().put(PartidoSimple.class, new HibernatePartidoSimpleHome(tlocal));
+	}
+	
+	/* METODOS*************************************************************************/
 	
 	private static HibernateApplication initialize() {
 		ThreadLocal<Session> tlocal = new ThreadLocal<Session>();
@@ -34,11 +43,6 @@ public class HibernateApplication extends Application {
 		instance.tl = tlocal;
 		return instance;
 		
-	}
-	
-	public HibernateApplication(HomeFactory factory, ThreadLocal<Session> tlocal) {
-		super(factory);
-		this.getHomes().put(PartidoSimple.class, new HibernatePartidoSimpleHome(tlocal));
 	}
 	
 	public void execute(Action action){

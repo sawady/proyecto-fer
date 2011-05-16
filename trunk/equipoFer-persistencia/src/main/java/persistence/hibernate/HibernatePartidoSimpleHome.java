@@ -10,11 +10,14 @@ import org.hibernate.Session;
 import org.hibernate.criterion.Restrictions;
 
 public class HibernatePartidoSimpleHome extends HibernateHome<PartidoSimple> {
+	
+	/* CONSTRUCTOR ***********************************************************************************/
 
 	public HibernatePartidoSimpleHome(ThreadLocal<Session> tl) {
 		super(tl, PartidoSimple.class);
 	}
 	
+	/* METODOS ***********************************************************************************/
 	public PartidoSimple getByFecha(Date date){
 		return (PartidoSimple) this.getCriteria().add(Restrictions.eq("fecha", date)).uniqueResult();
 	}

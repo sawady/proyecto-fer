@@ -7,9 +7,7 @@ import appModel.Persistible;
 
 public class TestGeneralImprimirTodasLasEntidades {
 
-	/**
-	 * @param args
-	 */
+	/* MAIN*************************************************************************/
 	public static void main(String[] args) {
 		
 		HibernateApplication.getInstance().execute(new Action() {

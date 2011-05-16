@@ -11,6 +11,8 @@ import persistence.hibernate.HibernateApplication;
 
 public class TestCasoDeUsoCrearMultiplesPartidosYEquipos {
 	
+	/* VARIABLES*************************************************************************/
+	
 	private static List<String>equipos= new ArrayList<String>();
 	//estas listas son necesarias para que los partidos de copa
 	//contengan partidos simples con los mismos rivales
@@ -25,6 +27,7 @@ public class TestCasoDeUsoCrearMultiplesPartidosYEquipos {
 	private static Random r= new Random();
 	
 	
+	/* INICIALIZADOR*************************************************************************/
 	//metodo para tener un poco de prolijidad
 	private void inicialize(){
 		// recordar dd/MM/yyyy HH:mm formato de la fecha
@@ -41,7 +44,9 @@ public class TestCasoDeUsoCrearMultiplesPartidosYEquipos {
 		todasLasListas.add(fechasPSimpleRiverIndependiente);
 	}
 	
-	//genera los equipos rivales para un partido simple, verificando que no sea contra el mismo
+	/* METODOS*************************************************************************/
+	
+	//genera los equipos rivales para un partido simple, verificando que no sea contra Él mismo
 	private List<String> generarRivales(){
 		List<String>toReturn = new ArrayList<String>();
 		toReturn.add(equipos.get(r.nextInt(4)));
@@ -83,6 +88,7 @@ public class TestCasoDeUsoCrearMultiplesPartidosYEquipos {
 		
 	}
 	
+	/*MAIN *************************************************************************/
 	public static void main(String[] args) {
 		TestCasoDeUsoCrearMultiplesPartidosYEquipos self = new TestCasoDeUsoCrearMultiplesPartidosYEquipos();
 		self.inicialize();
@@ -133,11 +139,11 @@ public class TestCasoDeUsoCrearMultiplesPartidosYEquipos {
 			}
 			}
 			/////////////////////////////////////////////////////////////////////////
-			//creo el partido simple en la base
+			//creo el partido simple en la base de datos
 			application.execute(new ActionCrearPartidoSimple(x.get(0),x.get(1), fecha));
 		}
 		
-		//Creo los partidos de copa
+		//Creo los partidos de copa en la db
 		for(int i=0; i<=10; i++){
 			List<String>x =self.losPartidosSimplesParaLaCopa();
 			application.execute(new ActionCrearPartidoDeCopa(x.get(0),x.get(1)));

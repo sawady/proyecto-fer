@@ -3,13 +3,10 @@ package persistence.test;
 import persistence.actions.Action;
 import persistence.hibernate.HibernateApplication;
 import appModel.Home;
-import appModel.Persistible;
 
 public class TestGeneralBorrarTodasLasEntidades {
 
-	/**
-	 * @param args
-	 */
+	/* MAIN*************************************************************************/
 	public static void main(String[] args) {
 		
 		HibernateApplication.getInstance().execute(new Action() {

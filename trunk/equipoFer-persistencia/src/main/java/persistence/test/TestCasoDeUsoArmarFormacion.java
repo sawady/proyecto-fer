@@ -1,24 +1,26 @@
 package persistence.test;
 
-import java.util.concurrent.CyclicBarrier;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
-
-import persistence.actions.Action;
 import persistence.actions.ActionBuscarEquipoYArmarFormacion;
 import persistence.actions.ActionCrearEquipo;
 import persistence.hibernate.HibernateApplication;
-import appModel.Home;
 
 public class TestCasoDeUsoArmarFormacion implements Runnable {
 	
+	/* VAIRIABLES ***********************************************************************************/
+	
 	private String nombreEquipo;
+	
+	
+	/* CONSTRUCTOR ***********************************************************************************/
 	
 	public TestCasoDeUsoArmarFormacion(String nombreEquipo) {
 		super();
 		this.nombreEquipo = nombreEquipo;
 	}
 
+	/* MAIN ***********************************************************************************/
 	public static void main(String[] args) {
 
 	  ExecutorService newFixedThreadPool = Executors.newFixedThreadPool(10);
@@ -38,6 +40,7 @@ public class TestCasoDeUsoArmarFormacion implements Runnable {
 						
 	}
 
+	/* METODOS ***********************************************************************************/
 	public void run() {
 		
 		// creamos y persistimos el equipo river
