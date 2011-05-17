@@ -24,8 +24,8 @@ public class HibernatePartidoSimpleHome extends HibernateHome<PartidoSimple> {
 	
 	public List<?> getByAdversarios(Equipo equipo, Equipo equipo2){
 		return this.getCriteria()
-		.add(Restrictions.or( Restrictions.and(Restrictions.eq("equipo1", equipo.getId()), Restrictions.eq("equipo2", equipo2.getId())), 
-							  Restrictions.and(Restrictions.eq("equipo1", equipo2.getId()), Restrictions.eq("equipo2", equipo.getId()))))
+		.add(Restrictions.or( Restrictions.and(Restrictions.eq("equipo1", equipo), Restrictions.eq("equipo2", equipo2)), 
+							  Restrictions.and(Restrictions.eq("equipo1", equipo2), Restrictions.eq("equipo2", equipo))))
 		.list();
 	}
 

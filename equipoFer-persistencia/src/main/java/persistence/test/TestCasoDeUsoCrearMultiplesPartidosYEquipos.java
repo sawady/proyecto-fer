@@ -88,10 +88,7 @@ public class TestCasoDeUsoCrearMultiplesPartidosYEquipos {
 		
 	}
 	
-	/*MAIN *************************************************************************/
-	public static void main(String[] args) {
-		TestCasoDeUsoCrearMultiplesPartidosYEquipos self = new TestCasoDeUsoCrearMultiplesPartidosYEquipos();
-		self.inicialize();
+	public void creaarLosPartidos(int simples, int deCopa){
 		final HibernateApplication application = HibernateApplication.getInstance();
 		
 		// creo los 4 equipos
@@ -102,8 +99,8 @@ public class TestCasoDeUsoCrearMultiplesPartidosYEquipos {
 		
 		//Creo los partidos Simples.
 		//las fechas q se generen son distintas, y lo guardo en una lista segun el los rivales
-		for(int i=0; i<=50; i++){
-			List<String>x =self.generarRivales();
+		for(int i=0; i<=simples; i++){
+			List<String>x =this.generarRivales();
 			String fecha;
 			
 			/////////////////////////////////////////////////////////////////////////
@@ -112,29 +109,29 @@ public class TestCasoDeUsoCrearMultiplesPartidosYEquipos {
 					&&
 					(x.get(1).equalsIgnoreCase("river") ||(x.get(1).equalsIgnoreCase("independiente"))					))
 					
-			){fecha = self.generarFechaPartido(fechasPSimpleRiverIndependiente);}
+			){fecha = this.generarFechaPartido(fechasPSimpleRiverIndependiente);}
 			else{
 				if(
 						(x.get(0).equalsIgnoreCase("river") ||(x.get(0).equalsIgnoreCase("boca"))
 						&&
 						(x.get(1).equalsIgnoreCase("river") ||(x.get(1).equalsIgnoreCase("boca"))					))
 						
-				){fecha = self.generarFechaPartido(fechasPSimpleBocaRiver);}
+				){fecha = this.generarFechaPartido(fechasPSimpleBocaRiver);}
 				else{ if
 				(
 						(x.get(0).equalsIgnoreCase("river") ||(x.get(0).equalsIgnoreCase("racing"))
 						&&
 						(x.get(1).equalsIgnoreCase("river") ||(x.get(1).equalsIgnoreCase("racing"))					))
 						
-				){fecha = self.generarFechaPartido(fechasPSimpleRacingRiver);}
+				){fecha = this.generarFechaPartido(fechasPSimpleRacingRiver);}
 				else{
 					if(
 							(x.get(0).equalsIgnoreCase("boca") ||(x.get(0).equalsIgnoreCase("racing"))
 							&&
 							(x.get(1).equalsIgnoreCase("boca") ||(x.get(1).equalsIgnoreCase("racing"))					))
 							
-					){fecha = self.generarFechaPartido(fechasPSimpleBocaRacing);}
-					else{fecha = self.generarFechaPartido(fechasPSimpleBocaIndependiente);}
+					){fecha = this.generarFechaPartido(fechasPSimpleBocaRacing);}
+					else{fecha = this.generarFechaPartido(fechasPSimpleBocaIndependiente);}
 				}
 			}
 			}
@@ -144,10 +141,20 @@ public class TestCasoDeUsoCrearMultiplesPartidosYEquipos {
 		}
 		
 		//Creo los partidos de copa en la db
-		for(int i=0; i<=10; i++){
-			List<String>x =self.losPartidosSimplesParaLaCopa();
+		for(int i=0; i<= deCopa; i++){
+			List<String>x =this.losPartidosSimplesParaLaCopa();
 			application.execute(new ActionCrearPartidoDeCopa(x.get(0),x.get(1)));
 		}
+	}
+
+		
+	
+	
+	/*MAIN *************************************************************************/
+	public static void main(String[] args) {
+		TestCasoDeUsoCrearMultiplesPartidosYEquipos self = new TestCasoDeUsoCrearMultiplesPartidosYEquipos();
+		self.inicialize();
+		self.creaarLosPartidos(300, 50);
 	}
 
 }
