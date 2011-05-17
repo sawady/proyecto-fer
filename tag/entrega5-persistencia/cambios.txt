@@ -1,0 +1,7 @@
+1) Tuvimos que cambiar algunas relaciones entre los objetos del modelo, para poder hacer las relaciones 
+entre las tablas de la base de datos. El objeto titular ahora conoce a qué formación pertenece y el
+objeto habilidad ahora conoce a qué jugador.
+
+2) Cambiamos algunas colecciones que en principio habíamos hecho listas, para volverlas sets siempre que se pueda.
+Esto lo hicimos porque sino tendríamos que tener un campo más en la tabla para indexación.
+ 
