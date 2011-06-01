@@ -10,7 +10,11 @@ public class TestCasoDeUsoEquiposOrdenadosPorVictorias {
 		
 		ActionEquiposOrdenadosPorVictorias action = new ActionEquiposOrdenadosPorVictorias();
 
+		Cronometro cn = new Cronometro();
+		cn.start();
 		HibernateApplication.getInstance().execute(action);
+		cn.stop();
+		cn.print();
 		
 	}
 
