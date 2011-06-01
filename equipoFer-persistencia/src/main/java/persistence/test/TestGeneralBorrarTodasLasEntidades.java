@@ -9,6 +9,8 @@ public class TestGeneralBorrarTodasLasEntidades {
 	/* MAIN*************************************************************************/
 	public static void main(String[] args) {
 		
+		Cronometro cn = new Cronometro();
+		cn.start();
 		HibernateApplication.getInstance().execute(new Action() {
 			
 			public void execute() {
@@ -18,7 +20,8 @@ public class TestGeneralBorrarTodasLasEntidades {
 				}
 			}
 		});
-
+		cn.stop();
+		cn.print();
 	}
 
 }

@@ -40,8 +40,10 @@ public class HibernateHome<T extends Entity> implements Home<T>{
 	}
 	
 	public void deleteAllEntities() {
-		for(T obj : this.getAllEntities())
-			this.tlocal.get().delete(obj);
+// Antes!!
+//		for(T obj : this.getAllEntities())
+//			this.tlocal.get().delete(obj);
+		this.tlocal.get().createQuery("delete from " + this.clazz.getName()).executeUpdate();
 	}
 
 	////////////////////////////
