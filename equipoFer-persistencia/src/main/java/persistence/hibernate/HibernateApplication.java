@@ -1,6 +1,8 @@
 package persistence.hibernate;
 
 
+import model.Equipo;
+import model.PartidoDeCopa;
 import model.PartidoSimple;
 
 import org.hibernate.Session;
@@ -9,9 +11,8 @@ import org.hibernate.Transaction;
 import org.hibernate.cfg.Configuration;
 
 import persistence.actions.Action;
-
-import appModel.HomeFactory;
 import appModel.Application;
+import appModel.HomeFactory;
 
 public class HibernateApplication extends Application {
 	
@@ -32,6 +33,8 @@ public class HibernateApplication extends Application {
 	public HibernateApplication(HomeFactory factory, ThreadLocal<Session> tlocal) {
 		super(factory);
 		this.getHomes().put(PartidoSimple.class, new HibernatePartidoSimpleHome(tlocal));
+		this.getHomes().put(Equipo.class, new HibernateEquipoHome(tlocal));
+		this.getHomes().put(PartidoDeCopa.class, new HibernatePartidoDeCopaHome(tlocal));
 	}
 	
 	/* METODOS*************************************************************************/

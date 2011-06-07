@@ -13,7 +13,7 @@ public class HibernateHome<T extends Entity> implements Home<T>{
 	
 	/* VARIABLES ***********************************************************************************/
 
-	private ThreadLocal<Session> tlocal;
+	protected ThreadLocal<Session> tlocal;
 	private Class<T> clazz;
 	
 	/* CONSTRUCTOR ***********************************************************************************/

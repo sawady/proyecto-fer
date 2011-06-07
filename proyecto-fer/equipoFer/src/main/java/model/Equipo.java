@@ -12,6 +12,7 @@ public class Equipo extends Entity implements Nombrable{
 	private Set<Jugador> jugadores = new HashSet<Jugador>(); 
 	private Tecnico tecnico; 
 	private String nombre;
+	private int cantVictorias = 0;
 	
 /* CONSTRUSTOR ***************************************************/
 	
@@ -38,7 +39,13 @@ public class Equipo extends Entity implements Nombrable{
 		 	
 /* METODOS ***************************************************/
 	
-
+	public void incrementarCantVictorias(){
+		this.setCantVictorias( this.getCantVictorias() + 1);
+	}
+	
+	public void decrementarCantVictorias(){
+		this.setCantVictorias( this.getCantVictorias() - 1);
+	}
 
 	public Formacion armarFormacion(){
 		return this.getTecnico().armarFormacion(this);
@@ -48,6 +55,14 @@ public class Equipo extends Entity implements Nombrable{
 
 	public Set<Jugador> getJugadores() {
 		return jugadores;
+	}
+
+	public int getCantVictorias() {
+		return cantVictorias;
+	}
+
+	public void setCantVictorias(int cantVictorias) {
+		this.cantVictorias = cantVictorias;
 	}
 
 	public void setJugadores(HashSet<Jugador> jugadores) {

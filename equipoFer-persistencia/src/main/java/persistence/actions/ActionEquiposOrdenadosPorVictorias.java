@@ -8,8 +8,9 @@ import java.util.Map.Entry;
 import java.util.Set;
 
 import model.Equipo;
-import model.PartidoDeCopa;
+import model.PartidoSimple;
 import persistence.hibernate.HibernateApplication;
+import persistence.hibernate.HibernateEquipoHome;
 import appModel.Home;
 
 public class ActionEquiposOrdenadosPorVictorias implements Action {
@@ -23,20 +24,23 @@ public class ActionEquiposOrdenadosPorVictorias implements Action {
 	
 	/* METODOS*************************************************************************/
 
+/* Vieja Forma
 	public void execute() {
 		
-		Home<PartidoDeCopa> homePdC = HibernateApplication.getInstance().getHome(PartidoDeCopa.class);
+		Home<PartidoSimple> homePS = HibernateApplication.getInstance().getHome(PartidoSimple.class);
 		Home<Equipo> homeEquipos = HibernateApplication.getInstance().getHome(Equipo.class);
 		
-		List<PartidoDeCopa> partidosDeCopa = homePdC.getAllEntities();
+		List<PartidoSimple> partidosSimples = homePS.getAllEntities();
 		
 		for(Equipo equipo : homeEquipos.getAllEntities()){
 			this.getTabla().put(equipo, 0);
 		}
 		
-		for(PartidoDeCopa pdc : partidosDeCopa){
-			Equipo ganador = pdc.getGanador();
-			this.getTabla().put(ganador, this.getTabla().get(ganador) + 1);
+		for(PartidoSimple psimple : partidosSimples){
+			Equipo ganador = psimple.getGanador();
+			if(ganador != null){
+				this.getTabla().put(ganador, this.getTabla().get(ganador) + 1);
+			}
 		}
 		
 		List<Entry<Equipo, Integer>> listaAOrdenar = new ArrayList<Entry<Equipo, Integer>>();
@@ -56,15 +60,6 @@ public class ActionEquiposOrdenadosPorVictorias implements Action {
 		
 	}
 	
-	private void imprimirResultados() {
-		System.out.println("Los equipos ordenados por victorias son:");
-		
-		for(Equipo eq : this.getResultado()){
-			System.out.println("- " + eq.getNombre() + " con " + 
-					this.getTabla().get(eq) + " victorias");
-		}
-		
-	}
 
 	private void insertarOrdenado(List<Entry<Equipo,Integer>> lista, Entry<Equipo,Integer> elem){
 
@@ -75,8 +70,30 @@ public class ActionEquiposOrdenadosPorVictorias implements Action {
 		lista.add(i, elem);
 		
 	}
+*/
+	
+	public void execute() {
+		
+		HibernateEquipoHome homeEquipos = (HibernateEquipoHome) HibernateApplication.getInstance().getHome(Equipo.class);
+		
+		this.setResultado(homeEquipos.getEquiposOrdenadosPorVictorias());
+		
+		this.imprimirResultados();
+		
+	};
+	
+	private void imprimirResultados() {
+		System.out.println("Los equipos ordenados por victorias son:");
+		
+		for(Equipo eq : this.getResultado()){
+			System.out.println("- " + eq.getNombre() + " con " + 
+					eq.getCantVictorias() + " victorias");
+		}
+		
+	}
 	
 	/* gET&SET*************************************************************************/
+	
 	private Map<Equipo, Integer> getTabla() {
 		return tabla;
 	}
