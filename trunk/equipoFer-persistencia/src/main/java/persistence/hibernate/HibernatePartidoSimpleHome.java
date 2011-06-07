@@ -28,6 +28,4 @@ public class HibernatePartidoSimpleHome extends HibernateHome<PartidoSimple> {
 							  Restrictions.and(Restrictions.eq("equipo1", equipo2), Restrictions.eq("equipo2", equipo))))
 		.list();
 	}
-
-
 }

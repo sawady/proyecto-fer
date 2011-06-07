@@ -9,6 +9,7 @@
         <version name="version"/>
         
         <property name="nombre"></property>
+        <property name="cantVictorias"></property>
         
         <many-to-one name="tecnico" class="Tecnico" cascade="all"/>
         

@@ -19,7 +19,7 @@ public class EquipoFerEntities {
 	public List<Class<?>> getEntities(){
 		List<Class<?>> result = new ArrayList<Class<?>>();
 		
-		result.add(Equipo.class);
+//		result.add(Equipo.class);
 		result.add(Formacion.class);
 		result.add(FormacionStrategy.class);
 		result.add(Habilidad.class);
@@ -27,7 +27,7 @@ public class EquipoFerEntities {
 		result.add(Tecnico.class);
 		result.add(Titular.class);
 //		result.add(PartidoSimple.class);
-		result.add(PartidoDeCopa.class);
+//		result.add(PartidoDeCopa.class);
 		
 		return result;
 	}
