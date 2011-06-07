@@ -28,7 +28,6 @@ public class ActionCrearPartidosSimples extends ActionCrearPartidos {
 			home.agregar(partidoSimple);
 		}
 		
-
 	}
 
 }

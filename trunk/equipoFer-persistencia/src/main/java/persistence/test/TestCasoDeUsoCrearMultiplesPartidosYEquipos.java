@@ -23,6 +23,8 @@ public class TestCasoDeUsoCrearMultiplesPartidosYEquipos {
 		application.execute(new ActionCrearEquipo("River"));
 		application.execute(new ActionCrearEquipo("Independiente"));
 		application.execute(new ActionCrearEquipo("Racing"));
+		application.execute(new ActionCrearEquipo("Olimpo"));
+		application.execute(new ActionCrearEquipo("Velez"));
 		application.execute(new ActionCrearPartidosDeCopa(cantDeCopa));
 		application.execute(new ActionCrearPartidosSimples(cantSimples));
 	}
