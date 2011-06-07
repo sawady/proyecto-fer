@@ -57,7 +57,8 @@ public class HibernateHome<T extends Entity> implements Home<T>{
 
 	@SuppressWarnings("unchecked")
 	public List<T> getAllEntities() {
-		return this.getCriteria().add(Restrictions.isNotNull("id")).list();
+		//Antes -> return this.getCriteria().add(Restrictions.isNotNull("id")).list();
+		return this.tlocal.get().createQuery("from " + this.clazz.getName()).list();
 	}
 
 
