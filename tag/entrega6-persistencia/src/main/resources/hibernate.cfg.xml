@@ -1,0 +1,45 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE hibernate-configuration PUBLIC
+        "-//Hibernate/Hibernate Configuration DTD 3.0//EN"
+        "http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
+<hibernate-configuration>
+	<session-factory>
+		<!-- Database connection settings -->
+		<property name="connection.driver_class">com.mysql.jdbc.Driver</property>
+		<property name="connection.url">jdbc:mysql://localhost/FER</property><!--  cambiar a nuestra DB -->
+		<property name="connection.username">root</property>
+		<property name="connection.password">root</property>
+		
+		<!-- JDBC connection pool (use the built-in) -->
+		<property name="connection.pool_size">1</property>
+
+		<!-- SQL dialect -->
+		<property name="dialect">org.hibernate.dialect.MySQLDialect</property>
+
+		<!-- Enable Hibernate's automatic session context management -->
+		<property name="current_session_context_class">thread</property>
+
+		<!-- Disable the second-level cache -->
+		<property name="cache.provider_class">org.hibernate.cache.NoCacheProvider</property>
+
+
+		<!-- Echo all executed SQL to stdout -->
+		<property name="show_sql">true</property>
+		
+		<!-- Isolation Level -->
+		<property name="hibernate.connection.isolation">4</property>
+		
+		<mapping resource="posicion.hbm.xml" /> <!-- nuestros mappings -->
+		<mapping resource="jugador.hbm.xml" />
+		<mapping resource="tecnico.hbm.xml" />
+		<mapping resource="titular.hbm.xml" />
+		<mapping resource="equipo.hbm.xml" /> 
+		<mapping resource="formacion.hbm.xml" />
+		<mapping resource="formacionStrategy.hbm.xml" />
+		<mapping resource="habilidad.hbm.xml" />
+		<mapping resource="partido.hbm.xml" />
+		
+	</session-factory>
+
+</hibernate-configuration>
+
