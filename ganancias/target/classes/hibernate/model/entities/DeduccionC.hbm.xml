@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping package="ar.com.cdt.ganancias.model.entities">
+	<class name="DeduccionC">
+		<id name="idDeduccionC" type="long" unsaved-value="0">
+			<generator class="native" />
+		</id>
+		<property name="cout_med_asist_anu" type="float" />
+		<property name="honor_med_anu" type="float" />
+		<property name="donac_anu" type="float" />
+		<property name="imp_cheq_cred_anu" type="float" />
+		<property name="deb_total_imp_cheq_cred_anu" type="float" />
+	</class>
+</hibernate-mapping>
