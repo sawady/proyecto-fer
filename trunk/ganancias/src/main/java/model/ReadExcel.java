@@ -3,6 +3,7 @@ package model;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.lang.reflect.InvocationTargetException;
 import java.util.Iterator;
 
 import model.entities.Empleado;
@@ -48,8 +49,7 @@ public class ReadExcel {
 		return hoja;
 	}
 
-	public void cargarDatos()
-			throws FileNotFoundException, IOException, FormatoEmpleadoException {
+	public void cargarDatos() throws FormatoEmpleadoException, SecurityException, NoSuchMethodException{
 
 		Iterator<Row> row =  hoja.rowIterator();
 		Empleado empleado = null;
@@ -60,16 +60,45 @@ public class ReadExcel {
 			empleado = new Empleado();
 			while (celda.hasNext()) {
 				Cell cel = celda.next();
-				if (cel.getColumnIndex() == 0) {
-					if (cel.getCellType() == 0) { // 0 = tipo nuemrico
-						empleado.setCUIL((int) cel.getNumericCellValue());
-					} else {
-						throw new FormatoEmpleadoException("La columna " + cel.getColumnIndex() + "tiene un valor incorrecto" );
-					}
-				}
-				if (cel.getColumnIndex() == 1) { 
-					if (cel.getCellType() == 1) { // 1 = tipo string
-						empleado.setNom_y_ape(cel.toString());
+				this.obtenerValorCelda(0, 0, cel, "setCUIL", (int) cel.getNumericCellValue(), empleado);
+//				this.obtenerValorCelda(1, , cel, "", , empleado);
+//				this.obtenerValorCelda(2, , cel, "", , empleado);
+//				this.obtenerValorCelda(3, , cel, "", , empleado);
+//				this.obtenerValorCelda(4, , cel, "", , empleado);
+//				this.obtenerValorCelda(5, , cel, "", , empleado);
+//				this.obtenerValorCelda(6, , cel, "", , empleado);
+//				this.obtenerValorCelda(7, , cel, "", , empleado);
+//				this.obtenerValorCelda(8, , cel, "", , empleado);
+//				this.obtenerValorCelda(9, , cel, "", , empleado);
+//				this.obtenerValorCelda(10, , cel, "", , empleado);
+//				this.obtenerValorCelda(11, , cel, "", , empleado);
+//				this.obtenerValorCelda(12, , cel, "", , empleado);
+//				this.obtenerValorCelda(13, , cel, "", , empleado);
+//				this.obtenerValorCelda(14, , cel, "", , empleado);
+//				this.obtenerValorCelda(15, , cel, "", , empleado);
+//				this.obtenerValorCelda(16, , cel, "", , empleado);
+//				this.obtenerValorCelda(17, , cel, "", , empleado);
+//				this.obtenerValorCelda(18, , cel, "", , empleado);
+//				this.obtenerValorCelda(19, , cel, "", , empleado);
+//				this.obtenerValorCelda(20, , cel, "", , empleado);
+//				this.obtenerValorCelda(21, , cel, "", , empleado);
+//				this.obtenerValorCelda(22, , cel, "", , empleado);
+//				this.obtenerValorCelda(23, , cel, "", , empleado);
+//				this.obtenerValorCelda(24, , cel, "", , empleado);
+//				this.obtenerValorCelda(25, , cel, "", , empleado);
+//				this.obtenerValorCelda(26, , cel, "", , empleado);
+//				this.obtenerValorCelda(27, , cel, "", , empleado);
+//				this.obtenerValorCelda(28, , cel, "", , empleado);
+//				this.obtenerValorCelda(29, , cel, "", , empleado);
+//				this.obtenerValorCelda(30, , cel, "", , empleado);
+//				this.obtenerValorCelda(31, , cel, "", , empleado);
+//				this.obtenerValorCelda(32, , cel, "", , empleado);
+//				this.obtenerValorCelda(33, , cel, "", , empleado);
+
+
+				
+						empleado.setCUIL((int) cel.getNumericCellValue());//00
+						empleado.setNom_y_ape(cel.toString());//1
 						empleado.setRem_net_imp((float) cel.getNumericCellValue());//2
 						empleado.setTot_pag_ant_temp((int) cel.getNumericCellValue());//3
 						empleado.setRem_net_imp_acum_temp((int) cel.getNumericCellValue());//4
@@ -102,17 +131,76 @@ public class ReadExcel {
 						empleado.setServ_dom((float) cel.getNumericCellValue());//31
 						empleado.setImp_cheq_cred((float) cel.getNumericCellValue());//32
 						empleado.setDev_compra_exter((float) cel.getNumericCellValue());//33
-					} else {
-						throw new FormatoEmpleadoException("La columna " + cel.getColumnIndex() + "tiene un valor incorrecto" );
-					}
+						
+					
 				}
 			}
 			HibernateApplication.getInstance().getHome(Empleado.class).agregar(empleado);
 		}
+	
+
+	private void obtenerValorCelda(int colum, int cellType,Cell cel,  String method, Object argSeter, Empleado empleado) throws FormatoEmpleadoException {
+		if (cel.getColumnIndex() == colum) {
+			if (cel.getCellType() == cellType) { // 0 = tipo nuemrico 1 = String
+				try {
+					Empleado.class.getMethod(method).invoke(empleado, argSeter);
+				} catch (IllegalArgumentException e) {
+					e.printStackTrace();
+				} catch (SecurityException e) {
+					e.printStackTrace();
+				} catch (IllegalAccessException e) {
+					e.printStackTrace();
+				} catch (InvocationTargetException e) {
+					e.printStackTrace();
+				} catch (NoSuchMethodException e) {
+					e.printStackTrace();
+				}
+			} else {
+				throw new FormatoEmpleadoException("La columna " + cel.getColumnIndex() + "tiene un valor incorrecto" );
+			}
+		}
 	}
 
 	private int convertMes(String stringCellValue) {
-		return 0;
+		if(stringCellValue.toLowerCase() == "enero"){
+			return 1;
+		}
+		else if(stringCellValue.toLowerCase() == "febrero"){
+			return 2;
+		}
+		else if(stringCellValue.toLowerCase() == "marzo"){
+			return 3;
+		}
+		else if(stringCellValue.toLowerCase() == "abril"){
+			return 4;
+		}
+		else if(stringCellValue.toLowerCase() == "mayo"){
+			return 5;
+		}
+		else if(stringCellValue.toLowerCase() == "junio"){
+			return 6;
+		}
+		else if(stringCellValue.toLowerCase() == "julio"){
+			return 7;
+		}
+		else if(stringCellValue.toLowerCase() == "agosto"){
+			return 8;
+		}
+		else if(stringCellValue.toLowerCase() == "septiembre"){
+			return 9;
+		}
+		else if(stringCellValue.toLowerCase() == "octubre"){
+			return 10;
+		}
+		else if(stringCellValue.toLowerCase() == "noviembre"){
+			return 11;
+		}
+		else if(stringCellValue.toLowerCase() == "diciembre"){
+			return 12;
+		}
+		else{
+			return 0; //quiere decir que no se cargo el valor del mes por lo que no se lo tiene en cuenta
+		}
 	}
 
 }
