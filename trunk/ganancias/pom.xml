@@ -18,6 +18,14 @@
 				</configuration>
 			</plugin>
 		</plugins>
+		<resources>
+			<resource>
+				<directory>src/main/java</directory>
+				<includes>
+					<include>**/*hbm.xml</include>
+				</includes>
+			</resource>
+		</resources>
 	</build>
 
 
@@ -48,5 +56,12 @@
 			<version>3.6.3.Final</version>
 		</dependency>
 
+		<dependency>
+			<groupId>org.apache.poi</groupId>
+			<artifactId>poi</artifactId>
+			<version>3.9</version>
+			<type>jar</type>
+			<scope>compile</scope>
+		</dependency>
 	</dependencies>
 </project>  
