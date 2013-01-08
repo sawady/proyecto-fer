@@ -1,10 +1,12 @@
-package model;
+package model.excel;
 
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
 import java.util.Iterator;
 
+import model.FormatoEmpleadoException;
 import model.entities.Empleado;
 
 import org.apache.poi.hssf.usermodel.HSSFSheet;
@@ -34,6 +36,11 @@ public class ReadExcel {
 		this.poiArchivo = new POIFSFileSystem(archivoEntrada);
 		this.obtenerHoja(0);
 	}
+	public void leerArchivo(FileInputStream file) throws IOException {
+		this.archivoEntrada = file;
+		this.poiArchivo = new POIFSFileSystem(archivoEntrada);
+		this.obtenerHoja(0);
+	}
 
 	public HSSFWorkbook obtenerLibro() throws IOException {
 		if (poiArchivo != null) {
@@ -60,48 +67,49 @@ public class ReadExcel {
 			while (celda.hasNext()) {
 				Cell cel = celda.next();
 				this.obtenerValorCelda(0, 0, cel, "setCUIL", (int) cel.getNumericCellValue(), empleado);
-//				this.obtenerValorCelda(1, , cel, "", , empleado);
-//				this.obtenerValorCelda(2, , cel, "", , empleado);
-//				this.obtenerValorCelda(3, , cel, "", , empleado);
-//				this.obtenerValorCelda(4, , cel, "", , empleado);
-//				this.obtenerValorCelda(5, , cel, "", , empleado);
-//				this.obtenerValorCelda(6, , cel, "", , empleado);
-//				this.obtenerValorCelda(7, , cel, "", , empleado);
-//				this.obtenerValorCelda(8, , cel, "", , empleado);
-//				this.obtenerValorCelda(9, , cel, "", , empleado);
-//				this.obtenerValorCelda(10, , cel, "", , empleado);
-//				this.obtenerValorCelda(11, , cel, "", , empleado);
-//				this.obtenerValorCelda(12, , cel, "", , empleado);
-//				this.obtenerValorCelda(13, , cel, "", , empleado);
-//				this.obtenerValorCelda(14, , cel, "", , empleado);
-//				this.obtenerValorCelda(15, , cel, "", , empleado);
-//				this.obtenerValorCelda(16, , cel, "", , empleado);
-//				this.obtenerValorCelda(17, , cel, "", , empleado);
-//				this.obtenerValorCelda(18, , cel, "", , empleado);
-//				this.obtenerValorCelda(19, , cel, "", , empleado);
-//				this.obtenerValorCelda(20, , cel, "", , empleado);
-//				this.obtenerValorCelda(21, , cel, "", , empleado);
-//				this.obtenerValorCelda(22, , cel, "", , empleado);
-//				this.obtenerValorCelda(23, , cel, "", , empleado);
-//				this.obtenerValorCelda(24, , cel, "", , empleado);
-//				this.obtenerValorCelda(25, , cel, "", , empleado);
-//				this.obtenerValorCelda(26, , cel, "", , empleado);
-//				this.obtenerValorCelda(27, , cel, "", , empleado);
-//				this.obtenerValorCelda(28, , cel, "", , empleado);
-//				this.obtenerValorCelda(29, , cel, "", , empleado);
-//				this.obtenerValorCelda(30, , cel, "", , empleado);
-//				this.obtenerValorCelda(31, , cel, "", , empleado);
-//				this.obtenerValorCelda(32, , cel, "", , empleado);
-//				this.obtenerValorCelda(33, , cel, "", , empleado);
+				this.obtenerValorCelda(1, 1, cel, "setNom_y_ape", cel.getStringCellValue() , empleado);
+				this.obtenerValorCelda(2, 0, cel, "setRem_net_imp",(float) cel.getNumericCellValue() , empleado);
+				this.obtenerValorCelda(3, 0, cel, "setTot_pag_ant_temp", (int) cel.getNumericCellValue(), empleado);
+				this.obtenerValorCelda(4, 0, cel, "setRem_net_imp_acum_temp", (int) cel.getNumericCellValue() , empleado);
+				this.obtenerValorCelda(5, 0, cel, "setEstad_civil", (int) cel.getNumericCellValue() , empleado);
+				this.obtenerValorCelda(6, , cel, "", , empleado);
+				this.obtenerValorCelda(7, , cel, "", , empleado);
+				this.obtenerValorCelda(8, , cel, "", , empleado);
+				this.obtenerValorCelda(9, , cel, "", , empleado);
+				this.obtenerValorCelda(10, , cel, "", , empleado);
+				this.obtenerValorCelda(11, , cel, "", , empleado);
+				this.obtenerValorCelda(12, , cel, "", , empleado);
+				this.obtenerValorCelda(13, , cel, "", , empleado);
+				this.obtenerValorCelda(14, , cel, "", , empleado);
+				this.obtenerValorCelda(15, , cel, "", , empleado);
+				this.obtenerValorCelda(16, , cel, "", , empleado);
+				this.obtenerValorCelda(17, , cel, "", , empleado);
+				this.obtenerValorCelda(18, , cel, "", , empleado);
+				this.obtenerValorCelda(19, , cel, "", , empleado);
+				this.obtenerValorCelda(20, , cel, "", , empleado);
+				this.obtenerValorCelda(21, , cel, "", , empleado);
+				this.obtenerValorCelda(22, , cel, "", , empleado);
+				this.obtenerValorCelda(23, , cel, "", , empleado);
+				this.obtenerValorCelda(24, , cel, "", , empleado);
+				this.obtenerValorCelda(25, , cel, "", , empleado);
+				this.obtenerValorCelda(26, , cel, "", , empleado);
+				this.obtenerValorCelda(27, , cel, "", , empleado);
+				this.obtenerValorCelda(28, , cel, "", , empleado);
+				this.obtenerValorCelda(29, , cel, "", , empleado);
+				this.obtenerValorCelda(30, , cel, "", , empleado);
+				this.obtenerValorCelda(31, , cel, "", , empleado);
+				this.obtenerValorCelda(32, , cel, "", , empleado);
+				this.obtenerValorCelda(33, , cel, "", , empleado);
 
 
 				
-						empleado.setCUIL((int) cel.getNumericCellValue());//0
-						empleado.setRem_net_imp((float) cel.getNumericCellValue());//2
-						empleado.setTot_pag_ant_temp((int) cel.getNumericCellValue());//3
-						empleado.setRem_net_imp_acum_temp((int) cel.getNumericCellValue());//4
-						empleado.setEstad_civil((int) cel.getNumericCellValue());//5
-						empleado.setMes_cas(this.convertMes(cel.getStringCellValue()));//6
+//						empleado.setCUIL((int) cel.getNumericCellValue());//0
+//						empleado.setNom_y_ape(cel.getStringCellValue());//1
+//						empleado.setRem_net_imp((float) cel.getNumericCellValue());//2
+//						empleado.setTot_pag_ant_temp((int) cel.getNumericCellValue());//3
+						//empleado.setRem_net_imp_acum_temp((int) cel.getNumericCellValue());//4
+//						empleado.setEstad_civil((int) cel.getNumericCellValue());//5
+//						empleado.setMes_cas(this.convertMes(cel.getStringCellValue()));//6
 						empleado.setCant_hij_anual((int) cel.getNumericCellValue());//7
 						empleado.setMes_nac_hij_1(this.convertMes(cel.getStringCellValue()));//8
 						empleado.setCant_hij_nac_1((int) cel.getNumericCellValue());//9

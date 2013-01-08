@@ -65,7 +65,7 @@ public class CalculoManual {
 		button.setBounds(10, 11, 136, 29);
 		button.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-			}
+				frmImpuestoALas.dispose();			}
 		});
 		frmImpuestoALas.getContentPane().setLayout(null);
 		frmImpuestoALas.getContentPane().add(button);
@@ -139,10 +139,6 @@ public class CalculoManual {
 		
 		JButton button_1 = new JButton("Cancelar");
 		button_1.setBounds(203, 420, 106, 23);
-		button_1.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				frmImpuestoALas.dispose();			}
-		});
 		desktopPane.add(button_1);
 		
 		JButton button_2 = new JButton("Aceptar");
