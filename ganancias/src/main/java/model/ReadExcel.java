@@ -1,7 +1,6 @@
 package model;
 
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
 import java.util.Iterator;
@@ -97,8 +96,7 @@ public class ReadExcel {
 
 
 				
-						empleado.setCUIL((int) cel.getNumericCellValue());//00
-						empleado.setNom_y_ape(cel.toString());//1
+						empleado.setCUIL((int) cel.getNumericCellValue());//0
 						empleado.setRem_net_imp((float) cel.getNumericCellValue());//2
 						empleado.setTot_pag_ant_temp((int) cel.getNumericCellValue());//3
 						empleado.setRem_net_imp_acum_temp((int) cel.getNumericCellValue());//4
