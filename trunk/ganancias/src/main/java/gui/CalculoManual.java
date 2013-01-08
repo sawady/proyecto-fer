@@ -4,20 +4,13 @@ import java.awt.EventQueue;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import javax.swing.JButton;
-import javax.swing.JFileChooser;
-import javax.swing.JFrame;
-import javax.swing.JTextField;
-import javax.swing.JLabel;
-import javax.swing.JDesktopPane;
-import javax.swing.JScrollPane;
-import javax.swing.JSpinner;
-import javax.swing.JScrollBar;
-import javax.swing.ScrollPaneConstants;
-import javax.swing.JInternalFrame;
-import javax.swing.JComboBox;
-import javax.swing.JRadioButton;
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.JButton;
+import javax.swing.JComboBox;
+import javax.swing.JDesktopPane;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JTextField;
 
 
 public class CalculoManual {
@@ -35,21 +28,21 @@ public class CalculoManual {
 	private JTextField textField_9;
 	private JTextField textField_10;
 
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					CalculoManual window = new CalculoManual();
-					window.frmImpuestoALas.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
+//	/**
+//	 * Launch the application.
+//	 */
+//	public static void main(String[] args) {
+//		EventQueue.invokeLater(new Runnable() {
+//			public void run() {
+//				try {
+//					CalculoManual window = new CalculoManual();
+//					window.frmImpuestoALas.setVisible(true);
+//				} catch (Exception e) {
+//					e.printStackTrace();
+//				}
+//			}
+//		});
+//	}
 
 	/**
 	 * Create the application.
@@ -65,6 +58,7 @@ public class CalculoManual {
 		frmImpuestoALas = new JFrame();
 		frmImpuestoALas.setTitle("Impuesto a las ganancias - Calculo manual");
 		frmImpuestoALas.setBounds(100, 100, 781, 573);
+		frmImpuestoALas.setVisible(true);
 		frmImpuestoALas.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
 		JButton button = new JButton("Volver al inicio");
@@ -145,10 +139,18 @@ public class CalculoManual {
 		
 		JButton button_1 = new JButton("Cancelar");
 		button_1.setBounds(203, 420, 106, 23);
+		button_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				frmImpuestoALas.dispose();			}
+		});
 		desktopPane.add(button_1);
 		
 		JButton button_2 = new JButton("Aceptar");
 		button_2.setBounds(363, 420, 118, 23);
+		button_2.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+							}
+		});
 		desktopPane.add(button_2);
 		
 		textField_1 = new JTextField();
