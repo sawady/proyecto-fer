@@ -38,18 +38,18 @@ public class ModificarTablas {
 	/**
 	 * Launch the application.
 	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					ModificarTablas window = new ModificarTablas();
-					window.frmImpuestoALas.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
+//	public static void main(String[] args) {
+//		EventQueue.invokeLater(new Runnable() {
+//			public void run() {
+//				try {
+//					ModificarTablas window = new ModificarTablas();
+//					window.frmImpuestoALas.setVisible(true);
+//				} catch (Exception e) {
+//					e.printStackTrace();
+//				}
+//			}
+//		});
+//	}
 
 	/**
 	 * Create the application.
@@ -65,6 +65,7 @@ public class ModificarTablas {
 		frmImpuestoALas = new JFrame();
 		frmImpuestoALas.setTitle("Impuesto a las ganancias - Modificar tablas");
 		frmImpuestoALas.setBounds(100, 100, 783, 431);
+		frmImpuestoALas.setVisible(true);
 		frmImpuestoALas.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frmImpuestoALas.getContentPane().setLayout(null);
 		

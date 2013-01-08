@@ -48,32 +48,46 @@ public class Vista {
 		frmProgramaDeImpuesto.getContentPane().setLayout(null);
 		
 		JButton btnNewButton = new JButton("Cargar Excel");
-		btnNewButton.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-			}
-		});
 		btnNewButton.setBounds(255, 123, 254, 50);
 		frmProgramaDeImpuesto.getContentPane().add(btnNewButton);
-		
-		JButton btnNewButton_1 = new JButton("Modificacion de datos.");
-		btnNewButton_1.addActionListener(new ActionListener() {
+		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
+				new Cargar();
 			}
 		});
+		
+		JButton btnNewButton_1 = new JButton("Modificacion de datos.");
 		btnNewButton_1.setBounds(255, 213, 254, 50);
 		frmProgramaDeImpuesto.getContentPane().add(btnNewButton_1);
+		btnNewButton_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				new ModificarTablas();
+			}
+		});
 		
 		JButton btnNewButton_2 = new JButton("Carga manual.");
 		btnNewButton_2.setBounds(255, 300, 254, 50);
 		frmProgramaDeImpuesto.getContentPane().add(btnNewButton_2);
+		btnNewButton_2.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				new CalculoManual();
+			}
+		});
 		
 		JButton btnSalir = new JButton("Salir");
 		btnSalir.setBounds(627, 357, 91, 23);
 		frmProgramaDeImpuesto.getContentPane().add(btnSalir);
+		btnSalir.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				Vista.this.frmProgramaDeImpuesto.dispose();
+			}
+		});
 		
+					
 		JLabel lblImpuestoALas = new JLabel("Impuesto a las ganancias");
 		lblImpuestoALas.setFont(new Font("Tahoma", Font.PLAIN, 25));
 		lblImpuestoALas.setBounds(241, 49, 390, 39);
 		frmProgramaDeImpuesto.getContentPane().add(lblImpuestoALas);
 	}
+	
 }
