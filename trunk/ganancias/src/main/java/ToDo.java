@@ -2,16 +2,15 @@
 public class ToDo {
 // configurar hbt
 // crear tablas sql
-
+//web service rnif
 //homes (listo)
 // files hbm.xml (listo)
 // entities (listo)
 // metodos calculo (listo)
 
-//capa servicio
 // manejo file excel 
-	// lectura y carga a BBDD
+	// lectura y carga a BBDD(progress)
 	// escritura
-// vista
+// vista(progress)
 	
 }
