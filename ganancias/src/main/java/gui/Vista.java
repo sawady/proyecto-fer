@@ -106,6 +106,7 @@ public class Vista {
             if (returnVal == JFileChooser.APPROVE_OPTION) {
             	File file = fileChooser.getSelectedFile();
             	try {
+            		//Todo modificar.por proceso completo.
 					read.leerArchivo(file.getPath());
 				} catch (IOException e1) {
 					e1.printStackTrace();
