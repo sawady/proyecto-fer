@@ -1,9 +1,9 @@
 package persistencia.hibernateHome;
 
+import model.entities.Empleado;
+
 import org.hibernate.Session;
 import org.hibernate.criterion.Restrictions;
-
-import model.entities.Empleado;
 
 public class EmpleadoHibernateHome extends HibernateHome<Empleado> {
 

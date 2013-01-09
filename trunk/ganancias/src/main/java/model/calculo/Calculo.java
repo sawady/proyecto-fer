@@ -1,11 +1,11 @@
 package model.calculo;
 
-import persistencia.HibernateApplication;
-import persistencia.hibernateHome.CamposParaCalculoAnualHibernateHome;
-import persistencia.hibernateHome.HibernateHome;
 import model.entities.CamposParaCalculoAnual;
 import model.entities.DeduccionA;
 import model.entities.DeduccionC;
+import persistencia.HibernateApplication;
+import persistencia.hibernateHome.CamposParaCalculoAnualHibernateHome;
+import persistencia.hibernateHome.HibernateHome;
 
 public class Calculo {
 	protected DeduccionA deduccionA;
