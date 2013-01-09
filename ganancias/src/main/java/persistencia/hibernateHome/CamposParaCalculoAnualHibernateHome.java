@@ -1,8 +1,8 @@
 package persistencia.hibernateHome;
 
-import org.hibernate.Session;
-
 import model.entities.CamposParaCalculoAnual;
+
+import org.hibernate.Session;
 
 public class CamposParaCalculoAnualHibernateHome extends
 		HibernateHome<CamposParaCalculoAnual> {

@@ -1,6 +1,5 @@
 package gui;
 
-import java.awt.EventQueue;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -27,6 +26,7 @@ public class CalculoManual {
 	private JTextField textField_8;
 	private JTextField textField_9;
 	private JTextField textField_10;
+	private JTextField textField_11;
 
 //	/**
 //	 * Launch the application.
@@ -56,8 +56,9 @@ public class CalculoManual {
 	 */
 	private void initialize() {
 		frmImpuestoALas = new JFrame();
+		frmImpuestoALas.setResizable(false);
 		frmImpuestoALas.setTitle("Impuesto a las ganancias - Calculo manual");
-		frmImpuestoALas.setBounds(100, 100, 781, 573);
+		frmImpuestoALas.setBounds(100, 100, 781, 672);
 		frmImpuestoALas.setVisible(true);
 		frmImpuestoALas.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
@@ -71,78 +72,78 @@ public class CalculoManual {
 		frmImpuestoALas.getContentPane().add(button);
 		
 		JDesktopPane desktopPane = new JDesktopPane();
-		desktopPane.setBounds(47, 30, 703, 482);
+		desktopPane.setBounds(42, 52, 703, 568);
 		frmImpuestoALas.getContentPane().add(desktopPane);
 		
 		JLabel lblRemuneracionNetaImponibble = new JLabel("Remuneracion neta imponible");
-		lblRemuneracionNetaImponibble.setBounds(25, 12, 261, 15);
+		lblRemuneracionNetaImponibble.setBounds(45, 34, 222, 15);
 		desktopPane.add(lblRemuneracionNetaImponibble);
 		
 		JLabel lblEstadoCivil = new JLabel("Estado civil");
-		lblEstadoCivil.setBounds(25, 43, 205, 15);
+		lblEstadoCivil.setBounds(45, 62, 205, 15);
 		desktopPane.add(lblEstadoCivil);
 		
 		textField = new JTextField();
-		textField.setBounds(276, 10, 138, 19);
+		textField.setBounds(324, 34, 138, 19);
 		desktopPane.add(textField);
 		textField.setColumns(10);
 		
 		JComboBox comboBox = new JComboBox();
 		comboBox.setModel(new DefaultComboBoxModel(new String[] {"Soltero", "Casado"}));
 		comboBox.setToolTipText("");
-		comboBox.setBounds(276, 38, 138, 24);
+		comboBox.setBounds(324, 62, 138, 24);
 		desktopPane.add(comboBox);
 		
-		JLabel lblNewLabel = new JLabel("Cant de hijos");
-		lblNewLabel.setBounds(25, 76, 122, 15);
+		JLabel lblNewLabel = new JLabel("Cantidad de hijos");
+		lblNewLabel.setBounds(45, 98, 187, 15);
 		desktopPane.add(lblNewLabel);
 		
-		JLabel lblCantPersonasA = new JLabel("Cant personas a cargo");
-		lblCantPersonasA.setBounds(25, 114, 161, 15);
+		JLabel lblCantPersonasA = new JLabel("Cantidad personas a cargo");
+		lblCantPersonasA.setBounds(45, 136, 207, 15);
 		desktopPane.add(lblCantPersonasA);
 		
 		JLabel lblGastosDeSepelio = new JLabel("Gastos de sepelio");
-		lblGastosDeSepelio.setBounds(35, 176, 70, 15);
+		lblGastosDeSepelio.setBounds(45, 174, 161, 15);
 		desktopPane.add(lblGastosDeSepelio);
 		
 		JLabel lblSeguroDeVida = new JLabel("Seguro de vida");
-		lblSeguroDeVida.setBounds(35, 224, 70, 15);
+		lblSeguroDeVida.setBounds(45, 206, 159, 15);
 		desktopPane.add(lblSeguroDeVida);
 		
 		JLabel lblDonaciones = new JLabel("Donaciones");
-		lblDonaciones.setBounds(25, 261, 70, 15);
+		lblDonaciones.setBounds(45, 238, 138, 15);
 		desktopPane.add(lblDonaciones);
 		
 		JLabel lblCuotasMedicoAsistenciales = new JLabel("Cuotas Medico Asistenciales");
-		lblCuotasMedicoAsistenciales.setBounds(25, 299, 70, 15);
+		lblCuotasMedicoAsistenciales.setBounds(45, 272, 205, 15);
 		desktopPane.add(lblCuotasMedicoAsistenciales);
 		
 		JLabel lblHonorariosMedicos = new JLabel("Honorarios medicos");
-		lblHonorariosMedicos.setBounds(12, 320, 70, 15);
+		lblHonorariosMedicos.setBounds(45, 304, 205, 15);
 		desktopPane.add(lblHonorariosMedicos);
 		
 		JLabel lblInteresesPorCredito = new JLabel("Intereses por credito");
-		lblInteresesPorCredito.setBounds(25, 347, 70, 15);
+		lblInteresesPorCredito.setBounds(45, 344, 187, 15);
 		desktopPane.add(lblInteresesPorCredito);
 		
 		JLabel lblServicioDomestico = new JLabel("Servicio domestico");
-		lblServicioDomestico.setBounds(25, 374, 70, 15);
+		lblServicioDomestico.setBounds(45, 384, 166, 15);
 		desktopPane.add(lblServicioDomestico);
 		
 		JLabel lblImpuestoAlCheque = new JLabel("Impuesto al cheque sobre creditos");
-		lblImpuestoAlCheque.setBounds(25, 401, 70, 15);
+		lblImpuestoAlCheque.setBounds(45, 425, 259, 19);
 		desktopPane.add(lblImpuestoAlCheque);
 		
 		JLabel lblMontoDevolucionCompra = new JLabel("Monto devolucion compra al exterior");
-		lblMontoDevolucionCompra.setBounds(25, 428, 70, 15);
+		lblMontoDevolucionCompra.setBounds(45, 456, 277, 15);
 		desktopPane.add(lblMontoDevolucionCompra);
 		
 		JButton button_1 = new JButton("Cancelar");
-		button_1.setBounds(203, 420, 106, 23);
+		button_1.setBounds(193, 521, 106, 23);
 		desktopPane.add(button_1);
 		
 		JButton button_2 = new JButton("Aceptar");
-		button_2.setBounds(363, 420, 118, 23);
+		button_2.setBounds(354, 519, 118, 23);
 		button_2.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 							}
@@ -151,52 +152,57 @@ public class CalculoManual {
 		
 		textField_1 = new JTextField();
 		textField_1.setColumns(10);
-		textField_1.setBounds(276, 74, 138, 20);
+		textField_1.setBounds(324, 98, 138, 20);
 		desktopPane.add(textField_1);
 		
 		textField_2 = new JTextField();
 		textField_2.setColumns(10);
-		textField_2.setBounds(276, 112, 138, 20);
+		textField_2.setBounds(324, 136, 138, 20);
 		desktopPane.add(textField_2);
 		
 		textField_3 = new JTextField();
 		textField_3.setColumns(10);
-		textField_3.setBounds(276, 174, 138, 20);
+		textField_3.setBounds(324, 174, 138, 20);
 		desktopPane.add(textField_3);
 		
 		textField_4 = new JTextField();
 		textField_4.setColumns(10);
-		textField_4.setBounds(276, 216, 138, 20);
+		textField_4.setBounds(324, 206, 138, 20);
 		desktopPane.add(textField_4);
 		
 		textField_5 = new JTextField();
 		textField_5.setColumns(10);
-		textField_5.setBounds(276, 256, 138, 20);
+		textField_5.setBounds(324, 238, 138, 20);
 		desktopPane.add(textField_5);
 		
 		textField_6 = new JTextField();
 		textField_6.setColumns(10);
-		textField_6.setBounds(276, 297, 138, 20);
+		textField_6.setBounds(324, 270, 138, 20);
 		desktopPane.add(textField_6);
 		
 		textField_7 = new JTextField();
 		textField_7.setColumns(10);
-		textField_7.setBounds(276, 336, 138, 20);
+		textField_7.setBounds(324, 302, 138, 20);
 		desktopPane.add(textField_7);
 		
 		textField_8 = new JTextField();
 		textField_8.setColumns(10);
-		textField_8.setBounds(276, 380, 138, 20);
+		textField_8.setBounds(324, 342, 138, 20);
 		desktopPane.add(textField_8);
 		
 		textField_9 = new JTextField();
 		textField_9.setColumns(10);
-		textField_9.setBounds(276, 422, 138, 20);
+		textField_9.setBounds(324, 382, 138, 20);
 		desktopPane.add(textField_9);
 		
 		textField_10 = new JTextField();
 		textField_10.setColumns(10);
-		textField_10.setBounds(276, 462, 138, 20);
+		textField_10.setBounds(324, 423, 138, 20);
 		desktopPane.add(textField_10);
+		
+		textField_11 = new JTextField();
+		textField_11.setColumns(10);
+		textField_11.setBounds(324, 455, 138, 20);
+		desktopPane.add(textField_11);
 	}
 }

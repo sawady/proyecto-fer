@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping package="ar.com.cdt.ganancias.model.entities">
+	<class name="DeduccionA">
+		<id name="idDeduccionA" type="long" unsaved-value="0">
+			<generator class="native" />
+		</id>
+		<property name="CUIL" type="int" />
+		<property name="nom_y_ape" type="string" />
+		<property name="RNIF" type="float" />
+		<property name="gananciaA" type="float" />
+		<property name="gananciaB" type="float" />
+		<property name="gananciaC" type="float" />
+		<property name="imp_ganan_a_pagar_mes" type="float" />
+		<property name="Dev_IIGG" type="float" />
+
+	</class>
+</hibernate-mapping>

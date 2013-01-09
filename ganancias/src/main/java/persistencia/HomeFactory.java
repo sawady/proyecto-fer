@@ -2,7 +2,6 @@ package persistencia;
 
 import java.util.Map;
 
-
 import model.entities.SistemaEntities;
 
 public abstract class HomeFactory {

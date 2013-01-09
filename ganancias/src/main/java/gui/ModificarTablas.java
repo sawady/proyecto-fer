@@ -70,6 +70,7 @@ public class ModificarTablas {
 	 */
 	private void initialize() {
 		frmImpuestoALas = new JFrame();
+		frmImpuestoALas.setResizable(false);
 		frmImpuestoALas.setTitle("Impuesto a las ganancias - Modificar tablas");
 		frmImpuestoALas.setBounds(100, 100, 783, 431);
 		frmImpuestoALas.setVisible(true);
