@@ -9,8 +9,17 @@ public class ResultadoDeCalculo extends Entity{
 	private float gananciaA;
 	private float gananciaB;
 	private float gananciaC;
+	private float imp_ganan_periodo;
 	private float imp_ganan_a_pagar_mes;
 	private float Dev_IIGG;
+	
+	
+	public float getImp_ganan_periodo() {
+		return imp_ganan_periodo;
+	}
+	public void setImp_ganan_periodo(float imp_ganan_periodo) {
+		this.imp_ganan_periodo = imp_ganan_periodo;
+	}
 	
 	public int getCUIL() {
 		return CUIL;

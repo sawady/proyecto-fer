@@ -23,15 +23,28 @@ public class WriteExcel {
 	List<ResultadoDeCalculo> resultado;
 	public WriteExcel() {
 		super();
-		this.crearFilas();
 	}
-	private void crearFilas(){
+
+	public void crear(){
 		HibernateHome<ResultadoDeCalculo> resultadoHome = (HibernateHome<ResultadoDeCalculo>) HibernateApplication.getInstance().getHome(ResultadoDeCalculo.class);
 		List<ResultadoDeCalculo> resultado = resultadoHome.getAllEntities();
 		this.crearFilaTitulo();
 		for (int i = 1; i <= resultado.size()+1; i++) {
 			HSSFRow fila = hoja.createRow(i);
-			//Todo Crear las celdas con los contenidos de resultado
+			ResultadoDeCalculo r = resultado.get(i-1);
+			
+			new String("" + r.getCUIL() + "");
+			//Celdas con los contenidos de resultado
+			this.crearCelda(0,new String("" + r.getCUIL() + ""), fila);
+			this.crearCelda(1,r.getNom_y_ape(), fila);
+			this.crearCelda(2,new String("" + r.getRNIF() + ""), fila);
+			this.crearCelda(3,new String("" + r.getGananciaA() + ""), fila);
+			this.crearCelda(4,new String("" + r.getGananciaB() + ""), fila);
+			this.crearCelda(5,new String("" + r.getGananciaC() + ""), fila);
+			this.crearCelda(6,new String("" + r.getImp_ganan_periodo() + ""), fila);
+			this.crearCelda(7,new String("" + r.getImp_ganan_a_pagar_mes() + ""), fila);
+			this.crearCelda(8,new String("" + r.getDev_IIGG() + ""), fila);
+
 		}
         try {
             FileOutputStream elFichero = new FileOutputStream("~/ImpuestoALasGananciasMontos.xls");
@@ -56,6 +69,11 @@ public class WriteExcel {
 		crearCelda(8,"Monto de devolucion", style, fila);
 	}
 
+	private void crearCelda(int posicion, String elTexto, HSSFRow fila) {
+		HSSFCell celda = fila.createCell(posicion);
+		HSSFRichTextString texto = new HSSFRichTextString(elTexto);
+		celda.setCellValue(texto);		
+	}
 	private void crearCelda(int posicion, String elTexto, HSSFCellStyle style, HSSFRow fila) {
 		HSSFCell celda = fila.createCell(posicion);
 		HSSFRichTextString texto = new HSSFRichTextString(elTexto);

@@ -17,6 +17,8 @@ import model.entities.DeduccionC;
 import persistencia.HibernateApplication;
 import persistencia.hibernateHome.CamposParaCalculoAnualHibernateHome;
 import persistencia.hibernateHome.HibernateHome;
+import java.awt.Color;
+import javax.swing.UIManager;
 
 public class ModificarTablas {
 
@@ -70,6 +72,7 @@ public class ModificarTablas {
 	 */
 	private void initialize() {
 		frmImpuestoALas = new JFrame();
+		frmImpuestoALas.getContentPane().setBackground(new Color(176, 196, 222));
 		frmImpuestoALas.setResizable(false);
 		frmImpuestoALas.setTitle("Impuesto a las ganancias - Modificar tablas");
 		frmImpuestoALas.setBounds(100, 100, 783, 431);
@@ -92,9 +95,10 @@ public class ModificarTablas {
 		frmImpuestoALas.getContentPane().add(tabbedPane);
 
 		JDesktopPane desktopPane = new JDesktopPane();
+		desktopPane.setBackground(UIManager.getColor("ScrollBar.shadow"));
 		tabbedPane.addTab("Deducciones(A)", null, desktopPane, null);
 
-		JLabel lblNombre = new JLabel("Minimo no imponible");
+		JLabel lblNombre = new JLabel("Mínimo no imponible");
 		lblNombre.setBounds(57, 41, 253, 14);
 		desktopPane.add(lblNombre);
 
@@ -152,6 +156,7 @@ public class ModificarTablas {
 		desktopPane.add(btnAceptar);
 
 		JDesktopPane desktopPane_1 = new JDesktopPane();
+		desktopPane_1.setBackground(UIManager.getColor("Separator.shadow"));
 		tabbedPane.addTab("Deducciones(B)", null, desktopPane_1, null);
 
 		JLabel label = new JLabel("Tope anual gastos de sepelio");
@@ -199,10 +204,11 @@ public class ModificarTablas {
 		desktopPane_1.add(button_2);
 
 		JDesktopPane desktopPane_2 = new JDesktopPane();
+		desktopPane_2.setBackground(UIManager.getColor("ScrollBar.shadow"));
 		tabbedPane.addTab("Deducciones(C)", null, desktopPane_2, null);
 
 		JLabel lblCuotaMedicoAsistencial = new JLabel(
-				"Cuota Medico Asistencial");
+				"Cuota Médico Asistencial");
 		lblCuotaMedicoAsistencial.setBounds(51, 41, 225, 14);
 		desktopPane_2.add(lblCuotaMedicoAsistencial);
 
@@ -229,7 +235,7 @@ public class ModificarTablas {
 		textField_11.setBounds(310, 124, 138, 20);
 		desktopPane_2.add(textField_11);
 
-		JLabel lblImpuestoAlCheque = new JLabel("Imp al Cheque sobre creditos");
+		JLabel lblImpuestoAlCheque = new JLabel("Imp al Cheque sobre créditos");
 		lblImpuestoAlCheque.setBounds(51, 166, 240, 14);
 		desktopPane_2.add(lblImpuestoAlCheque);
 
@@ -239,7 +245,7 @@ public class ModificarTablas {
 		desktopPane_2.add(textField_12);
 
 		JLabel lblDeduccionImpCheque = new JLabel(
-				"Deduccion imp. cheque sobre Cred");
+				"Deducción imp. cheque sobre Cred");
 		lblDeduccionImpCheque.setBounds(51, 206, 251, 14);
 		desktopPane_2.add(lblDeduccionImpCheque);
 
@@ -257,6 +263,7 @@ public class ModificarTablas {
 		desktopPane_2.add(button_4);
 
 		JDesktopPane desktopPane_3 = new JDesktopPane();
+		desktopPane_3.setBackground(UIManager.getColor("ScrollBar.thumbHighlight"));
 		tabbedPane.addTab("Impuesto Anual", null, desktopPane_3, null);
 
 		JLabel label_9 = new JLabel("Ganancia neta imponible desde");

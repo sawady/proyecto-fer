@@ -13,6 +13,7 @@
 		<property name="gananciaA" type="float" />
 		<property name="gananciaB" type="float" />
 		<property name="gananciaC" type="float" />
+		<property name="imp_ganan_periodo" type="float" />
 		<property name="imp_ganan_a_pagar_mes" type="float" />
 		<property name="Dev_IIGG" type="float" />
 

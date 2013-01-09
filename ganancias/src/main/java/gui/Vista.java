@@ -12,8 +12,10 @@ import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 
-import model.excel.ReadExcel;
-
+import model.FormatoEmpleadoException;
+import model.ProcesoCalculoAutomatico;
+import javax.swing.UIManager;
+import java.awt.Color;
 
 public class Vista {
 
@@ -41,6 +43,7 @@ public class Vista {
 	public Vista() {
 		initialize();
 	}
+
 	JFileChooser fileChooser = new JFileChooser();
 
 	/**
@@ -48,22 +51,20 @@ public class Vista {
 	 */
 	private void initialize() {
 		frmProgramaDeImpuesto = new JFrame();
+		frmProgramaDeImpuesto.getContentPane().setBackground(new Color(176, 196, 222));
 		frmProgramaDeImpuesto.setTitle("Programa de impuesto a las ganancias.");
 		frmProgramaDeImpuesto.setBounds(100, 100, 781, 433);
 		frmProgramaDeImpuesto.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frmProgramaDeImpuesto.getContentPane().setLayout(null);
 		fileChooser.setDialogTitle("Cargar Excel");
 		fileChooser.setBounds(58, 52, 673, 326);
-		fileChooser.addChoosableFileFilter(new ExcelFilter()); 
+		fileChooser.addChoosableFileFilter(new ExcelFilter());
 
-		
 		JButton btnNewButton = new JButton("Cargar Excel");
 		btnNewButton.setBounds(255, 123, 254, 50);
 		frmProgramaDeImpuesto.getContentPane().add(btnNewButton);
 		btnNewButton.addActionListener(new SaveListener());
-		
-		
-		
+
 		JButton btnNewButton_1 = new JButton("Modificacion de datos");
 		btnNewButton_1.setBounds(255, 213, 254, 50);
 		frmProgramaDeImpuesto.getContentPane().add(btnNewButton_1);
@@ -72,7 +73,7 @@ public class Vista {
 				new ModificarTablas();
 			}
 		});
-		
+
 		JButton btnNewButton_2 = new JButton("Carga manual");
 		btnNewButton_2.setBounds(255, 300, 254, 50);
 		frmProgramaDeImpuesto.getContentPane().add(btnNewButton_2);
@@ -81,7 +82,7 @@ public class Vista {
 				new CalculoManual();
 			}
 		});
-		
+
 		JButton btnSalir = new JButton("Salir");
 		btnSalir.setBounds(627, 357, 91, 23);
 		frmProgramaDeImpuesto.getContentPane().add(btnSalir);
@@ -90,31 +91,36 @@ public class Vista {
 				Vista.this.frmProgramaDeImpuesto.dispose();
 			}
 		});
-		
-					
+
 		JLabel lblImpuestoALas = new JLabel("Impuesto a las ganancias");
 		lblImpuestoALas.setFont(new Font("Tahoma", Font.PLAIN, 25));
 		lblImpuestoALas.setBounds(241, 49, 390, 39);
 		frmProgramaDeImpuesto.getContentPane().add(lblImpuestoALas);
 	}
-	
-	private class SaveListener implements ActionListener {
-        public void actionPerformed(ActionEvent e) {
-            int returnVal = fileChooser.showSaveDialog(frmProgramaDeImpuesto);
-            ReadExcel read= new ReadExcel();
 
-            if (returnVal == JFileChooser.APPROVE_OPTION) {
-            	File file = fileChooser.getSelectedFile();
-            	try {
-            		//Todo modificar.por proceso completo.
-					read.leerArchivo(file.getPath());
+	private class SaveListener implements ActionListener {
+		public void actionPerformed(ActionEvent e) {
+			int returnVal = fileChooser.showSaveDialog(frmProgramaDeImpuesto);
+
+			if (returnVal == JFileChooser.APPROVE_OPTION) {
+				File file = fileChooser.getSelectedFile();
+				try {
+					new ProcesoCalculoAutomatico(file.getPath());
 				} catch (IOException e1) {
 					e1.printStackTrace();
+				} catch (SecurityException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				} catch (FormatoEmpleadoException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				} catch (NoSuchMethodException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
 				}
-                
-            }
-        }
-    }
 
-	
+			}
+		}
+	}
+
 }

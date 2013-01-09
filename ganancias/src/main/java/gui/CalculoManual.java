@@ -10,6 +10,8 @@ import javax.swing.JDesktopPane;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
+import java.awt.Color;
+import javax.swing.UIManager;
 
 
 public class CalculoManual {
@@ -56,6 +58,7 @@ public class CalculoManual {
 	 */
 	private void initialize() {
 		frmImpuestoALas = new JFrame();
+		frmImpuestoALas.getContentPane().setBackground(new Color(176, 196, 222));
 		frmImpuestoALas.setResizable(false);
 		frmImpuestoALas.setTitle("Impuesto a las ganancias - Calculo manual");
 		frmImpuestoALas.setBounds(100, 100, 781, 672);
@@ -72,6 +75,7 @@ public class CalculoManual {
 		frmImpuestoALas.getContentPane().add(button);
 		
 		JDesktopPane desktopPane = new JDesktopPane();
+		desktopPane.setBackground(UIManager.getColor("ScrollBar.shadow"));
 		desktopPane.setBounds(42, 52, 703, 568);
 		frmImpuestoALas.getContentPane().add(desktopPane);
 		
@@ -118,23 +122,23 @@ public class CalculoManual {
 		lblCuotasMedicoAsistenciales.setBounds(45, 272, 205, 15);
 		desktopPane.add(lblCuotasMedicoAsistenciales);
 		
-		JLabel lblHonorariosMedicos = new JLabel("Honorarios medicos");
+		JLabel lblHonorariosMedicos = new JLabel("Honorarios médicos");
 		lblHonorariosMedicos.setBounds(45, 304, 205, 15);
 		desktopPane.add(lblHonorariosMedicos);
 		
-		JLabel lblInteresesPorCredito = new JLabel("Intereses por credito");
+		JLabel lblInteresesPorCredito = new JLabel("Intereses por crédito");
 		lblInteresesPorCredito.setBounds(45, 344, 187, 15);
 		desktopPane.add(lblInteresesPorCredito);
 		
-		JLabel lblServicioDomestico = new JLabel("Servicio domestico");
+		JLabel lblServicioDomestico = new JLabel("Servicio doméstico");
 		lblServicioDomestico.setBounds(45, 384, 166, 15);
 		desktopPane.add(lblServicioDomestico);
 		
-		JLabel lblImpuestoAlCheque = new JLabel("Impuesto al cheque sobre creditos");
+		JLabel lblImpuestoAlCheque = new JLabel("Impuesto al cheque sobre créditos");
 		lblImpuestoAlCheque.setBounds(45, 425, 259, 19);
 		desktopPane.add(lblImpuestoAlCheque);
 		
-		JLabel lblMontoDevolucionCompra = new JLabel("Monto devolucion compra al exterior");
+		JLabel lblMontoDevolucionCompra = new JLabel("Monto devolución compra al exterior");
 		lblMontoDevolucionCompra.setBounds(45, 456, 277, 15);
 		desktopPane.add(lblMontoDevolucionCompra);
 		
