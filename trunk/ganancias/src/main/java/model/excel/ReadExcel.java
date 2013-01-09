@@ -29,32 +29,28 @@ public class ReadExcel {
 
 
 	
-	public void leerArchivo(String ruta) throws IOException {
+	public void leerArchivo(String ruta) throws IOException, SecurityException, FormatoEmpleadoException, NoSuchMethodException {
 		String strRutaArchivo = ruta;
 		this.archivoEntrada = new FileInputStream(strRutaArchivo);
 		this.poiArchivo = new POIFSFileSystem(archivoEntrada);
 		this.obtenerHoja(0);
-	}
-	public void leerArchivo(FileInputStream file) throws IOException {
-		this.archivoEntrada = file;
-		this.poiArchivo = new POIFSFileSystem(archivoEntrada);
-		this.obtenerHoja(0);
+		this.cargarDatos();
 	}
 
-	public HSSFWorkbook obtenerLibro() throws IOException {
+	private HSSFWorkbook obtenerLibro() throws IOException {
 		if (poiArchivo != null) {
 			libro = new HSSFWorkbook(poiArchivo);
 		}
 		return libro;
 	}
 
-	public HSSFSheet obtenerHoja(int intIndiceIn) throws IOException {
+	private HSSFSheet obtenerHoja(int intIndiceIn) throws IOException {
 		this.libro = obtenerLibro();
 		this.hoja = libro.getSheetAt(intIndiceIn);
 		return hoja;
 	}
 
-	public void cargarDatos() throws FormatoEmpleadoException, SecurityException, NoSuchMethodException{
+	private void cargarDatos() throws FormatoEmpleadoException, SecurityException, NoSuchMethodException{
 
 		Iterator<Row> row =  hoja.rowIterator();
 		Empleado empleado = null;
@@ -100,45 +96,6 @@ public class ReadExcel {
 				this.obtenerValorCelda(31, 0, cel, "setServ_dom", (float) cel.getNumericCellValue(), empleado);
 				this.obtenerValorCelda(32, 0, cel, "setImp_cheq_cred", (float) cel.getNumericCellValue(), empleado);
 				this.obtenerValorCelda(33, 0, cel, "setDev_compra_exter", (float) cel.getNumericCellValue(), empleado);
-
-
-				
-//						empleado.setCUIL((int) cel.getNumericCellValue());//0
-//						empleado.setNom_y_ape(cel.getStringCellValue());//1
-//						empleado.setRem_net_imp((float) cel.getNumericCellValue());//2
-//						empleado.setTot_pag_ant_temp((int) cel.getNumericCellValue());//3
-//						empleado.setRem_net_imp_acum_temp((int) cel.getNumericCellValue());//4
-//						empleado.setEstad_civil((int) cel.getNumericCellValue());//5
-//						empleado.setMes_cas(this.convertMes(cel.getStringCellValue()));//6
-//						empleado.setCant_hij_anual((int) cel.getNumericCellValue());//7
-//						empleado.setMes_nac_hij_1(this.convertMes(cel.getStringCellValue()));//8
-//						empleado.setCant_hij_nac_1((int) cel.getNumericCellValue());//9
-//						empleado.setMes_baja_hij_1(this.convertMes(cel.getStringCellValue()));//10
-//						empleado.setCant_hij_baja_1((int) cel.getNumericCellValue());//11
-//						empleado.setMes_nac_hij_2(this.convertMes(cel.getStringCellValue()));//12
-//						empleado.setCant_hij_nac_2((int) cel.getNumericCellValue());//13
-//						empleado.setMes_baja_hij_2(this.convertMes(cel.getStringCellValue()));//14
-//						empleado.setCant_hij_baja_2((int) cel.getNumericCellValue());//15
-//						empleado.setCant_pers_a_carg_anual((int) cel.getNumericCellValue());//16
-//						empleado.setMes_alta_pers_a_carg_1(this.convertMes(cel.getStringCellValue()));//17
-//						empleado.setCant_pers_a_carg_1((int) cel.getNumericCellValue());//18
-//						empleado.setMes_baja_pers_a_carg_1(this.convertMes(cel.getStringCellValue()));//19
-//						empleado.setCant_pers_a_carg_baja_1((int)cel.getNumericCellValue());//20
-//						empleado.setMes_alta_pers_a_carg_2(this.convertMes(cel.getStringCellValue()));//21
-//						empleado.setCant_pers_a_carg_2((int) cel.getNumericCellValue());//22
-//						empleado.setMes_baja_pers_a_carg_2(this.convertMes(cel.getStringCellValue()));//23
-//						empleado.setCant_pers_a_carg_baja_2((int)cel.getNumericCellValue());//24
-//						empleado.setGast_sepe((float) cel.getNumericCellValue());//25
-//						empleado.setSeg_vida((float) cel.getNumericCellValue());//26
-//						empleado.setDonac((float) cel.getNumericCellValue());//27
-//						empleado.setCuot_med_asist((float) cel.getNumericCellValue());//28
-//						empleado.setHonor_med((float) cel.getNumericCellValue());//29
-//						empleado.setInt_cred_hip((float) cel.getNumericCellValue());//30
-//						empleado.setServ_dom((float) cel.getNumericCellValue());//31
-//						empleado.setImp_cheq_cred((float) cel.getNumericCellValue());//32
-//						empleado.setDev_compra_exter((float) cel.getNumericCellValue());//33
-						
-					
 				}
 			}
 			HibernateApplication.getInstance().getHome(Empleado.class).agregar(empleado);

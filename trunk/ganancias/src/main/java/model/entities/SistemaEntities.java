@@ -13,6 +13,7 @@ public class SistemaEntities {
 		result.add(DeduccionB.class);
 		result.add(DeduccionC.class);
 		result.add(Empleado.class);
+		result.add(ResultadoDeCalculo.class);
 		
 		return result;
 	}
