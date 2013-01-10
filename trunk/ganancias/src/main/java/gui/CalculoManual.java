@@ -120,7 +120,7 @@ public class CalculoManual {
 		desktopPane.add(lblServicioDomestico);
 		
 		JLabel lblImpuestoAlCheque = new JLabel("Impuesto al cheque sobre créditos");
-		lblImpuestoAlCheque.setBounds(45, 425, 259, 19);
+		lblImpuestoAlCheque.setBounds(40, 419, 259, 19);
 		desktopPane.add(lblImpuestoAlCheque);
 		
 		JLabel lblMontoDevolucionCompra = new JLabel("Monto devolución compra al exterior");
@@ -193,7 +193,7 @@ public class CalculoManual {
 		
 		textField_10 = new JTextField();
 		textField_10.setColumns(10);
-		textField_10.setBounds(324, 423, 138, 20);
+		textField_10.setBounds(324, 414, 138, 20);
 		desktopPane.add(textField_10);
 		
 		textField_11 = new JTextField();
@@ -221,20 +221,22 @@ public class CalculoManual {
 	}
 
 	private model.calculo.CalculoManual resultadosCalculoManual(){
-		textField.getText();
-		textField_1.getText();
-		textField_2.getText();
-		textField_3.getText();
-		textField_4.getText();
-		textField_5.getText();
-		textField_6.getText();
-		textField_7.getText();
-		textField_8.getText();
-		textField_9.getText();
-		textField_10.getText();
-		textField_11.getText();
-		comboBox.getSelectedIndex(); //0 = soltero 1= casado
-		return null;
+		Float rnif = Float.parseFloat(textField.getText());
+		Integer cantHijos = Integer.parseInt(textField_1.getText());
+		Integer persACargo= Integer.parseInt(textField_2.getText());
+		Float gastSepe = Float.parseFloat(textField_3.getText());
+		Float segVida = Float.parseFloat(textField_4.getText());
+		Float donaciones = Float.parseFloat(textField_5.getText());
+		Float coutMedAsis = Float.parseFloat(textField_6.getText());
+		Float honorariosMed = Float.parseFloat(textField_7.getText());
+		Float intCredHip = Float.parseFloat(textField_8.getText());
+		Float servDom = Float.parseFloat(textField_9.getText());
+		Float impSobreCred = Float.parseFloat(textField_10.getText());
+		Float devExterior = Float.parseFloat(textField_11.getText());
+		Integer estadoCivil=  comboBox.getSelectedIndex(); //0 = soltero 1= casado
+		return new model.calculo.CalculoManual
+				(rnif, estadoCivil, cantHijos, persACargo, gastSepe, segVida, donaciones, 
+						coutMedAsis, honorariosMed, intCredHip, servDom, impSobreCred, devExterior);
 		
 	}
 }
