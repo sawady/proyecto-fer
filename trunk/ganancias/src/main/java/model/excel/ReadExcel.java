@@ -18,7 +18,6 @@ import persistencia.HibernateApplication;
 /**
  * Clase que lee un archivo excel(de una estructura especifica) a partir de una ruta, y guarda la lista de empleados que
  * contiene el archivo en la base de datos.   
- * @author ramaya
  *
  */
 public class ReadExcel {
