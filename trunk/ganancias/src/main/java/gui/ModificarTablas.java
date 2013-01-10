@@ -7,6 +7,7 @@ import javax.swing.JButton;
 import javax.swing.JDesktopPane;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JTabbedPane;
 import javax.swing.JTextField;
 
@@ -52,7 +53,7 @@ public class ModificarTablas {
 	private HibernateHome<DeduccionC> homeDecC = (HibernateHome<DeduccionC>) HibernateApplication
 			.getInstance().getHome(DeduccionC.class);
 	
-	CamposParaCalculoAnualHibernateHome homeDecAnual = (CamposParaCalculoAnualHibernateHome) HibernateApplication
+	private CamposParaCalculoAnualHibernateHome homeDecAnual = (CamposParaCalculoAnualHibernateHome) HibernateApplication
 			.getInstance().getHome(CamposParaCalculoAnual.class);
 
 	/**
@@ -105,7 +106,6 @@ public class ModificarTablas {
 		textField.setBounds(310, 41, 138, 20);
 		desktopPane.add(textField);
 		textField.setColumns(10);
-
 		JLabel lblDeduccinEspecal = new JLabel("Deducci\u00F3n especal");
 		lblDeduccinEspecal.setBounds(57, 80, 253, 14);
 		desktopPane.add(lblDeduccinEspecal);
@@ -235,7 +235,6 @@ public class ModificarTablas {
 		JLabel lblHonorariosMedicos = new JLabel("Honorarios Medicos");
 		lblHonorariosMedicos.setBounds(51, 80, 176, 14);
 		desktopPane_2.add(lblHonorariosMedicos);
-
 		textField_10 = new JTextField();
 		textField_10.setColumns(10);
 		textField_10.setBounds(310, 80, 138, 20);
@@ -308,7 +307,6 @@ public class ModificarTablas {
 		textField_15.setColumns(10);
 		textField_15.setBounds(310, 80, 138, 20);
 		desktopPane_3.add(textField_15);
-
 		JLabel label_11 = new JLabel("Base que se debe pagar");
 		label_11.setBounds(41, 124, 240, 14);
 		desktopPane_3.add(label_11);
@@ -410,20 +408,31 @@ public class ModificarTablas {
 	}
 	
 	private void botonAceptarAccionA() {
+		validarFloat(textField,"Mínimo no imponible");
 		Float txt0 = Float.parseFloat(textField.getText());
+		validarFloat(textField_1,"Deducci\u00F3n especal");
 		Float txt1 = Float.parseFloat(textField_1.getText());
+		validarFloat(textField_2,"Tope anual por conyuge");
 		Float txt2 = Float.parseFloat(textField_2.getText());
+		validarFloat(textField_3,"Tope anual por hijos");
 		Float txt3 = Float.parseFloat(textField_3.getText());
+		validarFloat(textField_4,"Tope anual por persona a cargo");
 		Float txt4 = Float.parseFloat(textField_4.getText());
 		homeDecA.deleteAllEntities(); //es mas limpio, total hay una sola fila
 		homeDecA.agregar(new DeduccionA(txt0, txt1, txt2, txt3, txt4));
 		mostrarDatosEnPantallaDeduccionA();
 	}
 	
+
+
 	private void botonAceptarAccionB() {
+		validarFloat(textField_5,"Tope anual gastos de sepelio");
 		Float txt5 = Float.parseFloat(textField_5.getText());
+		validarFloat(textField_6,"Tope anual seguro de vida");
 		Float txt6 = Float.parseFloat(textField_6.getText());
+		validarFloat(textField_7,"Tope anual servicio domestico");
 		Float txt7 = Float.parseFloat(textField_7.getText());
+		validarFloat(textField_8,"Tope anual crédito hipotecario");
 		Float txt8 = Float.parseFloat(textField_8.getText());
 		homeDecB.deleteAllEntities(); 
 		homeDecB.agregar(new DeduccionB(txt5, txt6, txt7, txt8));
@@ -431,10 +440,15 @@ public class ModificarTablas {
 	}
 	
 	private void botonAceptarAccionC() {
+		validarFloat(textField_9,"Cuota Médico Asistencial");
 		Float txt9 = Float.parseFloat(textField_9.getText());
+		validarFloat(textField_10,"Honorarios Medicos");
 		Float txt10 = Float.parseFloat(textField_10.getText());
+		validarFloat(textField_11,"Donaciones");
 		Float txt11 = Float.parseFloat(textField_11.getText());
+		validarFloat(textField_12,"Imp al Cheque sobre créditos");
 		Float txt12 = Float.parseFloat(textField_12.getText());
+		validarFloat(textField_13,"Deducción imp. cheque sobre Cred");
 		Float txt13 = Float.parseFloat(textField_13.getText());
 		homeDecC.deleteAllEntities(); 
 		homeDecC.agregar(new DeduccionC(txt9, txt10, txt11, txt12, txt13));
@@ -442,14 +456,27 @@ public class ModificarTablas {
 	}
 	
 	private void botonAceptarAccionAnual() {
+		validarFloat(textField_14,"Ganancia neta imponible desde");
 		Float  txt14 = Float.parseFloat(textField_14.getText());
+		validarFloat(textField_15,"Ganancia neta imponible hasta");
 		Float  txt15 = Float.parseFloat(textField_15.getText());
+		validarFloat(textField_16,"Base que se debe pagar");
 		Float  txt16 = Float.parseFloat(textField_16.getText());
+		validarFloat(textField_17,"Porcentaje estra por excedente");
 		Float  txt17 = Float.parseFloat(textField_17.getText());
+		validarFloat(textField_18,"Valor de excedente");
 		Float  txt18 = Float.parseFloat(textField_18.getText());
 		homeDecAnual.deleteAllEntities(); 
 		homeDecAnual.agregar(new CamposParaCalculoAnual(txt14, txt15, txt16, txt17, txt18));
 		mostrarDatosEnPantallCalculoAnual();
 	}
 	
+	private void validarFloat(JTextField texto, String campo){
+		try{
+			Float.parseFloat(texto.getText());
+		}catch(Exception e){
+			JOptionPane.showMessageDialog(null, " Solo se permiten números en el campo: " + campo);
+			texto.setText(null);
+		}
+	}
 }
