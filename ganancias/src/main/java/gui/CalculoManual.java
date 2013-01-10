@@ -1,5 +1,6 @@
 package gui;
 
+import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -10,7 +11,6 @@ import javax.swing.JDesktopPane;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
-import java.awt.Color;
 import javax.swing.UIManager;
 
 
@@ -29,22 +29,7 @@ public class CalculoManual {
 	private JTextField textField_9;
 	private JTextField textField_10;
 	private JTextField textField_11;
-
-//	/**
-//	 * Launch the application.
-//	 */
-//	public static void main(String[] args) {
-//		EventQueue.invokeLater(new Runnable() {
-//			public void run() {
-//				try {
-//					CalculoManual window = new CalculoManual();
-//					window.frmImpuestoALas.setVisible(true);
-//				} catch (Exception e) {
-//					e.printStackTrace();
-//				}
-//			}
-//		});
-//	}
+	private JComboBox comboBox;
 
 	/**
 	 * Create the application.
@@ -92,7 +77,7 @@ public class CalculoManual {
 		desktopPane.add(textField);
 		textField.setColumns(10);
 		
-		JComboBox comboBox = new JComboBox();
+		comboBox = new JComboBox();
 		comboBox.setModel(new DefaultComboBoxModel(new String[] {"Soltero", "Casado"}));
 		comboBox.setToolTipText("");
 		comboBox.setBounds(324, 62, 138, 24);
@@ -144,14 +129,21 @@ public class CalculoManual {
 		
 		JButton button_1 = new JButton("Cancelar");
 		button_1.setBounds(193, 521, 106, 23);
+		button_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				ponerCamposEnBlanco();			}
+		});
 		desktopPane.add(button_1);
 		
 		JButton button_2 = new JButton("Aceptar");
 		button_2.setBounds(354, 519, 118, 23);
 		button_2.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-							}
-		});
+
+	        @Override
+	        public void actionPerformed(ActionEvent e) {
+				showDialog();
+	        }
+	    });
 		desktopPane.add(button_2);
 		
 		textField_1 = new JTextField();
@@ -208,5 +200,41 @@ public class CalculoManual {
 		textField_11.setColumns(10);
 		textField_11.setBounds(324, 455, 138, 20);
 		desktopPane.add(textField_11);
+	}
+	
+	private void ponerCamposEnBlanco(){
+		textField_1.setText("");
+		textField_2.setText("");
+		textField_3.setText("");
+		textField_4.setText("");
+		textField_5.setText("");
+		textField_6.setText("");
+		textField_7.setText("");
+		textField_8.setText("");
+		textField_9.setText("");
+		textField_10.setText("");
+		textField_11.setText("");
+	}
+	private void showDialog() {
+	   model.calculo.CalculoManual resultados = resultadosCalculoManual();
+	   new ResultadosCalculoManual(new String(" " + resultados.gananciaNetaA()), new String(" " +resultados.gananciaNetaB()), new String(" " + resultados.gananciaNetaC()), new String(" " +resultados.impuestoAPagarEnElAnio()), new String(" " + resultados.impuestoAPagarPorMes()));
+	}
+
+	private model.calculo.CalculoManual resultadosCalculoManual(){
+		textField.getText();
+		textField_1.getText();
+		textField_2.getText();
+		textField_3.getText();
+		textField_4.getText();
+		textField_5.getText();
+		textField_6.getText();
+		textField_7.getText();
+		textField_8.getText();
+		textField_9.getText();
+		textField_10.getText();
+		textField_11.getText();
+		comboBox.getSelectedIndex(); //0 = soltero 1= casado
+		return null;
+		
 	}
 }

@@ -43,19 +43,6 @@ public class ModificarTablas {
 	private JTextField textField_17;
 	private JTextField textField_18;
 
-	// public static void main(String[] args) {
-	// EventQueue.invokeLater(new Runnable() {
-	// public void run() {
-	// try {
-	// ModificarTablas window = new ModificarTablas();
-	// window.frmImpuestoALas.setVisible(true);
-	// } catch (Exception e) {
-	// e.printStackTrace();
-	// }
-	// }
-	// });
-	// }
-
 	/**
 	 * Create the application.
 	 */
