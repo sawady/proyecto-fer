@@ -1,7 +1,5 @@
 package model.calculo;
 
-import model.entities.DeduccionA;
-import model.entities.DeduccionC;
 
 public class CalculoManual extends Calculo{
 	private float remuneracion_neta_imponible = 0;
@@ -31,8 +29,8 @@ public class CalculoManual extends Calculo{
 			float intereses_por_credito_hipotecario,
 			float servicios_domesticos,
 			float impuesto_al_cheque_sobre_creditos,
-			float monto_devolucion_al_exterior, DeduccionA deduccionA,
-			DeduccionC deduccionC) {
+			float monto_devolucion_al_exterior
+			) {
 		super();
 		this.remuneracion_neta_imponible = remuneracion_neta_imponible;
 		this.estado_civil = estado_civil;
@@ -121,8 +119,6 @@ public class CalculoManual extends Calculo{
 
 	// GET & SET
 	
-	
-
 	public float getDonaciones() {
 		return donaciones;
 	}

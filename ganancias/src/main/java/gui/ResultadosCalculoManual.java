@@ -21,15 +21,15 @@ public class ResultadosCalculoManual extends JDialog {
 //	/**
 //	 * Launch the application.
 //	 */
-	public static void main(String[] args) {
-		try {
-			ResultadosCalculoManual dialog = new ResultadosCalculoManual("0", "2", "3" , "5", "6");
-			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
-			dialog.setVisible(true);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
+//	public static void main(String[] args) {
+//		try {
+//			ResultadosCalculoManual dialog = new ResultadosCalculoManual("0", "2", "3" , "5", "6");
+//			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+//			dialog.setVisible(true);
+//		} catch (Exception e) {
+//			e.printStackTrace();
+//		}
+//	}
 
 	/**
 	 * Create the dialog.
@@ -44,27 +44,27 @@ public class ResultadosCalculoManual extends JDialog {
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
 		contentPanel.setLayout(null);
 		{
-			JLabel lblNewLabel = new JLabel("Ganancia Neta A: " + label1);
+			JLabel lblNewLabel = new JLabel("Ganancia Neta A: $" + label1);
 			lblNewLabel.setBounds(82, 22, 287, 15);
 			contentPanel.add(lblNewLabel);
 		}
 		{
-			JLabel lblNewLabel_1 = new JLabel("Ganancia Neta B: " + label2);
+			JLabel lblNewLabel_1 = new JLabel("Ganancia Neta B: $" + label2);
 			lblNewLabel_1.setBounds(82, 49, 287, 15);
 			contentPanel.add(lblNewLabel_1);
 		}
 		{
-			JLabel lblNewLabel_2 = new JLabel("Ganancia Neta C: " + label3);
+			JLabel lblNewLabel_2 = new JLabel("Ganancia Neta C: $" + label3);
 			lblNewLabel_2.setBounds(82, 76, 287, 15);
 			contentPanel.add(lblNewLabel_2);
 		}
 		{
-			JLabel lblNewLabel_3 = new JLabel("Impuesto a pagar en el año: " + label4);
+			JLabel lblNewLabel_3 = new JLabel("Impuesto a pagar en el año: $" + label4);
 			lblNewLabel_3.setBounds(82, 103, 287, 15);
 			contentPanel.add(lblNewLabel_3);
 		}
 		{
-			JLabel lblNewLabel_4 = new JLabel("Impuesto a pagar por mes: " + label5);
+			JLabel lblNewLabel_4 = new JLabel("Impuesto a pagar por mes: $" + label5);
 			lblNewLabel_4.setBounds(82, 130, 287, 15);
 			contentPanel.add(lblNewLabel_4);
 		}
