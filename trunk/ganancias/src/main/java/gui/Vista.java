@@ -1,5 +1,6 @@
 package gui;
 
+import java.awt.Color;
 import java.awt.EventQueue;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
@@ -14,12 +15,11 @@ import javax.swing.JLabel;
 
 import model.FormatoEmpleadoException;
 import model.ProcesoCalculoAutomatico;
-import javax.swing.UIManager;
-import java.awt.Color;
 
 public class Vista {
 
 	private JFrame frmProgramaDeImpuesto;
+	private JFileChooser fileChooser = new JFileChooser();
 
 	/**
 	 * Launch the application.
@@ -44,7 +44,6 @@ public class Vista {
 		initialize();
 	}
 
-	JFileChooser fileChooser = new JFileChooser();
 
 	/**
 	 * Initialize the contents of the frame.
