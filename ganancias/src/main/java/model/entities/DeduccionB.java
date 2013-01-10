@@ -9,6 +9,23 @@ public class DeduccionB extends Entity {
 	private float serv_dom_anu;
 	private float int_cred_hip_anu;
 	
+	
+	
+	public DeduccionB() {
+		super();
+	}
+	public DeduccionB(int id) {
+		super(id);
+	}
+
+	public DeduccionB(float gast_sepe_anu, float seg_vida_anu,
+			float serv_dom_anu, float int_cred_hip_anu) {
+		super();
+		this.gast_sepe_anu = gast_sepe_anu;
+		this.seg_vida_anu = seg_vida_anu;
+		this.serv_dom_anu = serv_dom_anu;
+		this.int_cred_hip_anu = int_cred_hip_anu;
+	}
 	public float getGast_sepe_anu() {
 		return gast_sepe_anu;
 	}

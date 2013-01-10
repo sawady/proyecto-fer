@@ -9,6 +9,22 @@ public class DeduccionC extends Entity{
 	private float imp_cheq_cred_anu;
 	private float deb_total_imp_cheq_cred_anu;
 	
+	public DeduccionC(float cout_med_asist_anu, float honor_med_anu,
+			float donac_anu, float imp_cheq_cred_anu,
+			float deb_total_imp_cheq_cred_anu) {
+		super();
+		this.cout_med_asist_anu = cout_med_asist_anu;
+		this.honor_med_anu = honor_med_anu;
+		this.donac_anu = donac_anu;
+		this.imp_cheq_cred_anu = imp_cheq_cred_anu;
+		this.deb_total_imp_cheq_cred_anu = deb_total_imp_cheq_cred_anu;
+	}
+	public DeduccionC() {
+		super();
+	}
+	public DeduccionC(int id) {
+		super(id);
+	}
 	public float getCout_med_asist_anu() {
 		return cout_med_asist_anu;
 	}

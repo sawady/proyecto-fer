@@ -42,6 +42,18 @@ public class ModificarTablas {
 	private JTextField textField_16;
 	private JTextField textField_17;
 	private JTextField textField_18;
+	
+	private HibernateHome<DeduccionA> homeDecA = (HibernateHome<DeduccionA>) HibernateApplication
+			.getInstance().getHome(DeduccionA.class);
+	
+	private HibernateHome<DeduccionB> homeDecB = (HibernateHome<DeduccionB>) HibernateApplication
+			.getInstance().getHome(DeduccionB.class);
+	
+	private HibernateHome<DeduccionC> homeDecC = (HibernateHome<DeduccionC>) HibernateApplication
+			.getInstance().getHome(DeduccionC.class);
+	
+	CamposParaCalculoAnualHibernateHome homeDecAnual = (CamposParaCalculoAnualHibernateHome) HibernateApplication
+			.getInstance().getHome(CamposParaCalculoAnual.class);
 
 	/**
 	 * Create the application.
@@ -132,11 +144,17 @@ public class ModificarTablas {
 
 		JButton btnCancelar = new JButton("Cancelar");
 		btnCancelar.setBounds(170, 255, 106, 23);
+		btnCancelar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				botonCancelarAccionA();
+			}
+		});
 		desktopPane.add(btnCancelar);
 
 		JButton btnAceptar = new JButton("Guardar");
 		btnAceptar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				botonAceptarAccionA();
 			}
 		});
 		btnAceptar.setBounds(330, 255, 118, 23);
@@ -184,10 +202,20 @@ public class ModificarTablas {
 
 		JButton button_1 = new JButton("Cancelar");
 		button_1.setBounds(170, 255, 106, 23);
+		button_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				botonCancelarAccionB();
+			}
+		});
 		desktopPane_1.add(button_1);
 
 		JButton btnGuardar = new JButton("Guardar");
 		btnGuardar.setBounds(330, 255, 118, 23);
+		btnGuardar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				botonAceptarAccionB();
+			}
+		});
 		desktopPane_1.add(btnGuardar);
 
 		JDesktopPane desktopPane_2 = new JDesktopPane();
@@ -242,10 +270,20 @@ public class ModificarTablas {
 		desktopPane_2.add(textField_13);
 
 		JButton button_3 = new JButton("Cancelar");
+		button_3.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				botonCancelarAccionC();
+			}
+		});
 		button_3.setBounds(170, 255, 106, 23);
 		desktopPane_2.add(button_3);
 
 		JButton btnGuardar_1 = new JButton("Guardar");
+		btnGuardar_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				botonAceptarAccionC();
+			}
+		});
 		btnGuardar_1.setBounds(330, 255, 118, 23);
 		desktopPane_2.add(btnGuardar_1);
 
@@ -299,18 +337,27 @@ public class ModificarTablas {
 		desktopPane_3.add(textField_18);
 
 		JButton button_5 = new JButton("Cancelar");
+		button_5.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				botonCancelarAccionAnual();
+			}
+		});
 		button_5.setBounds(170, 255, 106, 23);
 		desktopPane_3.add(button_5);
 
 		JButton btnGuardar_2 = new JButton("Guardar");
+		btnGuardar_2.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				botonAceptarAccionAnual();
+			}
+		});
 		btnGuardar_2.setBounds(330, 255, 118, 23);
 		desktopPane_3.add(btnGuardar_2);
 
 	}
 
+	//Auxiliares
 	public void mostrarDatosEnPantallaDeduccionA() {
-		HibernateHome<DeduccionA> homeDecA = (HibernateHome<DeduccionA>) HibernateApplication
-				.getInstance().getHome(DeduccionA.class);
 		DeduccionA deduccionA = homeDecA.getFirst();
 		textField.setText(Float.toString(deduccionA.getMin_no_imp()));
 		textField_1.setText(Float.toString(deduccionA.getDedu_espe()));
@@ -321,8 +368,6 @@ public class ModificarTablas {
 	}
 	
 	public void mostrarDatosEnPantallaDeduccionB() {
-		HibernateHome<DeduccionB> homeDecB = (HibernateHome<DeduccionB>) HibernateApplication
-				.getInstance().getHome(DeduccionB.class);
 		DeduccionB deduccionB = homeDecB.getFirst();
 		textField_5.setText(Float.toString(deduccionB.getGast_sepe_anu()));
 		textField_6.setText(Float.toString(deduccionB.getSeg_vida_anu()));
@@ -331,8 +376,6 @@ public class ModificarTablas {
 
 	}
 	public void mostrarDatosEnPantallaDeduccionC() {
-		HibernateHome<DeduccionC> homeDecC = (HibernateHome<DeduccionC>) HibernateApplication
-				.getInstance().getHome(DeduccionC.class);
 		DeduccionC deduccionC = homeDecC.getFirst();
 		textField_9.setText(Float.toString(deduccionC.getCout_med_asist_anu()));
 		textField_10.setText(Float.toString(deduccionC.getHonor_med_anu()));
@@ -342,9 +385,7 @@ public class ModificarTablas {
 	}
 	
 	public void mostrarDatosEnPantallCalculoAnual() {
-		CamposParaCalculoAnualHibernateHome homeDecC = (CamposParaCalculoAnualHibernateHome) HibernateApplication
-				.getInstance().getHome(CamposParaCalculoAnual.class);
-		CamposParaCalculoAnual camposParaCalculoAnual = homeDecC.getFirst();
+		CamposParaCalculoAnual camposParaCalculoAnual = homeDecAnual.getFirst();
 		textField_14.setText(Float.toString(camposParaCalculoAnual.getDesde()));
 		textField_15.setText(Float.toString(camposParaCalculoAnual.getHasta()));
 		textField_16.setText(Float.toString(camposParaCalculoAnual.getBase()));
@@ -352,4 +393,63 @@ public class ModificarTablas {
 		textField_18.setText(Float.toString(camposParaCalculoAnual.getSobre_exced()));
 	}
 
+	private void botonCancelarAccionA() {
+		mostrarDatosEnPantallaDeduccionA();
+	}
+	
+	private void botonCancelarAccionB() {
+		mostrarDatosEnPantallaDeduccionB(); 
+	}
+	
+	private void botonCancelarAccionC() {
+		mostrarDatosEnPantallaDeduccionC();
+	}
+	
+	private void botonCancelarAccionAnual() {
+		mostrarDatosEnPantallCalculoAnual();
+	}
+	
+	private void botonAceptarAccionA() {
+		Float txt0 = Float.parseFloat(textField.getText());
+		Float txt1 = Float.parseFloat(textField_1.getText());
+		Float txt2 = Float.parseFloat(textField_2.getText());
+		Float txt3 = Float.parseFloat(textField_3.getText());
+		Float txt4 = Float.parseFloat(textField_4.getText());
+		homeDecA.deleteAllEntities(); //es mas limpio, total hay una sola fila
+		homeDecA.agregar(new DeduccionA(txt0, txt1, txt2, txt3, txt4));
+		mostrarDatosEnPantallaDeduccionA();
+	}
+	
+	private void botonAceptarAccionB() {
+		Float txt5 = Float.parseFloat(textField_5.getText());
+		Float txt6 = Float.parseFloat(textField_6.getText());
+		Float txt7 = Float.parseFloat(textField_7.getText());
+		Float txt8 = Float.parseFloat(textField_8.getText());
+		homeDecB.deleteAllEntities(); 
+		homeDecB.agregar(new DeduccionB(txt5, txt6, txt7, txt8));
+		mostrarDatosEnPantallaDeduccionB();
+	}
+	
+	private void botonAceptarAccionC() {
+		Float txt9 = Float.parseFloat(textField_9.getText());
+		Float txt10 = Float.parseFloat(textField_10.getText());
+		Float txt11 = Float.parseFloat(textField_11.getText());
+		Float txt12 = Float.parseFloat(textField_12.getText());
+		Float txt13 = Float.parseFloat(textField_13.getText());
+		homeDecC.deleteAllEntities(); 
+		homeDecC.agregar(new DeduccionC(txt9, txt10, txt11, txt12, txt13));
+		mostrarDatosEnPantallaDeduccionC();
+	}
+	
+	private void botonAceptarAccionAnual() {
+		Float  txt14 = Float.parseFloat(textField_14.getText());
+		Float  txt15 = Float.parseFloat(textField_15.getText());
+		Float  txt16 = Float.parseFloat(textField_16.getText());
+		Float  txt17 = Float.parseFloat(textField_17.getText());
+		Float  txt18 = Float.parseFloat(textField_18.getText());
+		homeDecAnual.deleteAllEntities(); 
+		homeDecAnual.agregar(new CamposParaCalculoAnual(txt14, txt15, txt16, txt17, txt18));
+		mostrarDatosEnPantallCalculoAnual();
+	}
+	
 }

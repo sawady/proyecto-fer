@@ -9,6 +9,23 @@ public class DeduccionA extends Entity{
 	private float hijos;
 	private float otros;
 	
+
+	public DeduccionA() {
+		super();
+	}
+	public DeduccionA(int id) {
+		super(id);
+	}
+	
+	public DeduccionA(float min_no_imp, float dedu_espe, float conyuge,
+			float hijos, float otros) {
+		super();
+		this.min_no_imp = min_no_imp;
+		this.dedu_espe = dedu_espe;
+		this.conyuge = conyuge;
+		this.hijos = hijos;
+		this.otros = otros;
+	}
 	public float getMin_no_imp() {
 		return min_no_imp;
 	}
