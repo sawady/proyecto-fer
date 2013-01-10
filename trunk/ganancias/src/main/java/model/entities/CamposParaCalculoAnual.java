@@ -11,6 +11,22 @@ public class CamposParaCalculoAnual extends Entity {
 	private float sobre_exced;
 	
 	
+	
+	public CamposParaCalculoAnual() {
+		super();
+	}
+	public CamposParaCalculoAnual(int id) {
+		super(id);
+	}
+	public CamposParaCalculoAnual(float desde, float hasta, float base,
+			float por_extra, float sobre_exced) {
+		super();
+		this.desde = desde;
+		this.hasta = hasta;
+		this.base = base;
+		this.por_extra = por_extra;
+		this.sobre_exced = sobre_exced;
+	}
 	public float getDesde() {
 		return desde;
 	}
