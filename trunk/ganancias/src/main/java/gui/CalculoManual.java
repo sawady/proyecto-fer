@@ -126,7 +126,7 @@ public class CalculoManual {
 
 		JLabel lblImpuestoAlCheque = new JLabel(
 				"Impuesto al cheque sobre créditos");
-		lblImpuestoAlCheque.setBounds(40, 419, 259, 19);
+		lblImpuestoAlCheque.setBounds(45, 419, 259, 19);
 		desktopPane.add(lblImpuestoAlCheque);
 
 		JLabel lblMontoDevolucionCompra = new JLabel(
