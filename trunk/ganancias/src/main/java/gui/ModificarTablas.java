@@ -134,7 +134,7 @@ public class ModificarTablas {
 		btnCancelar.setBounds(170, 255, 106, 23);
 		desktopPane.add(btnCancelar);
 
-		JButton btnAceptar = new JButton("Aceptar");
+		JButton btnAceptar = new JButton("Guardar");
 		btnAceptar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 			}
@@ -186,9 +186,9 @@ public class ModificarTablas {
 		button_1.setBounds(170, 255, 106, 23);
 		desktopPane_1.add(button_1);
 
-		JButton button_2 = new JButton("Aceptar");
-		button_2.setBounds(330, 255, 118, 23);
-		desktopPane_1.add(button_2);
+		JButton btnGuardar = new JButton("Guardar");
+		btnGuardar.setBounds(330, 255, 118, 23);
+		desktopPane_1.add(btnGuardar);
 
 		JDesktopPane desktopPane_2 = new JDesktopPane();
 		desktopPane_2.setBackground(UIManager.getColor("ScrollBar.shadow"));
@@ -245,9 +245,9 @@ public class ModificarTablas {
 		button_3.setBounds(170, 255, 106, 23);
 		desktopPane_2.add(button_3);
 
-		JButton button_4 = new JButton("Aceptar");
-		button_4.setBounds(330, 255, 118, 23);
-		desktopPane_2.add(button_4);
+		JButton btnGuardar_1 = new JButton("Guardar");
+		btnGuardar_1.setBounds(330, 255, 118, 23);
+		desktopPane_2.add(btnGuardar_1);
 
 		JDesktopPane desktopPane_3 = new JDesktopPane();
 		desktopPane_3.setBackground(UIManager.getColor("ScrollBar.thumbHighlight"));
@@ -302,9 +302,9 @@ public class ModificarTablas {
 		button_5.setBounds(170, 255, 106, 23);
 		desktopPane_3.add(button_5);
 
-		JButton button_6 = new JButton("Aceptar");
-		button_6.setBounds(330, 255, 118, 23);
-		desktopPane_3.add(button_6);
+		JButton btnGuardar_2 = new JButton("Guardar");
+		btnGuardar_2.setBounds(330, 255, 118, 23);
+		desktopPane_3.add(btnGuardar_2);
 
 	}
 
