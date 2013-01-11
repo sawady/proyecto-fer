@@ -1,10 +1,10 @@
 package gui;
 
-import java.awt.BorderLayout;
 import java.awt.Color;
-import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.LinkedList;
+import java.util.List;
 
 import javax.swing.JButton;
 import javax.swing.JDesktopPane;
@@ -15,6 +15,7 @@ import javax.swing.JScrollPane;
 import javax.swing.JTabbedPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
+import javax.swing.ScrollPaneConstants;
 import javax.swing.UIManager;
 
 import model.entities.CamposParaCalculoAnual;
@@ -24,6 +25,7 @@ import model.entities.DeduccionC;
 import persistencia.HibernateApplication;
 import persistencia.hibernateHome.CamposParaCalculoAnualHibernateHome;
 import persistencia.hibernateHome.HibernateHome;
+import java.awt.Component;
 
 
 public class ModificarTablas {
@@ -43,29 +45,30 @@ public class ModificarTablas {
 	private JTextField textField_11;
 	private JTextField textField_12;
 	private JTextField textField_13;
-	private JTable tablaDeAnual;
 	private TableModelAnual tableModel;
+	private JTable tableAnual;
+
 	
-//	private HibernateHome<DeduccionA> homeDecA = (HibernateHome<DeduccionA>) HibernateApplication
-//			.getInstance().getHome(DeduccionA.class);
-//	
-//	private HibernateHome<DeduccionB> homeDecB = (HibernateHome<DeduccionB>) HibernateApplication
-//			.getInstance().getHome(DeduccionB.class);
-//	
-//	private HibernateHome<DeduccionC> homeDecC = (HibernateHome<DeduccionC>) HibernateApplication
-//			.getInstance().getHome(DeduccionC.class);
-//	
-//	private CamposParaCalculoAnualHibernateHome homeDecAnual = (CamposParaCalculoAnualHibernateHome) HibernateApplication
-//			.getInstance().getHome(CamposParaCalculoAnual.class);
+	private HibernateHome<DeduccionA> homeDecA = (HibernateHome<DeduccionA>) HibernateApplication
+			.getInstance().getHome(DeduccionA.class);
+	
+	private HibernateHome<DeduccionB> homeDecB = (HibernateHome<DeduccionB>) HibernateApplication
+			.getInstance().getHome(DeduccionB.class);
+	
+	private HibernateHome<DeduccionC> homeDecC = (HibernateHome<DeduccionC>) HibernateApplication
+			.getInstance().getHome(DeduccionC.class);
+	
+	private CamposParaCalculoAnualHibernateHome homeDecAnual = (CamposParaCalculoAnualHibernateHome) HibernateApplication
+			.getInstance().getHome(CamposParaCalculoAnual.class);
 
 	/**
 	 * Create the application.
 	 */
 	public ModificarTablas() {
 		initialize();
-		//this.mostrarDatosEnPantallaDeduccionA();
-		//this.mostrarDatosEnPantallaDeduccionB();
-		//this.mostrarDatosEnPantallaDeduccionC();
+		this.mostrarDatosEnPantallaDeduccionA();
+		this.mostrarDatosEnPantallaDeduccionB();
+		this.mostrarDatosEnPantallaDeduccionC();
 	}
 
 
@@ -149,7 +152,7 @@ public class ModificarTablas {
 		btnCancelar.setBounds(170, 255, 106, 23);
 		btnCancelar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				//botonCancelarAccionA();
+				botonCancelarAccionA();
 			}
 		});
 		desktopPane.add(btnCancelar);
@@ -157,7 +160,7 @@ public class ModificarTablas {
 		JButton btnAceptar = new JButton("Guardar");
 		btnAceptar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				//botonAceptarAccionA();
+				botonAceptarAccionA();
 			}
 		});
 		btnAceptar.setBounds(330, 255, 118, 23);
@@ -207,7 +210,7 @@ public class ModificarTablas {
 		button_1.setBounds(170, 255, 106, 23);
 		button_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				//botonCancelarAccionB();
+				botonCancelarAccionB();
 			}
 		});
 		desktopPane_1.add(button_1);
@@ -216,7 +219,7 @@ public class ModificarTablas {
 		btnGuardar.setBounds(330, 255, 118, 23);
 		btnGuardar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				//botonAceptarAccionB();
+				botonAceptarAccionB();
 			}
 		});
 		desktopPane_1.add(btnGuardar);
@@ -274,7 +277,7 @@ public class ModificarTablas {
 		JButton button_3 = new JButton("Cancelar");
 		button_3.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				//botonCancelarAccionC();
+				botonCancelarAccionC();
 			}
 		});
 		button_3.setBounds(170, 255, 106, 23);
@@ -283,7 +286,7 @@ public class ModificarTablas {
 		JButton btnGuardar_1 = new JButton("Guardar");
 		btnGuardar_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				//botonAceptarAccionC();
+				botonAceptarAccionC();
 			}
 		});
 		btnGuardar_1.setBounds(330, 255, 118, 23);
@@ -293,138 +296,134 @@ public class ModificarTablas {
 		desktopPane_3.setBackground(UIManager.getColor("ScrollBar.thumbHighlight"));
 		tabbedPane.addTab("Impuesto Anual", null, desktopPane_3, null);
 
-
-		desktopPane_3.add(crearTabla());
-		
+	
 		JButton btnGuardar_2 = new JButton("Editar Fila");
 		btnGuardar_2.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				//botonEditarAccionAnual();
+				botonEditarAccionAnual();
 			}
 		});
-		btnGuardar_2.setBounds(330, 255, 118, 23);
+		btnGuardar_2.setBounds(466, 280, 118, 23);
 		desktopPane_3.add(btnGuardar_2);
-
-	}
-	public JScrollPane crearTabla (){
-
-        // creamos el modelo de Tabla
+		
+		//tabla
 		this.tableModel = new TableModelAnual();
-        // se crea la Tabla con el modelo 
-		this.tablaDeAnual = new JTable (this.tableModel); 
-		//creo las columnas
+		tableAnual = new JTable(tableModel);
+		List<CamposParaCalculoAnual>lista = new LinkedList<CamposParaCalculoAnual>();
+		lista.add(new CamposParaCalculoAnual(1, 2, 3, 5, 6));
+		//this.tableModel.actualizarme(homeDecAnual.getAllEntities());
+		this.tableModel.actualizarme(lista);
 		this.tableModel.addColumn( "Ganancia neta imponible Desde");
 		this.tableModel.addColumn( "Ganancia neta imponible Hasta");
 		this.tableModel.addColumn( "Base que se debe pagar");
 		this.tableModel.addColumn( "Porcentaje estra por excedente");
 		this.tableModel.addColumn( "Valor de excedente");
-		//creo las filas
-		//this.tableModel.actualizarme(homeDecAnual.getAllEntities());
-		 //se define el tamanio
-		this.tablaDeAnual.setPreferredScrollableViewportSize(new Dimension(500, 70));
-        //Creamos un JscrollPane y le agregamos la JTable
-        return  new JScrollPane(tablaDeAnual);
+		
+		
+		JScrollPane scrollPane = new JScrollPane(tableAnual);
+		scrollPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
+		scrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_ALWAYS);
+		scrollPane.setBounds(15, 12, 569, 266);
+		desktopPane_3.add(scrollPane);
 	}
 	
 	//Auxiliares
-//	public void mostrarDatosEnPantallaDeduccionA() {
-//		DeduccionA deduccionA = homeDecA.getFirst();
-//		textField.setText(Float.toString(deduccionA.getMin_no_imp()));
-//		textField_1.setText(Float.toString(deduccionA.getDedu_espe()));
-//		textField_2.setText(Float.toString(deduccionA.getConyuge()));
-//		textField_3.setText(Float.toString(deduccionA.getHijos()));
-//		textField_4.setText(Float.toString(deduccionA.getOtros()));
-//
-//	}
-//	
-//	public void mostrarDatosEnPantallaDeduccionB() {
-//		DeduccionB deduccionB = homeDecB.getFirst();
-//		textField_5.setText(Float.toString(deduccionB.getGast_sepe_anu()));
-//		textField_6.setText(Float.toString(deduccionB.getSeg_vida_anu()));
-//		textField_7.setText(Float.toString(deduccionB.getServ_dom_anu()));
-//		textField_8.setText(Float.toString(deduccionB.getInt_cred_hip_anu()));
-//
-//	}
-//	public void mostrarDatosEnPantallaDeduccionC() {
-//		DeduccionC deduccionC = homeDecC.getFirst();
-//		textField_9.setText(Float.toString(deduccionC.getCout_med_asist_anu()));
-//		textField_10.setText(Float.toString(deduccionC.getHonor_med_anu()));
-//		textField_11.setText(Float.toString(deduccionC.getDonac_anu()));
-//		textField_12.setText(Float.toString(deduccionC.getImp_cheq_cred_anu()));
-//		textField_13.setText(Float.toString(deduccionC.getDeb_total_imp_cheq_cred_anu()));
-//	}
-//	
-//	private void botonCancelarAccionA() {
-//		mostrarDatosEnPantallaDeduccionA();
-//	}
-//	
-//	private void botonCancelarAccionB() {
-//		mostrarDatosEnPantallaDeduccionB(); 
-//	}
-//	
-//	private void botonCancelarAccionC() {
-//		mostrarDatosEnPantallaDeduccionC();
-//	}
-//	
-//	private void botonAceptarAccionA() {
-//		validarFloat(textField,"Mínimo no imponible");
-//		Float txt0 = Float.parseFloat(textField.getText());
-//		validarFloat(textField_1,"Deducci\u00F3n especal");
-//		Float txt1 = Float.parseFloat(textField_1.getText());
-//		validarFloat(textField_2,"Tope anual por conyuge");
-//		Float txt2 = Float.parseFloat(textField_2.getText());
-//		validarFloat(textField_3,"Tope anual por hijos");
-//		Float txt3 = Float.parseFloat(textField_3.getText());
-//		validarFloat(textField_4,"Tope anual por persona a cargo");
-//		Float txt4 = Float.parseFloat(textField_4.getText());
-//		homeDecA.deleteAllEntities(); //es mas limpio, total hay una sola fila
-//		homeDecA.agregar(new DeduccionA(txt0, txt1, txt2, txt3, txt4));
-//		mostrarDatosEnPantallaDeduccionA();
-//	}
-//	
-//
-//
-//	private void botonAceptarAccionB() {
-//		validarFloat(textField_5,"Tope anual gastos de sepelio");
-//		Float txt5 = Float.parseFloat(textField_5.getText());
-//		validarFloat(textField_6,"Tope anual seguro de vida");
-//		Float txt6 = Float.parseFloat(textField_6.getText());
-//		validarFloat(textField_7,"Tope anual servicio domestico");
-//		Float txt7 = Float.parseFloat(textField_7.getText());
-//		validarFloat(textField_8,"Tope anual crédito hipotecario");
-//		Float txt8 = Float.parseFloat(textField_8.getText());
-//		homeDecB.deleteAllEntities(); 
-//		homeDecB.agregar(new DeduccionB(txt5, txt6, txt7, txt8));
-//		mostrarDatosEnPantallaDeduccionB();
-//	}
-//	
-//	private void botonAceptarAccionC() {
-//		validarFloat(textField_9,"Cuota Médico Asistencial");
-//		Float txt9 = Float.parseFloat(textField_9.getText());
-//		validarFloat(textField_10,"Honorarios Medicos");
-//		Float txt10 = Float.parseFloat(textField_10.getText());
-//		validarFloat(textField_11,"Donaciones");
-//		Float txt11 = Float.parseFloat(textField_11.getText());
-//		validarFloat(textField_12,"Imp al Cheque sobre créditos");
-//		Float txt12 = Float.parseFloat(textField_12.getText());
-//		validarFloat(textField_13,"Deducción imp. cheque sobre Cred");
-//		Float txt13 = Float.parseFloat(textField_13.getText());
-//		homeDecC.deleteAllEntities(); 
-//		homeDecC.agregar(new DeduccionC(txt9, txt10, txt11, txt12, txt13));
-//		mostrarDatosEnPantallaDeduccionC();
-//	}
-//	
-//	private void botonEditarAccionAnual() {
-//		try{
-//			 new EditarTablaCalculoAnual(homeDecAnual.getWithId((tablaDeAnual.getSelectedRow())), homeDecAnual); 
-//		}	
-//		catch(Exception e){
-//			JOptionPane.showMessageDialog(frmImpuestoALas, "Seleccione la fila primero",
-//					"Mensaje", JOptionPane.ERROR_MESSAGE);
-//		}
-//	}
+	public void mostrarDatosEnPantallaDeduccionA() {
+		DeduccionA deduccionA = homeDecA.getFirst();
+		textField.setText(Float.toString(deduccionA.getMin_no_imp()));
+		textField_1.setText(Float.toString(deduccionA.getDedu_espe()));
+		textField_2.setText(Float.toString(deduccionA.getConyuge()));
+		textField_3.setText(Float.toString(deduccionA.getHijos()));
+		textField_4.setText(Float.toString(deduccionA.getOtros()));
+
+	}
 	
+	public void mostrarDatosEnPantallaDeduccionB() {
+		DeduccionB deduccionB = homeDecB.getFirst();
+		textField_5.setText(Float.toString(deduccionB.getGast_sepe_anu()));
+		textField_6.setText(Float.toString(deduccionB.getSeg_vida_anu()));
+		textField_7.setText(Float.toString(deduccionB.getServ_dom_anu()));
+		textField_8.setText(Float.toString(deduccionB.getInt_cred_hip_anu()));
+
+	}
+	public void mostrarDatosEnPantallaDeduccionC() {
+		DeduccionC deduccionC = homeDecC.getFirst();
+		textField_9.setText(Float.toString(deduccionC.getCout_med_asist_anu()));
+		textField_10.setText(Float.toString(deduccionC.getHonor_med_anu()));
+		textField_11.setText(Float.toString(deduccionC.getDonac_anu()));
+		textField_12.setText(Float.toString(deduccionC.getImp_cheq_cred_anu()));
+		textField_13.setText(Float.toString(deduccionC.getDeb_total_imp_cheq_cred_anu()));
+	}
 	
+	private void botonCancelarAccionA() {
+		mostrarDatosEnPantallaDeduccionA();
+	}
+	
+	private void botonCancelarAccionB() {
+		mostrarDatosEnPantallaDeduccionB(); 
+	}
+	
+	private void botonCancelarAccionC() {
+		mostrarDatosEnPantallaDeduccionC();
+	}
+	
+	private void botonAceptarAccionA() {
+		validarFloat(textField,"Mínimo no imponible");
+		Float txt0 = Float.parseFloat(textField.getText());
+		validarFloat(textField_1,"Deducci\u00F3n especal");
+		Float txt1 = Float.parseFloat(textField_1.getText());
+		validarFloat(textField_2,"Tope anual por conyuge");
+		Float txt2 = Float.parseFloat(textField_2.getText());
+		validarFloat(textField_3,"Tope anual por hijos");
+		Float txt3 = Float.parseFloat(textField_3.getText());
+		validarFloat(textField_4,"Tope anual por persona a cargo");
+		Float txt4 = Float.parseFloat(textField_4.getText());
+		homeDecA.deleteAllEntities(); //es mas limpio, total hay una sola fila
+		homeDecA.agregar(new DeduccionA(txt0, txt1, txt2, txt3, txt4));
+		mostrarDatosEnPantallaDeduccionA();
+	}
+	
+
+
+	private void botonAceptarAccionB() {
+		validarFloat(textField_5,"Tope anual gastos de sepelio");
+		Float txt5 = Float.parseFloat(textField_5.getText());
+		validarFloat(textField_6,"Tope anual seguro de vida");
+		Float txt6 = Float.parseFloat(textField_6.getText());
+		validarFloat(textField_7,"Tope anual servicio domestico");
+		Float txt7 = Float.parseFloat(textField_7.getText());
+		validarFloat(textField_8,"Tope anual crédito hipotecario");
+		Float txt8 = Float.parseFloat(textField_8.getText());
+		homeDecB.deleteAllEntities(); 
+		homeDecB.agregar(new DeduccionB(txt5, txt6, txt7, txt8));
+		mostrarDatosEnPantallaDeduccionB();
+	}
+	
+	private void botonAceptarAccionC() {
+		validarFloat(textField_9,"Cuota Médico Asistencial");
+		Float txt9 = Float.parseFloat(textField_9.getText());
+		validarFloat(textField_10,"Honorarios Medicos");
+		Float txt10 = Float.parseFloat(textField_10.getText());
+		validarFloat(textField_11,"Donaciones");
+		Float txt11 = Float.parseFloat(textField_11.getText());
+		validarFloat(textField_12,"Imp al Cheque sobre créditos");
+		Float txt12 = Float.parseFloat(textField_12.getText());
+		validarFloat(textField_13,"Deducción imp. cheque sobre Cred");
+		Float txt13 = Float.parseFloat(textField_13.getText());
+		homeDecC.deleteAllEntities(); 
+		homeDecC.agregar(new DeduccionC(txt9, txt10, txt11, txt12, txt13));
+		mostrarDatosEnPantallaDeduccionC();
+	}
+	
+	private void botonEditarAccionAnual() {
+		try{
+			 new EditarTablaCalculoAnual(homeDecAnual.getWithId((tableAnual.getSelectedRow())), homeDecAnual); 
+		}	
+		catch(Exception e){
+			JOptionPane.showMessageDialog(frmImpuestoALas, "Seleccione la fila primero",
+					"Mensaje", JOptionPane.ERROR_MESSAGE);
+		}
+	}
 	
 	private void validarFloat(JTextField texto, String campo){
 		try{
