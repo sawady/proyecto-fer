@@ -20,6 +20,7 @@ import model.entities.CamposParaCalculoAnual;
 import model.entities.DeduccionA;
 import model.entities.DeduccionB;
 import model.entities.DeduccionC;
+import model.entities.Empleado;
 import persistencia.HibernateApplication;
 import persistencia.hibernateHome.CamposParaCalculoAnualHibernateHome;
 import persistencia.hibernateHome.HibernateHome;
@@ -40,7 +41,8 @@ public class Vista {
 	
 	private CamposParaCalculoAnualHibernateHome homeDecAnual = (CamposParaCalculoAnualHibernateHome) HibernateApplication
 			.getInstance().getHome(CamposParaCalculoAnual.class);
-
+	private HibernateHome<Empleado> empleado = (HibernateHome<Empleado>) HibernateApplication
+			.getInstance().getHome(Empleado.class);
 	/**
 	 * Launch the application.
 	 */
@@ -61,10 +63,15 @@ public class Vista {
 	 * Create the application.
 	 */
 	public Vista() {	
-		homeDecAnual.agregar(new CamposParaCalculoAnual(new Float(0.00),new Float(10000.00),new Float(0.00),new Float(9),new Float(0.00)));
-		homeDecA.agregar(new DeduccionA(new Float(12960), new Float(62208), new Float(14400), new Float(7200), new Float(5400)));
-		homeDecB.agregar(new DeduccionB(new Float(996.23), new Float(996.23),new Float(12996.23),new Float(20000.00)));
-		homeDecC.agregar(new DeduccionC(new Float(5),new Float(5),new Float(5),new Float(0.06),new Float(35)));
+//		homeDecAnual.agregar(new CamposParaCalculoAnual(new Float(0.00),new Float(10000.00),new Float(0.00),new Float(9),new Float(0.00)));
+//		homeDecA.agregar(new DeduccionA(new Float(12960), new Float(62208), new Float(14400), new Float(7200), new Float(5400)));
+//		homeDecB.agregar(new DeduccionB(new Float(996.23), new Float(996.23),new Float(12996.23),new Float(20000.00)));
+//		homeDecC.agregar(new DeduccionC(new Float(5),new Float(5),new Float(5),new Float(0.06),new Float(35)));
+//		empleado.agregar(new Empleado());
+		
+		System.out.println(HibernateApplication.getInstance().getAllHomes());
+		System.out.println(homeDecAnual);
+		//System.out.println(homeDecAnual.getAllEntities());
 		initialize();
 		
 	}
