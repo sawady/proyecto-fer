@@ -12,6 +12,7 @@ import javax.swing.JButton;
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 
 import model.FormatoEmpleadoException;
 import model.ProcesoCalculoAutomatico;
@@ -106,16 +107,15 @@ public class Vista {
 				try {
 					new ProcesoCalculoAutomatico(file.getPath());
 				} catch (IOException e1) {
-					e1.printStackTrace();
-				} catch (SecurityException e1) {
-					// TODO Auto-generated catch block
+					JOptionPane.showMessageDialog(frmProgramaDeImpuesto, "No es posible guardar el archivo, compruebe que sea del formato correcto",
+							"Mensaje", JOptionPane.ERROR_MESSAGE);				} catch (SecurityException e1) {
 					e1.printStackTrace();
 				} catch (FormatoEmpleadoException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
+					JOptionPane.showMessageDialog(frmProgramaDeImpuesto, "No es posible guardar el archivo, compruebe que sea del formato correcto",
+							"Mensaje", JOptionPane.ERROR_MESSAGE);	
 				} catch (NoSuchMethodException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
+					JOptionPane.showMessageDialog(frmProgramaDeImpuesto, "No es posible guardar el archivo, compruebe que sea del formato correcto",
+							"Mensaje", JOptionPane.ERROR_MESSAGE);	
 				}
 
 			}
