@@ -20,6 +20,7 @@ import model.entities.CamposParaCalculoAnual;
 import model.entities.DeduccionA;
 import model.entities.DeduccionB;
 import model.entities.DeduccionC;
+import model.entities.Empleado;
 import persistencia.HibernateApplication;
 import persistencia.hibernateHome.CamposParaCalculoAnualHibernateHome;
 import persistencia.hibernateHome.HibernateHome;
@@ -57,7 +58,7 @@ public class ModificarTablas {
 	
 	private CamposParaCalculoAnualHibernateHome homeDecAnual = (CamposParaCalculoAnualHibernateHome) HibernateApplication
 			.getInstance().getHome(CamposParaCalculoAnual.class);
-
+	
 	/**
 	 * Create the application.
 	 */
