@@ -63,6 +63,9 @@ public class ModificarTablas {
 	 */
 	public ModificarTablas() {
 		initialize();
+		
+		
+		
 		this.mostrarDatosEnPantallaDeduccionA();
 		this.mostrarDatosEnPantallaDeduccionB();
 		this.mostrarDatosEnPantallaDeduccionC();

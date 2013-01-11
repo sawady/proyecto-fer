@@ -16,11 +16,30 @@ import javax.swing.JOptionPane;
 
 import model.FormatoEmpleadoException;
 import model.ProcesoCalculoAutomatico;
+import model.entities.CamposParaCalculoAnual;
+import model.entities.DeduccionA;
+import model.entities.DeduccionB;
+import model.entities.DeduccionC;
+import persistencia.HibernateApplication;
+import persistencia.hibernateHome.CamposParaCalculoAnualHibernateHome;
+import persistencia.hibernateHome.HibernateHome;
 
 public class Vista {
 
 	private JFrame frmProgramaDeImpuesto;
 	private JFileChooser fileChooser = new JFileChooser();
+	
+	private HibernateHome<DeduccionA> homeDecA = (HibernateHome<DeduccionA>) HibernateApplication
+			.getInstance().getHome(DeduccionA.class);
+	
+	private HibernateHome<DeduccionB> homeDecB = (HibernateHome<DeduccionB>) HibernateApplication
+			.getInstance().getHome(DeduccionB.class);
+	
+	private HibernateHome<DeduccionC> homeDecC = (HibernateHome<DeduccionC>) HibernateApplication
+			.getInstance().getHome(DeduccionC.class);
+	
+	private CamposParaCalculoAnualHibernateHome homeDecAnual = (CamposParaCalculoAnualHibernateHome) HibernateApplication
+			.getInstance().getHome(CamposParaCalculoAnual.class);
 
 	/**
 	 * Launch the application.
@@ -41,8 +60,13 @@ public class Vista {
 	/**
 	 * Create the application.
 	 */
-	public Vista() {
+	public Vista() {	
+		homeDecAnual.agregar(new CamposParaCalculoAnual(new Float(0.00),new Float(10000.00),new Float(0.00),new Float(9),new Float(0.00)));
+		homeDecA.agregar(new DeduccionA(new Float(12960), new Float(62208), new Float(14400), new Float(7200), new Float(5400)));
+		homeDecB.agregar(new DeduccionB(new Float(996.23), new Float(996.23),new Float(12996.23),new Float(20000.00)));
+		homeDecC.agregar(new DeduccionC(new Float(5),new Float(5),new Float(5),new Float(0.06),new Float(35)));
 		initialize();
+		
 	}
 
 
