@@ -9,8 +9,8 @@ public class ToDo {
 // metodos calculo (listo)
 
 // manejo file excel 
-	// lectura y carga a BBDD(progress)
-	// escritura
-// vista(progress)
+	// lectura y carga a BBDD(listo)
+	// escritura(listo)
+// vista(listo)
 	
 }
