@@ -25,7 +25,6 @@ import model.entities.DeduccionC;
 import persistencia.HibernateApplication;
 import persistencia.hibernateHome.CamposParaCalculoAnualHibernateHome;
 import persistencia.hibernateHome.HibernateHome;
-import java.awt.Component;
 
 
 public class ModificarTablas {
