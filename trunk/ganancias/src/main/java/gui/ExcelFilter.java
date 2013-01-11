@@ -10,7 +10,7 @@ public class ExcelFilter  extends FileFilter {
 
  
     
-    // Accept all directories and all gif, jpg, or tiff files.
+    // Accept all directories and all xls or xlsx files.
     public boolean accept(File f) {
 
         if (f.isDirectory()) {

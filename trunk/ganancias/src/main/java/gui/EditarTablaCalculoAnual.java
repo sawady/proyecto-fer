@@ -53,7 +53,6 @@ public class EditarTablaCalculoAnual extends JFrame {
 		desktopPane.add(label);
 		
 		textField = new JTextField();
-		textField.setText("0.0");
 		textField.setColumns(10);
 		textField.setBounds(310, 41, 138, 20);
 		desktopPane.add(textField);
@@ -63,7 +62,6 @@ public class EditarTablaCalculoAnual extends JFrame {
 		desktopPane.add(label_1);
 		
 		textField_1 = new JTextField();
-		textField_1.setText("0.0");
 		textField_1.setColumns(10);
 		textField_1.setBounds(310, 80, 138, 20);
 		desktopPane.add(textField_1);
@@ -73,7 +71,6 @@ public class EditarTablaCalculoAnual extends JFrame {
 		desktopPane.add(label_2);
 		
 		textField_2 = new JTextField();
-		textField_2.setText("0.0");
 		textField_2.setColumns(10);
 		textField_2.setBounds(310, 124, 138, 20);
 		desktopPane.add(textField_2);
@@ -83,7 +80,6 @@ public class EditarTablaCalculoAnual extends JFrame {
 		desktopPane.add(label_3);
 		
 		textField_3 = new JTextField();
-		textField_3.setText("0.0");
 		textField_3.setColumns(10);
 		textField_3.setBounds(310, 166, 138, 20);
 		desktopPane.add(textField_3);
@@ -93,7 +89,6 @@ public class EditarTablaCalculoAnual extends JFrame {
 		desktopPane.add(label_4);
 		
 		textField_4 = new JTextField();
-		textField_4.setText("0.0");
 		textField_4.setColumns(10);
 		textField_4.setBounds(310, 206, 138, 20);
 		desktopPane.add(textField_4);
