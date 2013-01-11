@@ -3,8 +3,6 @@ package gui;
 import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.LinkedList;
-import java.util.List;
 
 import javax.swing.JButton;
 import javax.swing.JDesktopPane;
@@ -308,10 +306,10 @@ public class ModificarTablas {
 		//tabla
 		this.tableModel = new TableModelAnual();
 		tableAnual = new JTable(tableModel);
-		List<CamposParaCalculoAnual>lista = new LinkedList<CamposParaCalculoAnual>();
-		lista.add(new CamposParaCalculoAnual(1, 2, 3, 5, 6));
-		//this.tableModel.actualizarme(homeDecAnual.getAllEntities());
-		this.tableModel.actualizarme(lista);
+		//List<CamposParaCalculoAnual>lista = new LinkedList<CamposParaCalculoAnual>();
+		//lista.add(new CamposParaCalculoAnual(1, 2, 3, 5, 6));
+		this.tableModel.actualizarme(homeDecAnual.getAllEntities());
+		//this.tableModel.actualizarme(lista);
 		this.tableModel.addColumn( "Ganancia neta imponible Desde");
 		this.tableModel.addColumn( "Ganancia neta imponible Hasta");
 		this.tableModel.addColumn( "Base que se debe pagar");
