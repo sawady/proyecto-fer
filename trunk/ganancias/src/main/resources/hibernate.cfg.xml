@@ -7,17 +7,17 @@
 	<session-factory>
 		<!-- Datos de conexión -->
 		<property name="connection.driver_class">
-			com.microsoft.sqlserver.jdbc.SQLServerDriver</property>
+			com.mysql.jdbc.Driver</property>
 		<property name="connection.url">
-			jdbc:sqlserver://localhost;databaseName=ejemplo
+			jdbc:mysql://desarrollo.cdt.com.ar:3306/ganancias_desarrollo
 		</property>
-		<property name="connection.username">root</property>
-		<property name="connection.password">root</property>
+		<property name="connection.username">factory</property>
+		<property name="connection.password">estabalocaMMM</property>
 		<!-- Actualiza estructura -->
 		<property name="hibernate.hbm2ddl.auto">update</property>
 
 		<!-- la comunicacion con la bbdd -->
-		<property name="dialect">org.hibernate.dialect.SQLServerDialect</property>
+		<property name="dialect">org.hibernate.dialect.MySQLDialect</property>
 		<!-- para MySQL: org.hibernate.dialect.MySQLDialect -->
 
 		<!-- Para que muestre las querys que se van haciendo -->
@@ -25,12 +25,12 @@
 
 		<!-- aca irían todas las configuraciones que vamos a ver en el siguiente 
 			paso -->
-		<mapping resource="CamposParaCalculoAnual.hbm.xml" />
-		<mapping resource="DeduccionA.hbm.xml" />
-		<mapping resource="DeduccionB.hbm.xml" />
-		<mapping resource="DeduccionC.hbm.xml" />
-		<mapping resource="Empleado.hbm.xml" />
-		<mapping resource="ResultadoDeCalculo.hbm.xml" />
+		<mapping resource="hibernate/model/entities/CamposParaCalculoAnual.hbm.xml" />
+		<mapping resource="hibernate/model/entities/DeduccionA.hbm.xml" />
+		<mapping resource="hibernate/model/entities/DeduccionB.hbm.xml" />
+		<mapping resource="hibernate/model/entities/DeduccionC.hbm.xml" />
+		<mapping resource="hibernate/model/entities/Empleado.hbm.xml" />
+		<mapping resource="hibernate/model/entities/ResultadoDeCalculo.hbm.xml" />
 
 	</session-factory>
 </hibernate-configuration>

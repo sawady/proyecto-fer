@@ -2,9 +2,9 @@
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
 
-<hibernate-mapping package="ar.com.cdt.ganancias.model.entities">
+<hibernate-mapping package="model.entities">
 	<class name="DeduccionA">
-		<id name="idDeduccionA" type="long" unsaved-value="0">
+		<id name="id" type="long" unsaved-value="0">
 			<generator class="native" />
 		</id>
 		<property name="min_no_imp" type="float" />
