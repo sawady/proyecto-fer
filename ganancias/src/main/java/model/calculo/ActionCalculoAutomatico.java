@@ -51,12 +51,14 @@ public class ActionCalculoAutomatico implements Action {
 		HibernateHome<DeduccionC> temporal2 = (HibernateHome<DeduccionC>) HibernateApplication
 				.getInstance().getHome(DeduccionC.class);
 		this.deduccionC = temporal2.getFirst();
-		listaDeEmpleados = homeEmpleado.getAllEntities();
 		this.proceso(this.ruta);
 	}
 
 	public void proceso(String ruta) {
-		read.leerArchivo(ruta);
+		List<Empleado> empleados = read.leerArchivo(ruta);
+		for (Empleado e: empleados){
+			homeEmpleado.agregar(e);
+		}
 		this.generarResultados();
 		WriteExcel w = new WriteExcel(homeDeResultados.getAllEntities());
 		w.write();
@@ -64,6 +66,7 @@ public class ActionCalculoAutomatico implements Action {
 	}
 
 	private void generarResultados() {
+		listaDeEmpleados = homeEmpleado.getAllEntities();
 		for (Empleado e : listaDeEmpleados) {
 			ResultadoDeCalculo r = new ResultadoDeCalculo();
 			r.setCUIL(e.getCUIL());
