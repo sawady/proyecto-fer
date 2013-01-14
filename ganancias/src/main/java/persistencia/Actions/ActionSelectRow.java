@@ -7,11 +7,11 @@ import persistencia.hibernateHome.CamposParaCalculoAnualHibernateHome;
 public class ActionSelectRow implements Action{
 	private int id;
 	private CamposParaCalculoAnual result;
-
+	private Float value;
 	
-	public ActionSelectRow(int id) {
+	public ActionSelectRow(Float valueAt) {
 		super();
-		this.id = id;
+		this.value = valueAt;
 	}
 
 
@@ -19,9 +19,8 @@ public class ActionSelectRow implements Action{
 	public void execute() {
 		CamposParaCalculoAnualHibernateHome homeDecAnual = (CamposParaCalculoAnualHibernateHome) HibernateApplication
 				.getInstance().getHome(CamposParaCalculoAnual.class);	
-		this.setResult(homeDecAnual.getWithId(id));
+		this.setResult(homeDecAnual.getByDesde(this.value));
 	}
-
 
 	public int getId() {
 		return id;

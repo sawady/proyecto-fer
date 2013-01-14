@@ -286,23 +286,12 @@ public class ModificarTablas {
 		JDesktopPane desktopPane_3 = new JDesktopPane();
 		desktopPane_3.setBackground(UIManager.getColor("ScrollBar.thumbHighlight"));
 		tabbedPane.addTab("Impuesto Anual", null, desktopPane_3, null);
-
-	
-		JButton btnGuardar_2 = new JButton("Editar Fila");
-		btnGuardar_2.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				botonEditarAccionAnual();
-			}
-		});
-		btnGuardar_2.setBounds(466, 280, 118, 23);
-		desktopPane_3.add(btnGuardar_2);
 		
 		//tabla
 		this.tableModel = new TableModelAnual();
 		tableAnual = new JTable(tableModel);
 		ActionTraerTodosAnual action = new ActionTraerTodosAnual();
 		HibernateApplication.getInstance().execute(action);
-		this.tableModel.actualizarme(action.getResult());
 		this.tableModel.addColumn( "Desde");
 		this.tableModel.addColumn( "Hasta");
 		this.tableModel.addColumn( "Base");
@@ -311,9 +300,9 @@ public class ModificarTablas {
 		
 		tableModel.actualizarme(action.getResult());
 		JScrollPane scrollPane = new JScrollPane(tableAnual);
-		scrollPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
+		//scrollPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
 		//scrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_ALWAYS);
-		scrollPane.setBounds(15, 12, 569, 266);
+		scrollPane.setBounds(15, 12, 569, 131);
 		desktopPane_3.add(scrollPane);
 	}
 	
@@ -413,20 +402,21 @@ public class ModificarTablas {
 		mostrarDatosEnPantallaDeduccionC();
 	}
 	
-	private void botonEditarAccionAnual() {
-		try{
-			ActionSelectRow action = new ActionSelectRow(tableAnual.getSelectedRow());
-			HibernateApplication.getInstance().execute(action);
-			if (action.getResult()== null){
-				throw new Exception();
-			}
-			 new EditarTablaCalculoAnual(action.getResult()); 
-		}	
-		catch(Exception e){
-			JOptionPane.showMessageDialog(frmImpuestoALas, "Seleccione la fila primero",
-					"Mensaje", JOptionPane.ERROR_MESSAGE);
-		}
-	}
+//	private void botonEditarAccionAnual() {
+//		try{
+//			ActionSelectRow action = new ActionSelectRow(
+//			(Float) tableAnual.getModel().getValueAt(tableAnual.getSelectedRow(), 0));
+//			HibernateApplication.getInstance().execute(action);
+//			if (action.getResult()== null){
+//				throw new Exception();
+//			}
+//			 new EditarTablaCalculoAnual(action.getResult()); 
+//		}	
+//		catch(Exception e){
+//			JOptionPane.showMessageDialog(frmImpuestoALas, "Seleccione la fila primero",
+//					"Mensaje", JOptionPane.ERROR_MESSAGE);
+//		}
+//	}
 	
 	private void validarFloat(JTextField texto, String campo){
 		try{
