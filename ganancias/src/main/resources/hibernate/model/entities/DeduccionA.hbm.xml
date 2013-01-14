@@ -4,7 +4,7 @@
 
 <hibernate-mapping package="model.entities">
 	<class name="DeduccionA">
-		<id name="id" type="long" unsaved-value="0">
+		<id name="id" type="int" unsaved-value="0">
 			<generator class="native" />
 		</id>
 		<property name="min_no_imp" type="float" />
