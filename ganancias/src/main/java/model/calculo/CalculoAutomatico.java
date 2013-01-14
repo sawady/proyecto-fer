@@ -2,12 +2,25 @@ package model.calculo;
 
 import java.util.Date;
 
+import persistencia.HibernateApplication;
+import persistencia.Actions.Action;
+import persistencia.hibernateHome.CamposParaCalculoAnualHibernateHome;
+import persistencia.hibernateHome.HibernateHome;
+
+import model.entities.CamposParaCalculoAnual;
+import model.entities.DeduccionA;
+import model.entities.DeduccionC;
 import model.entities.Empleado;
 
-public class CalculoAutomatico extends Calculo{
+public class CalculoAutomatico implements Action{
 	
 	private Empleado empleado;
 	private float rnif;
+	private DeduccionA deduccionA;
+	private DeduccionC deduccionC;
+	private CamposParaCalculoAnual calculo_anual;
+	private CamposParaCalculoAnualHibernateHome calculo_anual_home;
+
 
 	//constructor	
 	public CalculoAutomatico() {
@@ -23,7 +36,19 @@ public class CalculoAutomatico extends Calculo{
 
 	}
 	//metodos
-	
+
+	@Override
+	public void execute() {
+		calculo_anual_home = (CamposParaCalculoAnualHibernateHome) HibernateApplication
+				.getInstance().getHome(CamposParaCalculoAnual.class);
+		HibernateHome<DeduccionA> temporal = (HibernateHome<DeduccionA>) HibernateApplication
+				.getInstance().getHome(DeduccionA.class);
+		this.deduccionA = temporal.getFirst();
+		HibernateHome<DeduccionC> temporal2 = (HibernateHome<DeduccionC>) HibernateApplication
+				.getInstance().getHome(DeduccionC.class);
+		this.deduccionC = temporal2.getFirst();
+		
+	}
 	//ganancia neta A
 	public float gananciaNetaA(){
 		return this.getRnif() - this.deduccionesA();
@@ -122,8 +147,7 @@ public class CalculoAutomatico extends Calculo{
 	//ganancia neta
 	
 	public float gananciaNetaC(){
-		this.resultadoGananciaNetaC = this.gananciaNetaB() - this.auxGananciaNetaC();
-		return this.resultadoGananciaNetaC;
+		return this.gananciaNetaB() - this.auxGananciaNetaC();
 	}
 	
 	public float auxGananciaNetaC(){
@@ -137,7 +161,7 @@ public class CalculoAutomatico extends Calculo{
   	   this.calculo_anual =  this.calculo_anual_home.getByInRango(this.gananciaNetaC());
 		return (this.getCalculo_anual().getBase() 
 				+ ((this.getCalculo_anual().getPor_extra()
-				* (this.resultadoGananciaNetaC - this.getCalculo_anual().getSobre_exced()))/100)) - this.auxImpAPagarAnio(); 	
+				* (this.gananciaNetaC() - this.getCalculo_anual().getSobre_exced()))/100)) - this.auxImpAPagarAnio(); 	
 	}
 	
 	private float auxImpAPagarAnio() {
@@ -167,4 +191,38 @@ public class CalculoAutomatico extends Calculo{
 	public void setEmpleado(Empleado empleado) {
 		this.empleado = empleado;
 	}
+
+	public DeduccionA getDeduccionA() {
+		return deduccionA;
+	}
+
+	public void setDeduccionA(DeduccionA deduccionA) {
+		this.deduccionA = deduccionA;
+	}
+
+	public DeduccionC getDeduccionC() {
+		return deduccionC;
+	}
+
+	public void setDeduccionC(DeduccionC deduccionC) {
+		this.deduccionC = deduccionC;
+	}
+
+	public CamposParaCalculoAnual getCalculo_anual() {
+		return calculo_anual;
+	}
+
+	public void setCalculo_anual(CamposParaCalculoAnual calculo_anual) {
+		this.calculo_anual = calculo_anual;
+	}
+
+	public CamposParaCalculoAnualHibernateHome getCalculo_anual_home() {
+		return calculo_anual_home;
+	}
+
+	public void setCalculo_anual_home(
+			CamposParaCalculoAnualHibernateHome calculo_anual_home) {
+		this.calculo_anual_home = calculo_anual_home;
+	}
+	
 }

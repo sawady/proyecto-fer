@@ -14,6 +14,8 @@ import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.UIManager;
 
+import persistencia.HibernateApplication;
+
 public class CalculoManual {
 
 	private JFrame frmImpuestoALas;
@@ -242,17 +244,12 @@ public class CalculoManual {
 					JOptionPane.ERROR_MESSAGE);
 		} 	
 		else {
-			model.calculo.CalculoManual resultados = resultadosCalculoManual();
-			new ResultadosCalculoManual(new String(" "
-					+ resultados.gananciaNetaA()), new String(" "
-					+ resultados.gananciaNetaB()), new String(" "
-					+ resultados.gananciaNetaC()), new String(" "
-					+ resultados.impuestoAPagarEnElAnio()), new String(" "
-					+ resultados.impuestoAPagarPorMes()));
+			HibernateApplication.getInstance().execute(resultadosCalculoManual());
+			
 		}
 	}
 
-	private model.calculo.CalculoManual resultadosCalculoManual() {
+	private model.calculo.ActionCalculoManual resultadosCalculoManual() {
 		validarFloat(textField, "Remuneracion neta imponible");
 		Float rnif = Float.parseFloat(textField.getText());
 		validarInteger(textField_1,"Cantidad de hijos");
@@ -279,7 +276,7 @@ public class CalculoManual {
 		Float devExterior = Float.parseFloat(textField_11.getText());
 		Integer estadoCivil = comboBox.getSelectedIndex(); // 0 = soltero 1=
 															// casado
-		return new model.calculo.CalculoManual(rnif, estadoCivil, cantHijos,
+		return new model.calculo.ActionCalculoManual(rnif, estadoCivil, cantHijos,
 				persACargo, gastSepe, segVida, donaciones, coutMedAsis,
 				honorariosMed, intCredHip, servDom, impSobreCred, devExterior);
 
