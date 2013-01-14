@@ -16,33 +16,30 @@ import javax.swing.JOptionPane;
 
 import model.FormatoEmpleadoException;
 import model.ProcesoCalculoAutomatico;
-import model.entities.CamposParaCalculoAnual;
-import model.entities.DeduccionA;
-import model.entities.DeduccionB;
-import model.entities.DeduccionC;
-import model.entities.Empleado;
-import persistencia.HibernateApplication;
-import persistencia.hibernateHome.CamposParaCalculoAnualHibernateHome;
-import persistencia.hibernateHome.HibernateHome;
 
 public class Vista {
 
 	private JFrame frmProgramaDeImpuesto;
 	private JFileChooser fileChooser = new JFileChooser();
-	
-	private HibernateHome<DeduccionA> homeDecA = (HibernateHome<DeduccionA>) HibernateApplication
-			.getInstance().getHome(DeduccionA.class);
-	
-	private HibernateHome<DeduccionB> homeDecB = (HibernateHome<DeduccionB>) HibernateApplication
-			.getInstance().getHome(DeduccionB.class);
-	
-	private HibernateHome<DeduccionC> homeDecC = (HibernateHome<DeduccionC>) HibernateApplication
-			.getInstance().getHome(DeduccionC.class);
-	
-	private CamposParaCalculoAnualHibernateHome homeDecAnual = (CamposParaCalculoAnualHibernateHome) HibernateApplication
-			.getInstance().getHome(CamposParaCalculoAnual.class);
-	private HibernateHome<Empleado> empleado = (HibernateHome<Empleado>) HibernateApplication
-			.getInstance().getHome(Empleado.class);
+
+	// private HibernateHome<DeduccionA> homeDecA = (HibernateHome<DeduccionA>)
+	// HibernateApplication
+	// .getInstance().getHome(DeduccionA.class);
+	//
+	// private HibernateHome<DeduccionB> homeDecB = (HibernateHome<DeduccionB>)
+	// HibernateApplication
+	// .getInstance().getHome(DeduccionB.class);
+	//
+	// private HibernateHome<DeduccionC> homeDecC = (HibernateHome<DeduccionC>)
+	// HibernateApplication
+	// .getInstance().getHome(DeduccionC.class);
+	//
+	// private CamposParaCalculoAnualHibernateHome homeDecAnual =
+	// (CamposParaCalculoAnualHibernateHome) HibernateApplication
+	// .getInstance().getHome(CamposParaCalculoAnual.class);
+	// private HibernateHome<Empleado> empleado = (HibernateHome<Empleado>)
+	// HibernateApplication
+	// .getInstance().getHome(Empleado.class);
 	/**
 	 * Launch the application.
 	 */
@@ -62,27 +59,31 @@ public class Vista {
 	/**
 	 * Create the application.
 	 */
-	public Vista() {	
-//		homeDecAnual.agregar(new CamposParaCalculoAnual(new Float(0.00),new Float(10000.00),new Float(0.00),new Float(9),new Float(0.00)));
-//		homeDecA.agregar(new DeduccionA(new Float(12960), new Float(62208), new Float(14400), new Float(7200), new Float(5400)));
-//		homeDecB.agregar(new DeduccionB(new Float(996.23), new Float(996.23),new Float(12996.23),new Float(20000.00)));
-//		homeDecC.agregar(new DeduccionC(new Float(5),new Float(5),new Float(5),new Float(0.06),new Float(35)));
-//		empleado.agregar(new Empleado());
-		
-		System.out.println(HibernateApplication.getInstance().getAllHomes());
-		System.out.println(homeDecAnual);
-		//System.out.println(homeDecAnual.getAllEntities());
-		initialize();
-		
-	}
+	public Vista() {
+		// homeDecAnual.agregar(new CamposParaCalculoAnual(new Float(0.00),new
+		// Float(10000.00),new Float(0.00),new Float(9),new Float(0.00)));
+		// homeDecA.agregar(new DeduccionA(new Float(12960), new Float(62208),
+		// new Float(14400), new Float(7200), new Float(5400)));
+		// homeDecB.agregar(new DeduccionB(new Float(996.23), new
+		// Float(996.23),new Float(12996.23),new Float(20000.00)));
+		// homeDecC.agregar(new DeduccionC(new Float(5),new Float(5),new
+		// Float(5),new Float(0.06),new Float(35)));
+		// empleado.agregar(new Empleado());
 
+		// System.out.println(HibernateApplication.getInstance().getAllHomes());
+		// System.out.println(homeDecAnual);
+		// System.out.println(homeDecAnual.getAllEntities());
+		initialize();
+
+	}
 
 	/**
 	 * Initialize the contents of the frame.
 	 */
 	private void initialize() {
 		frmProgramaDeImpuesto = new JFrame();
-		frmProgramaDeImpuesto.getContentPane().setBackground(new Color(176, 196, 222));
+		frmProgramaDeImpuesto.getContentPane().setBackground(
+				new Color(176, 196, 222));
 		frmProgramaDeImpuesto.setTitle("Programa de impuesto a las ganancias.");
 		frmProgramaDeImpuesto.setBounds(100, 100, 781, 433);
 		frmProgramaDeImpuesto.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -138,15 +139,25 @@ public class Vista {
 				try {
 					new ProcesoCalculoAutomatico(file.getPath());
 				} catch (IOException e1) {
-					JOptionPane.showMessageDialog(frmProgramaDeImpuesto, "No es posible guardar el archivo, compruebe que sea del formato correcto",
-							"Mensaje", JOptionPane.ERROR_MESSAGE);				} catch (SecurityException e1) {
+					JOptionPane
+							.showMessageDialog(
+									frmProgramaDeImpuesto,
+									"No es posible guardar el archivo, compruebe que sea del formato correcto",
+									"Mensaje", JOptionPane.ERROR_MESSAGE);
+				} catch (SecurityException e1) {
 					e1.printStackTrace();
 				} catch (FormatoEmpleadoException e1) {
-					JOptionPane.showMessageDialog(frmProgramaDeImpuesto, "No es posible guardar el archivo, compruebe que sea del formato correcto",
-							"Mensaje", JOptionPane.ERROR_MESSAGE);	
+					JOptionPane
+							.showMessageDialog(
+									frmProgramaDeImpuesto,
+									"No es posible guardar el archivo, compruebe que sea del formato correcto",
+									"Mensaje", JOptionPane.ERROR_MESSAGE);
 				} catch (NoSuchMethodException e1) {
-					JOptionPane.showMessageDialog(frmProgramaDeImpuesto, "No es posible guardar el archivo, compruebe que sea del formato correcto",
-							"Mensaje", JOptionPane.ERROR_MESSAGE);	
+					JOptionPane
+							.showMessageDialog(
+									frmProgramaDeImpuesto,
+									"No es posible guardar el archivo, compruebe que sea del formato correcto",
+									"Mensaje", JOptionPane.ERROR_MESSAGE);
 				}
 
 			}

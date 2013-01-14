@@ -1,7 +1,15 @@
 package model.calculo;
 
+import gui.ResultadosCalculoManual;
+import model.entities.CamposParaCalculoAnual;
+import model.entities.DeduccionA;
+import model.entities.DeduccionC;
+import persistencia.HibernateApplication;
+import persistencia.Actions.Action;
+import persistencia.hibernateHome.CamposParaCalculoAnualHibernateHome;
+import persistencia.hibernateHome.HibernateHome;
 
-public class CalculoManual extends Calculo{
+public class ActionCalculoManual implements Action {
 	private float remuneracion_neta_imponible = 0;
 	private int estado_civil = 0;
 	private int cant_hijos = 0;
@@ -15,22 +23,23 @@ public class CalculoManual extends Calculo{
 	private float servicios_domesticos = 0;
 	private float impuesto_al_cheque_sobre_creditos = 0;
 	private float monto_devolucion_al_exterior = 0;
+	private DeduccionA deduccionA;
+	private DeduccionC deduccionC;
+	private CamposParaCalculoAnual calculo_anual;
+	private CamposParaCalculoAnualHibernateHome calculo_anual_home;
 
-	
-	//constructor
-	public CalculoManual() {
-		super();
+	public ActionCalculoManual() {
+
 	}
-	
-	public CalculoManual(float remuneracion_neta_imponible, int estado_civil,
-			int cant_hijos, int cant_personas_a_cargo, float gastos_sepelio,
-			float seguro_de_vida, float donaciones,
+
+	public ActionCalculoManual(float remuneracion_neta_imponible,
+			int estado_civil, int cant_hijos, int cant_personas_a_cargo,
+			float gastos_sepelio, float seguro_de_vida, float donaciones,
 			float cuotas_medico_asistenciales, float honorarios_medicos,
 			float intereses_por_credito_hipotecario,
 			float servicios_domesticos,
 			float impuesto_al_cheque_sobre_creditos,
-			float monto_devolucion_al_exterior
-			) {
+			float monto_devolucion_al_exterior) {
 		super();
 		this.remuneracion_neta_imponible = remuneracion_neta_imponible;
 		this.estado_civil = estado_civil;
@@ -46,6 +55,29 @@ public class CalculoManual extends Calculo{
 		this.impuesto_al_cheque_sobre_creditos = impuesto_al_cheque_sobre_creditos;
 		this.monto_devolucion_al_exterior = monto_devolucion_al_exterior;
 	}
+
+	@Override
+	public void execute() {
+		// homes
+		calculo_anual_home = (CamposParaCalculoAnualHibernateHome) HibernateApplication
+				.getInstance().getHome(CamposParaCalculoAnual.class);
+		HibernateHome<DeduccionA> temporal = (HibernateHome<DeduccionA>) HibernateApplication
+				.getInstance().getHome(DeduccionA.class);
+		this.deduccionA = temporal.getFirst();
+		HibernateHome<DeduccionC> temporal2 = (HibernateHome<DeduccionC>) HibernateApplication
+				.getInstance().getHome(DeduccionC.class);
+		this.deduccionC = temporal2.getFirst();
+
+		// dialog
+		new ResultadosCalculoManual(new String(" " + this.gananciaNetaA()),
+				new String(" " + this.gananciaNetaB()), new String(" "
+						+ this.gananciaNetaC()), new String(" "
+						+ this.impuestoAPagarEnElAnio()), new String(" "
+						+ this.impuestoAPagarPorMes()));
+
+	}
+
+	// constructor
 
 	// Ganancia Neta A
 	public float gananciaNetaA() {
@@ -75,57 +107,62 @@ public class CalculoManual extends Calculo{
 	}
 
 	private float calculoDeduccionesGananciaB() {
-		return (this.auxiliarMedASist() / 100 ) + ( this.auxDonanciones() / 100);
+		return (this.auxiliarMedASist() / 100) + (this.auxDonanciones() / 100);
 	}
-	
+
 	private float auxDonanciones() {
 		return this.getDonaciones() * this.getDeduccionC().getDonac_anu();
 	}
 
-	private float auxiliarMedASist(){
-		return this.getCuotas_medico_asistenciales()* this.getDeduccionC().getCout_med_asist_anu();
+	private float auxiliarMedASist() {
+		return this.getCuotas_medico_asistenciales()
+				* this.getDeduccionC().getCout_med_asist_anu();
 	}
+
 	// Ganancia Neta C
 	public float gananciaNetaC() {
-		 this.resultadoGananciaNetaC = this.gananciaNetaB() - this.calculoDeduccionesGananciaC();
-		 return this.resultadoGananciaNetaC;
+		return this.gananciaNetaB() - this.calculoDeduccionesGananciaC();
 	}
 
 	private float calculoDeduccionesGananciaC() {
 		return this.auxHonorMedic() + this.auxCheq();
 	}
-	
-	
+
 	private float auxCheq() {
-		return (this.getHonorarios_medicos() * this.getDeduccionC().getHonor_med_anu())/100;
+		return (this.getHonorarios_medicos() * this.getDeduccionC()
+				.getHonor_med_anu()) / 100;
 	}
 
 	private float auxHonorMedic() {
-		return 	(((this.impuesto_al_cheque_sobre_creditos * this.getDeduccionC().getImp_cheq_cred_anu())/100) * this.getDeduccionC().getDeb_total_imp_cheq_cred_anu())/100	;
+		return (((this.impuesto_al_cheque_sobre_creditos * this.getDeduccionC()
+				.getImp_cheq_cred_anu()) / 100) * this.getDeduccionC()
+				.getDeb_total_imp_cheq_cred_anu()) / 100;
 	}
 
-	//impuesto a pagar en el año
-	public float impuestoAPagarEnElAnio(){
-  	   this.calculo_anual =  this.calculo_anual_home.getByInRango(this.gananciaNetaC());
-		return (this.getCalculo_anual().getBase() 
-				+ ((this.getCalculo_anual().getPor_extra()
-				* (this.resultadoGananciaNetaC - this.getCalculo_anual().getSobre_exced()))/100))-this.getMonto_devolucion_al_exterior(); 	
+	// impuesto a pagar en el año
+	public float impuestoAPagarEnElAnio() {
+		this.calculo_anual = this.calculo_anual_home.getByInRango(this
+				.gananciaNetaC());
+		return (this.getCalculo_anual().getBase() + ((this.getCalculo_anual()
+				.getPor_extra() * (this.gananciaNetaC() - this
+				.getCalculo_anual().getSobre_exced())) / 100))
+				- this.getMonto_devolucion_al_exterior();
 	}
-	
+
 	// impuesto a pagar por mes
-	public float impuestoAPagarPorMes(){
-		return this.impuestoAPagarEnElAnio()/12;
+	public float impuestoAPagarPorMes() {
+		return this.impuestoAPagarEnElAnio() / 12;
 	}
 
 	// GET & SET
-	
+
 	public float getDonaciones() {
 		return donaciones;
 	}
+
 	public void setDonaciones(float donaciones) {
 		this.donaciones = donaciones;
 	}
-
 
 	public float getRemuneracion_neta_imponible() {
 		return remuneracion_neta_imponible;
@@ -225,4 +262,38 @@ public class CalculoManual extends Calculo{
 			float monto_devolucion_al_exterior) {
 		this.monto_devolucion_al_exterior = monto_devolucion_al_exterior;
 	}
+
+	public DeduccionA getDeduccionA() {
+		return deduccionA;
+	}
+
+	public void setDeduccionA(DeduccionA deduccionA) {
+		this.deduccionA = deduccionA;
+	}
+
+	public DeduccionC getDeduccionC() {
+		return deduccionC;
+	}
+
+	public void setDeduccionC(DeduccionC deduccionC) {
+		this.deduccionC = deduccionC;
+	}
+
+	public CamposParaCalculoAnual getCalculo_anual() {
+		return calculo_anual;
+	}
+
+	public void setCalculo_anual(CamposParaCalculoAnual calculo_anual) {
+		this.calculo_anual = calculo_anual;
+	}
+
+	public CamposParaCalculoAnualHibernateHome getCalculo_anual_home() {
+		return calculo_anual_home;
+	}
+
+	public void setCalculo_anual_home(
+			CamposParaCalculoAnualHibernateHome calculo_anual_home) {
+		this.calculo_anual_home = calculo_anual_home;
+	}
+
 }
