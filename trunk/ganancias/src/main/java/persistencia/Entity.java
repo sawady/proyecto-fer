@@ -13,9 +13,9 @@ public abstract class Entity implements Persistible{
 		public Entity() {		
 		}
 
-		public Entity(int id) {
-			this.id = id;
-		}
+//		public Entity(int id) {
+//			this.id = id;
+//		}
 		
 /* GET&SET***************************************************/
 

@@ -12,7 +12,7 @@ public class CamposParaCalculoAnualHibernateHome extends
 	}
 
 	public CamposParaCalculoAnual getByInRango(float gananciaNetaC) {
-		CamposParaCalculoAnual  retorno = new CamposParaCalculoAnual();
+		CamposParaCalculoAnual  retorno = null;
 		for (CamposParaCalculoAnual  a :this.getAllEntities()){
 			if(a.getDesde()<= gananciaNetaC && a.getHasta()>=gananciaNetaC){
 				retorno =a;

@@ -5,7 +5,7 @@ import persistencia.HibernateApplication;
 import persistencia.hibernateHome.HibernateHome;
 
 public class ActionEditarDeduccionA implements Action {
-	private HibernateHome<DeduccionA> homeDecAnual;
+	private HibernateHome<DeduccionA> homeDecA;
 	private DeduccionA nuevo;
 
 
@@ -16,10 +16,10 @@ public class ActionEditarDeduccionA implements Action {
 
 	@Override
 	public void execute() {
-		homeDecAnual = (HibernateHome<DeduccionA>) HibernateApplication
+		homeDecA = (HibernateHome<DeduccionA>) HibernateApplication
 				.getInstance().getHome(DeduccionA.class);
-		homeDecAnual.deleteAllEntities();
-		homeDecAnual.agregar(nuevo);
+		homeDecA.deleteAllEntities();
+		homeDecA.agregar(nuevo);
 	}
 
 }
