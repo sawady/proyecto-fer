@@ -14,32 +14,15 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 
+import persistencia.HibernateApplication;
+
 import model.FormatoEmpleadoException;
-import model.ProcesoCalculoAutomatico;
+import model.calculo.ActionCalculoAutomatico;
 
 public class Vista {
 
 	private JFrame frmProgramaDeImpuesto;
 	private JFileChooser fileChooser = new JFileChooser();
-
-	// private HibernateHome<DeduccionA> homeDecA = (HibernateHome<DeduccionA>)
-	// HibernateApplication
-	// .getInstance().getHome(DeduccionA.class);
-	//
-	// private HibernateHome<DeduccionB> homeDecB = (HibernateHome<DeduccionB>)
-	// HibernateApplication
-	// .getInstance().getHome(DeduccionB.class);
-	//
-	// private HibernateHome<DeduccionC> homeDecC = (HibernateHome<DeduccionC>)
-	// HibernateApplication
-	// .getInstance().getHome(DeduccionC.class);
-	//
-	// private CamposParaCalculoAnualHibernateHome homeDecAnual =
-	// (CamposParaCalculoAnualHibernateHome) HibernateApplication
-	// .getInstance().getHome(CamposParaCalculoAnual.class);
-	// private HibernateHome<Empleado> empleado = (HibernateHome<Empleado>)
-	// HibernateApplication
-	// .getInstance().getHome(Empleado.class);
 	/**
 	 * Launch the application.
 	 */
@@ -60,19 +43,6 @@ public class Vista {
 	 * Create the application.
 	 */
 	public Vista() {
-		// homeDecAnual.agregar(new CamposParaCalculoAnual(new Float(0.00),new
-		// Float(10000.00),new Float(0.00),new Float(9),new Float(0.00)));
-		// homeDecA.agregar(new DeduccionA(new Float(12960), new Float(62208),
-		// new Float(14400), new Float(7200), new Float(5400)));
-		// homeDecB.agregar(new DeduccionB(new Float(996.23), new
-		// Float(996.23),new Float(12996.23),new Float(20000.00)));
-		// homeDecC.agregar(new DeduccionC(new Float(5),new Float(5),new
-		// Float(5),new Float(0.06),new Float(35)));
-		// empleado.agregar(new Empleado());
-
-		// System.out.println(HibernateApplication.getInstance().getAllHomes());
-		// System.out.println(homeDecAnual);
-		// System.out.println(homeDecAnual.getAllEntities());
 		initialize();
 
 	}
@@ -137,7 +107,7 @@ public class Vista {
 			if (returnVal == JFileChooser.APPROVE_OPTION) {
 				File file = fileChooser.getSelectedFile();
 				try {
-					new ProcesoCalculoAutomatico(file.getPath());
+					HibernateApplication.getInstance().execute(new ActionCalculoAutomatico(file.getPath()));
 				} catch (IOException e1) {
 					JOptionPane
 							.showMessageDialog(

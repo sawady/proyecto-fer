@@ -1,6 +1,7 @@
 package model.excel;
 
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
 import java.util.Iterator;
@@ -29,12 +30,38 @@ public class ReadExcel {
 
 
 	
-	public void leerArchivo(String ruta) throws IOException, SecurityException, FormatoEmpleadoException, NoSuchMethodException {
+	public void leerArchivo(String ruta) {
 		String strRutaArchivo = ruta;
-		this.archivoEntrada = new FileInputStream(strRutaArchivo);
-		this.poiArchivo = new POIFSFileSystem(archivoEntrada);
-		this.obtenerHoja(0);
-		this.cargarDatos();
+		try {
+			this.archivoEntrada = new FileInputStream(strRutaArchivo);
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		try {
+			this.poiArchivo = new POIFSFileSystem(archivoEntrada);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		try {
+			this.obtenerHoja(0);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		try {
+			this.cargarDatos();
+		} catch (SecurityException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (FormatoEmpleadoException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (NoSuchMethodException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 	private HSSFWorkbook obtenerLibro() throws IOException {
