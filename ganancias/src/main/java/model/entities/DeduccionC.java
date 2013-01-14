@@ -22,9 +22,7 @@ public class DeduccionC extends Entity{
 	public DeduccionC() {
 		super();
 	}
-	public DeduccionC(int id) {
-		super(id);
-	}
+	
 	public float getCout_med_asist_anu() {
 		return cout_med_asist_anu;
 	}
