@@ -13,7 +13,8 @@ import javax.swing.JTextField;
 import javax.swing.UIManager;
 
 import model.entities.CamposParaCalculoAnual;
-import persistencia.hibernateHome.CamposParaCalculoAnualHibernateHome;
+import persistencia.HibernateApplication;
+import persistencia.Actions.ActionEditarTablaCalculoAnual;
 
 public class EditarTablaCalculoAnual extends JFrame {
 	
@@ -22,17 +23,15 @@ public class EditarTablaCalculoAnual extends JFrame {
 	private JTextField textField_2;
 	private JTextField textField_3;
 	private JTextField textField_4;
-	private CamposParaCalculoAnualHibernateHome homeDecAnual;
 	CamposParaCalculoAnual aModificar;
 
 	private static final long serialVersionUID = 1L;
 
-	public EditarTablaCalculoAnual(CamposParaCalculoAnual withId,
-			CamposParaCalculoAnualHibernateHome homeDecAnual2) {
+	public EditarTablaCalculoAnual(CamposParaCalculoAnual withId
+			) {
 		setResizable(false);
 		getContentPane().setBackground(new Color(176, 196, 222));
 		this.aModificar = withId;
-		this.homeDecAnual = homeDecAnual2;
 		this.inicialize();
 	}
 	
@@ -132,9 +131,8 @@ public class EditarTablaCalculoAnual extends JFrame {
 		Float  txt17 = Float.parseFloat(textField_3.getText());
 		validarFloat(textField_4,"Valor de excedente");
 		Float  txt18 = Float.parseFloat(textField_4.getText());
-		homeDecAnual.eliminar(aModificar);
 		CamposParaCalculoAnual nuevo = new CamposParaCalculoAnual(txt14, txt15, txt16, txt17, txt18);
-		homeDecAnual.agregar(nuevo);
+		HibernateApplication.getInstance().execute(new ActionEditarTablaCalculoAnual(aModificar, nuevo));
 		aModificar = nuevo;
 		JOptionPane.showMessageDialog(this, "Se han guardado sus cambios",
 				"Mensaje", JOptionPane.INFORMATION_MESSAGE);
