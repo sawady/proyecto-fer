@@ -16,14 +16,18 @@ import javax.swing.JTextField;
 import javax.swing.ScrollPaneConstants;
 import javax.swing.UIManager;
 
-import model.entities.CamposParaCalculoAnual;
 import model.entities.DeduccionA;
 import model.entities.DeduccionB;
 import model.entities.DeduccionC;
-import model.entities.Empleado;
 import persistencia.HibernateApplication;
-import persistencia.hibernateHome.CamposParaCalculoAnualHibernateHome;
-import persistencia.hibernateHome.HibernateHome;
+import persistencia.Actions.ActionEditarDeduccionA;
+import persistencia.Actions.ActionEditarDeduccionB;
+import persistencia.Actions.ActionEditarDeduccionC;
+import persistencia.Actions.ActionGetFirstDeduccionA;
+import persistencia.Actions.ActionGetFirstDeduccionB;
+import persistencia.Actions.ActionGetFirstDeduccionC;
+import persistencia.Actions.ActionSelectRow;
+import persistencia.Actions.ActionTraerTodosAnual;
 
 
 public class ModificarTablas {
@@ -45,28 +49,12 @@ public class ModificarTablas {
 	private JTextField textField_13;
 	private TableModelAnual tableModel;
 	private JTable tableAnual;
-
-	
-	private HibernateHome<DeduccionA> homeDecA = (HibernateHome<DeduccionA>) HibernateApplication
-			.getInstance().getHome(DeduccionA.class);
-	
-	private HibernateHome<DeduccionB> homeDecB = (HibernateHome<DeduccionB>) HibernateApplication
-			.getInstance().getHome(DeduccionB.class);
-	
-	private HibernateHome<DeduccionC> homeDecC = (HibernateHome<DeduccionC>) HibernateApplication
-			.getInstance().getHome(DeduccionC.class);
-	
-	private CamposParaCalculoAnualHibernateHome homeDecAnual = (CamposParaCalculoAnualHibernateHome) HibernateApplication
-			.getInstance().getHome(CamposParaCalculoAnual.class);
 	
 	/**
 	 * Create the application.
 	 */
 	public ModificarTablas() {
 		initialize();
-		
-		
-		
 		this.mostrarDatosEnPantallaDeduccionA();
 		this.mostrarDatosEnPantallaDeduccionB();
 		this.mostrarDatosEnPantallaDeduccionC();
@@ -310,10 +298,9 @@ public class ModificarTablas {
 		//tabla
 		this.tableModel = new TableModelAnual();
 		tableAnual = new JTable(tableModel);
-		//List<CamposParaCalculoAnual>lista = new LinkedList<CamposParaCalculoAnual>();
-		//lista.add(new CamposParaCalculoAnual(1, 2, 3, 5, 6));
-		this.tableModel.actualizarme(homeDecAnual.getAllEntities());
-		//this.tableModel.actualizarme(lista);
+		ActionTraerTodosAnual action = new ActionTraerTodosAnual();
+		HibernateApplication.getInstance().execute(action);
+		this.tableModel.actualizarme(action.getResult());
 		this.tableModel.addColumn( "Ganancia neta imponible Desde");
 		this.tableModel.addColumn( "Ganancia neta imponible Hasta");
 		this.tableModel.addColumn( "Base que se debe pagar");
@@ -330,7 +317,10 @@ public class ModificarTablas {
 	
 	//Auxiliares
 	public void mostrarDatosEnPantallaDeduccionA() {
-		DeduccionA deduccionA = homeDecA.getFirst();
+		ActionGetFirstDeduccionA action = new ActionGetFirstDeduccionA();
+		HibernateApplication.getInstance().execute(action);
+		
+		DeduccionA deduccionA = action.getResult();
 		textField.setText(Float.toString(deduccionA.getMin_no_imp()));
 		textField_1.setText(Float.toString(deduccionA.getDedu_espe()));
 		textField_2.setText(Float.toString(deduccionA.getConyuge()));
@@ -340,7 +330,10 @@ public class ModificarTablas {
 	}
 	
 	public void mostrarDatosEnPantallaDeduccionB() {
-		DeduccionB deduccionB = homeDecB.getFirst();
+		ActionGetFirstDeduccionB action = new ActionGetFirstDeduccionB();
+		HibernateApplication.getInstance().execute(action);
+		
+		DeduccionB deduccionB = action.getResult();
 		textField_5.setText(Float.toString(deduccionB.getGast_sepe_anu()));
 		textField_6.setText(Float.toString(deduccionB.getSeg_vida_anu()));
 		textField_7.setText(Float.toString(deduccionB.getServ_dom_anu()));
@@ -348,7 +341,9 @@ public class ModificarTablas {
 
 	}
 	public void mostrarDatosEnPantallaDeduccionC() {
-		DeduccionC deduccionC = homeDecC.getFirst();
+		ActionGetFirstDeduccionC action = new ActionGetFirstDeduccionC();
+		HibernateApplication.getInstance().execute(action);
+		DeduccionC deduccionC = action.getResult();
 		textField_9.setText(Float.toString(deduccionC.getCout_med_asist_anu()));
 		textField_10.setText(Float.toString(deduccionC.getHonor_med_anu()));
 		textField_11.setText(Float.toString(deduccionC.getDonac_anu()));
@@ -379,8 +374,8 @@ public class ModificarTablas {
 		Float txt3 = Float.parseFloat(textField_3.getText());
 		validarFloat(textField_4,"Tope anual por persona a cargo");
 		Float txt4 = Float.parseFloat(textField_4.getText());
-		homeDecA.deleteAllEntities(); //es mas limpio, total hay una sola fila
-		homeDecA.agregar(new DeduccionA(txt0, txt1, txt2, txt3, txt4));
+		DeduccionA nuevo =new DeduccionA(txt0, txt1, txt2, txt3, txt4);
+		HibernateApplication.getInstance().execute(new ActionEditarDeduccionA( nuevo));
 		mostrarDatosEnPantallaDeduccionA();
 	}
 	
@@ -395,8 +390,8 @@ public class ModificarTablas {
 		Float txt7 = Float.parseFloat(textField_7.getText());
 		validarFloat(textField_8,"Tope anual crédito hipotecario");
 		Float txt8 = Float.parseFloat(textField_8.getText());
-		homeDecB.deleteAllEntities(); 
-		homeDecB.agregar(new DeduccionB(txt5, txt6, txt7, txt8));
+		DeduccionB nuevo = new DeduccionB(txt5, txt6, txt7, txt8);
+		HibernateApplication.getInstance().execute(new ActionEditarDeduccionB( nuevo));
 		mostrarDatosEnPantallaDeduccionB();
 	}
 	
@@ -411,14 +406,16 @@ public class ModificarTablas {
 		Float txt12 = Float.parseFloat(textField_12.getText());
 		validarFloat(textField_13,"Deducción imp. cheque sobre Cred");
 		Float txt13 = Float.parseFloat(textField_13.getText());
-		homeDecC.deleteAllEntities(); 
-		homeDecC.agregar(new DeduccionC(txt9, txt10, txt11, txt12, txt13));
+		DeduccionC nuevo = new DeduccionC(txt9, txt10, txt11, txt12, txt13);
+		HibernateApplication.getInstance().execute(new ActionEditarDeduccionC( nuevo));
 		mostrarDatosEnPantallaDeduccionC();
 	}
 	
 	private void botonEditarAccionAnual() {
 		try{
-			 new EditarTablaCalculoAnual(homeDecAnual.getWithId((tableAnual.getSelectedRow())), homeDecAnual); 
+			ActionSelectRow action = new ActionSelectRow(tableAnual.getSelectedRow());
+			HibernateApplication.getInstance().execute(action);
+			 new EditarTablaCalculoAnual(action.getResult()); 
 		}	
 		catch(Exception e){
 			JOptionPane.showMessageDialog(frmImpuestoALas, "Seleccione la fila primero",
