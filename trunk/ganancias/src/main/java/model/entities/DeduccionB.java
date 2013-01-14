@@ -14,9 +14,7 @@ public class DeduccionB extends Entity {
 	public DeduccionB() {
 		super();
 	}
-	public DeduccionB(int id) {
-		super(id);
-	}
+
 
 	public DeduccionB(float gast_sepe_anu, float seg_vida_anu,
 			float serv_dom_anu, float int_cred_hip_anu) {

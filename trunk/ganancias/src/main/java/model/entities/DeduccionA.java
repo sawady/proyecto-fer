@@ -13,9 +13,7 @@ public class DeduccionA extends Entity{
 	public DeduccionA() {
 		super();
 	}
-	public DeduccionA(int id) {
-		super(id);
-	}
+
 	
 	public DeduccionA(float min_no_imp, float dedu_espe, float conyuge,
 			float hijos, float otros) {
