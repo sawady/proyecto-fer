@@ -15,6 +15,7 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 
 import persistencia.HibernateApplication;
+import persistencia.Actions.ActionCargaInicial;
 
 import model.FormatoEmpleadoException;
 import model.calculo.ActionCalculoAutomatico;
@@ -43,6 +44,7 @@ public class Vista {
 	 * Create the application.
 	 */
 	public Vista() {
+		HibernateApplication.getInstance().execute(new ActionCargaInicial());
 		initialize();
 
 	}
