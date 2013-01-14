@@ -1,22 +1,34 @@
 package gui;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
 import javax.swing.JDialog;
-import javax.swing.JPanel;
-import javax.swing.border.EmptyBorder;
 import javax.swing.JLabel;
+import javax.swing.JPanel;
 import javax.swing.UIManager;
-import java.awt.Color;
+import javax.swing.border.EmptyBorder;
 
 public class ResultadosCalculoManual extends JDialog {
 
 	private static final long serialVersionUID = 1L;
 	private final JPanel contentPanel = new JPanel();
+//	/**
+//	 * Launch the application.
+//	 */
+//	public static void main(String[] args) {
+//		try {
+//			ResultadosCalculoManual dialog = new ResultadosCalculoManual("0", "2", "3" , "5", "6");
+//			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+//			dialog.setVisible(true);
+//		} catch (Exception e) {
+//			e.printStackTrace();
+//		}
+//	}
 
 	/**
 	 * Create the dialog.
@@ -25,6 +37,8 @@ public class ResultadosCalculoManual extends JDialog {
 		setResizable(false);
 		setTitle("Resultados del calculo Manual");
 		setBounds(100, 100, 450, 300);
+		setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+		setVisible(true);
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setBackground(UIManager.getColor("ScrollBar.shadow"));
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));

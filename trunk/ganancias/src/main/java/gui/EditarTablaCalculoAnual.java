@@ -30,6 +30,7 @@ public class EditarTablaCalculoAnual extends JFrame {
 	public EditarTablaCalculoAnual(CamposParaCalculoAnual withId
 			) {
 		setResizable(false);
+		setVisible(true);
 		getContentPane().setBackground(new Color(176, 196, 222));
 		this.aModificar = withId;
 		this.inicialize();

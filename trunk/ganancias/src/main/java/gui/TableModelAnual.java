@@ -37,7 +37,7 @@ public class TableModelAnual extends DefaultTableModel {
 	 */
 	public void actualizarme(List<CamposParaCalculoAnual> model) {
 
-		Object[] datos = new Object[1];
+		Object[] datos = new Object[5];
 		for (CamposParaCalculoAnual anual : model) {
 			datos[0] = anual.getDesde();
 			datos[1] = anual.getHasta();

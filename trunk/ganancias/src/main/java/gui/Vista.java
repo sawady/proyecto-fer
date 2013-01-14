@@ -44,9 +44,8 @@ public class Vista {
 	 * Create the application.
 	 */
 	public Vista() {
-		HibernateApplication.getInstance().execute(new ActionCargaInicial());
 		initialize();
-
+		HibernateApplication.getInstance().execute(new ActionCargaInicial());
 	}
 
 	/**

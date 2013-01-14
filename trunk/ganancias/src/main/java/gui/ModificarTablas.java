@@ -81,6 +81,7 @@ public class ModificarTablas {
 		button.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				frmImpuestoALas.dispose();
+				
 			}
 		});
 
@@ -150,6 +151,7 @@ public class ModificarTablas {
 		btnAceptar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				botonAceptarAccionA();
+				JOptionPane.showMessageDialog(frmImpuestoALas,"Los cambios se guardaron satisfactoriamente", "Información",JOptionPane.INFORMATION_MESSAGE);
 			}
 		});
 		btnAceptar.setBounds(330, 255, 118, 23);
@@ -301,16 +303,16 @@ public class ModificarTablas {
 		ActionTraerTodosAnual action = new ActionTraerTodosAnual();
 		HibernateApplication.getInstance().execute(action);
 		this.tableModel.actualizarme(action.getResult());
-		this.tableModel.addColumn( "Ganancia neta imponible Desde");
-		this.tableModel.addColumn( "Ganancia neta imponible Hasta");
-		this.tableModel.addColumn( "Base que se debe pagar");
+		this.tableModel.addColumn( "Desde");
+		this.tableModel.addColumn( "Hasta");
+		this.tableModel.addColumn( "Base");
 		this.tableModel.addColumn( "Porcentaje estra por excedente");
 		this.tableModel.addColumn( "Valor de excedente");
 		
-		
+		tableModel.actualizarme(action.getResult());
 		JScrollPane scrollPane = new JScrollPane(tableAnual);
 		scrollPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
-		scrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_ALWAYS);
+		//scrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_ALWAYS);
 		scrollPane.setBounds(15, 12, 569, 266);
 		desktopPane_3.add(scrollPane);
 	}
@@ -415,6 +417,9 @@ public class ModificarTablas {
 		try{
 			ActionSelectRow action = new ActionSelectRow(tableAnual.getSelectedRow());
 			HibernateApplication.getInstance().execute(action);
+			if (action.getResult()== null){
+				throw new Exception();
+			}
 			 new EditarTablaCalculoAnual(action.getResult()); 
 		}	
 		catch(Exception e){
