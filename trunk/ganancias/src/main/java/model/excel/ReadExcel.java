@@ -15,6 +15,7 @@ import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Row;
 
 import persistencia.HibernateApplication;
+import persistencia.Actions.ActionAgregarEmpleado;
 /**
  * Clase que lee un archivo excel(de una estructura especifica) a partir de una ruta, y guarda la lista de empleados que
  * contiene el archivo en la base de datos.   
@@ -96,8 +97,8 @@ public class ReadExcel {
 				this.obtenerValorCelda(32, 0, cel, "setImp_cheq_cred", (float) cel.getNumericCellValue(), empleado);
 				this.obtenerValorCelda(33, 0, cel, "setDev_compra_exter", (float) cel.getNumericCellValue(), empleado);
 				}
+			HibernateApplication.getInstance().execute(new ActionAgregarEmpleado(empleado));
 			}
-			HibernateApplication.getInstance().getHome(Empleado.class).agregar(empleado);
 		}
 	
 

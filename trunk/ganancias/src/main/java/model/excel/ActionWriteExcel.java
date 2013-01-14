@@ -15,17 +15,18 @@ import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.hssf.util.HSSFColor;
 
 import persistencia.HibernateApplication;
+import persistencia.Actions.Action;
 import persistencia.hibernateHome.HibernateHome;
 
-public class WriteExcel {
+public class ActionWriteExcel implements Action{
 	HSSFWorkbook libro = new HSSFWorkbook();
 	HSSFSheet hoja = libro.createSheet();	
 	List<ResultadoDeCalculo> resultado;
-	public WriteExcel() {
+	public ActionWriteExcel() {
 		super();
 	}
 
-	public void crear(){
+	public void execute(){
 		HibernateHome<ResultadoDeCalculo> resultadoHome = (HibernateHome<ResultadoDeCalculo>) HibernateApplication.getInstance().getHome(ResultadoDeCalculo.class);
 		List<ResultadoDeCalculo> resultado = resultadoHome.getAllEntities();
 		this.crearFilaTitulo();
