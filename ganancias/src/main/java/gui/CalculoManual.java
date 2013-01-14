@@ -286,7 +286,7 @@ public class CalculoManual {
 		try{
 			Float.parseFloat(texto.getText());
 		}catch(Exception e){
-			JOptionPane.showMessageDialog(null, " Solo se permiten números en el campo: " + campo);
+			JOptionPane.showMessageDialog(frmImpuestoALas,"Solo se permiten números en el campo: " + campo, "Error",JOptionPane.ERROR_MESSAGE);
 			texto.setText(null);
 		}
 	}
@@ -295,7 +295,7 @@ public class CalculoManual {
 		try{
 			Integer.parseInt(texto.getText());
 		}catch(Exception e){
-			JOptionPane.showMessageDialog(null," Solo se permiten números en el campo: " + campo);
+			JOptionPane.showMessageDialog(frmImpuestoALas," Solo se permiten números en el campo: " + campo, "Error", JOptionPane.ERROR_MESSAGE);
 			texto.setText(null);
 		}
 	}
