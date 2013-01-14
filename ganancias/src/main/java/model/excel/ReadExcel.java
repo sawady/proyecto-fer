@@ -9,11 +9,12 @@ import java.util.Iterator;
 import model.FormatoEmpleadoException;
 import model.entities.Empleado;
 
-import org.apache.poi.hssf.usermodel.HSSFSheet;
-import org.apache.poi.hssf.usermodel.HSSFWorkbook;
-import org.apache.poi.poifs.filesystem.POIFSFileSystem;
+import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Row;
+import org.apache.poi.ss.usermodel.Sheet;
+import org.apache.poi.ss.usermodel.Workbook;
+import org.apache.poi.ss.usermodel.WorkbookFactory;
 
 import persistencia.HibernateApplication;
 import persistencia.Actions.ActionAgregarEmpleado;
@@ -24,56 +25,49 @@ import persistencia.Actions.ActionAgregarEmpleado;
  */
 public class ReadExcel {
 	private FileInputStream archivoEntrada;
-	private POIFSFileSystem poiArchivo;
-	private HSSFWorkbook libro;
-	private HSSFSheet hoja;
-
+	private Workbook libro;
+	private Sheet hoja;
 
 	
 	public void leerArchivo(String ruta) {
-		String strRutaArchivo = ruta;
 		try {
-			this.archivoEntrada = new FileInputStream(strRutaArchivo);
+			this.archivoEntrada = new FileInputStream(ruta);
 		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
+			System.out.println("fallo en leer Archivo");
 			e.printStackTrace();
 		}
-		try {
-			this.poiArchivo = new POIFSFileSystem(archivoEntrada);
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		try {
-			this.obtenerHoja(0);
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		this.obtenerHoja(0);
 		try {
 			this.cargarDatos();
 		} catch (SecurityException e) {
-			// TODO Auto-generated catch block
+			System.out.println("fallo en cargar datos");
 			e.printStackTrace();
 		} catch (FormatoEmpleadoException e) {
-			// TODO Auto-generated catch block
+			System.out.println("fallo en cargar datos");
 			e.printStackTrace();
 		} catch (NoSuchMethodException e) {
-			// TODO Auto-generated catch block
+			System.out.println("fallo en cargar datos");
 			e.printStackTrace();
 		}
 	}
 
-	private HSSFWorkbook obtenerLibro() throws IOException {
-		if (poiArchivo != null) {
-			libro = new HSSFWorkbook(poiArchivo);
-		}
+	private Workbook obtenerLibro() {
+			try {
+				libro = WorkbookFactory.create(archivoEntrada);
+			} catch (IOException e) {
+				System.out.println("fallo en obtener libro");
+				e.printStackTrace();
+			} catch (InvalidFormatException e) {
+				System.out.println("fallo en obtener libro");
+				e.printStackTrace();
+			}
+		
 		return libro;
 	}
 
-	private HSSFSheet obtenerHoja(int intIndiceIn) throws IOException {
+	private Sheet obtenerHoja(int intIndiceIn) {
 		this.libro = obtenerLibro();
-		this.hoja = libro.getSheetAt(intIndiceIn);
+		this.hoja = libro.getSheetAt(1);
 		return hoja;
 	}
 
@@ -81,8 +75,8 @@ public class ReadExcel {
 
 		Iterator<Row> row =  hoja.rowIterator();
 		Empleado empleado = null;
-		row.next();
-		row.next();//es para que arranque a recorrer desde la fila 3.(Verificar)
+		System.out.println(hoja.rowIterator());
+//		row.next();//es para que arranque a recorrer desde la fila 3.(Verificar) me tira false el hasNext :(
 		while (row.hasNext()) {
 			Row r = row.next();
 			Iterator<Cell> celda = r.cellIterator();

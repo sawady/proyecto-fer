@@ -10,8 +10,8 @@ import model.entities.DeduccionA;
 import model.entities.DeduccionC;
 import model.entities.Empleado;
 import model.entities.ResultadoDeCalculo;
-import model.excel.ActionWriteExcel;
 import model.excel.ReadExcel;
+import model.excel.WriteExcel;
 import persistencia.HibernateApplication;
 import persistencia.Actions.Action;
 import persistencia.hibernateHome.CamposParaCalculoAnualHibernateHome;
@@ -58,7 +58,8 @@ public class ActionCalculoAutomatico implements Action {
 	public void proceso(String ruta) {
 		read.leerArchivo(ruta);
 		this.generarResultados();
-		HibernateApplication.getInstance().execute(new ActionWriteExcel());
+		WriteExcel w = new WriteExcel(homeDeResultados.getAllEntities());
+		w.write();
 		this.limpiarTablas();
 	}
 

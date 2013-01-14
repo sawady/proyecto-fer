@@ -14,7 +14,7 @@ public class ActionTraerTodosAnual implements Action {
 		CamposParaCalculoAnualHibernateHome homeDecAnual = (CamposParaCalculoAnualHibernateHome) HibernateApplication
 				.getInstance().getHome(CamposParaCalculoAnual.class);
 		this.setResult(homeDecAnual.getAllEntities());
-		
+	
 	}
 
 	public List<CamposParaCalculoAnual> getResult() {
