@@ -4,7 +4,7 @@
 
 <hibernate-mapping package="model.entities">
 	<class name="CamposParaCalculoAnual">
-		<id name="id" type="long" unsaved-value="0">
+		<id name="id" type="int" unsaved-value="0">
 			<generator class="native" />
 		</id>
 		<property name="desde" type="float" />
