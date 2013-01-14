@@ -43,9 +43,9 @@ public class ActionCargaInicial implements Action {
 		datoAnual.setId(0);
 		homeAnual.agregar(datoAnual);
 	
-//		homeAnual.agregar(new CamposParaCalculoAnual(1,2,3,4,6));
-//		homeAnual.agregar(new CamposParaCalculoAnual(9,8,7,6,5));
-//		homeAnual.agregar(new CamposParaCalculoAnual(8,7,6,5,4));
-//		homeAnual.agregar(new CamposParaCalculoAnual(7,6,5,4,3));
+		homeAnual.agregar(new CamposParaCalculoAnual(1,2,3,4,6));
+		homeAnual.agregar(new CamposParaCalculoAnual(9,8,7,6,5));
+		homeAnual.agregar(new CamposParaCalculoAnual(8,7,6,5,4));
+		homeAnual.agregar(new CamposParaCalculoAnual(7,6,5,4,3));
 	}
 }

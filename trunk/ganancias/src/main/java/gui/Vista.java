@@ -45,7 +45,7 @@ public class Vista {
 	 */
 	public Vista() {
 		initialize();
-		HibernateApplication.getInstance().execute(new ActionCargaInicial());
+		HibernateApplication.getInstance().execute(new ActionCargaInicial()); //TODO Eliminar luego!
 	}
 
 	/**
@@ -109,6 +109,11 @@ public class Vista {
 				File file = fileChooser.getSelectedFile();
 				try {
 					HibernateApplication.getInstance().execute(new ActionCalculoAutomatico(file.getPath()));
+					JOptionPane
+					.showMessageDialog(
+							frmProgramaDeImpuesto,
+							"El archivo generado se guardo en su carpeta personal",
+							"Mensaje", JOptionPane.INFORMATION_MESSAGE);
 				} catch (IOException e1) {
 					JOptionPane
 							.showMessageDialog(
