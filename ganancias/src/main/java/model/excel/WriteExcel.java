@@ -15,9 +15,6 @@ import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
-import persistencia.HibernateApplication;
-import persistencia.hibernateHome.HibernateHome;
-
 public class WriteExcel {
 	 XSSFWorkbook libro = new XSSFWorkbook();
 	Sheet hoja = libro.createSheet();	
@@ -34,13 +31,11 @@ public class WriteExcel {
 
 
 	public void write(){
-		HibernateHome<ResultadoDeCalculo> resultadoHome = (HibernateHome<ResultadoDeCalculo>) HibernateApplication.getInstance().getHome(ResultadoDeCalculo.class);
 		this.crearFilaTitulo();
 		if(resultado.size()>=1){
 			for (int i = 1; i <= resultado.size()-2; i++) {
 				Row fila = hoja.createRow(i);
 				ResultadoDeCalculo r = resultado.get(i-1);
-				
 				new String("" + r.getCUIL() + "");
 				//Celdas con los contenidos de resultado
 				this.crearCelda(0,r.getCUIL() , fila);
@@ -52,7 +47,6 @@ public class WriteExcel {
 				this.crearCelda(6,(double) r.getImp_ganan_periodo(), fila);
 				this.crearCelda(7,(double) r.getImp_ganan_a_pagar_mes(), fila);
 				this.crearCelda(8,(double) r.getDev_IIGG(), fila);
-
 			}
 		}
         try {
@@ -69,9 +63,7 @@ public class WriteExcel {
 		Row fila = hoja.createRow(0);
 		for (int i = 0; i < 9; i++) {
 			hoja.setColumnWidth(i, 5000);
-			
 		}
-		
 		crearCeldaTexto(0,"Cuil", style, fila);
 		crearCeldaTexto(1,"Nombre y apellido", style, fila);
 		crearCeldaTexto(2,"Rem Neta Imponible final", style, fila);
@@ -86,7 +78,6 @@ public class WriteExcel {
 	private void crearCelda(int posicion, Double valor, Row fila) {
 		Cell celda = fila.createCell(posicion);
 		celda.setCellValue(valor);	
-		 
 	}
 	
 	private void crearCelda(int posicion, String elTexto, Row fila) {
