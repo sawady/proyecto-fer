@@ -6,8 +6,8 @@ public class Empleado extends Entity{
 	private String CUIL;
 	private String nom_y_ape;
 	private float rem_net_imp;
-	private int tot_pag_ant_temp;
-	private int rem_net_imp_acum_temp;
+	private float tot_pag_ant_temp;
+	private float rem_net_imp_acum_temp;
 	private int estad_civil;
 	private int mes_cas;
 	private int cant_hij_anual;
@@ -57,16 +57,16 @@ public class Empleado extends Entity{
 	public void setRem_net_imp(float rem_net_imp) {
 		this.rem_net_imp = rem_net_imp;
 	}
-	public int getTot_pag_ant_temp() {
+	public float getTot_pag_ant_temp() {
 		return tot_pag_ant_temp;
 	}
-	public void setTot_pag_ant_temp(int tot_pag_ant_temp) {
+	public void setTot_pag_ant_temp(float tot_pag_ant_temp) {
 		this.tot_pag_ant_temp = tot_pag_ant_temp;
 	}
-	public int getRem_net_imp_acum_temp() {
+	public float getRem_net_imp_acum_temp() {
 		return rem_net_imp_acum_temp;
 	}
-	public void setRem_net_imp_acum_temp(int rem_net_imp_acum_temp) {
+	public void setRem_net_imp_acum_temp(float rem_net_imp_acum_temp) {
 		this.rem_net_imp_acum_temp = rem_net_imp_acum_temp;
 	}
 	public int getEstad_civil() {

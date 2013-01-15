@@ -93,6 +93,7 @@ public class ActionCalculoAutomatico implements Action {
 
 	// Metodos para el calculo
 	public float gananciaNetaA(Empleado e) {
+		this.rnif = e.getRem_net_imp_acum_temp() + e.getRem_net_imp();
 		return this.getRnif() - this.deduccionesA(e);
 	}
 
