@@ -211,7 +211,7 @@ public class ActionCalculoAutomatico implements Action {
 
 	// impuesto a pagar en el año
 	public float impuestoAPagarEnElAnio(Empleado e) {
-		//TODO
+		//TODO explota porq los valores son cualquier cosa.
 		//this.calculo_anual = this.calculo_anual_home.getByInRango(this	.gananciaNetaC(e));
 		this.calculo_anual = new CamposParaCalculoAnual(0, 10000, 500, 200, 25);
 		return (this.getCalculo_anual().getBase() + ((this.getCalculo_anual()

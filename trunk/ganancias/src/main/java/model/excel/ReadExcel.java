@@ -94,7 +94,6 @@ public class ReadExcel {
 			if (cel.getColumnIndex() == 1) {
 				if (cel.getCellType() == 1) { // 0 = tipo nuemrico 1 = String
 					empleado.setNom_y_ape(cel.getStringCellValue());//1
-					System.out.println(empleado.getNom_y_ape());
 				}
 					    }
 			if (cel.getColumnIndex() == 2) {
