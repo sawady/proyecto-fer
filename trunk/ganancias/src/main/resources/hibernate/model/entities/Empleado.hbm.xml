@@ -8,11 +8,11 @@
 			<generator class="native" />
 		</id>
 
-		<property name="CUIL" type="double" />
+		<property name="CUIL" type="string" />
 		<property name="nom_y_ape" type="string" />
 		<property name="rem_net_imp" type="float" />
-		<property name="tot_pag_ant_temp" type="integer" />
-		<property name="rem_net_imp_acum_temp" type="integer" />
+		<property name="tot_pag_ant_temp" type="float" />
+		<property name="rem_net_imp_acum_temp" type="float" />
 		<property name="estad_civil" type="integer" />
 		<property name="mes_cas" type="integer" />
 		<property name="cant_hij_anual" type="integer" />
