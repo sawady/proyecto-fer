@@ -87,8 +87,8 @@ public class ReadExcel {
 			Cell cel = celda.next();
 			if (cel.getColumnIndex() == 0) {
 				if (cel.getCellType() == 0) { // 0 = tipo nuemrico 1 = String
-					//String s = new String(df.format(cel.getNumericCellValue()));
-					//empleado.setCUIL("rochi");
+					String s = new String(df.format(cel.getNumericCellValue()));
+					empleado.setCUIL(s);
 					      	}
 					    }
 			if (cel.getColumnIndex() == 1) {
@@ -297,63 +297,4 @@ public class ReadExcel {
 			return 0; //quiere decir que no se cargo el valor del mes por lo que no se lo tiene en cuenta
 		}
 	}
-//private void obtenerValorCelda(int colum, int cellType,Cell cel,  String method, Object argSeter, Empleado empleado) throws FormatoEmpleadoException {
-//	if (cel.getColumnIndex() == colum) {
-//	if (cel.getCellType() == cellType) { // 0 = tipo nuemrico 1 = String
-//		try {
-//			Method[] methods = Empleado.class.getMethods();
-//		    for( int i = 0; i < methods.length; i++ ) {
-//		        if( methods[i].getName().equals( method ) ){
-//		        	methods[i].invoke(empleado, argSeter);
-//		        	}
-//		    }
-//		} catch (IllegalArgumentException e) {
-//			e.printStackTrace();
-//		} catch (SecurityException e) {
-//			e.printStackTrace();
-//		} catch (IllegalAccessException e) {
-//			e.printStackTrace();
-//		} catch (InvocationTargetException e) {
-//			e.printStackTrace();
-//		}
-//	} else {
-//		throw new FormatoEmpleadoException("La columna " + cel.getColumnIndex() + "tiene un valor incorrecto" );
-//	}
-//}
-//}
-	
-	//this.obtenerValorCelda(0, 0, cel, "setCUIL", (int) cel.getNumericCellValue(), empleado);
-//	this.obtenerValorCelda(1, 1, cel, "setNom_y_ape", cel.getNumericCellValue() , empleado);
-//	this.obtenerValorCelda(2, 0, cel, "setRem_net_imp",(float) cel.getNumericCellValue() , empleado);
-//	this.obtenerValorCelda(3, 0, cel, "setTot_pag_ant_temp", (int) cel.getNumericCellValue(), empleado);
-//	this.obtenerValorCelda(4, 0, cel, "setRem_net_imp_acum_temp", (int) cel.getNumericCellValue() , empleado);
-//	this.obtenerValorCelda(5, 0, cel, "setEstad_civil", (int) cel.getNumericCellValue() , empleado);
-//	this.obtenerValorCelda(6, 0, cel, "setMes_cas",this.convertMes(cel.getStringCellValue()) , empleado);
-//	this.obtenerValorCelda(7, 0, cel, "setCant_hij_anual",(int) cel.getNumericCellValue() , empleado);
-//	this.obtenerValorCelda(8, 0, cel, "setMes_nac_hij_1",this.convertMes(cel.getStringCellValue()) , empleado);
-//	this.obtenerValorCelda(9, 0, cel, "setCant_hij_nac_1", (int) cel.getNumericCellValue(), empleado);
-//	this.obtenerValorCelda(10, 0, cel, "setMes_baja_hij_1", this.convertMes(cel.getStringCellValue()), empleado);
-//	this.obtenerValorCelda(11, 0, cel, "setCant_hij_baja_1", (int) cel.getNumericCellValue(), empleado);
-//	this.obtenerValorCelda(12, 0, cel, "setMes_nac_hij_2", this.convertMes(cel.getStringCellValue()), empleado);
-//	this.obtenerValorCelda(13, 0, cel, "setCant_hij_nac_2", (int) cel.getNumericCellValue(), empleado);
-//	this.obtenerValorCelda(14, 0, cel, "setMes_baja_hij_2", this.convertMes(cel.getStringCellValue()), empleado);
-//	this.obtenerValorCelda(15, 0, cel, "setCant_hij_baja_2", (int) cel.getNumericCellValue(), empleado);
-//	this.obtenerValorCelda(16, 0, cel, "setCant_pers_a_carg_anual", (int) cel.getNumericCellValue(), empleado);
-//	this.obtenerValorCelda(17, 0, cel, "setMes_alta_pers_a_carg_1", this.convertMes(cel.getStringCellValue()), empleado);
-//	this.obtenerValorCelda(18, 0, cel, "setCant_pers_a_carg_1", (int) cel.getNumericCellValue(), empleado);
-//	this.obtenerValorCelda(19, 0, cel, "setMes_baja_pers_a_carg_1", this.convertMes(cel.getStringCellValue()), empleado);
-//	this.obtenerValorCelda(20, 0, cel, "setCant_pers_a_carg_baja_1", (int)cel.getNumericCellValue(), empleado);
-//	this.obtenerValorCelda(21, 0, cel, "setMes_alta_pers_a_carg_2", this.convertMes(cel.getStringCellValue()), empleado);
-//	this.obtenerValorCelda(22, 0, cel, "setCant_pers_a_carg_2", (int) cel.getNumericCellValue(), empleado);
-//	this.obtenerValorCelda(23, 0, cel, "setMes_baja_pers_a_carg_2", this.convertMes(cel.getStringCellValue()), empleado);
-//	this.obtenerValorCelda(24, 0, cel, "setCant_pers_a_carg_baja_2", (int)cel.getNumericCellValue(), empleado);
-//	this.obtenerValorCelda(25, 0, cel, "setGast_sepe", (float) cel.getNumericCellValue(), empleado);
-//	this.obtenerValorCelda(26, 0, cel, "setSeg_vida", (float) cel.getNumericCellValue(), empleado);
-//	this.obtenerValorCelda(27, 0, cel, "setDonac", (float) cel.getNumericCellValue(), empleado);
-//	this.obtenerValorCelda(28, 0, cel, "setCuot_med_asist", (float) cel.getNumericCellValue(), empleado);
-//	this.obtenerValorCelda(29, 0, cel, "setHonor_med", (float) cel.getNumericCellValue(), empleado);
-//	this.obtenerValorCelda(30, 0, cel, "setInt_cred_hip", (float) cel.getNumericCellValue(), empleado);
-//	this.obtenerValorCelda(31, 0, cel, "setServ_dom", (float) cel.getNumericCellValue(), empleado);
-//	this.obtenerValorCelda(32, 0, cel, "setImp_cheq_cred", (float) cel.getNumericCellValue(), empleado);
-//	this.obtenerValorCelda(33, 0, cel, "setDev_compra_exter", (float) cel.getNumericCellValue(), empleado);
 }

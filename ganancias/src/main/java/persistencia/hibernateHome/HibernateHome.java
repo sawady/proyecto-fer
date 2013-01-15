@@ -46,10 +46,6 @@ public class HibernateHome<T extends Entity> implements Home<T>{
 		this.tlocal.get().createQuery("delete from " + this.clazz.getName()).executeUpdate();
 	}
 	
-	public void dropTable(){
-		this.tlocal.get().createQuery("DROP TABLE " + this.clazz.getName()).executeUpdate();
-	}
-
 	////////////////////////////
 	//BUSQUEDA
 	///////////////////////////
