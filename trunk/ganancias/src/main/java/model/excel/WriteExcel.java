@@ -36,9 +36,8 @@ public class WriteExcel {
 	public void write(){
 		HibernateHome<ResultadoDeCalculo> resultadoHome = (HibernateHome<ResultadoDeCalculo>) HibernateApplication.getInstance().getHome(ResultadoDeCalculo.class);
 		this.crearFilaTitulo();
-		if
-		(resultado.size()>=1){
-			for (int i = 1; i <= resultado.size(); i++) {
+		if(resultado.size()>=1){
+			for (int i = 1; i <= resultado.size()-2; i++) {
 				Row fila = hoja.createRow(i);
 				ResultadoDeCalculo r = resultado.get(i-1);
 				
@@ -68,27 +67,32 @@ public class WriteExcel {
 	private void crearFilaTitulo() {
 		CellStyle style = this.crearStyleTitulo();
 		Row fila = hoja.createRow(0);
+		for (int i = 0; i < 9; i++) {
+			hoja.setColumnWidth(i, 5000);
+			
+		}
 		
 		crearCeldaTexto(0,"Cuil", style, fila);
 		crearCeldaTexto(1,"Nombre y apellido", style, fila);
-		crearCeldaTexto(2,"Remuneracion Neta Imponible final", style, fila);
+		crearCeldaTexto(2,"Rem Neta Imponible final", style, fila);
 		crearCeldaTexto(3,"Ganancia Neta(A)", style, fila);
 		crearCeldaTexto(4,"Ganancia Neta(B)", style, fila);
 		crearCeldaTexto(5,"Ganancia Neta(C)", style, fila);
-		crearCeldaTexto(6,"Impuesto de ganancias total del periodo", style, fila);
+		crearCeldaTexto(6,"Impuesto total del periodo", style, fila);
 		crearCeldaTexto(7,"Impuesto a pagar en el mes", style, fila);
 		crearCeldaTexto(8,"Monto de devolucion", style, fila);
 	}
 
 	private void crearCelda(int posicion, Double valor, Row fila) {
 		Cell celda = fila.createCell(posicion);
-		celda.setCellValue(valor);		
+		celda.setCellValue(valor);	
+		 
 	}
 	
 	private void crearCelda(int posicion, String elTexto, Row fila) {
 		Cell celda = fila.createCell(posicion);
-	
-		celda.setCellValue(elTexto);		
+		celda.setCellValue(elTexto);
+		
 	}
 	private void crearCeldaTexto(int posicion, String elTexto, CellStyle style, Row fila) {
 		Cell celda = fila.createCell(posicion);

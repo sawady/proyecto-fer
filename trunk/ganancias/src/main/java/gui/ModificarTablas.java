@@ -298,8 +298,6 @@ public class ModificarTablas {
 		
 		tableModel.actualizarme(action.getResult());
 		JScrollPane scrollPane = new JScrollPane(tableAnual);
-		//scrollPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
-		//scrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_ALWAYS);
 		scrollPane.setBounds(15, 12, 569, 131);
 		desktopPane_3.add(scrollPane);
 	}
@@ -399,22 +397,6 @@ public class ModificarTablas {
 		HibernateApplication.getInstance().execute(new ActionEditarDeduccionC( nuevo));
 		mostrarDatosEnPantallaDeduccionC();
 	}
-	
-//	private void botonEditarAccionAnual() {
-//		try{
-//			ActionSelectRow action = new ActionSelectRow(
-//			(Float) tableAnual.getModel().getValueAt(tableAnual.getSelectedRow(), 0));
-//			HibernateApplication.getInstance().execute(action);
-//			if (action.getResult()== null){
-//				throw new Exception();
-//			}
-//			 new EditarTablaCalculoAnual(action.getResult()); 
-//		}	
-//		catch(Exception e){
-//			JOptionPane.showMessageDialog(frmImpuestoALas, "Seleccione la fila primero",
-//					"Mensaje", JOptionPane.ERROR_MESSAGE);
-//		}
-//	}
 	
 	private void validarFloat(JTextField texto, String campo){
 		try{
