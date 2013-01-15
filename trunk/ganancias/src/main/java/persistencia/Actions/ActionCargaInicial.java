@@ -14,6 +14,7 @@ public class ActionCargaInicial implements Action {
 	private HibernateHome<DeduccionC> homeDecC;
 	private CamposParaCalculoAnualHibernateHome homeAnual;
 
+
 	@Override
 	public void execute() {
 		homeDecA = (HibernateHome<DeduccionA>) HibernateApplication
@@ -25,7 +26,7 @@ public class ActionCargaInicial implements Action {
 		
 		homeAnual = (CamposParaCalculoAnualHibernateHome) HibernateApplication
 				.getInstance().getHome(CamposParaCalculoAnual.class);
-
+		
 		homeAnual.deleteAllEntities();
 		homeDecA.deleteAllEntities();
 		homeDecB.deleteAllEntities();

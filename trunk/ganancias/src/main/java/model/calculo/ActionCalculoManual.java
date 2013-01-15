@@ -141,8 +141,10 @@ public class ActionCalculoManual implements Action {
 
 	// impuesto a pagar en el año
 	public float impuestoAPagarEnElAnio() {
-		this.calculo_anual = this.calculo_anual_home.getByInRango(this
-				.gananciaNetaC());
+		//this.calculo_anual = this.calculo_anual_home.getByInRango(this
+			//	.gananciaNetaC());
+		//TODO
+		this.calculo_anual = new CamposParaCalculoAnual(0,100000,250,230,52); 
 		return (this.getCalculo_anual().getBase() + ((this.getCalculo_anual()
 				.getPor_extra() * (this.gananciaNetaC() - this
 				.getCalculo_anual().getSobre_exced())) / 100))

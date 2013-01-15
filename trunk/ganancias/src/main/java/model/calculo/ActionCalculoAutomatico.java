@@ -70,7 +70,7 @@ public class ActionCalculoAutomatico implements Action {
 		for (Empleado e : listaDeEmpleados) {
 			ResultadoDeCalculo r = new ResultadoDeCalculo();
 			r.setCUIL(e.getCUIL());
-			r.setNom_y_ape(r.getNom_y_ape());
+			r.setNom_y_ape(e.getNom_y_ape());
 			r.setGananciaA(gananciaNetaA(e));
 			r.setGananciaB(gananciaNetaB(e));
 			r.setGananciaC(gananciaNetaC(e));

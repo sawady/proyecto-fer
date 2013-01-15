@@ -44,7 +44,7 @@ public class WriteExcel {
 				
 				new String("" + r.getCUIL() + "");
 				//Celdas con los contenidos de resultado
-				this.crearCelda(0,(double) r.getCUIL() , fila);
+				this.crearCelda(0,r.getCUIL() , fila);
 				this.crearCelda(1,r.getNom_y_ape(), fila);
 				this.crearCelda(2,(double) r.getRNIF() , fila);
 				this.crearCelda(3,(double) r.getGananciaA(), fila);
