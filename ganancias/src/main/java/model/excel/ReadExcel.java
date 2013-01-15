@@ -77,44 +77,41 @@ public class ReadExcel {
 		Iterator<Row> row =  hoja.rowIterator();
 		List<Empleado>retorno = new LinkedList<Empleado>();
 		Empleado empleado = null;
-		System.out.println(hoja.rowIterator());
 		row.next();
 		row.next();
 		row.next();
-
-//		row.next();//es para que arranque a recorrer desde la fila 3.(Verificar) me tira false el hasNext :(
 		while (row.hasNext()) {
-			Row r = row.next();
-			Iterator<Cell> celda = r.cellIterator();
-			empleado = new Empleado();
-			while (celda.hasNext()) {
-				Cell cel = celda.next();
-				if (cel.getColumnIndex() == 0) {
-					if (cel.getCellType() == 0) { // 0 = tipo nuemrico 1 = String
-						empleado.setCUIL((int) cel.getNumericCellValue());
-						        	}
-						    }
-				if (cel.getColumnIndex() == 1) {
-					if (cel.getCellType() == 1) { // 0 = tipo nuemrico 1 = String
-						empleado.setNom_y_ape(cel.getStringCellValue());//1
-						        	}
-						    }
-				if (cel.getColumnIndex() == 2) {
-					if (cel.getCellType() == 0) { // 0 = tipo nuemrico 1 = String
-						empleado.setRem_net_imp((float) cel.getNumericCellValue());//2
-						        	}
-						    }
-				if (cel.getColumnIndex() == 3) {
-					if (cel.getCellType() == 1) { // 0 = tipo nuemrico 1 = String
-						empleado.setTot_pag_ant_temp((int) cel.getNumericCellValue());//3
-						        	}
-						    }
-				if (cel.getColumnIndex() == 4) {
-					if (cel.getCellType() == 0) { // 0 = tipo nuemrico 1 = String
-						empleado.setRem_net_imp_acum_temp((int) cel.getNumericCellValue());//4
-						        	}
-						    }
-		    
+		Row r = row.next();
+		Iterator<Cell> celda = r.cellIterator();
+		empleado = new Empleado();
+		while (celda.hasNext()) {
+			Cell cel = celda.next();
+			if (cel.getColumnIndex() == 0) {
+				if (cel.getCellType() == 0) { // 0 = tipo nuemrico 1 = String
+					empleado.setCUIL( cel.getNumericCellValue());
+					        	}
+					    }
+			if (cel.getColumnIndex() == 1) {
+				if (cel.getCellType() == 1) { // 0 = tipo nuemrico 1 = String
+					empleado.setNom_y_ape(cel.getStringCellValue());//1
+				}
+					    }
+			if (cel.getColumnIndex() == 2) {
+				if (cel.getCellType() == 0) { // 0 = tipo nuemrico 1 = String
+					empleado.setRem_net_imp((float) cel.getNumericCellValue());//2
+					        	}
+					    }
+			if (cel.getColumnIndex() == 3) {
+				if (cel.getCellType() == 1) { // 0 = tipo nuemrico 1 = String
+					empleado.setTot_pag_ant_temp((int) cel.getNumericCellValue());//3
+					        	}
+				    }
+			if (cel.getColumnIndex() == 4) {
+				if (cel.getCellType() == 0) { // 0 = tipo nuemrico 1 = String
+					empleado.setRem_net_imp_acum_temp((int) cel.getNumericCellValue());//4
+					        	}
+					    }
+	    
 			if (cel.getColumnIndex() == 5) {
 				if (cel.getCellType() == 0) { // 0 = tipo nuemrico 1 = String
 					empleado.setEstad_civil((int) cel.getNumericCellValue());//5

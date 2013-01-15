@@ -3,7 +3,7 @@ package model.entities;
 import persistencia.Entity;
 
 public class Empleado extends Entity{
-	private int CUIL;
+	private double CUIL;
 	private String nom_y_ape;
 	private float rem_net_imp;
 	private int tot_pag_ant_temp;
@@ -39,10 +39,10 @@ public class Empleado extends Entity{
 	private float dev_compra_exter;
 	
 	
-	public int getCUIL() {
+	public double getCUIL() {
 		return CUIL;
 	}
-	public void setCUIL(int cUIL) {
+	public void setCUIL(double cUIL) {
 		CUIL = cUIL;
 	}
 	public String getNom_y_ape() {

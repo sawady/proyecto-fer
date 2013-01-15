@@ -3,7 +3,7 @@ package model.entities;
 import persistencia.Entity;
 
 public class ResultadoDeCalculo extends Entity{
-	private int CUIL;
+	private double CUIL;
 	private String nom_y_ape;
 	private float RNIF;
 	private float gananciaA;
@@ -21,10 +21,10 @@ public class ResultadoDeCalculo extends Entity{
 		this.imp_ganan_periodo = imp_ganan_periodo;
 	}
 	
-	public int getCUIL() {
+	public double getCUIL() {
 		return CUIL;
 	}
-	public void setCUIL(int cUIL) {
+	public void setCUIL(double cUIL) {
 		CUIL = cUIL;
 	}
 	public String getNom_y_ape() {
