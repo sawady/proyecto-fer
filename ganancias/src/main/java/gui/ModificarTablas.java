@@ -13,7 +13,6 @@ import javax.swing.JScrollPane;
 import javax.swing.JTabbedPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
-import javax.swing.ScrollPaneConstants;
 import javax.swing.UIManager;
 
 import model.entities.DeduccionA;
@@ -26,7 +25,6 @@ import persistencia.Actions.ActionEditarDeduccionC;
 import persistencia.Actions.ActionGetFirstDeduccionA;
 import persistencia.Actions.ActionGetFirstDeduccionB;
 import persistencia.Actions.ActionGetFirstDeduccionC;
-import persistencia.Actions.ActionSelectRow;
 import persistencia.Actions.ActionTraerTodosAnual;
 
 
