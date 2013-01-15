@@ -8,7 +8,7 @@
 			<generator class="native" />
 		</id>
 
-		<property name="CUIL" type="integer" />
+		<property name="CUIL" type="double" />
 		<property name="nom_y_ape" type="string" />
 		<property name="rem_net_imp" type="float" />
 		<property name="tot_pag_ant_temp" type="integer" />
