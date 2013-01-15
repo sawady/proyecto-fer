@@ -7,7 +7,7 @@
 		<id name="id" type="int" unsaved-value="0">
 			<generator class="native" />
 		</id>
-		<property name="CUIL" type="double" />
+		<property name="CUIL" type="string" />
 		<property name="nom_y_ape" type="string" />
 		<property name="RNIF" type="float" />
 		<property name="gananciaA" type="float" />

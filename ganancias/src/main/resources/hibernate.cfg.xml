@@ -14,7 +14,6 @@
 		<property name="connection.username">factory</property>
 		<property name="connection.password">estabalocaMMM</property>
 		<!-- Actualiza estructura -->
-		<property name="hibernate.hbm2ddl.auto">update</property>
 
 		<!-- la comunicacion con la bbdd -->
 		<property name="dialect">org.hibernate.dialect.MySQLDialect</property>
@@ -23,6 +22,7 @@
 		<!-- Para que muestre las querys que se van haciendo -->
 		<property name="hibernate.show_sql">true</property>
 
+		<property name="hibernate.hbm2ddl.auto">update</property>
 		<!-- aca irían todas las configuraciones que vamos a ver en el siguiente 
 			paso -->
 		<mapping resource="hibernate/model/entities/CamposParaCalculoAnual.hbm.xml" />
