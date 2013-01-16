@@ -15,6 +15,7 @@ import javax.swing.UIManager;
 import model.entities.CamposParaCalculoAnual;
 import persistencia.HibernateApplication;
 import persistencia.Actions.ActionEditarTablaCalculoAnual;
+import persistencia.Actions.ActionGetByCampoDesde;
 
 public class EditarTablaCalculoAnual extends JFrame {
 	
@@ -23,24 +24,31 @@ public class EditarTablaCalculoAnual extends JFrame {
 	private JTextField textField_2;
 	private JTextField textField_3;
 	private JTextField textField_4;
-	CamposParaCalculoAnual aModificar;
+	private CamposParaCalculoAnual aModificar;
+private Float id;
 
 	private static final long serialVersionUID = 1L;
 
-	public EditarTablaCalculoAnual(CamposParaCalculoAnual withId
+	public EditarTablaCalculoAnual(Float object
 			) {
+		this.id = object;
 		setResizable(false);
-		setVisible(true);
+		setVisible(true);	
+		setBounds(100, 100, 783, 431);
 		getContentPane().setBackground(new Color(176, 196, 222));
-		this.aModificar = withId;
 		this.inicialize();
 	}
 	
 	public void inicialize() {
 		getContentPane().setLayout(null);
 		
-		JButton button_1 = new JButton("Volver al inicio");
+		JButton button_1 = new JButton("Volver");
 		button_1.setBounds(12, 12, 136, 29);
+		button_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				dispose();
+			}
+		});
 		getContentPane().add(button_1);
 		
 		JDesktopPane desktopPane = new JDesktopPane();
@@ -110,8 +118,13 @@ public class EditarTablaCalculoAnual extends JFrame {
 			}
 		});
 		desktopPane.add(button_2);
+		mostrarEnPantalla();
 	}
 	private void mostrarEnPantalla(){
+		
+		ActionGetByCampoDesde action= (new ActionGetByCampoDesde(id));
+		HibernateApplication.getInstance().execute(action);
+		this.aModificar = action.getResult();
 		textField.setText(Float.toString(aModificar.getDesde()));
 		textField_1.setText(Float.toString(aModificar.getHasta()));
 		textField_2.setText(Float.toString(aModificar.getBase()));
@@ -133,8 +146,8 @@ public class EditarTablaCalculoAnual extends JFrame {
 		validarFloat(textField_4,"Valor de excedente");
 		Float  txt18 = Float.parseFloat(textField_4.getText());
 		CamposParaCalculoAnual nuevo = new CamposParaCalculoAnual(txt14, txt15, txt16, txt17, txt18);
-		HibernateApplication.getInstance().execute(new ActionEditarTablaCalculoAnual(aModificar, nuevo));
-		aModificar = nuevo;
+		System.out.println(aModificar.getDesde());
+		HibernateApplication.getInstance().execute(new ActionEditarTablaCalculoAnual(aModificar.getDesde(), nuevo));
 		JOptionPane.showMessageDialog(this, "Se han guardado sus cambios",
 				"Mensaje", JOptionPane.INFORMATION_MESSAGE);
 		this.dispose();

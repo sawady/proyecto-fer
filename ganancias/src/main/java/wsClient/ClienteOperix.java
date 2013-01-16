@@ -1,7 +1,6 @@
 package wsClient;
 
 import java.rmi.RemoteException;
-
 import javax.xml.rpc.ServiceException;
 
 import ar.com.operix.www.EmpleadoServicio;

@@ -14,11 +14,10 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 
-import persistencia.HibernateApplication;
-import persistencia.Actions.ActionCargaInicial;
-
 import model.FormatoEmpleadoException;
 import model.calculo.ActionCalculoAutomatico;
+import persistencia.HibernateApplication;
+import persistencia.Actions.ActionCargaInicial;
 
 public class Vista {
 
@@ -45,7 +44,7 @@ public class Vista {
 	 */
 	public Vista() {
 		initialize();
-		HibernateApplication.getInstance().execute(new ActionCargaInicial()); //TODO
+	HibernateApplication.getInstance().execute(new ActionCargaInicial()); //TODO
 	}
 
 	/**
@@ -87,7 +86,7 @@ public class Vista {
 		});
 
 		JButton btnSalir = new JButton("Salir");
-		btnSalir.setBounds(627, 357, 91, 23);
+		btnSalir.setBounds(40, 27, 133, 23);
 		frmProgramaDeImpuesto.getContentPane().add(btnSalir);
 		btnSalir.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
