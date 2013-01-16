@@ -45,9 +45,9 @@ public class ClienteOperix {
 				}
 			}
 		} catch (ServiceException e1) {
-			e1.printStackTrace();
+			System.out.println("fallo e1");
 		} catch (RemoteException e) {
-			e.printStackTrace();
+			System.out.println("fallo e2");
 		}
 		return null;
 	}

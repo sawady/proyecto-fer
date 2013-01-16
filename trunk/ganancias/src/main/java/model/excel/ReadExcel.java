@@ -17,6 +17,8 @@ import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.ss.usermodel.WorkbookFactory;
+
+import wsClient.ClienteOperix;
 /**
  * Clase que lee un archivo excel(de una estructura especifica) a partir de una ruta, y guarda la lista de empleados que
  * contiene el archivo en la base de datos.   
@@ -248,8 +250,8 @@ public class ReadExcel {
 					        	}
 					    }
 				}
-		//empleado.setTot_pag_ant_temp(ClienteOperix.ExtraerPagosAnteriores(empleado.getCUIL())); //TODO ws
-		//empleado.setRem_net_imp_acum_temp(ClienteOperix.ExtraerRnia(empleado.getCUIL())); //TODO ws
+		empleado.setTot_pag_ant_temp(ClienteOperix.ExtraerPagosAnteriores(empleado.getCUIL())); //TODO ws
+		empleado.setRem_net_imp_acum_temp(ClienteOperix.ExtraerRnia(empleado.getCUIL())); //TODO ws
 		retorno.add(empleado);
 			}
 		return retorno;
