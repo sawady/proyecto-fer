@@ -33,15 +33,16 @@ public class ClienteOperix {
 		} catch (RemoteException e) {
 			System.out.println("fallo e2");
 		}
-		return null;
+		return (float) 0;
 	}
 	
 	public static Float ExtraerRnia(String cuil){
+		Float retorno = null;
 		try {
 			port = locator.getServiciosOperixPort();
 			EmpleadoServicio[] xs= port.getGananciaEmpleados();
 			for (int i = 0; i < xs.length; i++) {
-				if (xs[i].getCuil() == cuil){
+				if (xs[i].getCuil().equalsIgnoreCase(cuil)){
 					return (float) xs[i].getRemNetImpAcum();
 				}
 			}
@@ -50,6 +51,6 @@ public class ClienteOperix {
 		} catch (RemoteException e) {
 			System.out.println("fallo e2");
 		}
-		return null;
+		return (float) 0;
 	}
 }
