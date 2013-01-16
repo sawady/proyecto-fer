@@ -8,8 +8,13 @@ import ar.com.operix.www.EmpleadoServicio;
 import ar.com.operix.www.ServiciosOperixPortType;
 import ar.com.operix.www.ServiciosOperixServiceLocator;
 
+/**
+ * 
+ * Clase web service cliente de operix. 
+ * Solo se interesa  a lo referente a los campos necesarios para el calculo de las ganancias d los empleados
+ *
+ */
 public class ClienteOperix {
-	
 	private static ServiciosOperixServiceLocator locator = new ServiciosOperixServiceLocator();
 	private static ServiciosOperixPortType port;
 	
@@ -26,14 +31,12 @@ public class ClienteOperix {
 				}
 			}
 		} catch (ServiceException e1) {
-			e1.printStackTrace();
+			System.out.println("fallo e1");
 		} catch (RemoteException e) {
-			e.printStackTrace();
+			System.out.println("fallo e2");
 		}
 		return null;
 	}
-	
-	
 	
 	public static Float ExtraerRnia(String cuil){
 		try {
