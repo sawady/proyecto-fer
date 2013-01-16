@@ -311,6 +311,11 @@ public class ModificarTablas {
 		desktopPane_3.add(btnActualizarTabla);
 		
 		JButton button = new JButton("Volver al inicio");
+		button.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				frmImpuestoALas.dispose();
+			}
+		});
 		button.setBounds(612, 358, 153, 29);
 		frmImpuestoALas.getContentPane().add(button);
 	}
