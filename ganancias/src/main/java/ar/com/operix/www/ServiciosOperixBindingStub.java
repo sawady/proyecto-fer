@@ -16,7 +16,7 @@ public class ServiciosOperixBindingStub extends org.apache.axis.client.Stub impl
     static org.apache.axis.description.OperationDesc [] _operations;
 
     static {
-        _operations = new org.apache.axis.description.OperationDesc[8];
+        _operations = new org.apache.axis.description.OperationDesc[10];
         _initOperationDesc1();
     }
 
@@ -135,6 +135,29 @@ public class ServiciosOperixBindingStub extends org.apache.axis.client.Stub impl
         oper.setUse(org.apache.axis.constants.Use.LITERAL);
         _operations[7] = oper;
 
+        oper = new org.apache.axis.description.OperationDesc();
+        oper.setName("GetGananciaEmpleados");
+        oper.setReturnType(new javax.xml.namespace.QName("http://www.operix.com.ar/", "EmpleadoServicioArray"));
+        oper.setReturnClass(ar.com.operix.www.EmpleadoServicio[].class);
+        oper.setReturnQName(new javax.xml.namespace.QName("", "result"));
+        param = oper.getReturnParamDesc();
+        param.setItemQName(new javax.xml.namespace.QName("", "item"));
+        oper.setStyle(org.apache.axis.constants.Style.RPC);
+        oper.setUse(org.apache.axis.constants.Use.LITERAL);
+        _operations[8] = oper;
+
+        oper = new org.apache.axis.description.OperationDesc();
+        oper.setName("SetGananciaEmpleados");
+        param = new org.apache.axis.description.ParameterDesc(new javax.xml.namespace.QName("", "EmpleadoServicio"), org.apache.axis.description.ParameterDesc.IN, new javax.xml.namespace.QName("http://www.operix.com.ar/", "EmpleadoServicioArray"), ar.com.operix.www.EmpleadoServicio[].class, false, false);
+        param.setItemQName(new javax.xml.namespace.QName("", "item"));
+        oper.addParameter(param);
+        oper.setReturnType(new javax.xml.namespace.QName("http://www.w3.org/2001/XMLSchema", "int"));
+        oper.setReturnClass(int.class);
+        oper.setReturnQName(new javax.xml.namespace.QName("", "result"));
+        oper.setStyle(org.apache.axis.constants.Style.RPC);
+        oper.setUse(org.apache.axis.constants.Use.LITERAL);
+        _operations[9] = oper;
+
     }
 
     public ServiciosOperixBindingStub() throws org.apache.axis.AxisFault {
@@ -166,6 +189,22 @@ public class ServiciosOperixBindingStub extends org.apache.axis.client.Stub impl
             java.lang.Class simpledf = org.apache.axis.encoding.ser.SimpleDeserializerFactory.class;
             java.lang.Class simplelistsf = org.apache.axis.encoding.ser.SimpleListSerializerFactory.class;
             java.lang.Class simplelistdf = org.apache.axis.encoding.ser.SimpleListDeserializerFactory.class;
+            qName = new javax.xml.namespace.QName("http://www.operix.com.ar/", "EmpleadoServicio");
+            cachedSerQNames.add(qName);
+            cls = ar.com.operix.www.EmpleadoServicio.class;
+            cachedSerClasses.add(cls);
+            cachedSerFactories.add(beansf);
+            cachedDeserFactories.add(beandf);
+
+            qName = new javax.xml.namespace.QName("http://www.operix.com.ar/", "EmpleadoServicioArray");
+            cachedSerQNames.add(qName);
+            cls = ar.com.operix.www.EmpleadoServicio[].class;
+            cachedSerClasses.add(cls);
+            qName = new javax.xml.namespace.QName("http://www.operix.com.ar/", "EmpleadoServicio");
+            qName2 = new javax.xml.namespace.QName("", "item");
+            cachedSerFactories.add(new org.apache.axis.encoding.ser.ArraySerializerFactory(qName, qName2));
+            cachedDeserFactories.add(new org.apache.axis.encoding.ser.ArrayDeserializerFactory());
+
             qName = new javax.xml.namespace.QName("http://www.operix.com.ar/", "HoraProyectoServicio");
             cachedSerQNames.add(qName);
             cls = ar.com.operix.www.HoraProyectoServicio.class;
@@ -535,6 +574,74 @@ public class ServiciosOperixBindingStub extends org.apache.axis.client.Stub impl
         setRequestHeaders(_call);
         setAttachments(_call);
  try {        java.lang.Object _resp = _call.invoke(new java.lang.Object[] {new java.lang.Integer(recursoId), salida});
+
+        if (_resp instanceof java.rmi.RemoteException) {
+            throw (java.rmi.RemoteException)_resp;
+        }
+        else {
+            extractAttachments(_call);
+            try {
+                return ((java.lang.Integer) _resp).intValue();
+            } catch (java.lang.Exception _exception) {
+                return ((java.lang.Integer) org.apache.axis.utils.JavaUtils.convert(_resp, int.class)).intValue();
+            }
+        }
+  } catch (org.apache.axis.AxisFault axisFaultException) {
+  throw axisFaultException;
+}
+    }
+
+    public ar.com.operix.www.EmpleadoServicio[] getGananciaEmpleados() throws java.rmi.RemoteException {
+        if (super.cachedEndpoint == null) {
+            throw new org.apache.axis.NoEndPointException();
+        }
+        org.apache.axis.client.Call _call = createCall();
+        _call.setOperation(_operations[8]);
+        _call.setUseSOAPAction(true);
+        _call.setSOAPActionURI("http://www.operix.com.ar/GetGananciaEmpleados");
+        _call.setEncodingStyle(null);
+        _call.setProperty(org.apache.axis.client.Call.SEND_TYPE_ATTR, Boolean.FALSE);
+        _call.setProperty(org.apache.axis.AxisEngine.PROP_DOMULTIREFS, Boolean.FALSE);
+        _call.setSOAPVersion(org.apache.axis.soap.SOAPConstants.SOAP11_CONSTANTS);
+        _call.setOperationName(new javax.xml.namespace.QName("http://www.operix.com.ar/", "GetGananciaEmpleados"));
+
+        setRequestHeaders(_call);
+        setAttachments(_call);
+ try {        java.lang.Object _resp = _call.invoke(new java.lang.Object[] {});
+
+        if (_resp instanceof java.rmi.RemoteException) {
+            throw (java.rmi.RemoteException)_resp;
+        }
+        else {
+            extractAttachments(_call);
+            try {
+                return (ar.com.operix.www.EmpleadoServicio[]) _resp;
+            } catch (java.lang.Exception _exception) {
+                return (ar.com.operix.www.EmpleadoServicio[]) org.apache.axis.utils.JavaUtils.convert(_resp, ar.com.operix.www.EmpleadoServicio[].class);
+            }
+        }
+  } catch (org.apache.axis.AxisFault axisFaultException) {
+  throw axisFaultException;
+}
+    }
+
+    public int setGananciaEmpleados(ar.com.operix.www.EmpleadoServicio[] empleadoServicio) throws java.rmi.RemoteException {
+        if (super.cachedEndpoint == null) {
+            throw new org.apache.axis.NoEndPointException();
+        }
+        org.apache.axis.client.Call _call = createCall();
+        _call.setOperation(_operations[9]);
+        _call.setUseSOAPAction(true);
+        _call.setSOAPActionURI("http://www.operix.com.ar/SetGananciaEmpleados");
+        _call.setEncodingStyle(null);
+        _call.setProperty(org.apache.axis.client.Call.SEND_TYPE_ATTR, Boolean.FALSE);
+        _call.setProperty(org.apache.axis.AxisEngine.PROP_DOMULTIREFS, Boolean.FALSE);
+        _call.setSOAPVersion(org.apache.axis.soap.SOAPConstants.SOAP11_CONSTANTS);
+        _call.setOperationName(new javax.xml.namespace.QName("http://www.operix.com.ar/", "SetGananciaEmpleados"));
+
+        setRequestHeaders(_call);
+        setAttachments(_call);
+ try {        java.lang.Object _resp = _call.invoke(new java.lang.Object[] {empleadoServicio});
 
         if (_resp instanceof java.rmi.RemoteException) {
             throw (java.rmi.RemoteException)_resp;

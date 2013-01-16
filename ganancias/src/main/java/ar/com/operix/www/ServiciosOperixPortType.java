@@ -16,4 +16,6 @@ public interface ServiciosOperixPortType extends java.rmi.Remote {
     public ar.com.operix.www.HorarioIE[] movimientosRecurso(int recursoId, int limit) throws java.rmi.RemoteException;
     public int imputoUltimaVez(int recursoId) throws java.rmi.RemoteException;
     public int horasTrabajadas(int recursoId, java.lang.String salida) throws java.rmi.RemoteException;
+    public ar.com.operix.www.EmpleadoServicio[] getGananciaEmpleados() throws java.rmi.RemoteException;
+    public int setGananciaEmpleados(ar.com.operix.www.EmpleadoServicio[] empleadoServicio) throws java.rmi.RemoteException;
 }
