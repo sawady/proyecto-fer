@@ -74,19 +74,9 @@ public class ModificarTablas {
 		frmImpuestoALas.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frmImpuestoALas.getContentPane().setLayout(null);
 
-		JButton button = new JButton("Volver al inicio");
-		button.setBounds(21, 11, 153, 29);
-		frmImpuestoALas.getContentPane().add(button);
-		button.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				frmImpuestoALas.dispose();
-
-			}
-		});
-
 		JTabbedPane tabbedPane = new JTabbedPane(JTabbedPane.LEFT);
 		tabbedPane.setTabLayoutPolicy(JTabbedPane.SCROLL_TAB_LAYOUT);
-		tabbedPane.setBounds(31, 54, 734, 322);
+		tabbedPane.setBounds(31, 24, 734, 322);
 		frmImpuestoALas.getContentPane().add(tabbedPane);
 
 		JDesktopPane desktopPane = new JDesktopPane();
@@ -319,6 +309,10 @@ public class ModificarTablas {
 		});
 		btnActualizarTabla.setBounds(292, 278, 156, 25);
 		desktopPane_3.add(btnActualizarTabla);
+		
+		JButton button = new JButton("Volver al inicio");
+		button.setBounds(612, 358, 153, 29);
+		frmImpuestoALas.getContentPane().add(button);
 	}
 
 	private void cargarModelTabla() {
