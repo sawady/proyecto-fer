@@ -250,8 +250,8 @@ public class ReadExcel {
 					        	}
 					    }
 				}
-		empleado.setTot_pag_ant_temp(ClienteOperix.ExtraerPagosAnteriores(empleado.getCUIL())); //TODO ws
-		empleado.setRem_net_imp_acum_temp(ClienteOperix.ExtraerRnia(empleado.getCUIL())); //TODO ws
+		empleado.setTot_pag_ant_temp(ClienteOperix.ExtraerPagosAnteriores(empleado.getCUIL())); //TODO 
+		empleado.setRem_net_imp_acum_temp(ClienteOperix.ExtraerRnia(empleado.getCUIL())); //TODO 
 		retorno.add(empleado);
 			}
 		return retorno;

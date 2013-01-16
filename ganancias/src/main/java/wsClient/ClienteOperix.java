@@ -9,7 +9,6 @@ import ar.com.operix.www.ServiciosOperixPortType;
 import ar.com.operix.www.ServiciosOperixServiceLocator;
 
 /**
- * 
  * Clase web service cliente de operix. 
  * Solo se interesa  a lo referente a los campos necesarios para el calculo de las ganancias d los empleados
  *
