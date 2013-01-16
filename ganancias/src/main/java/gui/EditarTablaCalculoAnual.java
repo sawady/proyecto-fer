@@ -48,6 +48,7 @@ private Float id;
 			public void actionPerformed(ActionEvent e) {
 				dispose();
 			}
+
 		});
 		getContentPane().add(button_1);
 		
@@ -115,6 +116,7 @@ private Float id;
 		button_2.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				botonGuardar();
+				new ModificarTablas();
 			}
 		});
 		desktopPane.add(button_2);
@@ -132,7 +134,6 @@ private Float id;
 		textField_4.setText(Float.toString(aModificar.getSobre_exced()));
 		
 	}
-	
 	
 	private void botonGuardar(){
 		validarFloat(textField,"Ganancia neta imponible desde");
