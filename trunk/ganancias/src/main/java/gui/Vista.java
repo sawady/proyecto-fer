@@ -67,7 +67,7 @@ public class Vista {
 		frmProgramaDeImpuesto.getContentPane().add(btnNewButton);
 		btnNewButton.addActionListener(new SaveListener());
 
-		JButton btnNewButton_1 = new JButton("Modificacion de valores");
+		JButton btnNewButton_1 = new JButton("Modificar valores de tablas");
 		btnNewButton_1.setBounds(255, 302, 254, 50);
 		frmProgramaDeImpuesto.getContentPane().add(btnNewButton_1);
 		btnNewButton_1.addActionListener(new ActionListener() {

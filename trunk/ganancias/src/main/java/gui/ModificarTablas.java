@@ -18,6 +18,8 @@ import javax.swing.UIManager;
 import javax.swing.table.TableModel;
 import javax.swing.table.TableRowSorter;
 
+import org.hibernate.classic.Validatable;
+
 import model.entities.DeduccionA;
 import model.entities.DeduccionB;
 import model.entities.DeduccionC;
@@ -293,22 +295,13 @@ public class ModificarTablas {
 				} else {
 					new EditarTablaCalculoAnual((Float) tableModel.getValueAt(
 							tableAnual.getSelectedRow(), 0));
-					cargarModelTabla();
+					frmImpuestoALas.dispose();
 				}
 
 			}
 		});
 		btnEditarFila.setBounds(460, 278, 124, 25);
 		desktopPane_3.add(btnEditarFila);
-		
-		JButton btnActualizarTabla = new JButton("Actualizar Tabla");
-		btnActualizarTabla.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				cargarModelTabla();
-			}
-		});
-		btnActualizarTabla.setBounds(292, 278, 156, 25);
-		desktopPane_3.add(btnActualizarTabla);
 		
 		JButton button = new JButton("Volver al inicio");
 		button.addActionListener(new ActionListener() {
@@ -320,8 +313,8 @@ public class ModificarTablas {
 		frmImpuestoALas.getContentPane().add(button);
 	}
 
-	private void cargarModelTabla() {
-		tableModel.getDataVector().removeAllElements();
+	public void cargarModelTabla() {
+		//tableModel.getDataVector().removeAllElements();
 		ActionTraerTodosAnual action = new ActionTraerTodosAnual();
 		HibernateApplication.getInstance().execute(action);
 		tableModel.actualizarme(action.getResult());
