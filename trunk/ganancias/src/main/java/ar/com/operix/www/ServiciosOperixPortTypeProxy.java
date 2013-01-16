@@ -92,5 +92,17 @@ public class ServiciosOperixPortTypeProxy implements ar.com.operix.www.Servicios
     return serviciosOperixPortType.horasTrabajadas(recursoId, salida);
   }
   
+  public ar.com.operix.www.EmpleadoServicio[] getGananciaEmpleados() throws java.rmi.RemoteException{
+    if (serviciosOperixPortType == null)
+      _initServiciosOperixPortTypeProxy();
+    return serviciosOperixPortType.getGananciaEmpleados();
+  }
+  
+  public int setGananciaEmpleados(ar.com.operix.www.EmpleadoServicio[] empleadoServicio) throws java.rmi.RemoteException{
+    if (serviciosOperixPortType == null)
+      _initServiciosOperixPortTypeProxy();
+    return serviciosOperixPortType.setGananciaEmpleados(empleadoServicio);
+  }
+  
   
 }
