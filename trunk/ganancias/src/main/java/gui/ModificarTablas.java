@@ -13,7 +13,10 @@ import javax.swing.JScrollPane;
 import javax.swing.JTabbedPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
+import javax.swing.RowSorter;
 import javax.swing.UIManager;
+import javax.swing.table.TableModel;
+import javax.swing.table.TableRowSorter;
 
 import model.entities.DeduccionA;
 import model.entities.DeduccionB;
@@ -26,7 +29,6 @@ import persistencia.Actions.ActionGetFirstDeduccionA;
 import persistencia.Actions.ActionGetFirstDeduccionB;
 import persistencia.Actions.ActionGetFirstDeduccionC;
 import persistencia.Actions.ActionTraerTodosAnual;
-
 
 public class ModificarTablas {
 
@@ -47,7 +49,7 @@ public class ModificarTablas {
 	private JTextField textField_13;
 	private TableModelAnual tableModel;
 	private JTable tableAnual;
-	
+
 	/**
 	 * Create the application.
 	 */
@@ -58,14 +60,13 @@ public class ModificarTablas {
 		this.mostrarDatosEnPantallaDeduccionC();
 	}
 
-
-
 	/**
 	 * Initialize the contents of the frame.
 	 */
 	private void initialize() {
 		frmImpuestoALas = new JFrame();
-		frmImpuestoALas.getContentPane().setBackground(new Color(176, 196, 222));
+		frmImpuestoALas.getContentPane()
+				.setBackground(new Color(176, 196, 222));
 		frmImpuestoALas.setResizable(false);
 		frmImpuestoALas.setTitle("Impuesto a las ganancias - Modificar tablas");
 		frmImpuestoALas.setBounds(100, 100, 783, 431);
@@ -79,7 +80,7 @@ public class ModificarTablas {
 		button.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				frmImpuestoALas.dispose();
-				
+
 			}
 		});
 
@@ -149,7 +150,9 @@ public class ModificarTablas {
 		btnAceptar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				botonAceptarAccionA();
-				JOptionPane.showMessageDialog(frmImpuestoALas,"Los cambios se guardaron satisfactoriamente", "Información",JOptionPane.INFORMATION_MESSAGE);
+				JOptionPane.showMessageDialog(frmImpuestoALas,
+						"Los cambios se guardaron satisfactoriamente",
+						"Información", JOptionPane.INFORMATION_MESSAGE);
 			}
 		});
 		btnAceptar.setBounds(330, 255, 118, 23);
@@ -282,31 +285,71 @@ public class ModificarTablas {
 		desktopPane_2.add(btnGuardar_1);
 
 		JDesktopPane desktopPane_3 = new JDesktopPane();
-		desktopPane_3.setBackground(UIManager.getColor("ScrollBar.thumbHighlight"));
+		desktopPane_3.setBackground(UIManager
+				.getColor("ScrollBar.thumbHighlight"));
 		tabbedPane.addTab("Impuesto Anual", null, desktopPane_3, null);
+
+		// tabla
+	
+		desktopPane_3.add(tabla());
+
+		JButton btnEditarFila = new JButton("Editar Fila");
+		btnEditarFila.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				if (tableAnual.getSelectedRow() == -1) {
+					JOptionPane.showMessageDialog(frmImpuestoALas,
+							"Seleccione una fila primero", "Mensaje",
+							JOptionPane.ERROR_MESSAGE);
+				} else {
+					new EditarTablaCalculoAnual((Float) tableModel.getValueAt(
+							tableAnual.getSelectedRow(), 0));
+					cargarModelTabla();
+				}
+
+			}
+		});
+		btnEditarFila.setBounds(460, 278, 124, 25);
+		desktopPane_3.add(btnEditarFila);
 		
-		//tabla
-		this.tableModel = new TableModelAnual();
-		tableAnual = new JTable(tableModel);
+		JButton btnActualizarTabla = new JButton("Actualizar Tabla");
+		btnActualizarTabla.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				cargarModelTabla();
+			}
+		});
+		btnActualizarTabla.setBounds(292, 278, 156, 25);
+		desktopPane_3.add(btnActualizarTabla);
+	}
+
+	private void cargarModelTabla() {
+		tableModel.getDataVector().removeAllElements();
 		ActionTraerTodosAnual action = new ActionTraerTodosAnual();
 		HibernateApplication.getInstance().execute(action);
-		this.tableModel.addColumn( "Desde");
-		this.tableModel.addColumn( "Hasta");
-		this.tableModel.addColumn( "Base");
-		this.tableModel.addColumn( "Porcentaje estra por excedente");
-		this.tableModel.addColumn( "Valor de excedente");
-		
 		tableModel.actualizarme(action.getResult());
+		
+	}
+
+	private JScrollPane tabla(){
+		this.tableModel = new TableModelAnual();
+		tableAnual = new JTable(tableModel);
+		this.tableModel.addColumn("Desde");
+		this.tableModel.addColumn("Hasta");
+		this.tableModel.addColumn("Base");
+		this.tableModel.addColumn("Porcentaje estra por excedente");
+		this.tableModel.addColumn("Valor de excedente");
+		RowSorter<TableModel> sorter = new TableRowSorter<TableModel>(tableModel);
+		tableAnual.setRowSorter(sorter);
+		tableAnual.getRowSorter().toggleSortOrder(0);
+		this.cargarModelTabla();
 		JScrollPane scrollPane = new JScrollPane(tableAnual);
 		scrollPane.setBounds(15, 12, 569, 131);
-		desktopPane_3.add(scrollPane);
+		return scrollPane;	
 	}
-	
-	//Auxiliares
+	// Auxiliares
 	public void mostrarDatosEnPantallaDeduccionA() {
 		ActionGetFirstDeduccionA action = new ActionGetFirstDeduccionA();
 		HibernateApplication.getInstance().execute(action);
-		
+
 		DeduccionA deduccionA = action.getResult();
 		textField.setText(Float.toString(deduccionA.getMin_no_imp()));
 		textField_1.setText(Float.toString(deduccionA.getDedu_espe()));
@@ -315,11 +358,11 @@ public class ModificarTablas {
 		textField_4.setText(Float.toString(deduccionA.getOtros()));
 
 	}
-	
+
 	public void mostrarDatosEnPantallaDeduccionB() {
 		ActionGetFirstDeduccionB action = new ActionGetFirstDeduccionB();
 		HibernateApplication.getInstance().execute(action);
-		
+
 		DeduccionB deduccionB = action.getResult();
 		textField_5.setText(Float.toString(deduccionB.getGast_sepe_anu()));
 		textField_6.setText(Float.toString(deduccionB.getSeg_vida_anu()));
@@ -327,6 +370,7 @@ public class ModificarTablas {
 		textField_8.setText(Float.toString(deduccionB.getInt_cred_hip_anu()));
 
 	}
+
 	public void mostrarDatosEnPantallaDeduccionC() {
 		ActionGetFirstDeduccionC action = new ActionGetFirstDeduccionC();
 		HibernateApplication.getInstance().execute(action);
@@ -335,74 +379,77 @@ public class ModificarTablas {
 		textField_10.setText(Float.toString(deduccionC.getHonor_med_anu()));
 		textField_11.setText(Float.toString(deduccionC.getDonac_anu()));
 		textField_12.setText(Float.toString(deduccionC.getImp_cheq_cred_anu()));
-		textField_13.setText(Float.toString(deduccionC.getDeb_total_imp_cheq_cred_anu()));
+		textField_13.setText(Float.toString(deduccionC
+				.getDeb_total_imp_cheq_cred_anu()));
 	}
-	
+
 	private void botonCancelarAccionA() {
 		mostrarDatosEnPantallaDeduccionA();
 	}
-	
+
 	private void botonCancelarAccionB() {
-		mostrarDatosEnPantallaDeduccionB(); 
+		mostrarDatosEnPantallaDeduccionB();
 	}
-	
+
 	private void botonCancelarAccionC() {
 		mostrarDatosEnPantallaDeduccionC();
 	}
-	
+
 	private void botonAceptarAccionA() {
-		validarFloat(textField,"Mínimo no imponible");
+		validarFloat(textField, "Mínimo no imponible");
 		Float txt0 = Float.parseFloat(textField.getText());
-		validarFloat(textField_1,"Deducci\u00F3n especal");
+		validarFloat(textField_1, "Deducci\u00F3n especal");
 		Float txt1 = Float.parseFloat(textField_1.getText());
-		validarFloat(textField_2,"Tope anual por conyuge");
+		validarFloat(textField_2, "Tope anual por conyuge");
 		Float txt2 = Float.parseFloat(textField_2.getText());
-		validarFloat(textField_3,"Tope anual por hijos");
+		validarFloat(textField_3, "Tope anual por hijos");
 		Float txt3 = Float.parseFloat(textField_3.getText());
-		validarFloat(textField_4,"Tope anual por persona a cargo");
+		validarFloat(textField_4, "Tope anual por persona a cargo");
 		Float txt4 = Float.parseFloat(textField_4.getText());
-		DeduccionA nuevo =new DeduccionA(txt0, txt1, txt2, txt3, txt4);
-		HibernateApplication.getInstance().execute(new ActionEditarDeduccionA( nuevo));
+		DeduccionA nuevo = new DeduccionA(txt0, txt1, txt2, txt3, txt4);
+		HibernateApplication.getInstance().execute(
+				new ActionEditarDeduccionA(nuevo));
 		mostrarDatosEnPantallaDeduccionA();
 	}
-	
-
 
 	private void botonAceptarAccionB() {
-		validarFloat(textField_5,"Tope anual gastos de sepelio");
+		validarFloat(textField_5, "Tope anual gastos de sepelio");
 		Float txt5 = Float.parseFloat(textField_5.getText());
-		validarFloat(textField_6,"Tope anual seguro de vida");
+		validarFloat(textField_6, "Tope anual seguro de vida");
 		Float txt6 = Float.parseFloat(textField_6.getText());
-		validarFloat(textField_7,"Tope anual servicio domestico");
+		validarFloat(textField_7, "Tope anual servicio domestico");
 		Float txt7 = Float.parseFloat(textField_7.getText());
-		validarFloat(textField_8,"Tope anual crédito hipotecario");
+		validarFloat(textField_8, "Tope anual crédito hipotecario");
 		Float txt8 = Float.parseFloat(textField_8.getText());
 		DeduccionB nuevo = new DeduccionB(txt5, txt6, txt7, txt8);
-		HibernateApplication.getInstance().execute(new ActionEditarDeduccionB( nuevo));
+		HibernateApplication.getInstance().execute(
+				new ActionEditarDeduccionB(nuevo));
 		mostrarDatosEnPantallaDeduccionB();
 	}
-	
+
 	private void botonAceptarAccionC() {
-		validarFloat(textField_9,"Cuota Médico Asistencial");
+		validarFloat(textField_9, "Cuota Médico Asistencial");
 		Float txt9 = Float.parseFloat(textField_9.getText());
-		validarFloat(textField_10,"Honorarios Medicos");
+		validarFloat(textField_10, "Honorarios Medicos");
 		Float txt10 = Float.parseFloat(textField_10.getText());
-		validarFloat(textField_11,"Donaciones");
+		validarFloat(textField_11, "Donaciones");
 		Float txt11 = Float.parseFloat(textField_11.getText());
-		validarFloat(textField_12,"Imp al Cheque sobre créditos");
+		validarFloat(textField_12, "Imp al Cheque sobre créditos");
 		Float txt12 = Float.parseFloat(textField_12.getText());
-		validarFloat(textField_13,"Deducción imp. cheque sobre Cred");
+		validarFloat(textField_13, "Deducción imp. cheque sobre Cred");
 		Float txt13 = Float.parseFloat(textField_13.getText());
 		DeduccionC nuevo = new DeduccionC(txt9, txt10, txt11, txt12, txt13);
-		HibernateApplication.getInstance().execute(new ActionEditarDeduccionC( nuevo));
+		HibernateApplication.getInstance().execute(
+				new ActionEditarDeduccionC(nuevo));
 		mostrarDatosEnPantallaDeduccionC();
 	}
-	
-	private void validarFloat(JTextField texto, String campo){
-		try{
+
+	private void validarFloat(JTextField texto, String campo) {
+		try {
 			Float.parseFloat(texto.getText());
-		}catch(Exception e){
-			JOptionPane.showMessageDialog(null, " Solo se permiten números en el campo: " + campo);
+		} catch (Exception e) {
+			JOptionPane.showMessageDialog(null,
+					" Solo se permiten números en el campo: " + campo);
 			texto.setText(null);
 		}
 	}

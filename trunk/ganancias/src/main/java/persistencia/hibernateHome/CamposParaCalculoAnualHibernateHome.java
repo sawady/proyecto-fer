@@ -18,17 +18,20 @@ public class CamposParaCalculoAnualHibernateHome extends
 				retorno =a;
 				break;
 			}
-		} //Se espera que siempre el valor del paramentro entre en alguno d los limites dados
+		}
 		return retorno;
 	}
 	public CamposParaCalculoAnual getByInRango(float gananciaNetaC) {
 		CamposParaCalculoAnual  retorno = null;
 		for (CamposParaCalculoAnual  a :this.getAllEntities()){
-			if(a.getDesde()<= gananciaNetaC && a.getHasta()>=gananciaNetaC){
-				retorno =a;
+			if(a.getDesde()<= gananciaNetaC && a.getHasta()>gananciaNetaC){
+				retorno = a;
 				break;
 			}
 		} //Se espera que siempre el valor del paramentro entre en alguno d los limites dados
+		if (retorno == null ){
+			retorno = this.getByInRango(0);
+		}
 		return retorno;
 	}
 	
