@@ -67,8 +67,8 @@ public class Vista {
 		frmProgramaDeImpuesto.getContentPane().add(btnNewButton);
 		btnNewButton.addActionListener(new SaveListener());
 
-		JButton btnNewButton_1 = new JButton("Modificacion de datos");
-		btnNewButton_1.setBounds(255, 213, 254, 50);
+		JButton btnNewButton_1 = new JButton("Modificacion de valores");
+		btnNewButton_1.setBounds(255, 302, 254, 50);
 		frmProgramaDeImpuesto.getContentPane().add(btnNewButton_1);
 		btnNewButton_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -77,7 +77,7 @@ public class Vista {
 		});
 
 		JButton btnNewButton_2 = new JButton("Carga manual");
-		btnNewButton_2.setBounds(255, 300, 254, 50);
+		btnNewButton_2.setBounds(255, 213, 254, 50);
 		frmProgramaDeImpuesto.getContentPane().add(btnNewButton_2);
 		btnNewButton_2.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
