@@ -86,7 +86,7 @@ public class Vista {
 		});
 
 		JButton btnSalir = new JButton("Salir");
-		btnSalir.setBounds(40, 27, 133, 23);
+		btnSalir.setBounds(602, 371, 133, 23);
 		frmProgramaDeImpuesto.getContentPane().add(btnSalir);
 		btnSalir.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {

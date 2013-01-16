@@ -34,7 +34,7 @@ private Float id;
 		this.id = object;
 		setResizable(false);
 		setVisible(true);	
-		setBounds(100, 100, 783, 431);
+		setBounds(100, 100, 719, 431);
 		getContentPane().setBackground(new Color(176, 196, 222));
 		this.inicialize();
 	}
@@ -43,7 +43,7 @@ private Float id;
 		getContentPane().setLayout(null);
 		
 		JButton button_1 = new JButton("Volver");
-		button_1.setBounds(12, 12, 136, 29);
+		button_1.setBounds(558, 348, 136, 29);
 		button_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				dispose();
@@ -53,7 +53,7 @@ private Float id;
 		
 		JDesktopPane desktopPane = new JDesktopPane();
 		desktopPane.setBackground(UIManager.getColor("Button.select"));
-		desktopPane.setBounds(22, 61, 596, 315);
+		desktopPane.setBounds(32, 12, 596, 315);
 		getContentPane().add(desktopPane);
 		
 		JLabel label = new JLabel("Ganancia neta imponible desde");

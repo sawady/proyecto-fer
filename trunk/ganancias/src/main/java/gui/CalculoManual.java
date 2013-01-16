@@ -54,7 +54,7 @@ public class CalculoManual {
 		frmImpuestoALas.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
 		JButton button = new JButton("Volver al inicio");
-		button.setBounds(10, 11, 136, 29);
+		button.setBounds(610, 592, 136, 29);
 		button.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				frmImpuestoALas.dispose();
@@ -65,7 +65,7 @@ public class CalculoManual {
 
 		JDesktopPane desktopPane = new JDesktopPane();
 		desktopPane.setBackground(UIManager.getColor("ScrollBar.shadow"));
-		desktopPane.setBounds(42, 52, 703, 568);
+		desktopPane.setBounds(43, 12, 703, 568);
 		frmImpuestoALas.getContentPane().add(desktopPane);
 
 		JLabel lblRemuneracionNetaImponibble = new JLabel(
