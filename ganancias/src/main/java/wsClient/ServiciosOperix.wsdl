@@ -1,0 +1,273 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns="http://schemas.xmlsoap.org/wsdl/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" name="ServiciosOperix" targetNamespace="http://www.operix.com.ar/" xmlns:tns="http://www.operix.com.ar/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/">
+  <wsdl:types xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://www.w3.org/2001/XMLSchema" targetNamespace="http://www.operix.com.ar/">
+      <xsd:complexType name="ProyectoServicio">
+        <xsd:sequence>
+          <xsd:element name="proyectoId" type="xsd:int"/>
+          <xsd:element name="proyectoNombre" type="xsd:string"/>
+          <xsd:element name="horasEstimadas" type="xsd:int"/>
+          <xsd:element name="mailAutor" type="xsd:string"/>
+          <xsd:element name="horasImputadas" type="xsd:int"/>
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:element xmlns:xsd="http://www.w3.org/2001/XMLSchema" name="ProyectoServicioElement" type="tns:ProyectoServicio"/>
+      <xsd:complexType name="ProyectoServicioArray">
+        <xsd:sequence>
+          <xsd:element name="item" type="tns:ProyectoServicio" minOccurs="0" maxOccurs="unbounded"/>
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:element xmlns:xsd="http://www.w3.org/2001/XMLSchema" name="ProyectoServicioArrayElement" type="tns:ProyectoServicioArray"/>
+      <xsd:complexType name="HoraProyectoServicio">
+        <xsd:sequence>
+          <xsd:element name="fecha" type="xsd:string"/>
+          <xsd:element name="horas" type="xsd:int"/>
+          <xsd:element name="comentario" type="xsd:string"/>
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:element xmlns:xsd="http://www.w3.org/2001/XMLSchema" name="HoraProyectoServicioElement" type="tns:HoraProyectoServicio"/>
+      <xsd:complexType name="HoraProyectoServicioArray">
+        <xsd:sequence>
+          <xsd:element name="item" type="tns:HoraProyectoServicio" minOccurs="0" maxOccurs="unbounded"/>
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:element xmlns:xsd="http://www.w3.org/2001/XMLSchema" name="HoraProyectoServicioArrayElement" type="tns:HoraProyectoServicioArray"/>
+      <xsd:complexType name="HorarioIE">
+        <xsd:sequence>
+          <xsd:element name="recursoId" type="xsd:int"/>
+          <xsd:element name="fechaHora" type="xsd:int"/>
+          <xsd:element name="movimiento" type="xsd:string"/>
+          <xsd:element name="tipo" type="xsd:string"/>
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:element xmlns:xsd="http://www.w3.org/2001/XMLSchema" name="HorarioIEElement" type="tns:HorarioIE"/>
+      <xsd:complexType name="HorarioIEArray">
+        <xsd:sequence>
+          <xsd:element name="item" type="tns:HorarioIE" minOccurs="0" maxOccurs="unbounded"/>
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:element xmlns:xsd="http://www.w3.org/2001/XMLSchema" name="HorarioIEArrayElement" type="tns:HorarioIEArray"/>
+      <xsd:complexType name="EmpleadoServicio">
+        <xsd:sequence>
+          <xsd:element name="cuil" type="xsd:string"/>
+          <xsd:element name="remNetImpAcum" type="xsd:int"/>
+          <xsd:element name="totPagAnt" type="xsd:int"/>
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:element xmlns:xsd="http://www.w3.org/2001/XMLSchema" name="EmpleadoServicioElement" type="tns:EmpleadoServicio"/>
+      <xsd:complexType name="EmpleadoServicioArray">
+        <xsd:sequence>
+          <xsd:element name="item" type="tns:EmpleadoServicio" minOccurs="0" maxOccurs="unbounded"/>
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:element xmlns:xsd="http://www.w3.org/2001/XMLSchema" name="EmpleadoServicioArrayElement" type="tns:EmpleadoServicioArray"/>
+    </xsd:schema>
+  </wsdl:types>
+  <wsdl:portType name="ServiciosOperixPortType">
+    <wsdl:operation name="ListarProyectos" parameterOrder="recursoId">
+      <wsdl:input message="tns:ListarProyectosRequest"/>
+      <wsdl:output message="tns:ListarProyectosResponse"/>
+    </wsdl:operation>
+    <wsdl:operation name="GrabarDatoProyecto" parameterOrder="proyecto comentario fecha horas">
+      <wsdl:input message="tns:GrabarDatoProyectoRequest"/>
+      <wsdl:output message="tns:GrabarDatoProyectoResponse"/>
+    </wsdl:operation>
+    <wsdl:operation name="GetHistorialProyecto" parameterOrder="proyecto">
+      <wsdl:input message="tns:GetHistorialProyectoRequest"/>
+      <wsdl:output message="tns:GetHistorialProyectoResponse"/>
+    </wsdl:operation>
+    <wsdl:operation name="BorrarDatoProyecto" parameterOrder="proyecto fecha">
+      <wsdl:input message="tns:BorrarDatoProyectoRequest"/>
+      <wsdl:output message="tns:BorrarDatoProyectoResponse"/>
+    </wsdl:operation>
+    <wsdl:operation name="GrabarMovimientoRecurso" parameterOrder="recursoId fechaHora movimiento tipo">
+      <wsdl:input message="tns:GrabarMovimientoRecursoRequest"/>
+      <wsdl:output message="tns:GrabarMovimientoRecursoResponse"/>
+    </wsdl:operation>
+    <wsdl:operation name="MovimientosRecurso" parameterOrder="recursoId limit">
+      <wsdl:input message="tns:MovimientosRecursoRequest"/>
+      <wsdl:output message="tns:MovimientosRecursoResponse"/>
+    </wsdl:operation>
+    <wsdl:operation name="ImputoUltimaVez" parameterOrder="recursoId">
+      <wsdl:input message="tns:ImputoUltimaVezRequest"/>
+      <wsdl:output message="tns:ImputoUltimaVezResponse"/>
+    </wsdl:operation>
+    <wsdl:operation name="HorasTrabajadas" parameterOrder="recursoId salida">
+      <wsdl:input message="tns:HorasTrabajadasRequest"/>
+      <wsdl:output message="tns:HorasTrabajadasResponse"/>
+    </wsdl:operation>
+    <wsdl:operation name="GetGananciaEmpleados">
+      <wsdl:input message="tns:GetGananciaEmpleadosRequest"/>
+      <wsdl:output message="tns:GetGananciaEmpleadosResponse"/>
+    </wsdl:operation>
+    <wsdl:operation name="SetGananciaEmpleados" parameterOrder="EmpleadoServicio">
+      <wsdl:input message="tns:SetGananciaEmpleadosRequest"/>
+      <wsdl:output message="tns:SetGananciaEmpleadosResponse"/>
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" name="ServiciosOperixBinding" type="tns:ServiciosOperixPortType">
+    <soap:binding xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" style="rpc" transport="http://schemas.xmlsoap.org/soap/http"/>
+    <wsdl:operation xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" name="ListarProyectos">
+      <soap:operation xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" soapAction="http://www.operix.com.ar/ListarProyectos" style="rpc"/>
+      <wsdl:input xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/">
+        <soap:body xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" parts="recursoId" use="literal" namespace="http://www.operix.com.ar/" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+      </wsdl:input>
+      <wsdl:output xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/">
+        <soap:body xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" parts="result" use="literal" namespace="http://www.operix.com.ar/" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" name="GrabarDatoProyecto">
+      <soap:operation xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" soapAction="http://www.operix.com.ar/GrabarDatoProyecto" style="rpc"/>
+      <wsdl:input xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/">
+        <soap:body xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" parts="proyecto comentario fecha horas" use="literal" namespace="http://www.operix.com.ar/" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+      </wsdl:input>
+      <wsdl:output xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/">
+        <soap:body xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" parts="result" use="literal" namespace="http://www.operix.com.ar/" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" name="GetHistorialProyecto">
+      <soap:operation xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" soapAction="http://www.operix.com.ar/GetHistorialProyecto" style="rpc"/>
+      <wsdl:input xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/">
+        <soap:body xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" parts="proyecto" use="literal" namespace="http://www.operix.com.ar/" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+      </wsdl:input>
+      <wsdl:output xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/">
+        <soap:body xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" parts="result" use="literal" namespace="http://www.operix.com.ar/" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" name="BorrarDatoProyecto">
+      <soap:operation xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" soapAction="http://www.operix.com.ar/BorrarDatoProyecto" style="rpc"/>
+      <wsdl:input xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/">
+        <soap:body xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" parts="proyecto fecha" use="literal" namespace="http://www.operix.com.ar/" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+      </wsdl:input>
+      <wsdl:output xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/">
+        <soap:body xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" parts="result" use="literal" namespace="http://www.operix.com.ar/" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" name="GrabarMovimientoRecurso">
+      <soap:operation xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" soapAction="http://www.operix.com.ar/GrabarMovimientoRecurso" style="rpc"/>
+      <wsdl:input xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/">
+        <soap:body xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" parts="recursoId fechaHora movimiento tipo" use="literal" namespace="http://www.operix.com.ar/" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+      </wsdl:input>
+      <wsdl:output xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/">
+        <soap:body xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" parts="result" use="literal" namespace="http://www.operix.com.ar/" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" name="MovimientosRecurso">
+      <soap:operation xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" soapAction="http://www.operix.com.ar/MovimientosRecurso" style="rpc"/>
+      <wsdl:input xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/">
+        <soap:body xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" parts="recursoId limit" use="literal" namespace="http://www.operix.com.ar/" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+      </wsdl:input>
+      <wsdl:output xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/">
+        <soap:body xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" parts="result" use="literal" namespace="http://www.operix.com.ar/" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" name="ImputoUltimaVez">
+      <soap:operation xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" soapAction="http://www.operix.com.ar/ImputoUltimaVez" style="rpc"/>
+      <wsdl:input xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/">
+        <soap:body xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" parts="recursoId" use="literal" namespace="http://www.operix.com.ar/" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+      </wsdl:input>
+      <wsdl:output xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/">
+        <soap:body xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" parts="result" use="literal" namespace="http://www.operix.com.ar/" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" name="HorasTrabajadas">
+      <soap:operation xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" soapAction="http://www.operix.com.ar/HorasTrabajadas" style="rpc"/>
+      <wsdl:input xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/">
+        <soap:body xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" parts="recursoId salida" use="literal" namespace="http://www.operix.com.ar/" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+      </wsdl:input>
+      <wsdl:output xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/">
+        <soap:body xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" parts="result" use="literal" namespace="http://www.operix.com.ar/" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" name="GetGananciaEmpleados">
+      <soap:operation xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" soapAction="http://www.operix.com.ar/GetGananciaEmpleados" style="rpc"/>
+      <wsdl:input xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/">
+        <soap:body xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" use="literal" namespace="http://www.operix.com.ar/" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+      </wsdl:input>
+      <wsdl:output xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/">
+        <soap:body xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" parts="result" use="literal" namespace="http://www.operix.com.ar/" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" name="SetGananciaEmpleados">
+      <soap:operation xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" soapAction="http://www.operix.com.ar/SetGananciaEmpleados" style="rpc"/>
+      <wsdl:input xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/">
+        <soap:body xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" parts="EmpleadoServicio" use="literal" namespace="http://www.operix.com.ar/" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+      </wsdl:input>
+      <wsdl:output xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/">
+        <soap:body xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" parts="result" use="literal" namespace="http://www.operix.com.ar/" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:message name="ListarProyectosRequest">
+    <wsdl:part name="recursoId" type="xsd:int"/>
+  </wsdl:message>
+  <wsdl:message name="ListarProyectosResponse">
+    <wsdl:part name="result" type="tns:ProyectoServicioArray"/>
+  </wsdl:message>
+  <wsdl:message name="GrabarDatoProyectoRequest">
+    <wsdl:part name="proyecto" type="xsd:int"/>
+    <wsdl:part name="comentario" type="xsd:string"/>
+    <wsdl:part name="fecha" type="xsd:dateTime"/>
+    <wsdl:part name="horas" type="xsd:int"/>
+  </wsdl:message>
+  <wsdl:message name="GrabarDatoProyectoResponse">
+    <wsdl:part name="result" type="xsd:int"/>
+  </wsdl:message>
+  <wsdl:message name="GetHistorialProyectoRequest">
+    <wsdl:part name="proyecto" type="xsd:int"/>
+  </wsdl:message>
+  <wsdl:message name="GetHistorialProyectoResponse">
+    <wsdl:part name="result" type="tns:HoraProyectoServicioArray"/>
+  </wsdl:message>
+  <wsdl:message name="BorrarDatoProyectoRequest">
+    <wsdl:part name="proyecto" type="xsd:int"/>
+    <wsdl:part name="fecha" type="xsd:dateTime"/>
+  </wsdl:message>
+  <wsdl:message name="BorrarDatoProyectoResponse">
+    <wsdl:part name="result" type="xsd:int"/>
+  </wsdl:message>
+  <wsdl:message name="GrabarMovimientoRecursoRequest">
+    <wsdl:part name="recursoId" type="xsd:int"/>
+    <wsdl:part name="fechaHora" type="xsd:int"/>
+    <wsdl:part name="movimiento" type="xsd:string"/>
+    <wsdl:part name="tipo" type="xsd:string"/>
+  </wsdl:message>
+  <wsdl:message name="GrabarMovimientoRecursoResponse">
+    <wsdl:part name="result" type="xsd:int"/>
+  </wsdl:message>
+  <wsdl:message name="MovimientosRecursoRequest">
+    <wsdl:part name="recursoId" type="xsd:int"/>
+    <wsdl:part name="limit" type="xsd:int"/>
+  </wsdl:message>
+  <wsdl:message name="MovimientosRecursoResponse">
+    <wsdl:part name="result" type="tns:HorarioIEArray"/>
+  </wsdl:message>
+  <wsdl:message name="ImputoUltimaVezRequest">
+    <wsdl:part name="recursoId" type="xsd:int"/>
+  </wsdl:message>
+  <wsdl:message name="ImputoUltimaVezResponse">
+    <wsdl:part name="result" type="xsd:int"/>
+  </wsdl:message>
+  <wsdl:message name="HorasTrabajadasRequest">
+    <wsdl:part name="recursoId" type="xsd:int"/>
+    <wsdl:part name="salida" type="xsd:string"/>
+  </wsdl:message>
+  <wsdl:message name="HorasTrabajadasResponse">
+    <wsdl:part name="result" type="xsd:int"/>
+  </wsdl:message>
+  <wsdl:message name="GetGananciaEmpleadosRequest"/>
+  <wsdl:message name="GetGananciaEmpleadosResponse">
+    <wsdl:part name="result" type="tns:EmpleadoServicioArray"/>
+  </wsdl:message>
+  <wsdl:message name="SetGananciaEmpleadosRequest">
+    <wsdl:part name="EmpleadoServicio" type="tns:EmpleadoServicioArray"/>
+  </wsdl:message>
+  <wsdl:message name="SetGananciaEmpleadosResponse">
+    <wsdl:part name="result" type="xsd:int"/>
+  </wsdl:message>
+  <wsdl:service xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" name="ServiciosOperixService">
+    <wsdl:port xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" name="ServiciosOperixPort" binding="tns:ServiciosOperixBinding">
+      <soap:address xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" location="http://www.operix.com.ar/ServiciosOperix.php"/>
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>
