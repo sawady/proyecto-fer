@@ -1,6 +1,10 @@
 package model.calculo;
 
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.Date;
 import java.util.List;
 
@@ -62,7 +66,28 @@ public class ActionCalculoAutomatico implements Action {
 		this.generarResultados();
 		WriteExcel w = new WriteExcel(homeDeResultados.getAllEntities());
 		w.write();
+		if(read.getCuilSinProcesar().size() >0){
+			generarLog();		
+		}
 		this.limpiarTablas();
+	}
+
+	private void generarLog() {
+		File f;
+		f = new File(System.getProperty("user.home") + File.separator + "ImpuestoALasGananciasLog.txt");
+		 
+		//Escritura
+		try{
+		FileWriter w = new FileWriter(f);
+		BufferedWriter bw = new BufferedWriter(w);
+		PrintWriter wr = new PrintWriter(bw);  
+		wr.write("Empleados que no fueron encontrados en operix, por favor verifique el nro de cuil.\n");//escribimos en el archivo
+		for (String s : read.getCuilSinProcesar()) {
+			wr.append(" " + s + "\n"); 
+		}
+		wr.close();
+		bw.close();
+		}catch(IOException e){};
 	}
 
 	private void generarResultados() {

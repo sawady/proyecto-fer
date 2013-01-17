@@ -28,8 +28,17 @@ public class ReadExcel {
 	private FileInputStream archivoEntrada;
 	private Workbook libro;
 	private Sheet hoja;
+	private List<String>cuilSinProcesar = new LinkedList<String>();
 
 	
+	public List<String> getCuilSinProcesar() {
+		return cuilSinProcesar;
+	}
+
+	public void setCuilSinProcesar(List<String> cuilSinProcesar) {
+		this.cuilSinProcesar = cuilSinProcesar;
+	}
+
 	public List<Empleado> leerArchivo(String ruta) {
 		try {
 			this.archivoEntrada = new FileInputStream(ruta);
@@ -250,10 +259,14 @@ public class ReadExcel {
 					        	}
 					    }
 				}
-		empleado.setTot_pag_ant_temp(ClienteOperix.ExtraerPagosAnteriores(empleado.getCUIL())); 
-		empleado.setRem_net_imp_acum_temp(ClienteOperix.ExtraerRnia(empleado.getCUIL())); 
-
-		retorno.add(empleado);
+			try {
+				empleado.setTot_pag_ant_temp(ClienteOperix.ExtraerPagosAnteriores(empleado.getCUIL())); 
+				empleado.setRem_net_imp_acum_temp(ClienteOperix.ExtraerRnia(empleado.getCUIL()));
+				retorno.add(empleado);
+			} catch (NoSeEncuentraCuilException e) {
+				if(empleado.getCUIL() != null){
+				this.cuilSinProcesar.add(empleado.getCUIL());}
+			} 
 			}
 		return retorno;
 		}
