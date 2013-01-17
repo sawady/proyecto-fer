@@ -3,6 +3,8 @@ package wsClient;
 import java.rmi.RemoteException;
 import javax.xml.rpc.ServiceException;
 
+import model.excel.NoSeEncuentraCuilException;
+
 import ar.com.operix.www.EmpleadoServicio;
 import ar.com.operix.www.ServiciosOperixPortType;
 import ar.com.operix.www.ServiciosOperixServiceLocator;
@@ -36,7 +38,7 @@ public class ClienteOperix {
 		return (float) 0;
 	}
 	
-	public static Float ExtraerRnia(String cuil){
+	public static Float ExtraerRnia(String cuil) throws NoSeEncuentraCuilException{
 		Float retorno = null;
 		try {
 			port = locator.getServiciosOperixPort();
@@ -50,6 +52,9 @@ public class ClienteOperix {
 			System.out.println("fallo e1");
 		} catch (RemoteException e) {
 			System.out.println("fallo e2");
+		}
+		if (retorno == null){
+			throw new NoSeEncuentraCuilException(cuil);
 		}
 		return (float) 0;
 	}

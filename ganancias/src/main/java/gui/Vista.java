@@ -107,7 +107,8 @@ public class Vista {
 			if (returnVal == JFileChooser.APPROVE_OPTION) {
 				File file = fileChooser.getSelectedFile();
 				try {
-					HibernateApplication.getInstance().execute(new ActionCalculoAutomatico(file.getPath()));
+					ActionCalculoAutomatico action = new ActionCalculoAutomatico(file.getPath());
+					HibernateApplication.getInstance().execute(action);
 					JOptionPane
 					.showMessageDialog(
 							frmProgramaDeImpuesto,
