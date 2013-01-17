@@ -87,9 +87,12 @@ public class ActionCalculoManual implements Action {
 	private float calculoDeduccionesGananciaA() {
 		float retorno = this.getDeduccionA().getMin_no_imp()
 				+ this.getDeduccionA().getDedu_espe()
+				+ (this.getCant_hijos() * this.getDeduccionA().getHijos())
 				+ (this.getDeduccionA().getOtros() * this
-						.getCant_personas_a_cargo()) + this.getGastos_sepelio()
-				+ this.getSeguro_de_vida() + this.getServicios_domesticos()
+						.getCant_personas_a_cargo()) 
+				+ this.getGastos_sepelio()
+				+ this.getSeguro_de_vida() 
+				+ this.getServicios_domesticos()
 				+ this.getIntereses_por_credito_hipotecario();
 		if (this.getEstado_civil() == 1) {
 			retorno += this.getDeduccionA().getConyuge();
@@ -128,15 +131,15 @@ public class ActionCalculoManual implements Action {
 		return this.auxHonorMedic() + this.auxCheq();
 	}
 
-	private float auxCheq() {
+	private float auxHonorMedic() {
 		return (this.getHonorarios_medicos() * this.getDeduccionC()
 				.getHonor_med_anu()) / 100;
 	}
 
-	private float auxHonorMedic() {
-		return (((this.impuesto_al_cheque_sobre_creditos * this.getDeduccionC()
-				.getImp_cheq_cred_anu()) / 100) * this.getDeduccionC()
-				.getDeb_total_imp_cheq_cred_anu()) / 100;
+		private float auxCheq() {
+		return (((this.impuesto_al_cheque_sobre_creditos * this.getDeduccionC().getImp_cheq_cred_anu())
+				/ 100)
+				* this.getDeduccionC().getDeb_total_imp_cheq_cred_anu()) / 100;
 	}
 
 	// impuesto a pagar en el año
@@ -144,9 +147,9 @@ public class ActionCalculoManual implements Action {
 		System.out.println(this.gananciaNetaC());
 		this.calculo_anual = this.calculo_anual_home.getByInRango(this
 				.gananciaNetaC());
-			return (this.getCalculo_anual().getBase() + ((this.getCalculo_anual()
-				.getPor_extra() * (this.gananciaNetaC() - this
-				.getCalculo_anual().getSobre_exced())) / 100))
+			return (this.getCalculo_anual().getBase() 
+					+ ((this.getCalculo_anual().getPor_extra() 
+							* (this.gananciaNetaC() - this.getCalculo_anual().getSobre_exced())) / 100))
 				- this.getMonto_devolucion_al_exterior();
 	}
 
