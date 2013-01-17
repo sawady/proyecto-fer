@@ -329,9 +329,11 @@ public class ModificarTablas {
 		this.tableModel.addColumn("Base");
 		this.tableModel.addColumn("Porcentaje estra por excedente");
 		this.tableModel.addColumn("Valor de excedente");
-		RowSorter<TableModel> sorter = new TableRowSorter<TableModel>(tableModel);
-		tableAnual.setRowSorter(sorter);
-		tableAnual.getRowSorter().toggleSortOrder(0);
+//		RowSorter<TableModel> sorter = new TableRowSorter<TableModel>(tableModel);
+//		tableAnual.setRowSorter(sorter);
+//		tableAnual.getRowSorter().toggleSortOrder(0);
+		//tableAnual.setAutoCreateRowSorter(true);
+		//tableAnual.setColumnModel(columnModel)
 		this.cargarModelTabla();
 		JScrollPane scrollPane = new JScrollPane(tableAnual);
 		scrollPane.setBounds(15, 12, 569, 131);
