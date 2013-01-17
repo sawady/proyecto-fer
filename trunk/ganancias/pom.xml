@@ -20,9 +20,10 @@
 		</plugins>
 		<resources>
 			<resource>
-				<directory>src/main/java</directory>
+				<directory>src/main/resources</directory>
 				<includes>
 					<include>**/*hbm.xml</include>
+					<include>**/*cfg.xml</include>
 				</includes>
 			</resource>
 		</resources>
