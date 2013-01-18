@@ -220,7 +220,7 @@ public class ModificarTablas {
 
 		textField_9 = new JTextField();
 		textField_9.setColumns(10);
-		textField_9.setBounds(310, 41, 138, 20);
+		textField_9.setBounds(306, 39, 138, 20);
 		desktopPane_2.add(textField_9);
 
 		JLabel lblHonorariosMedicos = new JLabel("Honorarios Medicos");
@@ -228,7 +228,7 @@ public class ModificarTablas {
 		desktopPane_2.add(lblHonorariosMedicos);
 		textField_10 = new JTextField();
 		textField_10.setColumns(10);
-		textField_10.setBounds(310, 80, 138, 20);
+		textField_10.setBounds(306, 80, 138, 20);
 		desktopPane_2.add(textField_10);
 
 		JLabel lblDonaciones = new JLabel("Donaciones");
@@ -237,26 +237,26 @@ public class ModificarTablas {
 
 		textField_11 = new JTextField();
 		textField_11.setColumns(10);
-		textField_11.setBounds(310, 124, 138, 20);
+		textField_11.setBounds(306, 124, 138, 20);
 		desktopPane_2.add(textField_11);
 
-		JLabel lblImpuestoAlCheque = new JLabel("Imp al Cheque sobre créditos");
-		lblImpuestoAlCheque.setBounds(51, 166, 240, 14);
-		desktopPane_2.add(lblImpuestoAlCheque);
-
-		textField_12 = new JTextField();
-		textField_12.setColumns(10);
-		textField_12.setBounds(310, 166, 138, 20);
-		desktopPane_2.add(textField_12);
+//		JLabel lblImpuestoAlCheque = new JLabel("Imp al Cheque sobre créditos");
+//		lblImpuestoAlCheque.setBounds(51, 166, 240, 14);
+//		desktopPane_2.add(lblImpuestoAlCheque);
+//
+//		textField_12 = new JTextField();
+//		textField_12.setColumns(10);
+//		textField_12.setBounds(310, 166, 138, 20);
+//		desktopPane_2.add(textField_12);
 
 		JLabel lblDeduccionImpCheque = new JLabel(
-				"Deducción imp. cheque sobre Cred");
-		lblDeduccionImpCheque.setBounds(51, 206, 251, 14);
+				"Deducción imp.cheque sobre Cred");
+		lblDeduccionImpCheque.setBounds(51, 166, 262, 14);
 		desktopPane_2.add(lblDeduccionImpCheque);
 
 		textField_13 = new JTextField();
 		textField_13.setColumns(10);
-		textField_13.setBounds(310, 206, 138, 20);
+		textField_13.setBounds(306, 166, 138, 20);
 		desktopPane_2.add(textField_13);
 
 		JButton button_3 = new JButton("Cancelar");
@@ -315,7 +315,6 @@ public class ModificarTablas {
 	}
 
 	public void cargarModelTabla() {
-		//tableModel.getDataVector().removeAllElements();
 		ActionTraerTodosAnual action = new ActionTraerTodosAnual();
 		HibernateApplication.getInstance().execute(action);
 		tableModel.actualizarme(action.getResult());
@@ -373,7 +372,6 @@ public class ModificarTablas {
 		textField_9.setText(Float.toString(deduccionC.getCout_med_asist_anu()));
 		textField_10.setText(Float.toString(deduccionC.getHonor_med_anu()));
 		textField_11.setText(Float.toString(deduccionC.getDonac_anu()));
-		textField_12.setText(Float.toString(deduccionC.getImp_cheq_cred_anu()));
 		textField_13.setText(Float.toString(deduccionC
 				.getDeb_total_imp_cheq_cred_anu()));
 	}
@@ -429,11 +427,9 @@ public class ModificarTablas {
 		Float txt10 = Float.parseFloat(textField_10.getText());
 		validarFloat(textField_11, "Donaciones");
 		Float txt11 = Float.parseFloat(textField_11.getText());
-		validarFloat(textField_12, "Imp al Cheque sobre créditos");
-		Float txt12 = Float.parseFloat(textField_12.getText());
 		validarFloat(textField_13, "Deducción imp. cheque sobre Cred");
 		Float txt13 = Float.parseFloat(textField_13.getText());
-		DeduccionC nuevo = new DeduccionC(txt9, txt10, txt11, txt12, txt13);
+		DeduccionC nuevo = new DeduccionC(txt9, txt10, txt11,  txt13);
 		HibernateApplication.getInstance().execute(
 				new ActionEditarDeduccionC(nuevo));
 		mostrarDatosEnPantallaDeduccionC();

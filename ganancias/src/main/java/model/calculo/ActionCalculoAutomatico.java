@@ -230,8 +230,7 @@ public class ActionCalculoAutomatico implements Action {
 
 	public float auxGananciaNetaC(Empleado e) {
 		return (e.getHonor_med() * this.getDeduccionC().getHonor_med_anu())
-				+ ((((e.getImp_cheq_cred() * this.getDeduccionC()
-						.getImp_cheq_cred_anu()) / 100) * this.getDeduccionC()
+				+ (((e.getImp_cheq_cred()  / 100) * this.getDeduccionC()
 						.getDeb_total_imp_cheq_cred_anu()) / 100);
 	}
 
