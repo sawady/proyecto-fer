@@ -10,7 +10,6 @@
 		<property name="cout_med_asist_anu" type="float" />
 		<property name="honor_med_anu" type="float" />
 		<property name="donac_anu" type="float" />
-		<property name="imp_cheq_cred_anu" type="float" />
 		<property name="deb_total_imp_cheq_cred_anu" type="float" />
 	</class>
 </hibernate-mapping>

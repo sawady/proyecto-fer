@@ -34,7 +34,7 @@ public class ActionCargaInicial implements Action {
 		
 		homeDecA.agregar(new DeduccionA(new Float(12960), 62208, 14400, 7200, 5400));
 		homeDecB.agregar(new DeduccionB(new Float(996.23),new Float(996.23),12960,20000));
-		homeDecC.agregar(new DeduccionC(5,5,5,new Float(0.06),35));
+		homeDecC.agregar(new DeduccionC(5,5,5,35));
 		homeAnual.agregar(new CamposParaCalculoAnual(0,10000,0,9,0));
 		homeAnual.agregar(new CamposParaCalculoAnual(10000,20000,800,14,10000));
 		homeAnual.agregar(new CamposParaCalculoAnual(20000,30000,2300,19,20000));
