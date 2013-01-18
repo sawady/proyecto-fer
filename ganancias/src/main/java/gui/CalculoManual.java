@@ -51,7 +51,7 @@ public class CalculoManual {
 		frmImpuestoALas.setTitle("Impuesto a las ganancias - Calculo manual");
 		frmImpuestoALas.setBounds(100, 100, 781, 672);
 		frmImpuestoALas.setVisible(true);
-		frmImpuestoALas.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frmImpuestoALas.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 
 		JButton button = new JButton("Volver al inicio");
 		button.setBounds(610, 592, 136, 29);

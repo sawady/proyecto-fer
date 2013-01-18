@@ -73,7 +73,8 @@ public class ModificarTablas {
 		frmImpuestoALas.setTitle("Impuesto a las ganancias - Modificar tablas");
 		frmImpuestoALas.setBounds(100, 100, 783, 431);
 		frmImpuestoALas.setVisible(true);
-		frmImpuestoALas.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frmImpuestoALas.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+		
 		frmImpuestoALas.getContentPane().setLayout(null);
 
 		JTabbedPane tabbedPane = new JTabbedPane(JTabbedPane.LEFT);
