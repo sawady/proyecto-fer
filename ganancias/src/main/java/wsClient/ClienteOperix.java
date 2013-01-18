@@ -44,6 +44,7 @@ public class ClienteOperix {
 			port = locator.getServiciosOperixPort();
 			EmpleadoServicio[] xs= port.getGananciaEmpleados();
 			for (int i = 0; i < xs.length; i++) {
+				System.out.println(xs[i].getCuil());
 				if (xs[i].getCuil().equalsIgnoreCase(cuil)){
 					return (float) xs[i].getRemNetImpAcum();
 				}
