@@ -17,7 +17,6 @@ import javax.swing.JOptionPane;
 import model.FormatoEmpleadoException;
 import model.calculo.ActionCalculoAutomatico;
 import persistencia.HibernateApplication;
-import persistencia.Actions.ActionCargaInicial;
 
 public class Vista {
 
@@ -52,6 +51,7 @@ public class Vista {
 	 */
 	private void initialize() {
 		frmProgramaDeImpuesto = new JFrame();
+		frmProgramaDeImpuesto.setResizable(false);
 		frmProgramaDeImpuesto.getContentPane().setBackground(
 				new Color(176, 196, 222));
 		frmProgramaDeImpuesto.setTitle("Programa de impuesto a las ganancias.");

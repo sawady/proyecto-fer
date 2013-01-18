@@ -105,7 +105,7 @@ public class ActionCalculoAutomatico implements Action {
 				r.setDev_IIGG(0);
 			} else {
 				r.setImp_ganan_a_pagar_mes(0);
-				r.setDev_IIGG(impuestoAPagarPorMes(e));
+				r.setDev_IIGG((impuestoAPagarPorMes(e)*-1));
 			}
 			homeDeResultados.agregar(r);
 		}

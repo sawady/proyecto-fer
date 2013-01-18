@@ -33,7 +33,7 @@ public class WriteExcel {
 	public void write(){
 		this.crearFilaTitulo();
 		if(resultado.size()>=1){
-			for (int i = 1; i <= resultado.size()-2; i++) {
+			for (int i = 1; i <= resultado.size(); i++) {
 				Row fila = hoja.createRow(i);
 				ResultadoDeCalculo r = resultado.get(i-1);
 				new String("" + r.getCUIL() + "");
