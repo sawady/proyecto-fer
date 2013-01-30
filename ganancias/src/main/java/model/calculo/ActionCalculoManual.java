@@ -1,5 +1,8 @@
 package model.calculo;
 
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
+
 import gui.ResultadosCalculoManual;
 import model.entities.CamposParaCalculoAnual;
 import model.entities.DeduccionA;
@@ -79,11 +82,9 @@ public class ActionCalculoManual implements Action {
 				&& this.remuneracion_neta_imponible <= tope.getSoltero())
 			|| (this.estado_civil == 1 
 				&& this.remuneracion_neta_imponible <= tope.getCasado())){
-			new ResultadosCalculoManual(new String(" " + this.gananciaNetaA()),
-					new String(" " + this.gananciaNetaB()), new String(" "
-							+ this.gananciaNetaC()), new String("0"
-							), new String("0"
-							));
+			JOptionPane.showMessageDialog(new JFrame(),
+					"El minimo para los casados es: "+ tope.getCasado() + " y para los solteros es: " + tope.getSoltero(),
+					"No es posible realizar el calculo", JOptionPane.ERROR_MESSAGE);
 			
 		}
 		else{

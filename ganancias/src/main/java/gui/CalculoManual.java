@@ -14,7 +14,10 @@ import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.UIManager;
 
+import model.entities.TopeSalarial;
+
 import persistencia.HibernateApplication;
+import persistencia.hibernateHome.HibernateHome;
 
 public class CalculoManual {
 
@@ -32,6 +35,8 @@ public class CalculoManual {
 	private JTextField textField_10;
 	private JTextField textField_11;
 	private JComboBox comboBox;
+	private TopeSalarial tope;
+
 
 	/**
 	 * Create the application.
@@ -244,8 +249,7 @@ public class CalculoManual {
 					JOptionPane.ERROR_MESSAGE);
 		} 	
 		else {
-			HibernateApplication.getInstance().execute(resultadosCalculoManual());
-			
+				HibernateApplication.getInstance().execute(resultadosCalculoManual());
 		}
 	}
 
