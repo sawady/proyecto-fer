@@ -14,7 +14,7 @@ public class SistemaEntities {
 		result.add(DeduccionC.class);
 		result.add(Empleado.class);
 		result.add(ResultadoDeCalculo.class);
-		
+		result.add(TopeSalarial.class);
 		return result;
 	}
 

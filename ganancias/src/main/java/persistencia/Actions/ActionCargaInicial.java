@@ -4,6 +4,7 @@ import model.entities.CamposParaCalculoAnual;
 import model.entities.DeduccionA;
 import model.entities.DeduccionB;
 import model.entities.DeduccionC;
+import model.entities.TopeSalarial;
 import persistencia.HibernateApplication;
 import persistencia.hibernateHome.CamposParaCalculoAnualHibernateHome;
 import persistencia.hibernateHome.HibernateHome;
@@ -13,6 +14,8 @@ public class ActionCargaInicial implements Action {
 	private HibernateHome<DeduccionB> homeDecB;
 	private HibernateHome<DeduccionC> homeDecC;
 	private CamposParaCalculoAnualHibernateHome homeAnual;
+	private HibernateHome<TopeSalarial> homeTope;
+
 
 
 	@Override
@@ -27,10 +30,14 @@ public class ActionCargaInicial implements Action {
 		homeAnual = (CamposParaCalculoAnualHibernateHome) HibernateApplication
 				.getInstance().getHome(CamposParaCalculoAnual.class);
 		
+		homeTope= (HibernateHome<TopeSalarial>) HibernateApplication
+				.getInstance().getHome(TopeSalarial.class);
+		
 		homeAnual.deleteAllEntities();
 		homeDecA.deleteAllEntities();
 		homeDecB.deleteAllEntities();
 		homeDecC.deleteAllEntities();
+		homeTope.deleteAllEntities();
 		
 		homeDecA.agregar(new DeduccionA(new Float(12960), 62208, 14400, 7200, 5400));
 		homeDecB.agregar(new DeduccionB(new Float(996.23),new Float(996.23),12960,20000));
@@ -42,5 +49,6 @@ public class ActionCargaInicial implements Action {
 		homeAnual.agregar(new CamposParaCalculoAnual(60000,90000,11100,27,60000));
 		homeAnual.agregar(new CamposParaCalculoAnual(90000,120000,19200,31,90000));
 		homeAnual.agregar(new CamposParaCalculoAnual(120000,999998,26900,39,120000));
+		homeTope.agregar(new TopeSalarial(5782, 7998));
 	}
 }

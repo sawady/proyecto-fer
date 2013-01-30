@@ -13,23 +13,21 @@ import javax.swing.JScrollPane;
 import javax.swing.JTabbedPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
-import javax.swing.RowSorter;
 import javax.swing.UIManager;
-import javax.swing.table.TableModel;
-import javax.swing.table.TableRowSorter;
-
-import org.hibernate.classic.Validatable;
 
 import model.entities.DeduccionA;
 import model.entities.DeduccionB;
 import model.entities.DeduccionC;
+import model.entities.TopeSalarial;
 import persistencia.HibernateApplication;
 import persistencia.Actions.ActionEditarDeduccionA;
 import persistencia.Actions.ActionEditarDeduccionB;
 import persistencia.Actions.ActionEditarDeduccionC;
+import persistencia.Actions.ActionEditarTope;
 import persistencia.Actions.ActionGetFirstDeduccionA;
 import persistencia.Actions.ActionGetFirstDeduccionB;
 import persistencia.Actions.ActionGetFirstDeduccionC;
+import persistencia.Actions.ActionGetFirstTope;
 import persistencia.Actions.ActionTraerTodosAnual;
 
 public class ModificarTablas {
@@ -47,10 +45,11 @@ public class ModificarTablas {
 	private JTextField textField_9;
 	private JTextField textField_10;
 	private JTextField textField_11;
-	private JTextField textField_12;
 	private JTextField textField_13;
 	private TableModelAnual tableModel;
 	private JTable tableAnual;
+	private JTextField textField_12;
+	private JTextField textField_14;
 
 	/**
 	 * Create the application.
@@ -60,6 +59,7 @@ public class ModificarTablas {
 		this.mostrarDatosEnPantallaDeduccionA();
 		this.mostrarDatosEnPantallaDeduccionB();
 		this.mostrarDatosEnPantallaDeduccionC();
+		this.mostrarDatosEnPantallaTope();
 	}
 
 	/**
@@ -74,13 +74,55 @@ public class ModificarTablas {
 		frmImpuestoALas.setBounds(100, 100, 783, 431);
 		frmImpuestoALas.setVisible(true);
 		frmImpuestoALas.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-		
+
 		frmImpuestoALas.getContentPane().setLayout(null);
 
 		JTabbedPane tabbedPane = new JTabbedPane(JTabbedPane.LEFT);
 		tabbedPane.setTabLayoutPolicy(JTabbedPane.SCROLL_TAB_LAYOUT);
 		tabbedPane.setBounds(31, 24, 734, 322);
 		frmImpuestoALas.getContentPane().add(tabbedPane);
+
+		JDesktopPane desktopPane_4 = new JDesktopPane();
+		desktopPane_4.setBackground(UIManager.getColor("ScrollBar.shadow"));
+		tabbedPane.addTab("Tope salarial", null, desktopPane_4, null);
+
+		JLabel lblSoltero = new JLabel("Soltero");
+		lblSoltero.setBounds(86, 47, 225, 14);
+		desktopPane_4.add(lblSoltero);
+
+		textField_12 = new JTextField();
+		textField_12.setText("0.0");
+		textField_12.setColumns(10);
+		textField_12.setBounds(341, 45, 138, 20);
+		desktopPane_4.add(textField_12);
+
+		JLabel lblCasado = new JLabel("Casado");
+		lblCasado.setBounds(86, 86, 176, 14);
+		desktopPane_4.add(lblCasado);
+
+		textField_14 = new JTextField();
+		textField_14.setText("0.0");
+		textField_14.setColumns(10);
+		textField_14.setBounds(341, 86, 138, 20);
+		desktopPane_4.add(textField_14);
+
+		JButton button_2 = new JButton("Cancelar");
+		button_2.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				 botonCancelarTope();
+			}
+		});
+		button_2.setBounds(205, 261, 106, 23);
+		desktopPane_4.add(button_2);
+
+		JButton button_4 = new JButton("Guardar");
+		button_4.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				botonAceptarAccionTope();
+			}
+		});
+		button_4.setBounds(365, 261, 118, 23);
+		desktopPane_4.add(button_4);
 
 		JDesktopPane desktopPane = new JDesktopPane();
 		desktopPane.setBackground(UIManager.getColor("ScrollBar.shadow"));
@@ -240,15 +282,6 @@ public class ModificarTablas {
 		textField_11.setBounds(306, 124, 138, 20);
 		desktopPane_2.add(textField_11);
 
-//		JLabel lblImpuestoAlCheque = new JLabel("Imp al Cheque sobre créditos");
-//		lblImpuestoAlCheque.setBounds(51, 166, 240, 14);
-//		desktopPane_2.add(lblImpuestoAlCheque);
-//
-//		textField_12 = new JTextField();
-//		textField_12.setColumns(10);
-//		textField_12.setBounds(310, 166, 138, 20);
-//		desktopPane_2.add(textField_12);
-
 		JLabel lblDeduccionImpCheque = new JLabel(
 				"Deducción imp.cheque sobre Cred");
 		lblDeduccionImpCheque.setBounds(51, 166, 262, 14);
@@ -283,7 +316,7 @@ public class ModificarTablas {
 		tabbedPane.addTab("Impuesto Anual", null, desktopPane_3, null);
 
 		// tabla
-	
+
 		desktopPane_3.add(tabla());
 
 		JButton btnEditarFila = new JButton("Editar Fila");
@@ -303,7 +336,7 @@ public class ModificarTablas {
 		});
 		btnEditarFila.setBounds(460, 278, 124, 25);
 		desktopPane_3.add(btnEditarFila);
-		
+
 		JButton button = new JButton("Volver al inicio");
 		button.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -313,15 +346,17 @@ public class ModificarTablas {
 		button.setBounds(612, 358, 153, 29);
 		frmImpuestoALas.getContentPane().add(button);
 	}
+	// Auxiliares
 
+	//tabla
 	public void cargarModelTabla() {
 		ActionTraerTodosAnual action = new ActionTraerTodosAnual();
 		HibernateApplication.getInstance().execute(action);
 		tableModel.actualizarme(action.getResult());
-		
+
 	}
 
-	private JScrollPane tabla(){
+	private JScrollPane tabla() {
 		this.tableModel = new TableModelAnual();
 		tableAnual = new JTable(tableModel);
 		this.tableModel.addColumn("Desde");
@@ -329,17 +364,20 @@ public class ModificarTablas {
 		this.tableModel.addColumn("Base");
 		this.tableModel.addColumn("Porcentaje estra por excedente");
 		this.tableModel.addColumn("Valor de excedente");
-//		RowSorter<TableModel> sorter = new TableRowSorter<TableModel>(tableModel);
-//		tableAnual.setRowSorter(sorter);
-//		tableAnual.getRowSorter().toggleSortOrder(0);
-		//tableAnual.setAutoCreateRowSorter(true);
-		//tableAnual.setColumnModel(columnModel)
+		// RowSorter<TableModel> sorter = new
+		// TableRowSorter<TableModel>(tableModel);
+		// tableAnual.setRowSorter(sorter);
+		// tableAnual.getRowSorter().toggleSortOrder(0);
+		// tableAnual.setAutoCreateRowSorter(true);
+		// tableAnual.setColumnModel(columnModel)
 		this.cargarModelTabla();
 		JScrollPane scrollPane = new JScrollPane(tableAnual);
 		scrollPane.setBounds(15, 12, 569, 131);
-		return scrollPane;	
+		return scrollPane;
 	}
-	// Auxiliares
+
+	
+	//mostrarDatos 
 	public void mostrarDatosEnPantallaDeduccionA() {
 		ActionGetFirstDeduccionA action = new ActionGetFirstDeduccionA();
 		HibernateApplication.getInstance().execute(action);
@@ -376,6 +414,15 @@ public class ModificarTablas {
 				.getDeb_total_imp_cheq_cred_anu()));
 	}
 
+	private void mostrarDatosEnPantallaTope() {
+		ActionGetFirstTope action = new ActionGetFirstTope();
+		HibernateApplication.getInstance().execute(action);
+		TopeSalarial tope = action.getResult();
+		textField_12.setText(Float.toString(tope.getSoltero()));
+		textField_14.setText(Float.toString(tope.getCasado()));
+	}
+	
+	//Boton cancelar
 	private void botonCancelarAccionA() {
 		mostrarDatosEnPantallaDeduccionA();
 	}
@@ -387,7 +434,13 @@ public class ModificarTablas {
 	private void botonCancelarAccionC() {
 		mostrarDatosEnPantallaDeduccionC();
 	}
+	
+	private void botonCancelarTope() {
+		mostrarDatosEnPantallaTope();
+	}
 
+	
+	//Boton Aceptar
 	private void botonAceptarAccionA() {
 		validarFloat(textField, "Mínimo no imponible");
 		Float txt0 = Float.parseFloat(textField.getText());
@@ -429,12 +482,25 @@ public class ModificarTablas {
 		Float txt11 = Float.parseFloat(textField_11.getText());
 		validarFloat(textField_13, "Deducción imp. cheque sobre Cred");
 		Float txt13 = Float.parseFloat(textField_13.getText());
-		DeduccionC nuevo = new DeduccionC(txt9, txt10, txt11,  txt13);
+		DeduccionC nuevo = new DeduccionC(txt9, txt10, txt11, txt13);
 		HibernateApplication.getInstance().execute(
 				new ActionEditarDeduccionC(nuevo));
 		mostrarDatosEnPantallaDeduccionC();
 	}
 
+	private void botonAceptarAccionTope(){
+		validarFloat(textField_12, "Soltero");
+		Float txt12 = Float.parseFloat(textField_12.getText());
+		validarFloat(textField_14, "Casado");
+		Float txt14 = Float.parseFloat(textField_14.getText());
+		TopeSalarial nuevo = new TopeSalarial(txt12, txt14);
+		HibernateApplication.getInstance().execute(
+				new ActionEditarTope(nuevo));
+		mostrarDatosEnPantallaTope();
+		
+	}
+	
+	////Validar
 	private void validarFloat(JTextField texto, String campo) {
 		try {
 			Float.parseFloat(texto.getText());
