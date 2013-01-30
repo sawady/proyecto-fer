@@ -107,9 +107,9 @@ public class ActionCalculoAutomatico implements Action {
 			r.setNom_y_ape(e.getNom_y_ape());
 			//valido si esta por debejo o no de los topes minimos
 			if ((e.getEstad_civil() == 0 
-					&& e.getRem_net_imp() < tope.getSoltero())
+					&& e.getRem_net_imp() <= tope.getSoltero())
 				|| (e.getEstad_civil() == 1 
-					&& e.getRem_net_imp() < tope.getCasado())) {
+					&& e.getRem_net_imp() <= tope.getCasado())) {
 				r.setGananciaA(0);
 				r.setGananciaB(0);
 				r.setGananciaC(0);
