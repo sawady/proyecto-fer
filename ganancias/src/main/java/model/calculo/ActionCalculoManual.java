@@ -4,6 +4,7 @@ import gui.ResultadosCalculoManual;
 import model.entities.CamposParaCalculoAnual;
 import model.entities.DeduccionA;
 import model.entities.DeduccionC;
+import model.entities.TopeSalarial;
 import persistencia.HibernateApplication;
 import persistencia.Actions.Action;
 import persistencia.hibernateHome.CamposParaCalculoAnualHibernateHome;
@@ -27,6 +28,8 @@ public class ActionCalculoManual implements Action {
 	private DeduccionC deduccionC;
 	private CamposParaCalculoAnual calculo_anual;
 	private CamposParaCalculoAnualHibernateHome calculo_anual_home;
+	private TopeSalarial tope;
+
 
 	public ActionCalculoManual() {
 
@@ -67,13 +70,29 @@ public class ActionCalculoManual implements Action {
 		HibernateHome<DeduccionC> temporal2 = (HibernateHome<DeduccionC>) HibernateApplication
 				.getInstance().getHome(DeduccionC.class);
 		this.deduccionC = temporal2.getFirst();
-
+		HibernateHome<TopeSalarial> temporal3 = (HibernateHome<TopeSalarial>) HibernateApplication
+				.getInstance().getHome(TopeSalarial.class);
+		this.tope = temporal3.getFirst();
 		// dialog
-		new ResultadosCalculoManual(new String(" " + this.gananciaNetaA()),
+		
+		if((this.estado_civil == 0 
+				&& this.remuneracion_neta_imponible < tope.getSoltero())
+			|| (this.estado_civil == 1 
+				&& this.remuneracion_neta_imponible < tope.getCasado())){
+			new ResultadosCalculoManual(new String(" " + this.gananciaNetaA()),
+					new String(" " + this.gananciaNetaB()), new String(" "
+							+ this.gananciaNetaC()), new String("0"
+							), new String("0"
+							));
+			
+		}
+		else{
+			new ResultadosCalculoManual(new String(" " + this.gananciaNetaA()),
 				new String(" " + this.gananciaNetaB()), new String(" "
 						+ this.gananciaNetaC()), new String(" "
 						+ this.impuestoAPagarEnElAnio()), new String(" "
 						+ this.impuestoAPagarPorMes()));
+		}
 
 	}
 
