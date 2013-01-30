@@ -128,7 +128,7 @@ public class ActionCalculoAutomatico implements Action {
 				+ this.getDeduccionA().getDedu_espe()
 				+ this.calculoConyuge(e)
 				+ (this.getDeduccionA().getHijos() * e.getCant_hij_anual())
-				* this.calculoPropHijos(e)
+				+ this.calculoPropHijos(e)
 				+ (this.getDeduccionA().getOtros() * e
 						.getCant_pers_a_carg_anual())
 				+ calculoPersACargoProp(e) + e.getGast_sepe() + e.getSeg_vida()
@@ -172,7 +172,7 @@ public class ActionCalculoAutomatico implements Action {
 	}
 
 	private float propHijosAux(int mesNacimiento, int cantHijosNacidos) {
-		return ((this.getDeduccionA().getHijos() / 12) * (mesNacimiento - 1))
+		return ((this.getDeduccionA().getHijos() / 12) * (12- (mesNacimiento - 1)))
 				* cantHijosNacidos;
 	}
 
@@ -217,9 +217,8 @@ public class ActionCalculoAutomatico implements Action {
 	}
 
 	private float auxGananciaNetaB(Empleado e) {
-		return (this.getDeduccionC().getCout_med_asist_anu() * e
-				.getCuot_med_asist())
-				+ ((e.getDonac() * this.getDeduccionC().getDonac_anu()) / 100);
+		return (((this.getDeduccionC().getCout_med_asist_anu() * e.getCuot_med_asist())/100)
+				+ ((e.getDonac() * this.getDeduccionC().getDonac_anu()) / 100));
 	}
 
 	// ganancia neta
@@ -229,9 +228,11 @@ public class ActionCalculoAutomatico implements Action {
 	}
 
 	public float auxGananciaNetaC(Empleado e) {
-		return (e.getHonor_med() * this.getDeduccionC().getHonor_med_anu())
-				+ (((e.getImp_cheq_cred()  / 100) * this.getDeduccionC()
-						.getDeb_total_imp_cheq_cred_anu()) / 100);
+		return ((e.getHonor_med() * this.getDeduccionC().getHonor_med_anu())
+				/100)
+				+ (((e.getImp_cheq_cred()) * this.getDeduccionC().getDeb_total_imp_cheq_cred_anu())
+						/ 100);
+				
 	}
 
 	// impuesto a pagar en el año

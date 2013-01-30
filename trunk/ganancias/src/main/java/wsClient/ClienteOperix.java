@@ -19,7 +19,28 @@ public class ClienteOperix {
 	private static ServiciosOperixPortType port;
 	
 	
-	
+	public static void extraerTodos(){
+			try {
+				port = locator.getServiciosOperixPort();
+			} catch (ServiceException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		
+			EmpleadoServicio[] xs;
+			try {
+				xs = port.getGananciaEmpleados();
+				for (int i = 0; i < xs.length; i++) {
+					System.out.println(xs[i].getCuil());
+					 
+				}
+			} catch (RemoteException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
+		
+	}
 	public   static Float ExtraerPagosAnteriores(String cuil){
 		try {
 			port = locator.getServiciosOperixPort();

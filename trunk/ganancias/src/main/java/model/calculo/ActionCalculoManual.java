@@ -138,7 +138,7 @@ public class ActionCalculoManual implements Action {
 
 		private float auxCheq() {
 		return (((this.impuesto_al_cheque_sobre_creditos)
-				/ 100)
+				)
 				* this.getDeduccionC().getDeb_total_imp_cheq_cred_anu()) / 100;
 	}
 
