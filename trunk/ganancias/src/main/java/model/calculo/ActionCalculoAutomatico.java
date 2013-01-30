@@ -14,6 +14,7 @@ import model.entities.DeduccionA;
 import model.entities.DeduccionC;
 import model.entities.Empleado;
 import model.entities.ResultadoDeCalculo;
+import model.entities.TopeSalarial;
 import model.excel.ReadExcel;
 import model.excel.WriteExcel;
 import persistencia.HibernateApplication;
@@ -30,8 +31,10 @@ public class ActionCalculoAutomatico implements Action {
 	private HibernateHome<ResultadoDeCalculo> homeDeResultados;
 	private DeduccionA deduccionA;
 	private DeduccionC deduccionC;
+	private TopeSalarial tope;
 	private CamposParaCalculoAnual calculo_anual;
 	private CamposParaCalculoAnualHibernateHome calculo_anual_home;
+
 	private String ruta;
 	private float rnif;
 
@@ -55,39 +58,45 @@ public class ActionCalculoAutomatico implements Action {
 		HibernateHome<DeduccionC> temporal2 = (HibernateHome<DeduccionC>) HibernateApplication
 				.getInstance().getHome(DeduccionC.class);
 		this.deduccionC = temporal2.getFirst();
+		HibernateHome<TopeSalarial> temporal3 = (HibernateHome<TopeSalarial>) HibernateApplication
+				.getInstance().getHome(TopeSalarial.class);
+		this.tope = temporal3.getFirst();
 		this.proceso(this.ruta);
 	}
 
 	public void proceso(String ruta) {
 		List<Empleado> empleados = read.leerArchivo(ruta);
-		for (Empleado e: empleados){
+		for (Empleado e : empleados) {
 			homeEmpleado.agregar(e);
 		}
 		this.generarResultados();
 		WriteExcel w = new WriteExcel(homeDeResultados.getAllEntities());
 		w.write();
-		if(read.getCuilSinProcesar().size() >0){
-			generarLog();		
+		if (read.getCuilSinProcesar().size() > 0) {
+			generarLog();
 		}
 		this.limpiarTablas();
 	}
 
 	private void generarLog() {
 		File f;
-		f = new File(System.getProperty("user.home") + File.separator + "ImpuestoALasGananciasLog.txt");
-		 
-		//Escritura
-		try{
-		FileWriter w = new FileWriter(f);
-		BufferedWriter bw = new BufferedWriter(w);
-		PrintWriter wr = new PrintWriter(bw);  
-		wr.write("Empleados que no fueron encontrados en operix, por favor verifique el nro de cuil.\n");//escribimos en el archivo
-		for (String s : read.getCuilSinProcesar()) {
-			wr.append(" " + s + "\n"); 
+		f = new File(System.getProperty("user.home") + File.separator
+				+ "ImpuestoALasGananciasLog.txt");
+
+		// Escritura
+		try {
+			FileWriter w = new FileWriter(f);
+			BufferedWriter bw = new BufferedWriter(w);
+			PrintWriter wr = new PrintWriter(bw);
+			wr.write("Empleados que no fueron encontrados en operix, por favor verifique el nro de cuil.\n");// escribimos
+			for (String s : read.getCuilSinProcesar()) {
+				wr.append(" " + s + "\n");
+			}
+			wr.close();
+			bw.close();
+		} catch (IOException e) {
 		}
-		wr.close();
-		bw.close();
-		}catch(IOException e){};
+		;
 	}
 
 	private void generarResultados() {
@@ -96,16 +105,59 @@ public class ActionCalculoAutomatico implements Action {
 			ResultadoDeCalculo r = new ResultadoDeCalculo();
 			r.setCUIL(e.getCUIL());
 			r.setNom_y_ape(e.getNom_y_ape());
-			r.setGananciaA(gananciaNetaA(e));
-			r.setGananciaB(gananciaNetaB(e));
-			r.setGananciaC(gananciaNetaC(e));
-			r.setImp_ganan_periodo(impuestoAPagarEnElAnio(e));
-			if (impuestoAPagarPorMes(e) >= 0) {
-				r.setImp_ganan_a_pagar_mes(impuestoAPagarPorMes(e));
-				r.setDev_IIGG(0);
-			} else {
+			//valido si esta por debejo o no de los topes minimos
+			if ((e.getEstad_civil() == 0 
+					&& e.getRem_net_imp() < tope.getSoltero())
+				|| (e.getEstad_civil() == 1 
+					&& e.getRem_net_imp() < tope.getCasado())) {
+				r.setGananciaA(0);
+				r.setGananciaB(0);
+				r.setGananciaC(0);
+				r.setImp_ganan_periodo(0);
 				r.setImp_ganan_a_pagar_mes(0);
-				r.setDev_IIGG((impuestoAPagarPorMes(e)*-1));
+				r.setDev_IIGG(0);
+			//si esta por encima de los topes...
+			} else {
+				r.setGananciaA(gananciaNetaA(e));
+				r.setGananciaB(gananciaNetaB(e));
+				r.setGananciaC(gananciaNetaC(e));
+				r.setImp_ganan_periodo(impuestoAPagarEnElAnio(e));
+				//si no efectuo ningun pago anterior paga el impuesto y la devolucion es 0
+				float impuestoAPagarPorMes = impuestoAPagarPorMes(e);
+				if(e.getTot_pag_ant_temp()<=0){
+					if (impuestoAPagarPorMes >= 0) {
+						r.setImp_ganan_a_pagar_mes(impuestoAPagarPorMes);
+						r.setDev_IIGG(0);
+					} else {
+						r.setImp_ganan_a_pagar_mes(0);
+						r.setDev_IIGG(0);
+					}
+				}
+				//si efectuo pagos anteriores
+				else{
+					//si no hay devolucion
+					if (impuestoAPagarPorMes >= 0) {
+						r.setImp_ganan_a_pagar_mes(impuestoAPagarPorMes);
+						r.setDev_IIGG(0);
+					//si hay devolucion comparo y actualizo valores
+					} else {
+						r.setImp_ganan_a_pagar_mes(0);
+						if(e.getTot_pag_ant_temp()<(impuestoAPagarPorMes * -1)){
+							r.setDev_IIGG(e.getTot_pag_ant_temp());
+							e.setTot_pag_ant_temp(0);
+							//Actualizar aqui el ws. 
+							//TODO descomentar
+							//ClienteOperix.actualizarPagosAnteriores(e.getCUIL(), 0);
+						}
+						else{
+							r.setDev_IIGG((impuestoAPagarPorMes * -1));
+							e.setTot_pag_ant_temp(e.getTot_pag_ant_temp() + impuestoAPagarPorMes);
+							//TODO descomentar
+							//ClienteOperix.actualizarPagosAnteriores(e.getCUIL(),(e.getTot_pag_ant_temp() + impuestoAPagarPorMes));
+						}
+						
+					}
+				}
 			}
 			homeDeResultados.agregar(r);
 		}
@@ -172,7 +224,7 @@ public class ActionCalculoAutomatico implements Action {
 	}
 
 	private float propHijosAux(int mesNacimiento, int cantHijosNacidos) {
-		return ((this.getDeduccionA().getHijos() / 12) * (12- (mesNacimiento - 1)))
+		return ((this.getDeduccionA().getHijos() / 12) * (12 - (mesNacimiento - 1)))
 				* cantHijosNacidos;
 	}
 
@@ -217,8 +269,9 @@ public class ActionCalculoAutomatico implements Action {
 	}
 
 	private float auxGananciaNetaB(Empleado e) {
-		return (((this.getDeduccionC().getCout_med_asist_anu() * e.getCuot_med_asist())/100)
-				+ ((e.getDonac() * this.getDeduccionC().getDonac_anu()) / 100));
+		return (((this.getDeduccionC().getCout_med_asist_anu() * e
+				.getCuot_med_asist()) / 100) + ((e.getDonac() * this
+				.getDeduccionC().getDonac_anu()) / 100));
 	}
 
 	// ganancia neta
@@ -228,16 +281,16 @@ public class ActionCalculoAutomatico implements Action {
 	}
 
 	public float auxGananciaNetaC(Empleado e) {
-		return ((e.getHonor_med() * this.getDeduccionC().getHonor_med_anu())
-				/100)
-				+ (((e.getImp_cheq_cred()) * this.getDeduccionC().getDeb_total_imp_cheq_cred_anu())
-						/ 100);
-				
+		return ((e.getHonor_med() * this.getDeduccionC().getHonor_med_anu()) / 100)
+				+ (((e.getImp_cheq_cred()) * this.getDeduccionC()
+						.getDeb_total_imp_cheq_cred_anu()) / 100);
+
 	}
 
 	// impuesto a pagar en el año
 	public float impuestoAPagarEnElAnio(Empleado e) {
-		this.calculo_anual = this.calculo_anual_home.getByInRango(this	.gananciaNetaC(e));
+		this.calculo_anual = this.calculo_anual_home.getByInRango(this
+				.gananciaNetaC(e));
 		return (this.getCalculo_anual().getBase() + ((this.getCalculo_anual()
 				.getPor_extra() * (this.gananciaNetaC(e) - this
 				.getCalculo_anual().getSobre_exced())) / 100))

@@ -17,7 +17,7 @@ import javax.swing.JOptionPane;
 import model.FormatoEmpleadoException;
 import model.calculo.ActionCalculoAutomatico;
 import persistencia.HibernateApplication;
-import wsClient.ClienteOperix;
+import persistencia.Actions.ActionCargaInicial;
 
 public class Vista {
 
@@ -45,7 +45,7 @@ public class Vista {
 	 */
 	public Vista() {
 		initialize();
-	//HibernateApplication.getInstance().execute(new ActionCargaInicial()); //TODO
+	HibernateApplication.getInstance().execute(new ActionCargaInicial()); //TODO comentar
 	}
 
 	/**

@@ -10,44 +10,35 @@ import ar.com.operix.www.ServiciosOperixPortType;
 import ar.com.operix.www.ServiciosOperixServiceLocator;
 
 /**
- * Clase web service cliente de operix. 
- * Solo se interesa  a lo referente a los campos necesarios para el calculo de las ganancias d los empleados
- *
+ * Clase web service cliente de operix. Solo se interesa a lo referente a los
+ * campos necesarios para el calculo de las ganancias d los empleados
+ * 
  */
 public class ClienteOperix {
 	private static ServiciosOperixServiceLocator locator = new ServiciosOperixServiceLocator();
 	private static ServiciosOperixPortType port;
-	
-	
-	public static void extraerTodos(){
-			try {
-				port = locator.getServiciosOperixPort();
-			} catch (ServiceException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-		
-			EmpleadoServicio[] xs;
-			try {
-				xs = port.getGananciaEmpleados();
-				for (int i = 0; i < xs.length; i++) {
-					System.out.println(xs[i].getCuil());
-					 
-				}
-			} catch (RemoteException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-			
-		
-	}
-	public   static Float ExtraerPagosAnteriores(String cuil){
+
+	public static void extraerTodos() {
 		try {
 			port = locator.getServiciosOperixPort();
-		
-			EmpleadoServicio[] xs= port.getGananciaEmpleados();
+			EmpleadoServicio[] xs;
+			xs = port.getGananciaEmpleados();
 			for (int i = 0; i < xs.length; i++) {
-				if (xs[i].getCuil() == cuil){
+				System.out.println(xs[i].getCuil());
+			}
+		} catch (ServiceException e) {
+			e.printStackTrace();
+		} catch (RemoteException e) {
+			e.printStackTrace();
+		}
+	}
+
+	public static Float ExtraerPagosAnteriores(String cuil) {
+		try {
+			port = locator.getServiciosOperixPort();
+			EmpleadoServicio[] xs = port.getGananciaEmpleados();
+			for (int i = 0; i < xs.length; i++) {
+				if (xs[i].getCuil() == cuil) {
 					return (float) xs[i].getTotPagAnt();
 				}
 			}
@@ -58,15 +49,33 @@ public class ClienteOperix {
 		}
 		return (float) 0;
 	}
-	
-	public static Float ExtraerRnia(String cuil) throws NoSeEncuentraCuilException{
+
+	public static void actualizarPagosAnteriores(String cuil, float value) {
+		try {
+			port = locator.getServiciosOperixPort();
+			EmpleadoServicio[] xs;
+			xs = port.getGananciaEmpleados();
+			for (int i = 0; i < xs.length; i++) {
+				if (xs[i].getCuil().equalsIgnoreCase(cuil)) {
+					xs[i].setTotPagAnt((int) value);
+				}
+			}
+		} catch (RemoteException e) {
+			e.printStackTrace();
+		} catch (ServiceException e) {
+			e.printStackTrace();
+		}
+
+	}
+
+	public static Float ExtraerRnia(String cuil)
+			throws NoSeEncuentraCuilException {
 		Float retorno = null;
 		try {
 			port = locator.getServiciosOperixPort();
-			EmpleadoServicio[] xs= port.getGananciaEmpleados();
+			EmpleadoServicio[] xs = port.getGananciaEmpleados();
 			for (int i = 0; i < xs.length; i++) {
-				System.out.println(xs[i].getCuil());
-				if (xs[i].getCuil().equalsIgnoreCase(cuil)){
+				if (xs[i].getCuil().equalsIgnoreCase(cuil)) {
 					return (float) xs[i].getRemNetImpAcum();
 				}
 			}
@@ -75,7 +84,7 @@ public class ClienteOperix {
 		} catch (RemoteException e) {
 			System.out.println("fallo e2");
 		}
-		if (retorno == null){
+		if (retorno == null) {
 			throw new NoSeEncuentraCuilException(cuil);
 		}
 		return (float) 0;
