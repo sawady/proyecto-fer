@@ -76,9 +76,9 @@ public class ActionCalculoManual implements Action {
 		// dialog
 		
 		if((this.estado_civil == 0 
-				&& this.remuneracion_neta_imponible < tope.getSoltero())
+				&& this.remuneracion_neta_imponible <= tope.getSoltero())
 			|| (this.estado_civil == 1 
-				&& this.remuneracion_neta_imponible < tope.getCasado())){
+				&& this.remuneracion_neta_imponible <= tope.getCasado())){
 			new ResultadosCalculoManual(new String(" " + this.gananciaNetaA()),
 					new String(" " + this.gananciaNetaB()), new String(" "
 							+ this.gananciaNetaC()), new String("0"
