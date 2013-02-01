@@ -67,6 +67,24 @@ public class ClienteOperix {
 		}
 
 	}
+	
+	public static void actualizarRemNetAcum(String cuil, float value) {
+		try {
+			port = locator.getServiciosOperixPort();
+			EmpleadoServicio[] xs;
+			xs = port.getGananciaEmpleados();
+			for (int i = 0; i < xs.length; i++) {
+				if (xs[i].getCuil().equalsIgnoreCase(cuil)) {
+					xs[i].setRemNetImpAcum((int) value);
+				}
+			}
+		} catch (RemoteException e) {
+			e.printStackTrace();
+		} catch (ServiceException e) {
+			e.printStackTrace();
+		}
+
+	}
 
 	public static Float ExtraerRnia(String cuil)
 			throws NoSeEncuentraCuilException {

@@ -22,6 +22,7 @@ import persistencia.Actions.Action;
 import persistencia.hibernateHome.CamposParaCalculoAnualHibernateHome;
 import persistencia.hibernateHome.EmpleadoHibernateHome;
 import persistencia.hibernateHome.HibernateHome;
+import wsClient.ClienteOperix;
 
 public class ActionCalculoAutomatico implements Action {
 
@@ -171,6 +172,8 @@ public class ActionCalculoAutomatico implements Action {
 	// Metodos para el calculo
 	public float gananciaNetaA(Empleado e) {
 		this.rnif = e.getRem_net_imp_acum_temp() + e.getRem_net_imp();
+		//TODO descomentar y crear validacion
+		//ClienteOperix.actualizarRemNetAcum(e.getCUIL(), this.rnif);
 		return this.getRnif() - this.deduccionesA(e);
 	}
 
@@ -298,7 +301,7 @@ public class ActionCalculoAutomatico implements Action {
 	}
 
 	private float auxImpAPagarAnio(Empleado e) {
-		int mesActual = (new Date()).getMonth();
+		int mesActual = (new Date()).getMonth() + 1;
 		return (e.getDev_compra_exter() / 12) * mesActual;
 	}
 
