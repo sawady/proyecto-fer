@@ -15,6 +15,7 @@ public class SistemaEntities {
 		result.add(Empleado.class);
 		result.add(ResultadoDeCalculo.class);
 		result.add(TopeSalarial.class);
+		result.add(WsAux.class);
 		return result;
 	}
 

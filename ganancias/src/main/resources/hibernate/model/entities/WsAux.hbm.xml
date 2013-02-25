@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping package="model.entities">
+	<class name="WsAux">
+		<id name="id" type="int" unsaved-value="0">
+			<generator class="native" />
+		</id>
+		<property name="CUIL" type="string" />
+		<property name="tot_pag_ant_temp" type="float" />
+		<property name="rem_net_imp_acum_temp" type="float" />
+
+	</class>
+</hibernate-mapping>
