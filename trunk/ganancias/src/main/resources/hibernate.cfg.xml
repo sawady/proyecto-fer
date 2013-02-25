@@ -32,6 +32,8 @@
 		<mapping resource="hibernate/model/entities/Empleado.hbm.xml" />
 		<mapping resource="hibernate/model/entities/ResultadoDeCalculo.hbm.xml" />
 		<mapping resource="hibernate/model/entities/TopeSalarial.hbm.xml" />
+		<mapping resource="hibernate/model/entities/WsAux.hbm.xml" />
+		
 		
 
 	</session-factory>

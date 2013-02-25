@@ -5,7 +5,6 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.Date;
 import java.util.List;
 
 import model.FormatoEmpleadoException;
@@ -15,6 +14,7 @@ import model.entities.DeduccionC;
 import model.entities.Empleado;
 import model.entities.ResultadoDeCalculo;
 import model.entities.TopeSalarial;
+import model.entities.WsAux;
 import model.excel.ReadExcel;
 import model.excel.WriteExcel;
 import persistencia.HibernateApplication;
@@ -22,6 +22,7 @@ import persistencia.Actions.Action;
 import persistencia.hibernateHome.CamposParaCalculoAnualHibernateHome;
 import persistencia.hibernateHome.EmpleadoHibernateHome;
 import persistencia.hibernateHome.HibernateHome;
+import persistencia.hibernateHome.WsAuxHibernateHome;
 import wsClient.ClienteOperix;
 
 public class ActionCalculoAutomatico implements Action {
@@ -35,9 +36,10 @@ public class ActionCalculoAutomatico implements Action {
 	private TopeSalarial tope;
 	private CamposParaCalculoAnual calculo_anual;
 	private CamposParaCalculoAnualHibernateHome calculo_anual_home;
-
+	private WsAuxHibernateHome homeWs; //TODO borrar home
 	private String ruta;
 	private float rnif;
+	private int mesActual;
 
 	public ActionCalculoAutomatico(String ruta) throws SecurityException,
 			IOException, FormatoEmpleadoException, NoSuchMethodException {
@@ -62,6 +64,8 @@ public class ActionCalculoAutomatico implements Action {
 		HibernateHome<TopeSalarial> temporal3 = (HibernateHome<TopeSalarial>) HibernateApplication
 				.getInstance().getHome(TopeSalarial.class);
 		this.tope = temporal3.getFirst();
+		//TODO borrar home
+		this.homeWs =(WsAuxHibernateHome) HibernateApplication.getInstance().getHome(WsAux.class);
 		this.proceso(this.ruta);
 	}
 
@@ -106,6 +110,7 @@ public class ActionCalculoAutomatico implements Action {
 			ResultadoDeCalculo r = new ResultadoDeCalculo();
 			r.setCUIL(e.getCUIL());
 			r.setNom_y_ape(e.getNom_y_ape());
+			this.actualizarWS(e);
 			//valido si esta por debejo o no de los topes minimos
 			if ((e.getEstad_civil() == 0 
 					&& e.getRem_net_imp() <= tope.getSoltero())
@@ -143,18 +148,23 @@ public class ActionCalculoAutomatico implements Action {
 					//si hay devolucion comparo y actualizo valores
 					} else {
 						r.setImp_ganan_a_pagar_mes(0);
+						WsAux ws = homeWs.getByCuil(e.getCUIL());
 						if(e.getTot_pag_ant_temp()<(impuestoAPagarPorMes * -1)){
 							r.setDev_IIGG(e.getTot_pag_ant_temp());
 							e.setTot_pag_ant_temp(0);
 							//Actualizar aqui el ws. 
 							//TODO descomentar
 							//ClienteOperix.actualizarPagosAnteriores(e.getCUIL(), 0);
+							ws.setTot_pag_ant_temp(0);
+							homeWs.actualizar(ws);
 						}
 						else{
 							r.setDev_IIGG((impuestoAPagarPorMes * -1));
 							e.setTot_pag_ant_temp(e.getTot_pag_ant_temp() + impuestoAPagarPorMes);
-							//TODO descomentar
+							//TODO descomentar cdo funcione el ws
 							//ClienteOperix.actualizarPagosAnteriores(e.getCUIL(),(e.getTot_pag_ant_temp() + impuestoAPagarPorMes));
+							ws.setTot_pag_ant_temp((e.getTot_pag_ant_temp() + impuestoAPagarPorMes));
+							homeWs.actualizar(ws);
 						}
 						
 					}
@@ -170,15 +180,21 @@ public class ActionCalculoAutomatico implements Action {
 	}
 
 	// Metodos para el calculo
-	public float gananciaNetaA(Empleado e) {
+	private void actualizarWS(Empleado e){
 		this.rnif = e.getRem_net_imp_acum_temp() + e.getRem_net_imp();
-		//TODO descomentar y crear validacion
-		//ClienteOperix.actualizarRemNetAcum(e.getCUIL(), this.rnif);
+		//ClienteOperix.actualizarRemNetAcum(e.getCUIL(), (int)this.rnif);
+		WsAux ws = homeWs.getByCuil(e.getCUIL());
+		ws.setRem_net_imp_acum_temp(rnif);
+		homeWs.actualizar(ws);
+	}
+	public float gananciaNetaA(Empleado e) {
 		return this.getRnif() - this.deduccionesA(e);
 	}
 
 	private float deduccionesA(Empleado e) {
-		int mesActual = new Date().getMonth() + 1;
+		//TODO para cambiar la fecha
+		int mesActual = 1;
+		//int mesActual = new Date().getMonth() + 1;
 		float retorno = this.getDeduccionA().getMin_no_imp()
 				+ this.getDeduccionA().getDedu_espe()
 				+ this.calculoConyuge(e)
@@ -301,7 +317,9 @@ public class ActionCalculoAutomatico implements Action {
 	}
 
 	private float auxImpAPagarAnio(Empleado e) {
-		int mesActual = (new Date()).getMonth() + 1;
+		//int mesActual = (new Date()).getMonth() + 1;
+		//TODO 
+		int mesActual = 1;
 		return (e.getDev_compra_exter() / 12) * mesActual;
 	}
 

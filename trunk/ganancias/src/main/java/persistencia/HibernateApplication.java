@@ -4,6 +4,7 @@ package persistencia;
 
 import model.entities.CamposParaCalculoAnual;
 import model.entities.Empleado;
+import model.entities.WsAux;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -14,6 +15,7 @@ import persistencia.Actions.Action;
 import persistencia.hibernateHome.CamposParaCalculoAnualHibernateHome;
 import persistencia.hibernateHome.EmpleadoHibernateHome;
 import persistencia.hibernateHome.HibernateHomeFactory;
+import persistencia.hibernateHome.WsAuxHibernateHome;
 
 
 
@@ -37,6 +39,7 @@ public class HibernateApplication extends Application {
 		super(factory);
 		this.getHomes().put(Empleado.class, new EmpleadoHibernateHome(tlocal));
 		this.getHomes().put(CamposParaCalculoAnual.class, new CamposParaCalculoAnualHibernateHome(tlocal));
+		this.getHomes().put(WsAux.class, new WsAuxHibernateHome(tlocal));
 	}
 	
 	/* METODOS*************************************************************************/

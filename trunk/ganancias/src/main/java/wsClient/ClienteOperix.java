@@ -17,14 +17,29 @@ import ar.com.operix.www.ServiciosOperixServiceLocator;
 public class ClienteOperix {
 	private static ServiciosOperixServiceLocator locator = new ServiciosOperixServiceLocator();
 	private static ServiciosOperixPortType port;
+	private static EmpleadoServicio[] xs;
 
 	public static void extraerTodos() {
 		try {
 			port = locator.getServiciosOperixPort();
-			EmpleadoServicio[] xs;
 			xs = port.getGananciaEmpleados();
 			for (int i = 0; i < xs.length; i++) {
-				System.out.println(xs[i].getCuil());
+				System.out.println(xs[i].getCuil() + " rnif " +xs[i].getRemNetImpAcum() + " pagant "+ xs[i].getTotPagAnt());
+			}
+		} catch (ServiceException e) {
+			e.printStackTrace();
+		} catch (RemoteException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public static void borrar() {
+		try {
+			port = locator.getServiciosOperixPort();
+			xs = port.getGananciaEmpleados();
+			for (int i = 0; i < xs.length; i++) {
+				xs[i].setRemNetImpAcum(0);
+				xs[i].setTotPagAnt(0);
 			}
 		} catch (ServiceException e) {
 			e.printStackTrace();
@@ -36,7 +51,7 @@ public class ClienteOperix {
 	public static Float ExtraerPagosAnteriores(String cuil) {
 		try {
 			port = locator.getServiciosOperixPort();
-			EmpleadoServicio[] xs = port.getGananciaEmpleados();
+			xs = port.getGananciaEmpleados();
 			for (int i = 0; i < xs.length; i++) {
 				if (xs[i].getCuil() == cuil) {
 					return (float) xs[i].getTotPagAnt();
@@ -53,11 +68,11 @@ public class ClienteOperix {
 	public static void actualizarPagosAnteriores(String cuil, float value) {
 		try {
 			port = locator.getServiciosOperixPort();
-			EmpleadoServicio[] xs;
 			xs = port.getGananciaEmpleados();
 			for (int i = 0; i < xs.length; i++) {
 				if (xs[i].getCuil().equalsIgnoreCase(cuil)) {
 					xs[i].setTotPagAnt((int) value);
+					System.out.println("pagos anteriores set " + value + "guardo" + xs[i].getTotPagAnt());
 				}
 			}
 		} catch (RemoteException e) {
@@ -71,11 +86,11 @@ public class ClienteOperix {
 	public static void actualizarRemNetAcum(String cuil, float value) {
 		try {
 			port = locator.getServiciosOperixPort();
-			EmpleadoServicio[] xs;
 			xs = port.getGananciaEmpleados();
 			for (int i = 0; i < xs.length; i++) {
 				if (xs[i].getCuil().equalsIgnoreCase(cuil)) {
 					xs[i].setRemNetImpAcum((int) value);
+					System.out.println(xs[i].getCuil() + " rnif set " + value + " guardo en rnif " + xs[i].getRemNetImpAcum());
 				}
 			}
 		} catch (RemoteException e) {
@@ -91,7 +106,7 @@ public class ClienteOperix {
 		Float retorno = null;
 		try {
 			port = locator.getServiciosOperixPort();
-			EmpleadoServicio[] xs = port.getGananciaEmpleados();
+			xs = port.getGananciaEmpleados();
 			for (int i = 0; i < xs.length; i++) {
 				if (xs[i].getCuil().equalsIgnoreCase(cuil)) {
 					return (float) xs[i].getRemNetImpAcum();
@@ -105,6 +120,6 @@ public class ClienteOperix {
 		if (retorno == null) {
 			throw new NoSeEncuentraCuilException(cuil);
 		}
-		return (float) 0;
+		return retorno;
 	}
 }

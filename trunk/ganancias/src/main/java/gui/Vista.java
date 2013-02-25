@@ -18,6 +18,7 @@ import model.FormatoEmpleadoException;
 import model.calculo.ActionCalculoAutomatico;
 import persistencia.HibernateApplication;
 import persistencia.Actions.ActionCargaInicial;
+import wsClient.ClienteOperix;
 
 public class Vista {
 
@@ -32,7 +33,9 @@ public class Vista {
 				try {
 					Vista window = new Vista();
 					window.frmProgramaDeImpuesto.setVisible(true);
-					//ClienteOperix.extraerTodos();
+					//ClienteOperix.borrar();
+					ClienteOperix.extraerTodos();
+					
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -45,7 +48,7 @@ public class Vista {
 	 */
 	public Vista() {
 		initialize();
-	HibernateApplication.getInstance().execute(new ActionCargaInicial()); //TODO comentar
+	//HibernateApplication.getInstance().execute(new ActionCargaInicial()); //TODO comentar
 	}
 
 	/**
