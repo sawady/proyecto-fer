@@ -259,14 +259,17 @@ public class ReadExcel {
 					        	}
 					    }
 				}
-			try {
-				empleado.setTot_pag_ant_temp(ClienteOperix.ExtraerPagosAnteriores(empleado.getCUIL())); 
-				empleado.setRem_net_imp_acum_temp(ClienteOperix.ExtraerRnia(empleado.getCUIL()));
+			//try {
+				//empleado.setTot_pag_ant_temp(ClienteOperix.ExtraerPagosAnteriores(empleado.getCUIL())); 
+				//empleado.setRem_net_imp_acum_temp(ClienteOperix.ExtraerRnia(empleado.getCUIL()));
+//				retorno.add(empleado);
+//			} catch (NoSeEncuentraCuilException e) {
+//				if(empleado.getCUIL() != null){
+//				this.cuilSinProcesar.add(empleado.getCUIL());}
+//			}
+			if(empleado.getCUIL()!=null){
 				retorno.add(empleado);
-			} catch (NoSeEncuentraCuilException e) {
-				if(empleado.getCUIL() != null){
-				this.cuilSinProcesar.add(empleado.getCUIL());}
-			} 
+			}
 			}
 		return retorno;
 		}

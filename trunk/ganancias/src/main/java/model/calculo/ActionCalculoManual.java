@@ -8,10 +8,12 @@ import model.entities.CamposParaCalculoAnual;
 import model.entities.DeduccionA;
 import model.entities.DeduccionC;
 import model.entities.TopeSalarial;
+import model.entities.WsAux;
 import persistencia.HibernateApplication;
 import persistencia.Actions.Action;
 import persistencia.hibernateHome.CamposParaCalculoAnualHibernateHome;
 import persistencia.hibernateHome.HibernateHome;
+import persistencia.hibernateHome.WsAuxHibernateHome;
 
 public class ActionCalculoManual implements Action {
 	private float remuneracion_neta_imponible = 0;
@@ -76,8 +78,9 @@ public class ActionCalculoManual implements Action {
 		HibernateHome<TopeSalarial> temporal3 = (HibernateHome<TopeSalarial>) HibernateApplication
 				.getInstance().getHome(TopeSalarial.class);
 		this.tope = temporal3.getFirst();
-		// dialog
-		
+		// dialog		
+		System.out.println("se agregaron los cuatro");
+
 		if((this.estado_civil == 0 
 				&& this.remuneracion_neta_imponible <= tope.getSoltero())
 			|| (this.estado_civil == 1 
