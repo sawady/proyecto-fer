@@ -5,6 +5,7 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.Date;
 import java.util.List;
 
 import model.FormatoEmpleadoException;
@@ -23,7 +24,6 @@ import persistencia.hibernateHome.CamposParaCalculoAnualHibernateHome;
 import persistencia.hibernateHome.EmpleadoHibernateHome;
 import persistencia.hibernateHome.HibernateHome;
 import persistencia.hibernateHome.WsAuxHibernateHome;
-import wsClient.ClienteOperix;
 
 public class ActionCalculoAutomatico implements Action {
 
@@ -45,6 +45,7 @@ public class ActionCalculoAutomatico implements Action {
 			IOException, FormatoEmpleadoException, NoSuchMethodException {
 		super();
 		this.ruta = ruta;
+	
 	}
 
 	@Override
@@ -66,14 +67,21 @@ public class ActionCalculoAutomatico implements Action {
 		this.tope = temporal3.getFirst();
 		//TODO borrar home
 		this.homeWs =(WsAuxHibernateHome) HibernateApplication.getInstance().getHome(WsAux.class);
+
 		this.proceso(this.ruta);
 	}
 
 	public void proceso(String ruta) {
 		List<Empleado> empleados = read.leerArchivo(ruta);
 		for (Empleado e : empleados) {
+//			WsAux x = homeWs.getByCuil(e.getCUIL());
+//			x.setRem_net_imp_acum_temp(0);
+//			homeWs.actualizar(x);
+			e.setTot_pag_ant_temp(homeWs.getByCuil(e.getCUIL()).getTot_pag_ant_temp()); //borrar
+			e.setRem_net_imp_acum_temp(homeWs.getByCuil(e.getCUIL()).getRem_net_imp_acum_temp());//borrar
 			homeEmpleado.agregar(e);
 		}
+		System.out.println("termine de recorrer");
 		this.generarResultados();
 		WriteExcel w = new WriteExcel(homeDeResultados.getAllEntities());
 		w.write();
@@ -182,7 +190,7 @@ public class ActionCalculoAutomatico implements Action {
 	// Metodos para el calculo
 	private void actualizarWS(Empleado e){
 		this.rnif = e.getRem_net_imp_acum_temp() + e.getRem_net_imp();
-		//ClienteOperix.actualizarRemNetAcum(e.getCUIL(), (int)this.rnif);
+		//ClienteOperix.actualizarRemNetAcum(e.getCUIL(), (int)this.rnif); //TODO
 		WsAux ws = homeWs.getByCuil(e.getCUIL());
 		ws.setRem_net_imp_acum_temp(rnif);
 		homeWs.actualizar(ws);
@@ -192,9 +200,8 @@ public class ActionCalculoAutomatico implements Action {
 	}
 
 	private float deduccionesA(Empleado e) {
-		//TODO para cambiar la fecha
-		int mesActual = 1;
-		//int mesActual = new Date().getMonth() + 1;
+		this.mesActual = new Date().getMonth() + 1;
+		//this.mesActual  = 1;
 		float retorno = this.getDeduccionA().getMin_no_imp()
 				+ this.getDeduccionA().getDedu_espe()
 				+ this.calculoConyuge(e)
@@ -317,9 +324,8 @@ public class ActionCalculoAutomatico implements Action {
 	}
 
 	private float auxImpAPagarAnio(Empleado e) {
-		//int mesActual = (new Date()).getMonth() + 1;
-		//TODO 
-		int mesActual = 1;
+		this.mesActual = (new Date()).getMonth() + 1;
+		//this.mesActual = 1;
 		return (e.getDev_compra_exter() / 12) * mesActual;
 	}
 

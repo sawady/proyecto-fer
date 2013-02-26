@@ -17,8 +17,6 @@ import javax.swing.JOptionPane;
 import model.FormatoEmpleadoException;
 import model.calculo.ActionCalculoAutomatico;
 import persistencia.HibernateApplication;
-import persistencia.Actions.ActionCargaInicial;
-import wsClient.ClienteOperix;
 
 public class Vista {
 
@@ -34,8 +32,7 @@ public class Vista {
 					Vista window = new Vista();
 					window.frmProgramaDeImpuesto.setVisible(true);
 					//ClienteOperix.borrar();
-					ClienteOperix.extraerTodos();
-					
+					//ClienteOperix.extraerTodos();
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
