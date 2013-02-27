@@ -31,8 +31,6 @@ public class Vista {
 				try {
 					Vista window = new Vista();
 					window.frmProgramaDeImpuesto.setVisible(true);
-					//ClienteOperix.borrar();
-					//ClienteOperix.extraerTodos();
 				} catch (Exception e) {
 					e.printStackTrace();
 				}

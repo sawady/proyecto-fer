@@ -15,7 +15,6 @@ import model.entities.DeduccionC;
 import model.entities.Empleado;
 import model.entities.ResultadoDeCalculo;
 import model.entities.TopeSalarial;
-import model.entities.WsAux;
 import model.excel.ReadExcel;
 import model.excel.WriteExcel;
 import persistencia.HibernateApplication;
@@ -23,7 +22,6 @@ import persistencia.Actions.Action;
 import persistencia.hibernateHome.CamposParaCalculoAnualHibernateHome;
 import persistencia.hibernateHome.EmpleadoHibernateHome;
 import persistencia.hibernateHome.HibernateHome;
-import persistencia.hibernateHome.WsAuxHibernateHome;
 
 public class ActionCalculoAutomatico implements Action {
 
@@ -36,7 +34,6 @@ public class ActionCalculoAutomatico implements Action {
 	private TopeSalarial tope;
 	private CamposParaCalculoAnual calculo_anual;
 	private CamposParaCalculoAnualHibernateHome calculo_anual_home;
-	private WsAuxHibernateHome homeWs; //TODO borrar home
 	private String ruta;
 	private float rnif;
 	private int mesActual;
@@ -45,11 +42,15 @@ public class ActionCalculoAutomatico implements Action {
 			IOException, FormatoEmpleadoException, NoSuchMethodException {
 		super();
 		this.ruta = ruta;
-	
 	}
 
 	@Override
 	public void execute() {
+		this.inicializacion();
+		this.proceso(this.ruta);
+	}
+
+	private void inicializacion() {
 		this.homeEmpleado = (EmpleadoHibernateHome) HibernateApplication
 				.getInstance().getHome(Empleado.class);
 		this.homeDeResultados = (HibernateHome<ResultadoDeCalculo>) HibernateApplication
@@ -65,23 +66,13 @@ public class ActionCalculoAutomatico implements Action {
 		HibernateHome<TopeSalarial> temporal3 = (HibernateHome<TopeSalarial>) HibernateApplication
 				.getInstance().getHome(TopeSalarial.class);
 		this.tope = temporal3.getFirst();
-		//TODO borrar home
-		this.homeWs =(WsAuxHibernateHome) HibernateApplication.getInstance().getHome(WsAux.class);
-
-		this.proceso(this.ruta);
 	}
 
 	public void proceso(String ruta) {
 		List<Empleado> empleados = read.leerArchivo(ruta);
 		for (Empleado e : empleados) {
-//			WsAux x = homeWs.getByCuil(e.getCUIL());
-//			x.setRem_net_imp_acum_temp(0);
-//			homeWs.actualizar(x);
-			e.setTot_pag_ant_temp(homeWs.getByCuil(e.getCUIL()).getTot_pag_ant_temp()); //borrar
-			e.setRem_net_imp_acum_temp(homeWs.getByCuil(e.getCUIL()).getRem_net_imp_acum_temp());//borrar
 			homeEmpleado.agregar(e);
 		}
-		System.out.println("termine de recorrer");
 		this.generarResultados();
 		WriteExcel w = new WriteExcel(homeDeResultados.getAllEntities());
 		w.write();
@@ -93,10 +84,7 @@ public class ActionCalculoAutomatico implements Action {
 
 	private void generarLog() {
 		File f;
-		f = new File(System.getProperty("user.home") + File.separator
-				+ "ImpuestoALasGananciasLog.txt");
-
-		// Escritura
+		f = new File(System.getProperty("user.home") + File.separator + "ImpuestoALasGananciasLog.txt");
 		try {
 			FileWriter w = new FileWriter(f);
 			BufferedWriter bw = new BufferedWriter(w);
@@ -109,7 +97,6 @@ public class ActionCalculoAutomatico implements Action {
 			bw.close();
 		} catch (IOException e) {
 		}
-		;
 	}
 
 	private void generarResultados() {
@@ -156,25 +143,18 @@ public class ActionCalculoAutomatico implements Action {
 					//si hay devolucion comparo y actualizo valores
 					} else {
 						r.setImp_ganan_a_pagar_mes(0);
-						WsAux ws = homeWs.getByCuil(e.getCUIL());
 						if(e.getTot_pag_ant_temp()<(impuestoAPagarPorMes * -1)){
 							r.setDev_IIGG(e.getTot_pag_ant_temp());
 							e.setTot_pag_ant_temp(0);
-							//Actualizar aqui el ws. 
 							//TODO descomentar
 							//ClienteOperix.actualizarPagosAnteriores(e.getCUIL(), 0);
-							ws.setTot_pag_ant_temp(0);
-							homeWs.actualizar(ws);
 						}
 						else{
 							r.setDev_IIGG((impuestoAPagarPorMes * -1));
 							e.setTot_pag_ant_temp(e.getTot_pag_ant_temp() + impuestoAPagarPorMes);
 							//TODO descomentar cdo funcione el ws
 							//ClienteOperix.actualizarPagosAnteriores(e.getCUIL(),(e.getTot_pag_ant_temp() + impuestoAPagarPorMes));
-							ws.setTot_pag_ant_temp((e.getTot_pag_ant_temp() + impuestoAPagarPorMes));
-							homeWs.actualizar(ws);
-						}
-						
+						}		
 					}
 				}
 			}
@@ -189,11 +169,17 @@ public class ActionCalculoAutomatico implements Action {
 
 	// Metodos para el calculo
 	private void actualizarWS(Empleado e){
-		this.rnif = e.getRem_net_imp_acum_temp() + e.getRem_net_imp();
-		//ClienteOperix.actualizarRemNetAcum(e.getCUIL(), (int)this.rnif); //TODO
-		WsAux ws = homeWs.getByCuil(e.getCUIL());
-		ws.setRem_net_imp_acum_temp(rnif);
-		homeWs.actualizar(ws);
+		Float x;
+//		try {
+//			x = ClienteOperix.ExtraerRnia(e.getCUIL());
+//			ClienteOperix.actualizarPagosAnteriores(e.getCUIL(), x);
+//			this.rnif = e.getRem_net_imp_acum_temp() + e.getRem_net_imp();
+//			ClienteOperix.actualizarRemNetAcum(e.getCUIL(), (int)this.rnif); //TODO
+//		} catch (NoSeEncuentraCuilException e1) {
+//			// TODO Auto-generated catch block
+//			e1.printStackTrace();
+//		}
+
 	}
 	public float gananciaNetaA(Empleado e) {
 		return this.getRnif() - this.deduccionesA(e);
@@ -201,7 +187,6 @@ public class ActionCalculoAutomatico implements Action {
 
 	private float deduccionesA(Empleado e) {
 		this.mesActual = new Date().getMonth() + 1;
-		//this.mesActual  = 1;
 		float retorno = this.getDeduccionA().getMin_no_imp()
 				+ this.getDeduccionA().getDedu_espe()
 				+ this.calculoConyuge(e)

@@ -33,6 +33,8 @@ import persistencia.Actions.ActionTraerTodosAnual;
 public class ModificarTablas {
 
 	private JFrame frmImpuestoALas;
+	private TableModelAnual tableModel;
+	private JTable tableAnual;
 	private JTextField textField;
 	private JTextField textField_1;
 	private JTextField textField_2;
@@ -46,8 +48,6 @@ public class ModificarTablas {
 	private JTextField textField_10;
 	private JTextField textField_11;
 	private JTextField textField_13;
-	private TableModelAnual tableModel;
-	private JTable tableAnual;
 	private JTextField textField_12;
 	private JTextField textField_14;
 
@@ -66,16 +66,7 @@ public class ModificarTablas {
 	 * Initialize the contents of the frame.
 	 */
 	private void initialize() {
-		frmImpuestoALas = new JFrame();
-		frmImpuestoALas.getContentPane()
-				.setBackground(new Color(176, 196, 222));
-		frmImpuestoALas.setResizable(false);
-		frmImpuestoALas.setTitle("Impuesto a las ganancias - Modificar tablas");
-		frmImpuestoALas.setBounds(100, 100, 783, 431);
-		frmImpuestoALas.setVisible(true);
-		frmImpuestoALas.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-
-		frmImpuestoALas.getContentPane().setLayout(null);
+		frameConfiguration();
 
 		JTabbedPane tabbedPane = new JTabbedPane(JTabbedPane.LEFT);
 		tabbedPane.setTabLayoutPolicy(JTabbedPane.SCROLL_TAB_LAYOUT);
@@ -348,12 +339,23 @@ public class ModificarTablas {
 	}
 	// Auxiliares
 
+	private void frameConfiguration() {
+		frmImpuestoALas = new JFrame();
+		frmImpuestoALas.getContentPane()
+				.setBackground(new Color(176, 196, 222));
+		frmImpuestoALas.setResizable(false);
+		frmImpuestoALas.setTitle("Impuesto a las ganancias - Modificar tablas");
+		frmImpuestoALas.setBounds(100, 100, 783, 431);
+		frmImpuestoALas.setVisible(true);
+		frmImpuestoALas.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+		frmImpuestoALas.getContentPane().setLayout(null);
+	}
+
 	//tabla
 	public void cargarModelTabla() {
 		ActionTraerTodosAnual action = new ActionTraerTodosAnual();
 		HibernateApplication.getInstance().execute(action);
 		tableModel.actualizarme(action.getResult());
-
 	}
 
 	private JScrollPane tabla() {
@@ -364,12 +366,6 @@ public class ModificarTablas {
 		this.tableModel.addColumn("Base");
 		this.tableModel.addColumn("Porcentaje estra por excedente");
 		this.tableModel.addColumn("Valor de excedente");
-		// RowSorter<TableModel> sorter = new
-		// TableRowSorter<TableModel>(tableModel);
-		// tableAnual.setRowSorter(sorter);
-		// tableAnual.getRowSorter().toggleSortOrder(0);
-		// tableAnual.setAutoCreateRowSorter(true);
-		// tableAnual.setColumnModel(columnModel)
 		this.cargarModelTabla();
 		JScrollPane scrollPane = new JScrollPane(tableAnual);
 		scrollPane.setBounds(15, 12, 569, 131);
@@ -381,7 +377,6 @@ public class ModificarTablas {
 	public void mostrarDatosEnPantallaDeduccionA() {
 		ActionGetFirstDeduccionA action = new ActionGetFirstDeduccionA();
 		HibernateApplication.getInstance().execute(action);
-
 		DeduccionA deduccionA = action.getResult();
 		textField.setText(Float.toString(deduccionA.getMin_no_imp()));
 		textField_1.setText(Float.toString(deduccionA.getDedu_espe()));
@@ -394,7 +389,6 @@ public class ModificarTablas {
 	public void mostrarDatosEnPantallaDeduccionB() {
 		ActionGetFirstDeduccionB action = new ActionGetFirstDeduccionB();
 		HibernateApplication.getInstance().execute(action);
-
 		DeduccionB deduccionB = action.getResult();
 		textField_5.setText(Float.toString(deduccionB.getGast_sepe_anu()));
 		textField_6.setText(Float.toString(deduccionB.getSeg_vida_anu()));
@@ -439,7 +433,6 @@ public class ModificarTablas {
 		mostrarDatosEnPantallaTope();
 	}
 
-	
 	//Boton Aceptar
 	private void botonAceptarAccionA() {
 		validarFloat(textField, "Mínimo no imponible");
