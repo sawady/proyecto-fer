@@ -22,13 +22,11 @@ public class WriteExcel {
 	public WriteExcel() {
 		super();
 	}
-
 	
 	public WriteExcel(List<ResultadoDeCalculo> resultado) {
 		super();
 		this.resultado = resultado;
 	}
-
 
 	public void write(){
 		this.crearFilaTitulo();
@@ -92,18 +90,17 @@ public class WriteExcel {
 	}
 
 	private CellStyle crearStyleTitulo() {
-
-    CellStyle style = libro.createCellStyle();
-    style.setBorderTop((short) 6); // double lines border
-    style.setBorderBottom((short) 1); // single line border
-    style.setFillBackgroundColor(HSSFColor.GREY_25_PERCENT.index);
-
-    Font font = libro.createFont();
-    font.setFontName(HSSFFont.FONT_ARIAL);
-    font.setFontHeightInPoints((short) 10);
-    font.setBoldweight(HSSFFont.BOLDWEIGHT_BOLD);
-    font.setColor(HSSFColor.BLUE.index);
-    style.setFont(font);
+	    CellStyle style = libro.createCellStyle();
+	    style.setBorderTop((short) 6); // double lines border
+	    style.setBorderBottom((short) 1); // single line border
+	    style.setFillBackgroundColor(HSSFColor.GREY_25_PERCENT.index);
+	
+	    Font font = libro.createFont();
+	    font.setFontName(HSSFFont.FONT_ARIAL);
+	    font.setFontHeightInPoints((short) 10);
+	    font.setBoldweight(HSSFFont.BOLDWEIGHT_BOLD);
+	    font.setColor(HSSFColor.BLUE.index);
+	    style.setFont(font);
 		return style;
 	}
 }

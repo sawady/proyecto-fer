@@ -15,9 +15,7 @@ import javax.swing.JTextField;
 import javax.swing.UIManager;
 
 import model.entities.TopeSalarial;
-
 import persistencia.HibernateApplication;
-import persistencia.hibernateHome.HibernateHome;
 
 public class CalculoManual {
 
@@ -37,26 +35,12 @@ public class CalculoManual {
 	private JComboBox comboBox;
 	private TopeSalarial tope;
 
-
-	/**
-	 * Create the application.
-	 */
 	public CalculoManual() {
 		initialize();
 	}
 
-	/**
-	 * Initialize the contents of the frame.
-	 */
 	private void initialize() {
-		frmImpuestoALas = new JFrame();
-		frmImpuestoALas.getContentPane()
-				.setBackground(new Color(176, 196, 222));
-		frmImpuestoALas.setResizable(false);
-		frmImpuestoALas.setTitle("Impuesto a las ganancias - Calculo manual");
-		frmImpuestoALas.setBounds(100, 100, 781, 672);
-		frmImpuestoALas.setVisible(true);
-		frmImpuestoALas.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+		this.frameConfiguration();
 
 		JButton button = new JButton("Volver al inicio");
 		button.setBounds(610, 592, 136, 29);
@@ -217,6 +201,17 @@ public class CalculoManual {
 		desktopPane.add(textField_11);
 	}
 
+	private void frameConfiguration() {
+		frmImpuestoALas = new JFrame();
+		frmImpuestoALas.getContentPane()
+				.setBackground(new Color(176, 196, 222));
+		frmImpuestoALas.setResizable(false);
+		frmImpuestoALas.setTitle("Impuesto a las ganancias - Calculo manual");
+		frmImpuestoALas.setBounds(100, 100, 781, 672);
+		frmImpuestoALas.setVisible(true);
+		frmImpuestoALas.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+	}
+
 	private void ponerCamposEnBlanco() {
 		textField.setText("");
 		textField_1.setText("");
@@ -245,8 +240,7 @@ public class CalculoManual {
 				|| textField_10.getText().equals("")
 				|| textField_11.getText().equals("")) {
 			JOptionPane.showMessageDialog(frmImpuestoALas,
-					"Debe completar todos los campos", "Error",
-					JOptionPane.ERROR_MESSAGE);
+					"Debe completar todos los campos", "Error",	JOptionPane.ERROR_MESSAGE);
 		} 	
 		else {
 				HibernateApplication.getInstance().execute(resultadosCalculoManual());

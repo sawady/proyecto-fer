@@ -1,19 +1,16 @@
 package model.calculo;
 
+import gui.ResultadosCalculoManual;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
-
-import gui.ResultadosCalculoManual;
 import model.entities.CamposParaCalculoAnual;
 import model.entities.DeduccionA;
 import model.entities.DeduccionC;
 import model.entities.TopeSalarial;
-import model.entities.WsAux;
 import persistencia.HibernateApplication;
 import persistencia.Actions.Action;
 import persistencia.hibernateHome.CamposParaCalculoAnualHibernateHome;
 import persistencia.hibernateHome.HibernateHome;
-import persistencia.hibernateHome.WsAuxHibernateHome;
 
 public class ActionCalculoManual implements Action {
 	private float remuneracion_neta_imponible = 0;
@@ -36,9 +33,7 @@ public class ActionCalculoManual implements Action {
 	private TopeSalarial tope;
 
 
-	public ActionCalculoManual() {
-
-	}
+	public ActionCalculoManual() {	}
 
 	public ActionCalculoManual(float remuneracion_neta_imponible,
 			int estado_civil, int cant_hijos, int cant_personas_a_cargo,
@@ -66,7 +61,24 @@ public class ActionCalculoManual implements Action {
 
 	@Override
 	public void execute() {
-		// homes
+		this.inicializacion();
+		if((this.estado_civil == 0 
+				&& this.remuneracion_neta_imponible <= tope.getSoltero())
+			|| (this.estado_civil == 1 
+				&& this.remuneracion_neta_imponible <= tope.getCasado())){
+			JOptionPane.showMessageDialog(new JFrame(),
+					"El minimo para los casados es: "+ tope.getCasado() + " y para los solteros es: " + tope.getSoltero(),
+					"No es posible realizar el calculo", JOptionPane.ERROR_MESSAGE);
+		}else{
+			new ResultadosCalculoManual(new String(" " + this.gananciaNetaA()),
+				new String(" " + this.gananciaNetaB()), new String(" "
+						+ this.gananciaNetaC()), new String(" "
+						+ this.impuestoAPagarEnElAnio()), new String(" "
+						+ this.impuestoAPagarPorMes()));
+		}
+	}
+
+	private void inicializacion() {
 		calculo_anual_home = (CamposParaCalculoAnualHibernateHome) HibernateApplication
 				.getInstance().getHome(CamposParaCalculoAnual.class);
 		HibernateHome<DeduccionA> temporal = (HibernateHome<DeduccionA>) HibernateApplication
@@ -78,29 +90,7 @@ public class ActionCalculoManual implements Action {
 		HibernateHome<TopeSalarial> temporal3 = (HibernateHome<TopeSalarial>) HibernateApplication
 				.getInstance().getHome(TopeSalarial.class);
 		this.tope = temporal3.getFirst();
-		// dialog		
-		System.out.println("se agregaron los cuatro");
-
-		if((this.estado_civil == 0 
-				&& this.remuneracion_neta_imponible <= tope.getSoltero())
-			|| (this.estado_civil == 1 
-				&& this.remuneracion_neta_imponible <= tope.getCasado())){
-			JOptionPane.showMessageDialog(new JFrame(),
-					"El minimo para los casados es: "+ tope.getCasado() + " y para los solteros es: " + tope.getSoltero(),
-					"No es posible realizar el calculo", JOptionPane.ERROR_MESSAGE);
-			
-		}
-		else{
-			new ResultadosCalculoManual(new String(" " + this.gananciaNetaA()),
-				new String(" " + this.gananciaNetaB()), new String(" "
-						+ this.gananciaNetaC()), new String(" "
-						+ this.impuestoAPagarEnElAnio()), new String(" "
-						+ this.impuestoAPagarPorMes()));
-		}
-
 	}
-
-	// constructor
 
 	// Ganancia Neta A
 	public float gananciaNetaA() {

@@ -18,30 +18,29 @@ import persistencia.Actions.ActionEditarTablaCalculoAnual;
 import persistencia.Actions.ActionGetByCampoDesde;
 
 public class EditarTablaCalculoAnual extends JFrame {
-	
+
 	private JTextField textField;
 	private JTextField textField_1;
 	private JTextField textField_2;
 	private JTextField textField_3;
 	private JTextField textField_4;
 	private CamposParaCalculoAnual aModificar;
-private Float id;
+	private Float id;
 
 	private static final long serialVersionUID = 1L;
 
-	public EditarTablaCalculoAnual(Float object
-			) {
+	public EditarTablaCalculoAnual(Float object) {
 		this.id = object;
 		setResizable(false);
-		setVisible(true);	
+		setVisible(true);
 		setBounds(100, 100, 719, 431);
 		getContentPane().setBackground(new Color(176, 196, 222));
 		this.inicialize();
 	}
-	
+
 	public void inicialize() {
 		getContentPane().setLayout(null);
-		
+
 		JButton button_1 = new JButton("Volver");
 		button_1.setBounds(558, 348, 136, 29);
 		button_1.addActionListener(new ActionListener() {
@@ -51,57 +50,57 @@ private Float id;
 
 		});
 		getContentPane().add(button_1);
-		
+
 		JDesktopPane desktopPane = new JDesktopPane();
 		desktopPane.setBackground(UIManager.getColor("Button.select"));
 		desktopPane.setBounds(32, 12, 596, 315);
 		getContentPane().add(desktopPane);
-		
+
 		JLabel label = new JLabel("Ganancia neta imponible desde");
 		label.setBounds(51, 41, 225, 14);
 		desktopPane.add(label);
-		
+
 		textField = new JTextField();
 		textField.setColumns(10);
 		textField.setBounds(310, 41, 138, 20);
 		desktopPane.add(textField);
-		
+
 		JLabel label_1 = new JLabel("Ganancia neta imponible hasta");
 		label_1.setBounds(51, 80, 176, 14);
 		desktopPane.add(label_1);
-		
+
 		textField_1 = new JTextField();
 		textField_1.setColumns(10);
 		textField_1.setBounds(310, 80, 138, 20);
 		desktopPane.add(textField_1);
-		
+
 		JLabel label_2 = new JLabel("Base que se debe pagar");
 		label_2.setBounds(51, 124, 176, 14);
 		desktopPane.add(label_2);
-		
+
 		textField_2 = new JTextField();
 		textField_2.setColumns(10);
 		textField_2.setBounds(310, 124, 138, 20);
 		desktopPane.add(textField_2);
-		
+
 		JLabel label_3 = new JLabel("Porcentaje estra por excedente");
 		label_3.setBounds(51, 166, 240, 14);
 		desktopPane.add(label_3);
-		
+
 		textField_3 = new JTextField();
 		textField_3.setColumns(10);
 		textField_3.setBounds(310, 166, 138, 20);
 		desktopPane.add(textField_3);
-		
+
 		JLabel label_4 = new JLabel("Valor de excedente");
 		label_4.setBounds(51, 206, 251, 14);
 		desktopPane.add(label_4);
-		
+
 		textField_4 = new JTextField();
 		textField_4.setColumns(10);
 		textField_4.setBounds(310, 206, 138, 20);
 		desktopPane.add(textField_4);
-		
+
 		JButton button = new JButton("Cancelar");
 		button.setBounds(170, 255, 106, 23);
 		button.addActionListener(new ActionListener() {
@@ -110,7 +109,7 @@ private Float id;
 			}
 		});
 		desktopPane.add(button);
-		
+
 		JButton button_2 = new JButton("Guardar");
 		button_2.setBounds(330, 255, 118, 23);
 		button_2.addActionListener(new ActionListener() {
@@ -122,9 +121,10 @@ private Float id;
 		desktopPane.add(button_2);
 		mostrarEnPantalla();
 	}
-	private void mostrarEnPantalla(){
-		
-		ActionGetByCampoDesde action= (new ActionGetByCampoDesde(id));
+
+	private void mostrarEnPantalla() {
+
+		ActionGetByCampoDesde action = (new ActionGetByCampoDesde(id));
 		HibernateApplication.getInstance().execute(action);
 		this.aModificar = action.getResult();
 		textField.setText(Float.toString(aModificar.getDesde()));
@@ -132,32 +132,31 @@ private Float id;
 		textField_2.setText(Float.toString(aModificar.getBase()));
 		textField_3.setText(Float.toString(aModificar.getPor_extra()));
 		textField_4.setText(Float.toString(aModificar.getSobre_exced()));
-		
+
 	}
-	
-	private void botonGuardar(){
-		validarFloat(textField,"Ganancia neta imponible desde");
-		Float  txt14 = Float.parseFloat(textField.getText());
-		validarFloat(textField_1,"Ganancia neta imponible hasta");
-		Float  txt15 = Float.parseFloat(textField_1.getText());
-		validarFloat(textField_2,"Base que se debe pagar");
-		Float  txt16 = Float.parseFloat(textField_2.getText());
-		validarFloat(textField_3,"Porcentaje estra por excedente");
-		Float  txt17 = Float.parseFloat(textField_3.getText());
-		validarFloat(textField_4,"Valor de excedente");
-		Float  txt18 = Float.parseFloat(textField_4.getText());
+
+	private void botonGuardar() {
+		validarFloat(textField, "Ganancia neta imponible desde");
+		Float txt14 = Float.parseFloat(textField.getText());
+		validarFloat(textField_1, "Ganancia neta imponible hasta");
+		Float txt15 = Float.parseFloat(textField_1.getText());
+		validarFloat(textField_2, "Base que se debe pagar");
+		Float txt16 = Float.parseFloat(textField_2.getText());
+		validarFloat(textField_3, "Porcentaje estra por excedente");
+		Float txt17 = Float.parseFloat(textField_3.getText());
+		validarFloat(textField_4, "Valor de excedente");
+		Float txt18 = Float.parseFloat(textField_4.getText());
 		CamposParaCalculoAnual nuevo = new CamposParaCalculoAnual(txt14, txt15, txt16, txt17, txt18);
 		System.out.println(aModificar.getDesde());
 		HibernateApplication.getInstance().execute(new ActionEditarTablaCalculoAnual(aModificar.getDesde(), nuevo));
-		JOptionPane.showMessageDialog(this, "Se han guardado sus cambios",
-				"Mensaje", JOptionPane.INFORMATION_MESSAGE);
+		JOptionPane.showMessageDialog(this, "Se han guardado sus cambios", "Mensaje", JOptionPane.INFORMATION_MESSAGE);
 		this.dispose();
 	}
 
-	private void validarFloat(JTextField texto, String campo){
-		try{
+	private void validarFloat(JTextField texto, String campo) {
+		try {
 			Float.parseFloat(texto.getText());
-		}catch(Exception e){
+		} catch (Exception e) {
 			JOptionPane.showMessageDialog(null, " Solo se permiten números en el campo: " + campo);
 			texto.setText(null);
 		}
